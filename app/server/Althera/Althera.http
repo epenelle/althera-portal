@@ -1,0 +1,36 @@
+@Althera_HostAddress = http://localhost:5125
+
+GET {{Althera_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+GET {{Althera_HostAddress}}/patient/
+Accept: application/json
+
+###
+
+POST {{Althera_HostAddress}}/patient/
+Accept: application/json
+
+{
+    "firstName": "patient3",
+    "lastName": "patient3"
+}
+
+###
+
+PUT {{Althera_HostAddress}}/patient/3
+Accept: application/json
+
+{
+    "Id": 3,
+    "firstName": "patient3",
+    "lastName": "patient3"
+}
+
+###
+
+DELETE {{Althera_HostAddress}}/patient/3
+
+###
