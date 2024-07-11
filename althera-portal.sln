@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{23E05DAC-7EEB-474D-808B-DE5E11548EA2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "server", "server", "{9682BC20-1B00-450D-871B-BB1548FD4128}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "altheraportal", "app\server\altheraportal\altheraportal.csproj", "{9E37DC25-F4C1-4261-A5F0-C764180D4797}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E37DC25-F4C1-4261-A5F0-C764180D4797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E37DC25-F4C1-4261-A5F0-C764180D4797}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E37DC25-F4C1-4261-A5F0-C764180D4797}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E37DC25-F4C1-4261-A5F0-C764180D4797}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9682BC20-1B00-450D-871B-BB1548FD4128} = {23E05DAC-7EEB-474D-808B-DE5E11548EA2}
+		{9E37DC25-F4C1-4261-A5F0-C764180D4797} = {9682BC20-1B00-450D-871B-BB1548FD4128}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B80EF787-B8AA-4B0B-96D1-13D75AC0A940}
+	EndGlobalSection
+EndGlobal
