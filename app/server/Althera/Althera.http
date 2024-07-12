@@ -34,3 +34,36 @@ Accept: application/json
 DELETE {{Althera_HostAddress}}/patient/3
 
 ###
+
+
+###
+
+GET {{Althera_HostAddress}}/commande/
+Accept: application/json
+
+###
+
+POST {{Althera_HostAddress}}/commande/
+Accept: application/json
+
+{
+    "IdPatient": 4,
+    "dateCommande": "10/07/2024"
+}
+
+###
+
+PUT {{Althera_HostAddress}}/commande/3
+Accept: application/json
+
+{
+    "Id": 3,
+    "IdPatient": 4,
+    "dateCommande": "10/07/2024"
+}
+
+###
+
+DELETE {{Althera_HostAddress}}/commande/3
+
+###
