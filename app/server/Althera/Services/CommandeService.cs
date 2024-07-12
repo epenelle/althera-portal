@@ -4,11 +4,11 @@ namespace Althera.Services;
 
 public static class CommandeService{
 
-    static List<Commande> Commande {get;}
+    static List<Commande> Commandes {get;}
     static int nextId = 3;
 
     static CommandeService(){
-        Commandes = new List<Commade> {
+        Commandes = new List<Commande> {
             new Commande { Id = 1, IdPatient = 2, dateCommande = "10/07/2024"},
             new Commande { Id = 2, IdPatient = 1, dateCommande = "10/07/2024"}
         };
