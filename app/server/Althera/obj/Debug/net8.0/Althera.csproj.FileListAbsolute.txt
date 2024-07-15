@@ -31,3 +31,36 @@ C:\ESEO\E4a\Stage Canada\Althera_Portal\althera-portal\app\server\Althera\obj\De
 C:\ESEO\E4a\Stage Canada\Althera_Portal\althera-portal\app\server\Althera\obj\Debug\net8.0\Althera.pdb
 C:\ESEO\E4a\Stage Canada\Althera_Portal\althera-portal\app\server\Althera\obj\Debug\net8.0\Althera.genruntimeconfig.cache
 C:\ESEO\E4a\Stage Canada\Althera_Portal\althera-portal\app\server\Althera\obj\Debug\net8.0\ref\Althera.dll
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\appsettings.json
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\Althera.exe
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\Althera.deps.json
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\Althera.runtimeconfig.json
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\Althera.dll
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\Althera.pdb
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\Althera.csproj.AssemblyReference.cache
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\Althera.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\Althera.AssemblyInfoInputs.cache
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\Althera.AssemblyInfo.cs
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\Althera.csproj.CoreCompileInputs.cache
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\Althera.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\Althera.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\Althera.sourcelink.json
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\staticwebassets\msbuild.Althera.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\staticwebassets\msbuild.build.Althera.props
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Althera.props
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Althera.props
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\scopedcss\bundle\Althera.styles.css
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\Althera.csproj.Up2Date
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\Althera.dll
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\refint\Althera.dll
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\Althera.pdb
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\Althera.genruntimeconfig.cache
+C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\obj\Debug\net8.0\ref\Althera.dll
