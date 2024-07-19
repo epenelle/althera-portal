@@ -1,10 +1,10 @@
 import React from 'react'
+
 import { PatientsData } from '@/data/data';
 import PatientCard from './PatientCard';
 import { BsPeopleFill } from 'react-icons/bs';
 import { FaSearch } from 'react-icons/fa';
 import { FaSortUp, FaSortDown } from 'react-icons/fa';
-import SelectCalendrier from '@/components/Helper/Calendrier';
 import PaginationMenu from '../../Helper/PaginationMenu';
 
 
@@ -43,7 +43,7 @@ return (
                     Ajouter
                 </button>
             </div>
-            <div className='hidden md:grid md:grid-cols-[150px_160px_150px_40px] w-full items-center gap-4 mt-4 p-2 border-2 bg-gray-300 border-gray-400 rounded-lg mb-5'>
+            <div className='hidden md:grid md:grid-cols-[150px_160px_150px_40px] w-full items-center gap-4 mt-4 pl-24 mb-5 p-2 border-2 bg-gray-300 border-gray-400 rounded-lg sm:gap-2 '>
                 <div className='flex items-center border-l-2 pl-3 border-r-2 border-gray-400'>
                     <span className='font-bold text-lg'>Nom</span>
                     <div className='grid grid-rows-[5px_5px] mb-2 ml-2'>
@@ -70,7 +70,6 @@ return (
                 <PatientCard key={patient.id} patient={patient} />
             ))}
             <PaginationMenu currentPage={currentPage} totalPages={totalPages} navigateToPage={navigateToPage} />
-            {/*<SelectCalendrier />*/}
         </div>
     </div>
 );
