@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Althera")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f0476257d8420f76126c480c15668b3f0f156448")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+99a919544229779b1806a6e05de043b1669437a4")]
 [assembly: System.Reflection.AssemblyProductAttribute("Althera")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Althera")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
