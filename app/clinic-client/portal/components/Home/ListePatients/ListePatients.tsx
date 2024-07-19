@@ -43,7 +43,7 @@ return (
                     Ajouter
                 </button>
             </div>
-            <div className='hidden md:grid md:grid-cols-[150px_160px_150px_40px] w-full items-center gap-4 mt-4 p-2 border-2 bg-gray-300 border-gray-400'>
+            <div className='hidden md:grid md:grid-cols-[150px_160px_150px_40px] w-full items-center gap-4 mt-4 p-2 border-2 bg-gray-300 border-gray-400 rounded-lg mb-5'>
                 <div className='flex items-center border-l-2 pl-3 border-r-2 border-gray-400'>
                     <span className='font-bold text-lg'>Nom</span>
                     <div className='grid grid-rows-[5px_5px] mb-2 ml-2'>

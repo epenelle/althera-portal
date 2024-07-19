@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { MdLanguage } from 'react-icons/md';
 import { CiLogout } from 'react-icons/ci';
 import { useRouter } from 'next/navigation';
+import { useButtonContext } from '../../Helper/ButtonContext';
 
 type Props = {
     nav:boolean,
@@ -14,6 +15,7 @@ type Props = {
 
 const MobileNav = ({closeNav, nav}:Props) => {
     const ResponsiveNav = nav ? "translate-x-0" : "translate-x-[-100%]";
+    const { buttonValue, setButtonValue } = useButtonContext();
     const router = useRouter();
     const handleSubmit = async (e: React.MouseEvent<SVGElement, MouseEvent>) => {
         console.log('Déconnexion réussite');
@@ -32,8 +34,8 @@ const MobileNav = ({closeNav, nav}:Props) => {
                 {navLinks.map((link)=>{
                     return (
                         <Link href={link.url} key={link.id}>
-                            <p className='text-2x1 font-semibold cursor-pointer hover:text-blue-800 transition-all duration-200 text-gray-900'>{link.label}</p>
-                        </Link>
+                            <p onClick={() => { setButtonValue(link.id); closeNav(); }} className='text-2x1 font-semibold cursor-pointer hover:text-blue-800 transition-all duration-200 text-gray-900'>{link.label}</p>
+                        </Link>     
                     )   
                 })}
             </div>
