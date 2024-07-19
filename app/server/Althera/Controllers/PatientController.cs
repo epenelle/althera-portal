@@ -7,18 +7,23 @@ namespace Althera.Controllers;
 [ApiController]
 [Route("[controller]")]
 public class PatientController : ControllerBase {
-    public PatientController(){
+     private readonly PatientServices _patientServices;
 
+    public PatientController(PatientServices patientServices){
+        _patientServices = patientServices;
     }
 
     // GET all action
     [HttpGet]
-    public ActionResult<List<Patient>> GetAll() => PatientService.GetAll();
+    public ActionResult<List<PatientModel>> GetAllPatients(){
+        return _patientServices.GetAllPatients();
+        
+    }
 
     // GET by Id action
     [HttpGet("{id}")]
-    public ActionResult<Patient> Get(int id){
-        var patient = PatientService.Get(id);
+    public ActionResult<PatientModel> GetPatient(int id){
+        var patient = _patientServices.GetPatientById(id);
         if(patient == null){
             return NotFound();
         }
@@ -27,40 +32,27 @@ public class PatientController : ControllerBase {
 
     // POST action
     [HttpPost]
-    public IActionResult Create(Patient patient){
-        PatientService.Add(patient);
-        return CreatedAtAction(nameof(Get), new {id= patient.Id}, patient);
+    public IActionResult CreatePatient(PatientModel patient){
+        if(patient == null){
+            return BadRequest();
+        }
+        _patientServices.CreatePatient(patient);
+        return NoContent();
     }
 
 
     // PUT action (Modification/Edit)
     [HttpPut("{id}")]
-    public IActionResult Update(int id, Patient patient){
-        if(id != patient.Id){
-            return BadRequest();
-        }
-        
-        var existingPatient = PatientService.Get(id);
-        if(existingPatient is null){
-            return NotFound();
-        }
-
-        PatientService.Update(patient);
+    public IActionResult UpdatePatient(int id, PatientModel patient){
+        _patientServices.UpdatePatient(id, patient);
         return NoContent();
     }
 
 
     // DELETE action
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id){
-
-        var patient = PatientService.Get(id);
-
-        if(patient is null){
-            return NotFound();
-        }
-
-        PatientService.Delete(id);
+    public IActionResult DeletePatient(int id){
+        _patientServices.DeletePatient(id);
         return NoContent();
     }
 

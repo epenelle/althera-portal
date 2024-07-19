@@ -43,6 +43,42 @@ namespace EFGetStarted.Migrations
                     b.ToTable("Cliniques");
                 });
 
+            modelBuilder.Entity("Commande", b =>
+                {
+                    b.Property<int>("commandeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("commandeId"));
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("commentaireOrthese")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("etatCommande")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("infoOrthese")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("modelorthese")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("scan")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("commandeId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Commandes");
+                });
+
             modelBuilder.Entity("Patient", b =>
                 {
                     b.Property<int>("patientId")
@@ -70,6 +106,17 @@ namespace EFGetStarted.Migrations
                     b.ToTable("Patients");
                 });
 
+            modelBuilder.Entity("Commande", b =>
+                {
+                    b.HasOne("Patient", "Patient")
+                        .WithMany("Commandes")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
+                });
+
             modelBuilder.Entity("Patient", b =>
                 {
                     b.HasOne("Clinique", "Clinique")
@@ -84,6 +131,11 @@ namespace EFGetStarted.Migrations
             modelBuilder.Entity("Clinique", b =>
                 {
                     b.Navigation("Patients");
+                });
+
+            modelBuilder.Entity("Patient", b =>
+                {
+                    b.Navigation("Commandes");
                 });
 #pragma warning restore 612, 618
         }
