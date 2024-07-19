@@ -1,7 +1,7 @@
-#Althera Portal
+# Althera Portal
 
 
-#Run the API 
+## Run the API 
 
 Move into the right folder:
 ```
@@ -13,7 +13,7 @@ Run the API :
 dotnet run
 ```
 
-#Run the API test website
+## Run the API test website
 
 API should be runing prior trying to run the test website
 
@@ -27,7 +27,7 @@ Start the website
 npm start
 ```
 
-#Run the database
+## Run the database
 
 In order to see the database, we are using Microsoft SQL Server Management Studio.
 The server is <mark>(localdb)\mssqllocaldb</mark>
