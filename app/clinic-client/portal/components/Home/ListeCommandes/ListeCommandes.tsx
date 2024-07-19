@@ -43,7 +43,7 @@ return (
                     Ajouter
                 </button>
             </div>
-            <div className='hidden md:grid md:grid-cols-[150px_160px_150px_40px] w-full items-center gap-4 mt-4 p-2 border-2 bg-gray-300 border-gray-400 rounded-lg mb-5'>
+            <div className='hidden md:grid md:grid-cols-[150px_160px_150px_150px] w-full items-center gap-4 pl-24 mt-4 p-2 border-2 bg-gray-300 border-gray-400 rounded-lg mb-5'>
                 <div className='flex items-center border-l-2 pl-3 border-r-2 border-gray-400'>
                     <span className='font-bold text-lg'>Numéro</span>
                     <div className='grid grid-rows-[5px_5px] mb-2 ml-2'>
@@ -58,8 +58,15 @@ return (
                         <FaSortDown className='cursor-pointer' />
                     </div>
                 </div>
-                <div className='flex items-center'>
+                <div className='flex items-center border-r-2 border-gray-400'>
                     <span className='font-bold text-lg'>Prénom</span>
+                    <div className='grid grid-rows-[5px_5px] mb-2 ml-2'>
+                        <FaSortUp className='cursor-pointer' />
+                        <FaSortDown className='cursor-pointer' />
+                    </div>
+                </div>
+                <div className='flex items-center'>
+                    <span className='font-bold text-lg'>Date</span>
                     <div className='grid grid-rows-[5px_5px] mb-2 ml-2'>
                         <FaSortUp className='cursor-pointer' />
                         <FaSortDown className='cursor-pointer' />
