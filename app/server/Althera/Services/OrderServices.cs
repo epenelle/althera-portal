@@ -61,7 +61,7 @@ public class OrderServices {
     }
 
     // Delete Order by ID
-    public void Deleteorder(int id)
+    public void DeleteOrder(int id)
     {
         var order = _dbContext.Orders.SingleOrDefault(c => c.orderId == id);
         if (order != null)

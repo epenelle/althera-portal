@@ -16,7 +16,7 @@ public class ClinicServices {
     // Clinic
 
     // Get All Clinic
-    public List<ClinicModel>? GetAllClinics()
+    public List<ClinicModel> GetAllClinics()
     {
         var AllClinics = _dbContext.Clinics.ToList();
         var AllClinicModel = new List<ClinicModel>();

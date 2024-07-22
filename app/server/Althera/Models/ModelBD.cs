@@ -20,6 +20,14 @@ public class AppDbContext : DbContext {
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        
+        modelBuilder.Entity<ClinicDB>()
+            .HasKey(c => c.clinicId);
+        modelBuilder.Entity<PatientDB>()
+            .HasKey(k => k.patientId);
+        modelBuilder.Entity<OrderDB>()
+            .HasKey(k => k.orderId);
+
         modelBuilder.Entity<PatientDB>()
             .HasOne(p => p.Clinic)
             .WithMany(c => c.Patients)
@@ -28,7 +36,8 @@ public class AppDbContext : DbContext {
         modelBuilder.Entity<OrderDB>()
             .HasOne(c => c.Patient)
             .WithMany(p => p.Orders)
-            .HasForeignKey(c => c.patientId);
+            .HasForeignKey(c => c.patientId);  
+
     }
 
 }

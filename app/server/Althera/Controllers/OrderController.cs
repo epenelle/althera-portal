@@ -52,7 +52,7 @@ public class OrderController : ControllerBase {
     // DELETE action
     [HttpDelete("{id}")]
     public IActionResult DeleteOrder(int id){
-        _orderServices.Deleteorder(id);
+        _orderServices.DeleteOrder(id);
         return NoContent();
     }
 

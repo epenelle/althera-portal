@@ -1,4 +1,8 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 public class ClinicDB {
+    [Key]
     public int clinicId { get; set; }
     public string? clinicName { get; set; }
     public string? clinicPassword { get; set; }
@@ -11,12 +15,13 @@ public class ClinicDB {
 }
 
 public class PatientDB {
+    [Key]
     public int patientId {get; set;}
     public string? patientFirstname { get; set; }
     public string? patientLastname { get; set; }
     public int? healthInsuranceCard { get; set; }
 
-    // Clé étrangère
+    [ForeignKey("clinicId")]
     public int clinicId { get; set; }
     
     // Propriété de navigation
@@ -27,6 +32,7 @@ public class PatientDB {
 }
 
 public class OrderDB {
+    [Key]
     public int orderId { get; set; }
     public string? orthesisModel { get; set; }
     public string? orthesisInfo { get; set; }
@@ -35,7 +41,7 @@ public class OrderDB {
     public string? orderState { get; set; }
     public string? orthesisComment { get; set; }
 
-    //Foreign key
+    [ForeignKey("patientId")]
     public int patientId { get; set; }
 
     // Navigation property
