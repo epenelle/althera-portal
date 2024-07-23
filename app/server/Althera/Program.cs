@@ -1,7 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using Althera.Services;
+using Althera.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 
 builder.Services.AddCors(options =>
 {
@@ -14,11 +17,17 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllers();
-//builder.Services.AddSingleton
 
+// Enregistrer vos services
+builder.Services.AddScoped<PatientServices>();
+builder.Services.AddScoped<OrderServices>();
 
-//builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
+// Ajouter DbContext
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// builder.Services.AddEndpointsApiExplorer();
+// builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -26,8 +35,8 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    //app.UseSwagger();
-    //app.UseSwaggerUI();
+    // app.UseSwagger();
+    // app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
