@@ -5,13 +5,13 @@ function App() {
   const [patients, setPatients] = useState(null);
   const [loadingPatients, setLoadingPatients] = useState(true);
   const [errorPatients, setErrorPatients] = useState(null);
-  const [newPatient, setNewPatient] = useState({ firstName: '', lastName: '' });
+  const [newPatient, setNewPatient] = useState({ firstName: '', lastName: '', healthInsuranceCard: '', clinicId: '' });
   const [deleteIdPatient, setDeleteIdPatient] = useState('');
 
   const [commandes, setCommandes] = useState(null);
   const [loadingCommandes, setLoadingCommandes] = useState(true);
   const [errorCommandes, setErrorCommandes] = useState(null);
-  const [newCommande, setNewCommande] = useState({ IdPatient: '', dateCommande: '' });
+  const [newCommande, setNewCommande] = useState({ IdPatient: '', dateCommande: '', orthesisModel: '', orthesisInfo: '', orthesisScan: '', orderState: '', orthesisComment: '' });
   const [deleteIdCommande, setDeleteIdCommande] = useState('');
 
   useEffect(() => {
@@ -83,7 +83,7 @@ function App() {
       }
       const createdPatient = await response.json();
       setPatients(prevState => [...prevState, createdPatient]);
-      setNewPatient({ firstName: '', lastName: '' });
+      setNewPatient({ firstName: '', lastName: '', healthInsuranceCard: '', clinicId: '' });
     } catch (error) {
       setErrorPatients(error);
     }
@@ -103,7 +103,7 @@ function App() {
       }
       const createdCommande = await response.json();
       setCommandes(prevState => [...prevState, createdCommande]);
-      setNewCommande({ IdPatient: '', dateCommande: '' });
+      setNewCommande({ IdPatient: '', dateCommande: '', orthesisModel: '', orthesisInfo: '', orthesisScan: '', orderState: '', orthesisComment: '' });
     } catch (error) {
       setErrorCommandes(error);
     }
@@ -176,6 +176,14 @@ function App() {
             <label>Last Name:</label>
             <input type="text" name="lastName" value={newPatient.lastName} onChange={handlePatientInputChange} />
           </div>
+          <div>
+            <label>Health Insurance Card:</label>
+            <input type="text" name="healthInsuranceCard" value={newPatient.healthInsuranceCard} onChange={handlePatientInputChange} />
+          </div>
+          <div>
+            <label>Clinic ID:</label>
+            <input type="text" name="clinicId" value={newPatient.clinicId} onChange={handlePatientInputChange} />
+          </div>
           <button type="submit">Add Patient</button>
         </form>
         <h2>Delete Patient</h2>
@@ -204,6 +212,26 @@ function App() {
           <div>
             <label>Date Commande:</label>
             <input type="text" name="dateCommande" value={newCommande.dateCommande} onChange={handleCommandeInputChange} />
+          </div>
+          <div>
+            <label>Orthesis Model:</label>
+            <input type="text" name="orthesisModel" value={newCommande.orthesisModel} onChange={handleCommandeInputChange} />
+          </div>
+          <div>
+            <label>Orthesis Info:</label>
+            <input type="text" name="orthesisInfo" value={newCommande.orthesisInfo} onChange={handleCommandeInputChange} />
+          </div>
+          <div>
+            <label>Orthesis Scan:</label>
+            <input type="text" name="orthesisScan" value={newCommande.orthesisScan} onChange={handleCommandeInputChange} />
+          </div>
+          <div>
+            <label>Order State:</label>
+            <input type="text" name="orderState" value={newCommande.orderState} onChange={handleCommandeInputChange} />
+          </div>
+          <div>
+            <label>Orthesis Comment:</label>
+            <input type="text" name="orthesisComment" value={newCommande.orthesisComment} onChange={handleCommandeInputChange} />
           </div>
           <button type="submit">Add Commande</button>
         </form>

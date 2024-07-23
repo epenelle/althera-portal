@@ -7,4 +7,4 @@ To Check :
 
 To run API :
 
-# dotnet run
+# dotneet run
