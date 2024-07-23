@@ -19,7 +19,7 @@ API should be runing prior trying to run the test website
 
 Move into the right folder
 ```
-cd .\app\clinic-client\testAPI
+cd .\app\clinic-client\testAPI\althera_test_api
 ```
 
 Start the website 

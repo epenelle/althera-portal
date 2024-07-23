@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Althera.Services;
 using Althera.Models;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,15 +17,17 @@ builder.Services.AddCors(options =>
         );
 });
 
-builder.Services.AddControllers();
+
+// Ajouter DbContext
+builder.Services.AddDbContext<AppDbContext>();
 
 // Enregistrer vos services
 builder.Services.AddScoped<PatientServices>();
 builder.Services.AddScoped<OrderServices>();
+builder.Services.AddScoped<ClinicServices>();
 
-// Ajouter DbContext
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddControllers();
+
 
 // builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();

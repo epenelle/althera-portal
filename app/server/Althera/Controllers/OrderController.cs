@@ -37,7 +37,7 @@ public class OrderController : ControllerBase {
             return BadRequest();
         }
         _orderServices.CreateOrder(order);
-        return NoContent();
+        return StatusCode(201, order);
     }
 
 

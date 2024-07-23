@@ -37,7 +37,7 @@ public class ClinicController : ControllerBase {
             return BadRequest();
         }
         _clinicServices.CreateClinic(clinic);
-        return NoContent();
+        return StatusCode(201, clinic);
     }
 
 

@@ -5,14 +5,21 @@ function App() {
   const [patients, setPatients] = useState(null);
   const [loadingPatients, setLoadingPatients] = useState(true);
   const [errorPatients, setErrorPatients] = useState(null);
-  const [newPatient, setNewPatient] = useState({ firstName: '', lastName: '', healthInsuranceCard: '', clinicId: '' });
+  const [newPatient, setNewPatient] = useState({ patientFirstname: '', patientLastname: '', healthInsuranceCard: '', clinicId: '' });
   const [deleteIdPatient, setDeleteIdPatient] = useState('');
 
-  const [commandes, setCommandes] = useState(null);
-  const [loadingCommandes, setLoadingCommandes] = useState(true);
-  const [errorCommandes, setErrorCommandes] = useState(null);
-  const [newCommande, setNewCommande] = useState({ IdPatient: '', dateCommande: '', orthesisModel: '', orthesisInfo: '', orthesisScan: '', orderState: '', orthesisComment: '' });
-  const [deleteIdCommande, setDeleteIdCommande] = useState('');
+  const [orders, setOrders] = useState(null);
+  const [loadingOrders, setLoadingOrders] = useState(true);
+  const [errorOrders, setErrorOrders] = useState(null);
+  const [newOrder, setNewOrder] = useState({ orthesisModel: '', orthesisInfo: '', orthesisScan: '', orderDate: '', orderState: '', orthesisComment: '', patientId: '' });
+  const [deleteIdOrder, setDeleteIdOrder] = useState('');
+
+  const [clinics, setClinics] = useState(null);
+  const [loadingClinics, setLoadingClinics] = useState(true);
+  const [errorClinics, setErrorClinics] = useState(null);
+  const [newClinic, setNewClinic] = useState({ clinicName: '', clinicPassword: '', clinicAddress: '' });
+  const [deleteIdClinic, setDeleteIdClinic] = useState('');
+
 
   useEffect(() => {
     const fetchPatients = async () => {
@@ -35,9 +42,9 @@ function App() {
       }
     };
 
-    const fetchCommandes = async () => {
+    const fetchOrders = async () => {
       try {
-        const response = await fetch('http://localhost:5125/commande', {
+        const response = await fetch('http://localhost:5125/order', {
           method: "GET",
           headers: {
             'Content-Type': 'application/json'
@@ -47,16 +54,37 @@ function App() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const json = await response.json();
-        setCommandes(json);
+        setOrders(json);
       } catch (error) {
-        setErrorCommandes(error);
+        setErrorOrders(error);
       } finally {
-        setLoadingCommandes(false);
+        setLoadingOrders(false);
+      }
+    };
+
+    const fetchClinic = async () => {
+      try {
+        const response = await fetch('http://localhost:5125/clinic', {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const json = await response.json();
+        setClinics(json);
+      } catch (error) {
+        setErrorClinics(error);
+      } finally {
+        setLoadingClinics(false);
       }
     };
 
     fetchPatients();
-    fetchCommandes();
+    fetchOrders();
+    fetchClinic();
   }, []);
 
   const handlePatientInputChange = (e) => {
@@ -64,9 +92,14 @@ function App() {
     setNewPatient(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleCommandeInputChange = (e) => {
+  const handleOrderInputChange = (e) => {
     const { name, value } = e.target;
-    setNewCommande(prevState => ({ ...prevState, [name]: value }));
+    setNewOrder(prevState => ({ ...prevState, [name]: value }));
+  };
+
+  const handleClinicInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewClinic(prevState => ({ ...prevState, [name]: value }));
   };
 
   const createPatient = async () => {
@@ -83,29 +116,50 @@ function App() {
       }
       const createdPatient = await response.json();
       setPatients(prevState => [...prevState, createdPatient]);
-      setNewPatient({ firstName: '', lastName: '', healthInsuranceCard: '', clinicId: '' });
+      setNewPatient({ patientFirstname: '', patientLastname: '', healthInsuranceCard: '', clinicId: '' });
     } catch (error) {
       setErrorPatients(error);
     }
   };
 
-  const createCommande = async () => {
+  const createOrder = async () => {
     try {
-      const response = await fetch('http://localhost:5125/commande', {
+      const response = await fetch('http://localhost:5125/order', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(newCommande)
+        body: JSON.stringify(newOrder)
       });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const createdCommande = await response.json();
-      setCommandes(prevState => [...prevState, createdCommande]);
-      setNewCommande({ IdPatient: '', dateCommande: '', orthesisModel: '', orthesisInfo: '', orthesisScan: '', orderState: '', orthesisComment: '' });
+      const createdOrder = await response.json();
+      setOrders(prevState => [...prevState, createdOrder]);
+      setNewOrder({ orthesisModel: '', orthesisInfo: '', orthesisScan: '', orderDate: '', orderState: '', orthesisComment: '', patientId: '' });
     } catch (error) {
-      setErrorCommandes(error);
+      setErrorOrders(error);
+    }
+  };
+
+  const createClinic = async () => {
+    console.log("Create Clinic")
+    try {
+      const response = await fetch('http://localhost:5125/clinic', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newClinic)
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const createdClinic = await response.json();
+      setOrders(prevState => [...prevState, createdClinic]);
+      setNewClinic({ clinicName: '', clinicPassword: '', clinicAddress: ''});
+    } catch (error) {
+      setErrorClinics(error);
     }
   };
 
@@ -113,8 +167,12 @@ function App() {
     setDeleteIdPatient(e.target.value);
   };
 
-  const handleDeleteCommandeChange = (e) => {
-    setDeleteIdCommande(e.target.value);
+  const handleDeleteOrderChange = (e) => {
+    setDeleteIdOrder(e.target.value);
+  };
+
+  const handleDeleteClinicChange = (e) => {
+    setDeleteIdClinic(e.target.value);
   };
 
   const deletePatient = async () => {
@@ -135,9 +193,9 @@ function App() {
     }
   };
 
-  const deleteCommande = async () => {
+  const deleteOrder = async () => {
     try {
-      const response = await fetch(`http://localhost:5125/commande/${deleteIdCommande}`, {
+      const response = await fetch(`http://localhost:5125/order/${deleteIdOrder}`, {
         method: "DELETE",
         headers: {
           'Content-Type': 'application/json'
@@ -146,16 +204,35 @@ function App() {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      setCommandes(prevState => prevState.filter(commande => commande.id !== parseInt(deleteIdCommande, 10)));
-      setDeleteIdCommande('');
+      setOrders(prevState => prevState.filter(order => order.id !== parseInt(deleteIdOrder, 10)));
+      setDeleteIdOrder('');
     } catch (error) {
-      setErrorCommandes(error);
+      setErrorOrders(error);
     }
   };
 
-  if (loadingPatients || loadingCommandes) return <p>Loading...</p>;
+  const deleteClinic = async () => {
+    try {
+      const response = await fetch(`http://localhost:5125/clinic/${deleteIdClinic}`, {
+        method: "DELETE",
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      setClinics(prevState => prevState.filter(clinic => clinic.id !== parseInt(deleteIdClinic, 10)));
+      setDeleteIdClinic('');
+    } catch (error) {
+      setErrorClinics(error);
+    }
+  };
+
+  if (loadingPatients || loadingOrders || loadingClinics) return <p>Loading...</p>;
   if (errorPatients) return <p>Error: {errorPatients.message}</p>;
-  if (errorCommandes) return <p>Error: {errorCommandes.message}</p>;
+  if (errorOrders) return <p>Error: {errorOrders.message}</p>;
+  if (errorClinics) return <p>Error: {errorClinics.message}</p>;
 
   return (
     <div className="App">
@@ -170,11 +247,11 @@ function App() {
         <form onSubmit={(e) => { e.preventDefault(); createPatient(); }}>
           <div>
             <label>First Name:</label>
-            <input type="text" name="firstName" value={newPatient.firstName} onChange={handlePatientInputChange} />
+            <input type="text" name="patientFirstname" value={newPatient.patientFirstname} onChange={handlePatientInputChange} />
           </div>
           <div>
             <label>Last Name:</label>
-            <input type="text" name="lastName" value={newPatient.lastName} onChange={handlePatientInputChange} />
+            <input type="text" name="patientLastname" value={newPatient.patientLastname} onChange={handlePatientInputChange} />
           </div>
           <div>
             <label>Health Insurance Card:</label>
@@ -196,54 +273,89 @@ function App() {
         </form>
       </div>
       
-      <div className="commande">
-        <h1>Commandes Data</h1>
-        {commandes ? (
-          <pre>{JSON.stringify(commandes, null, 2)}</pre>
+      <div className="order">
+        <h1>Orders Data</h1>
+        {orders ? (
+          <pre>{JSON.stringify(orders, null, 2)}</pre>
         ) : (
-          <p>No commande data available</p>
+          <p>No order data available</p>
         )}
-        <h2>Add New Commande</h2>
-        <form onSubmit={(e) => { e.preventDefault(); createCommande(); }}>
+        <h2>Add New Order</h2>
+        <form onSubmit={(e) => { e.preventDefault(); createOrder(); }}>
           <div>
             <label>Id Patient:</label>
-            <input type="text" name="IdPatient" value={newCommande.IdPatient} onChange={handleCommandeInputChange} />
+            <input type="text" name="orthesisModel" value={newOrder.orthesisModel} onChange={handleOrderInputChange} />
           </div>
           <div>
-            <label>Date Commande:</label>
-            <input type="text" name="dateCommande" value={newCommande.dateCommande} onChange={handleCommandeInputChange} />
+            <label>Date Order:</label>
+            <input type="text" name="orthesisInfo" value={newOrder.orthesisInfo} onChange={handleOrderInputChange} />
           </div>
           <div>
             <label>Orthesis Model:</label>
-            <input type="text" name="orthesisModel" value={newCommande.orthesisModel} onChange={handleCommandeInputChange} />
+            <input type="text" name="orthesisScan" value={newOrder.orthesisScan} onChange={handleOrderInputChange} />
           </div>
           <div>
             <label>Orthesis Info:</label>
-            <input type="text" name="orthesisInfo" value={newCommande.orthesisInfo} onChange={handleCommandeInputChange} />
+            <input type="text" name="orderDate" value={newOrder.orderDate} onChange={handleOrderInputChange} />
           </div>
           <div>
             <label>Orthesis Scan:</label>
-            <input type="text" name="orthesisScan" value={newCommande.orthesisScan} onChange={handleCommandeInputChange} />
+            <input type="text" name="orderState" value={newOrder.orderState} onChange={handleOrderInputChange} />
           </div>
           <div>
             <label>Order State:</label>
-            <input type="text" name="orderState" value={newCommande.orderState} onChange={handleCommandeInputChange} />
+            <input type="text" name="orthesisComment" value={newOrder.orthesisComment} onChange={handleOrderInputChange} />
           </div>
           <div>
             <label>Orthesis Comment:</label>
-            <input type="text" name="orthesisComment" value={newCommande.orthesisComment} onChange={handleCommandeInputChange} />
+            <input type="text" name="patientId" value={newOrder.patientId} onChange={handleOrderInputChange} />
           </div>
-          <button type="submit">Add Commande</button>
+          <button type="submit">Add Order</button>
         </form>
-        <h2>Delete Commande</h2>
-        <form onSubmit={(e) => { e.preventDefault(); deleteCommande(); }}>
+        <h2>Delete Order</h2>
+        <form onSubmit={(e) => { e.preventDefault(); deleteOrder(); }}>
           <div>
             <label>ID:</label>
-            <input type="text" value={deleteIdCommande} onChange={handleDeleteCommandeChange} />
+            <input type="text" value={deleteIdOrder} onChange={handleDeleteOrderChange} />
           </div>
-          <button type="submit">Delete Commande</button>
+          <button type="submit">Delete Order</button>
         </form>
       </div>
+
+      <div className="clinic">
+        <h1>Clinics Data</h1>
+        {clinics ? (
+          <pre>{JSON.stringify(clinics, null, 2)}</pre>
+        ) : (
+          <p>No clinic data available</p>
+        )}
+        <h2>Add New Clinic</h2>
+        <form onSubmit={(e) => { e.preventDefault(); createClinic(); }}>
+          <div>
+            <label>Clinic Name:</label>
+            <input type="text" name="clinicName" value={newClinic.clinicName} onChange={handleClinicInputChange} />
+          </div>
+          <div>
+            <label>Clinic Password:</label>
+            <input type="text" name="clinicPassword" value={newClinic.clinicPassword} onChange={handleClinicInputChange} />
+          </div>
+          <div>
+            <label>Clinic Address:</label>
+            <input type="text" name="clinicAddress" value={newClinic.clinicAddress} onChange={handleClinicInputChange} />
+          </div>
+          <button type="submit">Add CLinic</button>
+        </form>
+        <h2>Delete Clinic</h2>
+        <form onSubmit={(e) => { e.preventDefault(); deleteClinic(); }}>
+          <div>
+            <label>ID:</label>
+            <input type="text" value={deleteClinic} onChange={handleDeleteClinicChange} />
+          </div>
+          <button type="submit">Delete clinic</button>
+        </form>
+      </div>
+      
+
     </div>
   );
 }
