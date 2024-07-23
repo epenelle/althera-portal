@@ -169,6 +169,7 @@ C:\ESEO\E4a\Stage Canada\Althera_Portal\althera-portal\app\server\Althera\bin\De
 C:\ESEO\E4a\Stage Canada\Althera_Portal\althera-portal\app\server\Althera\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 C:\ESEO\E4a\Stage Canada\Althera_Portal\althera-portal\app\server\Althera\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\ESEO\E4a\Stage Canada\Althera_Portal\althera-portal\app\server\Althera\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+<<<<<<< HEAD
 C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\Humanizer.dll
@@ -274,3 +275,7 @@ C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\ne
 C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\maxim\OneDrive\Documents\althera-portal\app\server\Althera\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+=======
+C:\ESEO\E4a\Stage Canada\Althera_Portal\althera-portal\app\server\Althera\bin\Debug\net8.0\package-lock.json
+C:\ESEO\E4a\Stage Canada\Althera_Portal\althera-portal\app\server\Althera\bin\Debug\net8.0\package.json
+>>>>>>> f0d3cb167c08878a8ba3e37006a875503e4ccdc3
