@@ -1,6 +1,6 @@
 import React from 'react'
-import { PatientsData } from '@/data/data';
-import PatientCard from './CommandeCard';
+import { OrdersData } from '@/data/data';
+import ItemCard from '../ItemCard';
 import { BsPeopleFill } from 'react-icons/bs';
 import { FaSearch } from 'react-icons/fa';
 import { FaSortUp, FaSortDown } from 'react-icons/fa';
@@ -12,12 +12,12 @@ import PaginationMenu from '../../Helper/PaginationMenu';
 
 const ListePatients = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
-  const patientsPerPage = 10;
-  const indexOfLastPatient = currentPage * patientsPerPage;
-  const indexOfFirstPatient = indexOfLastPatient - patientsPerPage;
-  const currentPatients = PatientsData.slice(indexOfFirstPatient, indexOfLastPatient);
+  const ordersPerPage = 10;
+  const indexOfLastOrder = currentPage * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = OrdersData.slice(indexOfFirstOrder, indexOfLastOrder);
 
-  const totalPages = Math.ceil(PatientsData.length / patientsPerPage);
+  const totalPages = Math.ceil(OrdersData.length / ordersPerPage);
   const pageNumbers = [];
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
@@ -43,7 +43,7 @@ return (
                     Ajouter
                 </button>
             </div>
-            <div className='hidden md:grid md:grid-cols-[150px_160px_150px_150px] w-full items-center gap-4 pl-24 mt-4 p-2 border-2 bg-gray-300 border-gray-400 rounded-lg mb-5'>
+            <div className='hidden md:grid md:grid-cols-[160px_150px_140px_130px_150px] w-full items-center gap-4 pl-28 mt-4 p-2 border-2 bg-gray-300 border-gray-400 rounded-lg mb-5'>
                 <div className='flex items-center border-l-2 pl-3 border-r-2 border-gray-400'>
                     <span className='font-bold text-lg'>Numéro</span>
                     <div className='grid grid-rows-[5px_5px] mb-2 ml-2'>
@@ -65,16 +65,22 @@ return (
                         <FaSortDown className='cursor-pointer' />
                     </div>
                 </div>
-                <div className='flex items-center'>
+                <div className='flex items-center border-r-2 border-gray-400'>
                     <span className='font-bold text-lg'>Date</span>
+                    <div className='pt-2 mb-2 ml-2'>
+                        <FaSortDown className='cursor-pointer' />
+                    </div>
+                </div>
+                <div className='flex items-center'>
+                    <span className='font-bold text-lg'>Status</span>
                     <div className='grid grid-rows-[5px_5px] mb-2 ml-2'>
                         <FaSortUp className='cursor-pointer' />
                         <FaSortDown className='cursor-pointer' />
                     </div>
                 </div>
             </div>
-            {currentPatients.map((patient) => (
-                <PatientCard key={patient.id} patient={patient} />
+            {currentOrders.map((order) => (
+                <ItemCard key={order.id} data={order} />
             ))}
             <PaginationMenu currentPage={currentPage} totalPages={totalPages} navigateToPage={navigateToPage} />
             {/*<SelectCalendrier />*/}

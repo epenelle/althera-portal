@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { PatientsData } from '@/data/data';
-import PatientCard from './PatientCard';
+import PatientCard from '../ItemCard';
 import { BsPeopleFill } from 'react-icons/bs';
 import { FaSearch } from 'react-icons/fa';
 import { FaSortUp, FaSortDown } from 'react-icons/fa';
@@ -67,7 +67,7 @@ return (
                 </div>
             </div>
             {currentPatients.map((patient) => (
-                <PatientCard key={patient.id} patient={patient} />
+                <PatientCard key={patient.id} data={patient} />
             ))}
             <PaginationMenu currentPage={currentPage} totalPages={totalPages} navigateToPage={navigateToPage} />
         </div>
