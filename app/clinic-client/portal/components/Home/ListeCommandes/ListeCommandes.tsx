@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 import { OrdersData } from '@/data/data';
 import ItemCard from '../ItemCard';
 import { BsPeopleFill } from 'react-icons/bs';
