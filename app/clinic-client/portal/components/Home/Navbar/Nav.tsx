@@ -26,7 +26,7 @@ const Nav = ({openNav}:Props) => {
             <FaBars onClick={openNav} className='w-6 h-6 cursor-pointer'/>
         </div>
         {/* Contenu de la navbar, caché en affichage mobile */}
-        <div className='fixed left-0 top-0 h-full z-10 bg-[#2176FF] shadow-lg hidden md:flex flex-col items-center py-10 -col justify-between'>
+        <div className='fixed left-0 top-0 h-full z-10 bg-primary-light-blue shadow-lg hidden md:flex flex-col items-center py-10 -col justify-between'>
             <div className='px-5 mt-5'>
                 <Image src="/images/logo_althera_full_blanc.png" alt="Logo" width={150} height={150}/>
             </div>
@@ -35,15 +35,15 @@ const Nav = ({openNav}:Props) => {
                 {navLinks.map((link)=>{
                     return (
                         <Link href={link.url} key={link.id}>
-                            <button onClick={() => setButtonValue(link.id)} className='text-lg font-semibold cursor-pointer hover:text-blue-800 transition-all duration-200 text-white'>{link.label}</button>
+                            <button onClick={() => setButtonValue(link.id)} className='text-lg font-semibold cursor-pointer hover:text-secondary-dark-blue transition-all duration-200 text-white'>{link.label}</button>
                         </Link>
                     )
                 })}
             </div>
             {/* Icons */}
             <div className='flex flex-col items-center space-y-8'>
-                <MdLanguage className='w-6 h-6 cursor-pointer hover:text-blue-800'/>
-                <CiLogout className='w-6 h-6 cursor-pointer hover:text-red-600' onClick={handleSubmit}  />
+                <MdLanguage className='w-6 h-6 cursor-pointer hover:text-light-white'/>
+                <CiLogout className='w-6 h-6 cursor-pointer hover:text-medium-red' onClick={handleSubmit}  />
             </div>
         </div>
     </div>

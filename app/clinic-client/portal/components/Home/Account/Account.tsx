@@ -11,18 +11,18 @@ const Account = () => {
   }
 
   return (
-    <div className='flex flex-col justify-center pt-9 pb-9 bg-[#00072D] min-h-screen ml-[10vh] md:ml-[15vh]'>
-        <div className='flex flex-col grow w-4/5 mt-8 md:mt-16 mx-auto p-6 bg-[#FFFFFF] shadow-md rounded-lg justify-center'>
+    <div className='flex flex-col justify-center pt-9 pb-9 bg-dark-blue min-h-screen ml-[10vh] md:ml-[15vh]'>
+        <div className='flex flex-col grow w-4/5 mt-8 md:mt-16 mx-auto p-6 bg-light-white shadow-md rounded-lg justify-center'>
             <div className='pb-4 flex items-center justify-center'>
                 <MdAccountCircle size={30} className='mr-2' />
-                <h1 className='text-center font-bold text-3xl p-2 md:text-4x1 text-blue-950 '>Gestion compte</h1>
+                <h1 className='text-center font-bold text-3xl p-2 md:text-4x1 text-secondary-dark-blue '>Gestion compte</h1>
             </div>
             <div className='flex justify-between mt-4'>
-                <div className={`w-1/2 text-center py-2 border-2 border-gray-200 rounded-lg cursor-pointer ${activeSection === 'modifCompte' ? 'bg-[#2176FF]' : 'hover:bg-gray-100'} transition duration-300 ease-in-out mr-2`}
+                <div className={`w-1/2 text-center py-2 border-2 border-light-gray rounded-lg cursor-pointer ${activeSection === 'modifCompte' ? 'bg-primary-light-blue' : 'hover:bg-gray-100'} transition duration-300 ease-in-out mr-2`}
                      onClick={() => handleSectionClick('modifCompte')}>
                         Modification coordonnées
                 </div>
-                <div className={`w-1/2 text-center py-2 border-2 border-gray-200 rounded-lg cursor-pointer ${activeSection === 'modifPass' ? 'bg-[#2176FF]' : 'hover:bg-gray-100'} transition duration-300 ease-in-out ml-2`}
+                <div className={`w-1/2 text-center py-2 border-2 border-light-gray rounded-lg cursor-pointer ${activeSection === 'modifPass' ? 'bg-primary-light-blue' : 'hover:bg-gray-100'} transition duration-300 ease-in-out ml-2`}
                      onClick={() => handleSectionClick('modifPass')}>
                         Modification mot de passe
                 </div>

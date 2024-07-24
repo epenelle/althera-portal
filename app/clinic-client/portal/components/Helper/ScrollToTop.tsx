@@ -23,7 +23,7 @@ const ScrollToTop = () => {
 
   return (
     <div className='fixed bottom-4 animate-pulse right-4'>
-        {isVisible && <button onClick={ScrollToTop} className='bg-blue-700 text-white rounded-full w-12 h-12 flex items-center justify-center focus:outline-none'><FaArrowUp/></button>}
+        {isVisible && <button onClick={ScrollToTop} className='bg-secondary-medium-blue text-white rounded-full w-12 h-12 flex items-center justify-center focus:outline-none'><FaArrowUp/></button>}
     </div>
   )
 }

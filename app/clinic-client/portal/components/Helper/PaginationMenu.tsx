@@ -11,8 +11,8 @@ interface PaginationMenuProps {
 const PaginationMenu: React.FC<PaginationMenuProps> = ({ currentPage, totalPages, navigateToPage }) => {
     return (
         <div className='flex justify-center items-center mt-4 space-x-2'>
-            <div className='flex items-center'><FaBackward onClick={() => navigateToPage(1)} className='mx-1 hover:text-blue-500 cursor-pointer' /></div>
-            <div className='flex items-center'><IoCaretBack onClick={() => navigateToPage(Math.max(currentPage - 1, 1))} className='mx-1 hover:text-blue-500 cursor-pointer text-2xl'/></div>
+            <div className='flex items-center'><FaBackward onClick={() => navigateToPage(1)} className='mx-1 hover:text-secondary-light-blue cursor-pointer' /></div>
+            <div className='flex items-center'><IoCaretBack onClick={() => navigateToPage(Math.max(currentPage - 1, 1))} className='mx-1 hover:text-secondary-light-blue cursor-pointer text-2xl'/></div>
             {Array.from({ length: 3 }, (_, i) => {
                 let pageToShow;
                 if (currentPage === 1 || currentPage === 2) {
@@ -26,14 +26,14 @@ const PaginationMenu: React.FC<PaginationMenuProps> = ({ currentPage, totalPages
                 return (
                     <div className='flex items-center' key={pageToShow}>
                         <button onClick={() => navigateToPage(pageToShow)} 
-                                className={`${currentPage === pageToShow ? 'text-blue-500 font-bold underline' : ''} mx-1`}>
+                                className={`${currentPage === pageToShow ? 'text-secondary-light-blue font-bold underline' : ''} mx-1`}>
                             {pageToShow}
                         </button>
                     </div>
                 );
             })}
-            <div className='flex items-center'><IoCaretForward onClick={() => navigateToPage(Math.min(currentPage + 1, totalPages))} className='mx-1 hover:text-blue-500 cursor-pointer text-2xl' /></div>
-            <div className='flex items-center'><FaForward onClick={() => navigateToPage(totalPages)} className='mx-1 hover:text-blue-500 cursor-pointer' /></div>
+            <div className='flex items-center'><IoCaretForward onClick={() => navigateToPage(Math.min(currentPage + 1, totalPages))} className='mx-1 hover:text-secondary-light-blue cursor-pointer text-2xl' /></div>
+            <div className='flex items-center'><FaForward onClick={() => navigateToPage(totalPages)} className='mx-1 hover:text-secondary-light-blue cursor-pointer' /></div>
         </div>
     );
 };

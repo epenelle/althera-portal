@@ -23,7 +23,7 @@ const MobileNav = ({closeNav, nav}:Props) => {
 
     };
     return (
-        <div className={`transform ${ResponsiveNav} transition-all duration-500 fixed top-0 left-0 z-50 h-[100vh] right-0 bottom-0 bg-[#2176FF]`}>
+        <div className={`transform ${ResponsiveNav} transition-all duration-500 fixed top-0 left-0 z-50 h-[100vh] right-0 bottom-0 bg-primary-light-blue`}>
             {/* Logo */}
             <div>
                 <Image src="/images/logo_althera_full_blanc.png" alt="Logo" width={180} height={180} className='mt-5 ml-5'/>
@@ -34,14 +34,14 @@ const MobileNav = ({closeNav, nav}:Props) => {
                 {navLinks.map((link)=>{
                     return (
                         <Link href={link.url} key={link.id}>
-                            <p onClick={() => { setButtonValue(link.id); closeNav(); }} className='text-2x1 font-semibold cursor-pointer hover:text-blue-800 transition-all duration-200 text-gray-900'>{link.label}</p>
+                            <p onClick={() => { setButtonValue(link.id); closeNav(); }} className='text-2x1 font-semibold text-light-white cursor-pointer active:text-secondary-dark-blue transition-all duration-20'>{link.label}</p>
                         </Link>     
                     )   
                 })}
             </div>
             <div className='flex flex-col items-center space-y-8'>
-                <MdLanguage className='w-6 h-6 cursor-pointer hover:text-blue-800'/>
-                <CiLogout className='w-6 h-6 cursor-pointer hover:text-red-600' onClick={handleSubmit}  />
+                <MdLanguage className='w-6 h-6 cursor-pointer hover:text-light-white'/>
+                <CiLogout className='w-6 h-6 cursor-pointer hover:text-medium-red' onClick={handleSubmit}  />
             </div>
         </div>
     )

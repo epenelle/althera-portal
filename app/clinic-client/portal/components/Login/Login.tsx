@@ -59,7 +59,7 @@ const Login = () => {
 
 
   return (
-      <div className="flex justify-center items-center min-h-screen bg-[#00072D] bg-cover bg-center">
+      <div className="flex justify-center items-center min-h-screen bg-primary-dark-blue bg-cover bg-center">
         <div className="w-[420px] bg-transparent border-0 md:border-2 border-white/20 backdrop-blur-[20px] shadow-lg text-white rounded-lg p-8"
         style={{ boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)' }}>
           <div className='flex justify-center mt-5 mb-10'>
@@ -79,7 +79,7 @@ const Login = () => {
               className="w-full h-12 bg-transparent border border-white rounded-full text-base text-white px-5"
             />
           </div>
-          <button className="w-full h-11 bg-white border-none outline-none rounded-full shadow-sm cursor-pointer text-base text-gray-800 font-semibold mb-3.5"
+          <button className="w-full h-11 bg-light-white border-none outline-none rounded-full shadow-sm cursor-pointer text-base text-gray-800 font-semibold mb-3.5"
           onClick={handleSubmit}>
             Connexion
           </button>

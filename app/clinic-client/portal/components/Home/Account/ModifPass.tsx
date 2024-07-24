@@ -38,26 +38,26 @@ const ModifPass = () => {
                 onValider={handleValider}
             />
         )}
-      <div className="rounded-lg p-8 border-2 border-gray-200 shadow-lg flex flex-col items-center">
-        <h1 className='text-center font-bold text-2xl p-2 md:text-4x1 text-blue-950 mb-4'>Modification des coordonnées</h1>
+      <div className="rounded-lg p-8 border-2 border-light-grayshadow-lg flex flex-col items-center">
+        <h1 className='text-center font-bold text-2xl p-2 md:text-4x1 text-secondary-dark-blue mb-4'>Modification des coordonnées</h1>
         <div className="w-full max-w-lg">
           <div className="flex flex-col mb-4">
             <div className="flex items-center mb-2">
               <label className="w-2/5 text-right whitespace-nowrap">Ancien mot de passe : </label>
-              <input type='password' className="ml-4 h-12 border border-gray-200 rounded-full text-base px-5" />
+              <input type='password' className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" />
             </div>
             <div className="flex items-center mb-2">
               <label className="w-2/5 text-right whitespace-nowrap">Nouveau mot de passe : </label>
-              <input type='password' className="ml-4 h-12 border border-gray-200 rounded-full text-base px-5" />
+              <input type='password' className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" />
             </div>
             <div className="flex items-center mb-2">
               <label className="w-2/5 text-right whitespace-nowrap">Confirmer le mot de passe : </label>
-              <input type='password' className="ml-4 h-12 border border-gray-200 rounded-full text-base px-5" />
+              <input type='password' className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" />
             </div>
           </div>
           <div className="flex justify-center">
-            <button className="h-11 pl-5 pr-5 bg-red-600 border-2 border-black outline-none rounded-full shadow-sm cursor-pointer text-base text-white font-semibold
-            transform active:scale-95 transition duration-150 ease-in-out"
+            <button className="h-11 pl-5 pr-5 bg-medium-red border-2 border-black outline-none rounded-full shadow-sm cursor-pointer text-base text-white font-semibold
+            transform active:scale-95 transition duration-150 ease-in-out hover:bg-dark-red"
             onClick={() => showPopUp("Le mot de passe à bien été modifié !", false)}>
               Modifier le mot de passe
             </button>
@@ -65,8 +65,8 @@ const ModifPass = () => {
         </div>
       </div>
       <div className="mt-20 flex justify-center">
-        <button className="h-11 px-5 bg-red-600 border-2 border-black shadow-sm rounded-full text-white underline font-semibold cursor-pointer
-        transform active:scale-95 transition duration-150 ease-in-out"
+        <button className="h-11 px-5 bg-medium-red border-2 border-black shadow-sm rounded-full text-white underline font-semibold cursor-pointer
+        transform active:scale-95 transition duration-150 ease-in-out hover:bg-dark-red"
         onClick={() => showPopUp("Confirmer la suppression du compte et de ses données", true)}>
           Demander la suppression du compte
         </button>
