@@ -45,7 +45,7 @@ return (
             </div>
             <div className='hidden md:grid md:grid-cols-[160px_150px_140px_130px_150px] w-full items-center gap-4 pl-28 mt-4 p-2 border-2 bg-light-gray border-medium-gray rounded-lg mb-5'>
                 <div className='flex items-center border-l-2 pl-3 border-r-2 border-medium-gray'>
-                    <span className='font-bold text-lg'>Numéro</span>
+                    <span className='font-bold text-lg'>N° sécurité</span>
                     <div className='grid grid-rows-[5px_5px] mb-2 ml-2'>
                         <FaSortUp className='cursor-pointer' />
                         <FaSortDown className='cursor-pointer' />

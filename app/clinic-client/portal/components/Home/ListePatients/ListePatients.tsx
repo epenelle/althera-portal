@@ -59,7 +59,7 @@ return (
                     </div>
                 </div>
                 <div className='flex items-center'>
-                    <span className='font-bold text-lg'>Num sécu</span>
+                    <span className='font-bold text-lg'>N° sécurité</span>
                     <div className='grid grid-rows-[5px_5px] mb-2 ml-2'>
                         <FaSortUp className='cursor-pointer' />
                         <FaSortDown className='cursor-pointer' />

@@ -24,8 +24,8 @@ export const stats = [
     },
     {
       id: 4,
-      image: "/images/commandes_finies.png",
-      name: "Commandes finies",
+      image: "/images/commandes_terminees.png",
+      name: "Commandes terminées",
       maj: 8,
       nb: 60,
     },
@@ -198,7 +198,7 @@ export const stats = [
     firstName: "Lucas",
     lastName: "Dupont",
     date: "2022-01-02",
-    statut: "Livré",
+    statut: "Livrée",
   },
   {
     id: 3,
@@ -207,7 +207,7 @@ export const stats = [
     firstName: "Emma",
     lastName: "Martin",
     date: "2022-01-03",
-    statut: "Annulé",
+    statut: "Annulée",
   },
   {
     id: 4,
@@ -225,7 +225,7 @@ export const stats = [
     firstName: "Zoé",
     lastName: "Petit",
     date: "2022-01-05",
-    statut: "Livré",
+    statut: "Livrée",
   },
   {
     id: 6,
@@ -243,7 +243,7 @@ export const stats = [
     firstName: "Alice",
     lastName: "Moreau",
     date: "2022-01-07",
-    statut: "Livré",
+    statut: "Livrée",
   },
   {
     id: 8,
@@ -252,7 +252,7 @@ export const stats = [
     firstName: "Gabriel",
     lastName: "Lambert",
     date: "2022-01-08",
-    statut: "Annulé",
+    statut: "Annulée",
   },
   {
     id: 9,
@@ -270,7 +270,7 @@ export const stats = [
     firstName: "Arthur",
     lastName: "Roux",
     date: "2022-01-10",
-    statut: "Livré",
+    statut: "Livrée",
   },
   {
     id: 11,
@@ -288,7 +288,7 @@ export const stats = [
     firstName: "Hugo",
     lastName: "Adam",
     date: "2022-01-12",
-    statut: "Livré",
+    statut: "Livrée",
   },
   {
     id: 13,
@@ -297,7 +297,7 @@ export const stats = [
     firstName: "Jade",
     lastName: "Perrin",
     date: "2022-01-13",
-    statut: "Annulé",
+    statut: "Annulée",
   },
   {
     id: 14,
@@ -315,7 +315,7 @@ export const stats = [
     firstName: "Anna",
     lastName: "Lefevre",
     date: "2022-01-15",
-    statut: "Livré",
+    statut: "Livrée",
   },
   {
     id: 16,
@@ -333,7 +333,7 @@ export const stats = [
     firstName: "Mia",
     lastName: "Blanc",
     date: "2022-01-17",
-    statut: "Livré",
+    statut: "Livrée",
   },
   {
     id: 18,
@@ -342,7 +342,7 @@ export const stats = [
     firstName: "Théo",
     lastName: "Garnier",
     date: "2022-01-18",
-    statut: "Annulé",
+    statut: "Annulée",
   },
   {
     id: 19,
@@ -360,7 +360,7 @@ export const stats = [
     firstName: "Raphaël",
     lastName: "Lefebvre",
     date: "2022-01-20",
-    statut: "Livré",
+    statut: "Livrée",
   },
 ];
   
