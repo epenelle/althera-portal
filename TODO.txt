@@ -1,6 +1,0 @@
-
-// BDD => Add user => link to clinic
-
-// user => can be Admin 
-
-// Change => CLinic => no password/email etc ...
