@@ -5,13 +5,13 @@ import { IoBarChartOutline } from 'react-icons/io5';
 
 const Statistics = () => {
   return (
-    <div className='flex justify-center pt-9 pb-9 bg-primary-dark-blue min-h-screen ml-[10vh] md:ml-[15vh]'>
-        <div className='w-4/5 mt-8 md:mt-16 mx-auto p-6 bg-light-white rounded-lg shadow-md'>
-            <div className='border-b-2 border-light-gray pb-4 flex items-center justify-center'>
+    <div className='bg-primary-dark-blue flex justify-center min-h-screen ml-[10vh] md:ml-[15vh] pb-9 pt-9'>
+        <div className='bg-light-white mx-auto mt-8 w-4/5 md:mt-16 p-6 rounded-lg shadow-md'>
+            <div className='border-light-gray border-b-2 flex items-center justify-center pb-4'>
                 <IoBarChartOutline size={30} className="mr-2" />
-                <h1 className='text-center font-bold text-3xl p-2 md:text-4x1 text-secondary-dark-blue '>Tableau de bord</h1>
+                <h1 className='text-secondary-dark-blue text-center font-bold md:text-4x1 p-2 text-3xl'>Tableau de bord</h1>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 mt-4'>
+            <div className='grid-cols-1 grid gap-6 lg:grid-cols-3 md:grid-cols-2 mt-4 xl:grid-cols-3'>
             {stats.map((data)=>{
                 return <div key={data.id}>
                     <StatisticsCard data={data}/>

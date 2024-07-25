@@ -1,9 +1,10 @@
 import React from 'react'
 import PopUp from '../../Helper/PopUp';
-import { useButtonContext } from '@/components/Helper/ButtonContext';
+import { useRouter } from 'next/router';
 
 
 const ModifAccount = () => {
+  const router = useRouter();
   const defaultNomClinique = "Clinique Sherbrooke";
   const defaultAdresse = "Sherbrooke";
   const defaultTelephone = "01 23 45 67 89";
@@ -12,11 +13,10 @@ const ModifAccount = () => {
   const [isPopUpVisible, setIsPopUpVisible] = React.useState(false);
   const [typePopUp, setTypePopUp] = React.useState(false);
   const [messagePopUp, setMessagePopUp] = React.useState("");
-  const { buttonValue, setButtonValue } = useButtonContext();
 
   const handleOk = () => {
     setIsPopUpVisible(false);
-    setButtonValue(1);
+    router.push('/Home?type=dashboard');
   };
 
   const showPopUp = (message: string, type: boolean) => {

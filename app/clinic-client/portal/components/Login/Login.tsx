@@ -53,7 +53,7 @@ const Login = () => {
           setErrorMessage("Identifiants incorrects. Veuillez réessayer.");
         }*/
           console.log('Connexion réussie');
-          router.push("/");
+          router.push("/Home?type=dashboard");
 
         };
 

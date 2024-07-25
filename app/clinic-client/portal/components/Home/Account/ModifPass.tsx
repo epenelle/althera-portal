@@ -1,17 +1,17 @@
 'use client';
 import React from 'react'
 import PopUp from '../../Helper/PopUp';
-import { useButtonContext } from '@/components/Helper/ButtonContext';
+import { useRouter } from 'next/router';
 
 const ModifPass = () => {
+    const router = useRouter();
     const [isPopUpVisible, setIsPopUpVisible] = React.useState(false);
     const [typePopUp, setTypePopUp] = React.useState(false);
     const [messagePopUp, setMessagePopUp] = React.useState("");
-    const { buttonValue, setButtonValue } = useButtonContext();
 
     const handleOk = () => {
         setIsPopUpVisible(false);
-        setButtonValue(1);
+        router.push('/Home?type=dashboard');
     };
     const handleValider = () => {
         setIsPopUpVisible(false);

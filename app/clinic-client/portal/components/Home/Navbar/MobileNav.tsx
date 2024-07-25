@@ -17,10 +17,15 @@ const MobileNav = ({closeNav, nav}:Props) => {
     const ResponsiveNav = nav ? "translate-x-0" : "translate-x-[-100%]";
     const { buttonValue, setButtonValue } = useButtonContext();
     const router = useRouter();
+
     const handleSubmit = async (e: React.MouseEvent<SVGElement, MouseEvent>) => {
         console.log('Déconnexion réussite');
         router.push("/LoginPage");
 
+    };
+
+    const handleMenuClick = (type: string) => {
+        router.push('/Home?type=' + type);
     };
     return (
         <div className={`transform ${ResponsiveNav} transition-all duration-500 fixed top-0 left-0 z-50 h-[100vh] right-0 bottom-0 bg-primary-light-blue`}>
@@ -33,9 +38,7 @@ const MobileNav = ({closeNav, nav}:Props) => {
             <div className='relative z-[201] space-y-12 flex flex-col items-center justify-center h-[60%]'>
                 {navLinks.map((link)=>{
                     return (
-                        <Link href={link.url} key={link.id}>
-                            <p onClick={() => { setButtonValue(link.id); closeNav(); }} className='text-2x1 font-semibold text-light-white cursor-pointer active:text-secondary-dark-blue transition-all duration-20'>{link.label}</p>
-                        </Link>     
+                        <p key={link.id} onClick={() => { handleMenuClick(link.url); closeNav(); }} className='text-2x1 font-semibold text-light-white cursor-pointer active:text-secondary-dark-blue transition-all duration-20'>{link.label}</p> 
                     )   
                 })}
             </div>

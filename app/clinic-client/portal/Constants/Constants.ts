@@ -1,22 +1,22 @@
 export const navLinks = [
   {
     id: 1,
-    url: "#",
+    url: "dashboard",
     label: "Tableau de bord",
   },
     {
       id: 2,
-      url: "#",
+      url: "patients",
       label: "Patients",
     },
     {
       id: 3,
-      url: "#",
+      url: "orders",
       label: "Commandes",
     },
     {
       id: 4,
-      url: "#",
+      url: "account",
       label: "Compte",
     },
   ];

@@ -1,7 +1,7 @@
 import React from 'react'
 import '../app/globals.css';
 
-import { useButtonContext } from '../components/Helper/ButtonContext';
+import { useRouter } from 'next/router';
 
 import ResponsiveNav from '../components/Home/Navbar/ResponsiveNav';
 import ScrollToTop from '../components/Helper/ScrollToTop';
@@ -12,16 +12,19 @@ import ListeCommandes from '@/components/Home/ListeCommandes/ListeCommandes';
 import Account from '@/components/Home/Account/Account';
 
 const Home = () => {
-  const { buttonValue, setButtonValue } = useButtonContext();
+  const router = useRouter();
+  const { query } = router;
+  const { type } = query;
+  
   return (
     
       <div >
           <ResponsiveNav />
         <main>
-          {buttonValue === 1 && <Statistics />}
-          {buttonValue === 2 && <ListePatients />}
-          {buttonValue === 3 && <ListeCommandes />}
-          {buttonValue === 4 && <Account />}
+          {type === 'dashboard' && <Statistics />}
+          {type === 'patients' && <ListePatients />}
+          {type === 'orders' && <ListeCommandes />}
+          {type === 'account' && <Account />}
         </main>
         <ScrollToTop/>
       </div>

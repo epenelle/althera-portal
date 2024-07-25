@@ -11,7 +11,7 @@ const Account = () => {
   }
 
   return (
-    <div className='flex flex-col justify-center pt-9 pb-9 bg-dark-blue min-h-screen ml-[10vh] md:ml-[15vh]'>
+    <div className='flex flex-col justify-center pt-9 pb-9 bg-primary-dark-blue min-h-screen ml-[10vh] md:ml-[15vh]'>
         <div className='flex flex-col grow w-4/5 mt-8 md:mt-16 mx-auto p-6 bg-light-white shadow-md rounded-lg justify-center'>
             <div className='pb-4 flex items-center justify-center'>
                 <MdAccountCircle size={30} className='mr-2' />

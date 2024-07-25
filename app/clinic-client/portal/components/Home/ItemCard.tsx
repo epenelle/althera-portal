@@ -4,17 +4,13 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { LiaSnowmanSolid } from 'react-icons/lia';
 
 type Patient = {
-    id: number;
-    idclinique: number;
+    numSec: string;
     firstName: string;
     lastName: string;
-    numSec: string;
 };
 
 type Order = {
-    id: number;
-    idclinique: number;
-    num : string;
+    num: string;
     firstName: string;
     lastName: string;
     date: string;
@@ -31,29 +27,28 @@ const isPatient = (data: Patient | Order): data is Patient => {
 
 const PatientCard = ({data}: Props) => { 
     return (
-        <div className='rounded-2xl hover:shadow-md transition-all duration-150 border-2 cursor-pointer border-light-gray border-opacity-30 mb-2 p-5 sm:p-3'>
+        <div className='border-light-gray border-2 border-opacity-30 cursor-pointer hover:shadow-md mb-2 p-5 rounded-2xl sm:p-3 transition-all duration-150'>
                 {isPatient(data) ? (
-                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[100px_150px_150px_1fr_24px] items-center gap-4 sm:gap-2'>
-                        <LiaSnowmanSolid size={48} className='text-secondary-dark-blue font-bold sm:hidden md:block' />
-                        <h1 className='text-base text-secondary-dark-blue font-bold truncate'>{data.lastName}</h1>
-                        <h1 className='text-base text-secondary-dark-blue font-bold truncate'>{data.firstName}</h1>
-                        <h1 className='text-base text-secondary-dark-blue font-bold truncate'>{data.numSec}</h1>
-                        <IoIosArrowForward size={24} className='justify-self-end text-secondary-dark-blue hover:text-primary-light-blue font-bold' />
+                    <div className='grid-cols-1 grid items-center gap-4 sm:grid-cols-2 sm:gap-2 md:grid-cols-[100px_150px_150px_1fr_24px]'>
+                        <LiaSnowmanSolid size={48} className='font-bold text-secondary-dark-blue md:block sm:hidden' />
+                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.lastName}</h1>
+                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.firstName}</h1>
+                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.numSec}</h1>
+                        <IoIosArrowForward size={24} className='font-bold justify-self-end text-secondary-dark-blue hover:text-primary-light-blue' />
                     </div>
                 ) : (
-                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[100px_150px_150px_150px_150px_1fr_24px] items-center gap-4 sm:gap-2'>
-                        <LiaSnowmanSolid size={48} className='text-secondary-dark-blue font-bold sm:hidden md:block' />
-                        <h1 className='text-base text-secondary-dark-blue font-bold truncate'>{data.num}</h1>
-                        <h1 className='text-base text-secondary-dark-blue font-bold truncate'>{data.lastName}</h1>
-                        <h1 className='text-base text-secondary-dark-blue font-bold truncate'>{data.firstName}</h1>
-                        <h1 className='text-base text-secondary-dark-blue font-bold truncate'>{data.date}</h1>
-                        <h1 className='text-base text-secondary-dark-blue font-bold truncate'>{data.statut}</h1>
-                        <IoIosArrowForward size={24} className='justify-self-end text-secondary-dark-blue hover:text-primary-light-blue font-bold' />
+                    <div className='grid-cols-1 grid items-center gap-4 sm:grid-cols-2 sm:gap-2 md:grid-cols-[100px_150px_150px_150px_150px_1fr_24px]'>
+                        <LiaSnowmanSolid size={48} className='font-bold text-secondary-dark-blue md:block sm:hidden' />
+                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.num}</h1>
+                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.lastName}</h1>
+                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.firstName}</h1>
+                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.date}</h1>
+                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.statut}</h1>
+                        <IoIosArrowForward size={24} className='font-bold justify-self-end text-secondary-dark-blue hover:text-primary-light-blue' />
                     </div>
                 )}
-                
         </div>
-    )
+    );
 }
 
 export default PatientCard;

@@ -6,19 +6,23 @@ import { FaBars } from 'react-icons/fa';
 import { MdLanguage } from 'react-icons/md';
 import { CiLogout } from 'react-icons/ci';
 import { useRouter } from 'next/navigation';
-import { useButtonContext } from '../../Helper/ButtonContext';
 
 type Props = {
     openNav:()=>void
 }
 
 const Nav = ({openNav}:Props) => {
-    const { buttonValue, setButtonValue } = useButtonContext();
     const router = useRouter();
+
     const handleSubmit = async (e: React.MouseEvent<SVGElement, MouseEvent>) => {
         router.push("/LoginPage");
 
     };
+
+    const handleMenuClick = (type: string) => {
+        router.push('/Home?type=' + type);
+    };
+    
   return (
     <div>
         {/* Icône pour ouvrir la navbar en affichage mobile */}
@@ -34,9 +38,7 @@ const Nav = ({openNav}:Props) => {
             <div className='flex flex-col items-center space-y-10'>
                 {navLinks.map((link)=>{
                     return (
-                        <Link href={link.url} key={link.id}>
-                            <button onClick={() => setButtonValue(link.id)} className='text-lg font-semibold cursor-pointer hover:text-secondary-dark-blue transition-all duration-200 text-white'>{link.label}</button>
-                        </Link>
+                        <button onClick={() => handleMenuClick(link.url)} className='text-lg font-semibold cursor-pointer hover:text-secondary-dark-blue transition-all duration-200 text-white'>{link.label}</button>
                     )
                 })}
             </div>
