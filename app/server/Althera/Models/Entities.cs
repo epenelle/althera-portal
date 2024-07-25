@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class ClinicDB {
+
+// replace Class => Record
+public record ClinicDB {
     [Key]
     public int clinicId { get; set; }
     public string? clinicName { get; set; }

@@ -21,7 +21,7 @@ public class OrderServices {
     {
         var Allorder = _dbContext.Orders.ToList();
         var AllOrderModel = new List<OrderModel>();
-        foreach (var order in AllOrderModel) {
+        foreach (var order in Allorder) {
             var orderModelService = new OrderModel{ orthesisModel= order.orthesisModel, orthesisInfo= order.orthesisInfo, orthesisScan= order.orthesisScan, orderDate= order.orderDate, orderState = order.orderState, orthesisComment= order.orthesisComment, patientId=order.patientId };
             AllOrderModel.Add(orderModelService);
         }

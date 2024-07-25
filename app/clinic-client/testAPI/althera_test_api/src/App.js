@@ -283,31 +283,31 @@ function App() {
         <h2>Add New Order</h2>
         <form onSubmit={(e) => { e.preventDefault(); createOrder(); }}>
           <div>
-            <label>Id Patient:</label>
+            <label>Orthesis Model:</label>
             <input type="text" name="orthesisModel" value={newOrder.orthesisModel} onChange={handleOrderInputChange} />
           </div>
           <div>
-            <label>Date Order:</label>
+            <label>Orthesis Info:</label>
             <input type="text" name="orthesisInfo" value={newOrder.orthesisInfo} onChange={handleOrderInputChange} />
           </div>
           <div>
-            <label>Orthesis Model:</label>
+            <label>Orthesis Scan:</label>
             <input type="text" name="orthesisScan" value={newOrder.orthesisScan} onChange={handleOrderInputChange} />
           </div>
           <div>
-            <label>Orthesis Info:</label>
-            <input type="text" name="orderDate" value={newOrder.orderDate} onChange={handleOrderInputChange} />
+            <label>Date:</label>
+            <input type="datetime-local" name="orderDate" value={newOrder.orderDate} onChange={handleOrderInputChange} />
           </div>
           <div>
-            <label>Orthesis Scan:</label>
+            <label>order State:</label>
             <input type="text" name="orderState" value={newOrder.orderState} onChange={handleOrderInputChange} />
           </div>
           <div>
-            <label>Order State:</label>
+            <label>Orthesis Comment:</label>
             <input type="text" name="orthesisComment" value={newOrder.orthesisComment} onChange={handleOrderInputChange} />
           </div>
           <div>
-            <label>Orthesis Comment:</label>
+            <label>Patient Id:</label>
             <input type="text" name="patientId" value={newOrder.patientId} onChange={handleOrderInputChange} />
           </div>
           <button type="submit">Add Order</button>
@@ -349,7 +349,7 @@ function App() {
         <form onSubmit={(e) => { e.preventDefault(); deleteClinic(); }}>
           <div>
             <label>ID:</label>
-            <input type="text" value={deleteClinic} onChange={handleDeleteClinicChange} />
+            <input type="text" value={deleteIdClinic} onChange={handleDeleteClinicChange} />
           </div>
           <button type="submit">Delete clinic</button>
         </form>

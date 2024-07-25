@@ -3,14 +3,14 @@ using System;
 
 namespace Althera.Services;
 
-public class ClinicModel {
+public record ClinicModel {
     public string? clinicName { get; set; }
     public string? clinicPassword { get; set; }
     public string? clinicAddress { get; set; }
 
 }
 
-public class PatientModel {
+public record PatientModel {
     public string? patientFirstname { get; set; }
     public string? patientLastname { get; set; }
     public int? healthInsuranceCard { get; set; }
@@ -19,7 +19,7 @@ public class PatientModel {
     public int clinicId { get; set; }
 }
 
-public class OrderModel {
+public record OrderModel {
     public string? orthesisModel { get; set; }
     public string? orthesisInfo { get; set; }
     public string? orthesisScan { get; set; }
