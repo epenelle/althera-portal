@@ -3,6 +3,7 @@ import '../app/globals.css';
 import { useRouter } from 'next/router';
 import AddPatient from '@/components/Add/AddPatient';
 import AddOrder from '@/components/Add/AddOrder';
+import ResponsiveNav from '@/components/Home/Navbar/ResponsiveNav';
 
 const Add = () => {
     const router = useRouter();
@@ -11,6 +12,7 @@ const Add = () => {
 
     return (
       <div>
+        <ResponsiveNav />
         {type === 'patient' && <AddPatient />}
         {type === 'order' && <AddOrder />}
       </div>

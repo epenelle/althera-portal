@@ -1,5 +1,4 @@
 import React from 'react'
-import ResponsiveNav from '../Home/Navbar/ResponsiveNav';
 import PopUp from '../Helper/PopUp';
 import { BsPeopleFill } from 'react-icons/bs';
 import { useRouter } from 'next/router';
@@ -34,7 +33,6 @@ const AddPatient = () => {
                 onCancel={handleCancel}
             />
         )}
-      <ResponsiveNav />
       <div className='flex justify-center pt-9 pb-9 bg-primary-dark-blue min-h-screen ml-[10vh] md:ml-[15vh]'>
         <div className='w-4/5 mt-4 md:mt-16 mx-auto p-6 bg-light-white rounded-lg shadow-md'>
           <div className='border-b-2 border-light-gray pb-4 flex items-center justify-center'>
