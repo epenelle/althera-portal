@@ -6,10 +6,10 @@ namespace Althera.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ClinicController : ControllerBase {
+public class ClinicsController : ControllerBase {
      private readonly ClinicServices _clinicServices;
 
-    public ClinicController(ClinicServices clinicServices){
+    public ClinicsController(ClinicServices clinicServices){
         _clinicServices = clinicServices;
     }
 

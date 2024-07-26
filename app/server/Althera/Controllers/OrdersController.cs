@@ -6,10 +6,10 @@ namespace Althera.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class OrderController : ControllerBase {
-     private readonly OrderServices _orderServices;
+public class OrdersController : ControllerBase {
+     private readonly OrdersServices _orderServices;
 
-    public OrderController(OrderServices orderServices){
+    public OrdersController(OrdersServices orderServices){
         _orderServices = orderServices;
     }
 
