@@ -6,10 +6,10 @@ using Althera.Models;
 
 namespace Althera.Services;
 
-public class OrderServices {
+public class OrdersService {
     private readonly AppDbContext _dbContext;
 
-    public OrderServices(AppDbContext dbContext)
+    public OrdersService(AppDbContext dbContext)
     {
         _dbContext = dbContext;
     }

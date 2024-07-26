@@ -7,23 +7,23 @@ namespace Althera.Controllers;
 [ApiController]
 [Route("[controller]")]
 public class OrdersController : ControllerBase {
-     private readonly OrdersServices _orderServices;
+     private readonly OrdersService _ordersService;
 
-    public OrdersController(OrdersServices orderServices){
-        _orderServices = orderServices;
+    public OrdersController(OrdersService orderServices){
+        _ordersService = orderServices;
     }
 
     // GET all action
     [HttpGet]
     public ActionResult<List<OrderModel>> GetAllOrders(){
-        return _orderServices.GetAllOrders();
+        return _ordersService.GetAllOrders();
         
     }
 
     // GET by Id action
     [HttpGet("{id}")]
     public ActionResult<OrderModel> GetOrders(int id){
-        var order = _orderServices.GetOrderById(id);
+        var order = _ordersService.GetOrderById(id);
         if(order == null){
             return NotFound();
         }
@@ -36,7 +36,7 @@ public class OrdersController : ControllerBase {
         if(order == null){
             return BadRequest();
         }
-        _orderServices.CreateOrder(order);
+        _ordersService.CreateOrder(order);
         return StatusCode(201, order);
     }
 
@@ -44,7 +44,7 @@ public class OrdersController : ControllerBase {
     // PUT action (Modification/Edit)
     [HttpPut("{id}")]
     public IActionResult UpdateOrder(int id, OrderModel order){
-        _orderServices.UpdateOrder(id, order);
+        _ordersService.UpdateOrder(id, order);
         return NoContent();
     }
 
@@ -52,7 +52,7 @@ public class OrdersController : ControllerBase {
     // DELETE action
     [HttpDelete("{id}")]
     public IActionResult DeleteOrder(int id){
-        _orderServices.DeleteOrder(id);
+        _ordersService.DeleteOrder(id);
         return NoContent();
     }
 

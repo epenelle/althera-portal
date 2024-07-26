@@ -5,10 +5,10 @@ using Althera.Models;
 
 namespace Althera.Services;
 
-public class PatientServices {
+public class PatientsService {
     private readonly AppDbContext _dbContext;
 
-    public PatientServices(AppDbContext dbContext)
+    public PatientsService(AppDbContext dbContext)
     {
         _dbContext = dbContext;
     }

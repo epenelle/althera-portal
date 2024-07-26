@@ -22,9 +22,9 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<AppDbContext>();
 
 // Enregistrer vos services
-builder.Services.AddScoped<PatientsServices>();
-builder.Services.AddScoped<OrdersServices>();
-builder.Services.AddScoped<ClinicServices>();
+builder.Services.AddScoped<PatientsService>();
+builder.Services.AddScoped<OrdersService>();
+builder.Services.AddScoped<ClinicsService>();
 
 builder.Services.AddControllers();
 

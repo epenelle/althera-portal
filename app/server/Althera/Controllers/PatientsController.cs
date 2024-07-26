@@ -7,23 +7,23 @@ namespace Althera.Controllers;
 [ApiController]
 [Route("[controller]")]
 public class PatientsController : ControllerBase {
-     private readonly PatientsServices _patientServices;
+     private readonly PatientsService _patientsService;
 
-    public PatientsController(PatientsServices patientServices){
-        _patientServices = patientServices;
+    public PatientsController(PatientsService patientServices){
+        _patientsService = patientServices;
     }
 
     // GET all action
     [HttpGet]
     public ActionResult<List<PatientModel>> GetAllPatients(){
-        return _patientServices.GetAllPatients();
+        return _patientsService.GetAllPatients();
         
     }
 
     // GET by Id action
     [HttpGet("{id}")]
     public ActionResult<PatientModel> GetPatient(int id){
-        var patient = _patientServices.GetPatientById(id);
+        var patient = _patientsService.GetPatientById(id);
         if(patient == null){
             return NotFound();
         }
@@ -36,7 +36,7 @@ public class PatientsController : ControllerBase {
         if(patient == null){
             return BadRequest();
         }
-        _patientServices.CreatePatient(patient);
+        _patientsService.CreatePatient(patient);
         return StatusCode(201, patient);    
     }
 
@@ -44,7 +44,7 @@ public class PatientsController : ControllerBase {
     // PUT action (Modification/Edit)
     [HttpPut("{id}")]
     public IActionResult UpdatePatient(int id, PatientModel patient){
-        _patientServices.UpdatePatient(id, patient);
+        _patientsService.UpdatePatient(id, patient);
         return NoContent();
     }
 
@@ -52,7 +52,7 @@ public class PatientsController : ControllerBase {
     // DELETE action
     [HttpDelete("{id}")]
     public IActionResult DeletePatient(int id){
-        _patientServices.DeletePatient(id);
+        _patientsService.DeletePatient(id);
         return NoContent();
     }
 
