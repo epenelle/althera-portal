@@ -1,7 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public record PatientDB {
+namespace Althera.Models.Persistence;
+
+public record PatientDB 
+{
     [Key]
     public int patientId {get; set;}
     public string? patientFirstname { get; set; }

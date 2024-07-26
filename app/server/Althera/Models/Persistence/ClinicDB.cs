@@ -1,6 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-// replace Class => Record
-public record ClinicDB {
+
+namespace Althera.Models.Persistence;
+
+public record ClinicDB
+{
     [Key]
     public int clinicId { get; set; }
     public string? clinicName { get; set; }
@@ -10,5 +13,5 @@ public record ClinicDB {
     // Reverse navigation property
     public ICollection<PatientDB>? Patients { get; set; }
 
-//    public List<Patient> Patients { get; } = new();
+    //    public List<Patient> Patients { get; } = new();
 }

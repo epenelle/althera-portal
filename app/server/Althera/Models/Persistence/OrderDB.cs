@@ -1,7 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public record OrderDB {
+namespace Althera.Models.Persistence;
+
+public record OrderDB
+{
     [Key]
     public int orderId { get; set; }
     public string? orthesisModel { get; set; }

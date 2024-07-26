@@ -1,8 +1,5 @@
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Althera.Models;
+using Althera.Models.Persistence;
 
 namespace Althera.Services;
 
