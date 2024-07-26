@@ -1,7 +1,5 @@
 using Althera.Models.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 
 namespace Althera.Models;
 
