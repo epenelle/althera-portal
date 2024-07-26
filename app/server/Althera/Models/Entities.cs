@@ -16,7 +16,7 @@ public record ClinicDB {
 //    public List<Patient> Patients { get; } = new();
 }
 
-public class PatientDB {
+public record PatientDB {
     [Key]
     public int patientId {get; set;}
     public string? patientFirstname { get; set; }
@@ -33,7 +33,7 @@ public class PatientDB {
     public ICollection<OrderDB>? Orders { get; set; }
 }
 
-public class OrderDB {
+public record OrderDB {
     [Key]
     public int orderId { get; set; }
     public string? orthesisModel { get; set; }
