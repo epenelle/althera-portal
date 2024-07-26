@@ -6,13 +6,13 @@ namespace Althera.Models.Persistence;
 public record PatientDB 
 {
     [Key]
-    public int patientId {get; set;}
-    public string? patientFirstname { get; set; }
-    public string? patientLastname { get; set; }
-    public int? healthInsuranceCard { get; set; }
+    public int Id {get; set;}
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+    public int? HealthInsuranceNumber { get; set; }
 
     [ForeignKey("clinicId")]
-    public int clinicId { get; set; }
+    public int ClinicId { get; set; }
     
     // Propriété de navigation
     public ClinicDB? Clinic { get; set; }

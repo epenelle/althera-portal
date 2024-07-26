@@ -21,21 +21,21 @@ public class AppDbContext : DbContext {
     {
         
         modelBuilder.Entity<ClinicDB>()
-            .HasKey(c => c.clinicId);
+            .HasKey(c => c.Id);
         modelBuilder.Entity<PatientDB>()
-            .HasKey(k => k.patientId);
+            .HasKey(k => k.Id);
         modelBuilder.Entity<OrderDB>()
-            .HasKey(k => k.orderId);
+            .HasKey(k => k.Id);
 
         modelBuilder.Entity<PatientDB>()
             .HasOne(p => p.Clinic)
             .WithMany(c => c.Patients)
-            .HasForeignKey(p => p.clinicId);
+            .HasForeignKey(p => p.ClinicId);
 
         modelBuilder.Entity<OrderDB>()
             .HasOne(c => c.Patient)
             .WithMany(p => p.Orders)
-            .HasForeignKey(c => c.patientId);  
+            .HasForeignKey(c => c.Patient);  
 
     }
 

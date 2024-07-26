@@ -6,16 +6,16 @@ namespace Althera.Models.Persistence;
 public record OrderDB
 {
     [Key]
-    public int orderId { get; set; }
-    public string? orthesisModel { get; set; }
-    public string? orthesisInfo { get; set; }
-    public string? orthesisScan { get; set; }
-    public DateTime? orderDate { get; set; }
-    public string? orderState { get; set; }
-    public string? orthesisComment { get; set; }
+    public int Id { get; set; }
+    public string? OrthosisModel { get; set; }
+    public string? OrthosisInformation { get; set; }
+    public string? OrthosisScan { get; set; }
+    public DateTime? Date { get; set; }
+    public string? State { get; set; }
+    public string? Comments { get; set; }
 
     [ForeignKey("patientId")]
-    public int patientId { get; set; }
+    public int PatientId { get; set; }
 
     // Navigation property
     public PatientDB? Patient { get; set; }

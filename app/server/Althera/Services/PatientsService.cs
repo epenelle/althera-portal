@@ -19,7 +19,7 @@ public class PatientsService {
         var Allpatients = _dbContext.Patients.ToList();
         var AllPatientModel = new List<PatientModel>();
         foreach (var patient in Allpatients) {
-            var patientModelService = new PatientModel{patientFirstname = patient.patientFirstname, patientLastname= patient.patientLastname, healthInsuranceCard = patient.healthInsuranceCard, clinicId= patient.clinicId };
+            var patientModelService = new PatientModel{patientFirstname = patient.FirstName, patientLastname= patient.LastName, healthInsuranceCard = patient.HealthInsuranceNumber, clinicId= patient.ClinicId };
             AllPatientModel.Add(patientModelService);
         }
         return AllPatientModel;
@@ -28,8 +28,8 @@ public class PatientsService {
     // Get Patient by ID
     public PatientModel? GetPatientById(int id)
     {
-        var patient = _dbContext.Patients.SingleOrDefault(c => c.patientId == id);
-        if(patient != null) return new PatientModel{patientFirstname = patient.patientFirstname, patientLastname= patient.patientLastname, healthInsuranceCard = patient.healthInsuranceCard, clinicId= patient.clinicId };
+        var patient = _dbContext.Patients.SingleOrDefault(c => c.Id == id);
+        if(patient != null) return new PatientModel{patientFirstname = patient.FirstName, patientLastname= patient.LastName, healthInsuranceCard = patient.HealthInsuranceNumber, clinicId= patient.ClinicId };
         else return null;
     }
 
@@ -37,20 +37,20 @@ public class PatientsService {
     public void CreatePatient(PatientModel patient)
     {
         
-        _dbContext.Patients.Add(new PatientDB{patientFirstname = patient.patientFirstname, patientLastname= patient.patientLastname, healthInsuranceCard = patient.healthInsuranceCard, clinicId= patient.clinicId });
+        _dbContext.Patients.Add(new PatientDB{FirstName = patient.patientFirstname, LastName= patient.patientLastname, HealthInsuranceNumber = patient.healthInsuranceCard, ClinicId= patient.clinicId });
         _dbContext.SaveChanges();
     }
 
     // Edit Patient by ID
     public void UpdatePatient(int id, PatientModel updatedPatient)
     {
-        var patient = _dbContext.Patients.SingleOrDefault(p => p.patientId == id);
+        var patient = _dbContext.Patients.SingleOrDefault(p => p.Id == id);
         if (patient != null)
         {
-            patient.patientFirstname = updatedPatient.patientFirstname;
-            patient.patientLastname = updatedPatient.patientLastname;
-            patient.healthInsuranceCard = updatedPatient.healthInsuranceCard;
-            patient.clinicId = updatedPatient.clinicId;
+            patient.FirstName = updatedPatient.patientFirstname;
+            patient.LastName = updatedPatient.patientLastname;
+            patient.HealthInsuranceNumber = updatedPatient.healthInsuranceCard;
+            patient.ClinicId = updatedPatient.clinicId;
             _dbContext.SaveChanges();
         }
     }
@@ -58,7 +58,7 @@ public class PatientsService {
     // Delete Patient by ID
     public void DeletePatient(int id)
     {
-        var patient = _dbContext.Patients.SingleOrDefault(p => p.patientId == id);
+        var patient = _dbContext.Patients.SingleOrDefault(p => p.Id == id);
         if (patient != null)
         {
             _dbContext.Patients.Remove(patient);

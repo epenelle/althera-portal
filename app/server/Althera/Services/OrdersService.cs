@@ -19,7 +19,7 @@ public class OrdersService {
         var Allorder = _dbContext.Orders.ToList();
         var AllOrderModel = new List<OrderModel>();
         foreach (var order in Allorder) {
-            var orderModelService = new OrderModel{ orthesisModel= order.orthesisModel, orthesisInfo= order.orthesisInfo, orthesisScan= order.orthesisScan, orderDate= order.orderDate, orderState = order.orderState, orthesisComment= order.orthesisComment, patientId=order.patientId };
+            var orderModelService = new OrderModel{ orthesisModel= order.OrthosisModel, orthesisInfo= order.OrthosisInformation, orthesisScan= order.OrthosisScan, orderDate= order.Date, orderState = order.State, orthesisComment= order.Comments, patientId=order.PatientId };
             AllOrderModel.Add(orderModelService);
         }
         return AllOrderModel;
@@ -28,31 +28,31 @@ public class OrdersService {
     // Get order by ID
     public OrderModel? GetOrderById(int id)
     {
-        var order = _dbContext.Orders.SingleOrDefault(c => c.orderId == id);
-        if(order != null) return new OrderModel{orthesisModel= order.orthesisModel, orthesisInfo= order.orthesisInfo, orthesisScan= order.orthesisScan, orderDate= order.orderDate, orderState = order.orderState, orthesisComment= order.orthesisComment, patientId= order.patientId};
+        var order = _dbContext.Orders.SingleOrDefault(c => c.Id == id);
+        if(order != null) return new OrderModel{orthesisModel= order.OrthosisModel, orthesisInfo= order.OrthosisInformation, orthesisScan= order.OrthosisScan, orderDate= order.Date, orderState = order.State, orthesisComment= order.Comments, patientId= order.PatientId };
         else return null;
     }
 
     // Create new Order
     public void CreateOrder(OrderModel order)
     {
-        _dbContext.Orders.Add(new OrderDB{orthesisModel= order.orthesisModel, orthesisInfo= order.orthesisInfo, orthesisScan= order.orthesisScan, orderDate= order.orderDate, orderState = order.orderState, orthesisComment= order.orthesisComment, patientId= order.patientId});
+        _dbContext.Orders.Add(new OrderDB{OrthosisModel= order.orthesisModel, OrthosisInformation= order.orthesisInfo, OrthosisScan= order.orthesisScan, Date= order.orderDate, State = order.orderState, Comments= order.orthesisComment, PatientId= order.patientId });
         _dbContext.SaveChanges();
     }
 
     // Edit order by Id
     public void UpdateOrder(int id, OrderModel updatedOrder)
     {
-        var order = _dbContext.Orders.SingleOrDefault(c => c.orderId == id);
+        var order = _dbContext.Orders.SingleOrDefault(c => c.Id == id);
         if (order != null)
         {
-            order.orthesisModel = updatedOrder.orthesisModel;
-            order.orthesisInfo = updatedOrder.orthesisInfo;
-            order.orthesisScan = updatedOrder.orthesisScan;
-            order.orderDate = updatedOrder.orderDate;
-            order.orderState = updatedOrder.orderState;
-            order.orthesisComment = updatedOrder.orthesisComment;
-            order.patientId = updatedOrder.patientId;
+            order.OrthosisModel = updatedOrder.orthesisModel;
+            order.OrthosisInformation = updatedOrder.orthesisInfo;
+            order.OrthosisScan = updatedOrder.orthesisScan;
+            order.Date = updatedOrder.orderDate;
+            order.State = updatedOrder.orderState;
+            order.Comments = updatedOrder.orthesisComment;
+            order.PatientId = updatedOrder.patientId;
             _dbContext.SaveChanges();
         }
     }
@@ -60,7 +60,7 @@ public class OrdersService {
     // Delete Order by ID
     public void DeleteOrder(int id)
     {
-        var order = _dbContext.Orders.SingleOrDefault(c => c.orderId == id);
+        var order = _dbContext.Orders.SingleOrDefault(c => c.Id == id);
         if (order != null)
         {
             _dbContext.Orders.Remove(order);

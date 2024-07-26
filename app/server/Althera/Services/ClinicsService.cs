@@ -19,7 +19,7 @@ public class ClinicsService {
         var AllClinics = _dbContext.Clinics.ToList();
         var AllClinicModel = new List<ClinicModel>();
         foreach (var clinic in AllClinics) {
-            var clinicModelService = new ClinicModel{clinicName = clinic.clinicName, clinicAddress= clinic.clinicAddress, clinicPassword = clinic.clinicPassword };
+            var clinicModelService = new ClinicModel{clinicName = clinic.Name, clinicAddress= clinic.Address, clinicPassword = clinic.Password };
             AllClinicModel.Add(clinicModelService);
         }
         return AllClinicModel;
@@ -28,27 +28,27 @@ public class ClinicsService {
     // Get Clinic by ID
     public ClinicModel? GetCliniqueById(int id)
     {
-        var MyClinic = _dbContext.Clinics.SingleOrDefault(c => c.clinicId == id);
-        if(MyClinic != null) return new ClinicModel{clinicName = MyClinic.clinicName, clinicAddress= MyClinic.clinicAddress, clinicPassword = MyClinic.clinicPassword}; 
+        var MyClinic = _dbContext.Clinics.SingleOrDefault(c => c.Id == id);
+        if(MyClinic != null) return new ClinicModel{clinicName = MyClinic.Name, clinicAddress= MyClinic.Address, clinicPassword = MyClinic.Password}; 
         else return null;
     }
 
     // Create Clinic
     public void CreateClinic(ClinicModel clinic)
     {
-        _dbContext.Clinics.Add(new ClinicDB{clinicName= clinic.clinicName, clinicAddress= clinic.clinicAddress, clinicPassword=clinic.clinicPassword });
+        _dbContext.Clinics.Add(new ClinicDB{Name= clinic.clinicName, Address= clinic.clinicAddress, Password=clinic.clinicPassword });
         _dbContext.SaveChanges();
     }
 
     // Edit Clinic by ID
     public void UpdateClinic(int id, ClinicModel updatedClinic)
     {
-        var clinic = _dbContext.Clinics.SingleOrDefault(c => c.clinicId == id);
+        var clinic = _dbContext.Clinics.SingleOrDefault(c => c.Id == id);
         if (clinic != null)
         {
-            clinic.clinicName = updatedClinic.clinicName;
-            clinic.clinicPassword = updatedClinic.clinicPassword;
-            clinic.clinicAddress = updatedClinic.clinicAddress;
+            clinic.Name = updatedClinic.clinicName;
+            clinic.Password = updatedClinic.clinicPassword;
+            clinic.Address = updatedClinic.clinicAddress;
             _dbContext.SaveChanges();
         }
     }
@@ -56,7 +56,7 @@ public class ClinicsService {
     // Delete Clinic by ID
     public void DeleteClinic(int id)
     {
-        var clinic = _dbContext.Clinics.SingleOrDefault(c => c.clinicId == id);
+        var clinic = _dbContext.Clinics.SingleOrDefault(c => c.Id == id);
         if (clinic != null)
         {
             _dbContext.Clinics.Remove(clinic);
