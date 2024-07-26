@@ -1,4 +1,4 @@
-namespace Althera.Services;
+namespace Althera.Models.Api;
 
 public record ClinicModel {
     public string? clinicName { get; set; }

@@ -1,4 +1,4 @@
-using Althera.Models;
+using Althera.Models.Api;
 using Althera.Models.Persistence;
 
 namespace Althera.Services;

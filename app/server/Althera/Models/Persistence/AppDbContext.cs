@@ -1,16 +1,14 @@
-using Althera.Models.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace Althera.Models;
+namespace Althera.Models.Persistence;
 
-public class AppDbContext : DbContext {
-
+public class AppDbContext : DbContext
+{
     public DbSet<ClinicDB> Clinics { get; set; }
     public DbSet<PatientDB> Patients { get; set; }
     public DbSet<OrderDB> Orders { get; set; }
 
     public string? DbPath { get; }
-
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -19,7 +17,6 @@ public class AppDbContext : DbContext {
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        
         modelBuilder.Entity<ClinicDB>()
             .HasKey(c => c.Id);
         modelBuilder.Entity<PatientDB>()
@@ -35,9 +32,7 @@ public class AppDbContext : DbContext {
         modelBuilder.Entity<OrderDB>()
             .HasOne(c => c.Patient)
             .WithMany(p => p.Orders)
-            .HasForeignKey(c => c.Patient);  
-
+            .HasForeignKey(c => c.Patient);
     }
-
 }
 

@@ -1,6 +1,5 @@
-using Microsoft.EntityFrameworkCore;
+using Althera.Models.Persistence;
 using Althera.Services;
-using Althera.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
