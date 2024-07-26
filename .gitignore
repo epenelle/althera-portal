@@ -1,3 +1,5 @@
+*.user
+
 .vs/
 app/server/Althera/obj/
 app/server/Althera/bin/
