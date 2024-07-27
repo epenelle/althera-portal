@@ -27,6 +27,13 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v1",
         Description = "Welcome to the Althera Portal API documentation. This API adheres to RESTful principles, offering a comprehensive set of endpoints to interact with the Althera Portal.",
     });
+
+    /*
+     * To add swagger documentation : 
+    string xmlFi1e = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    string xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFi1e);
+    options.IncludeXmlComments(xmlPath);
+    */
 });
 
 var app = builder.Build();
