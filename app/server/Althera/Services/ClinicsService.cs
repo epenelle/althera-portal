@@ -22,6 +22,7 @@ public class ClinicsService {
             var clinicModelService = new ClinicModel{ClinicName = clinic.Name, ClinicAddress= clinic.Address, ClinicPassword = clinic.Password };
             AllClinicModel.Add(clinicModelService);
         }
+
         return AllClinicModel;
     }
 
@@ -29,8 +30,14 @@ public class ClinicsService {
     public ClinicModel? GetCliniqueById(int id)
     {
         var MyClinic = _dbContext.Clinics.SingleOrDefault(c => c.Id == id);
-        if(MyClinic != null) return new ClinicModel{ClinicName = MyClinic.Name, ClinicAddress= MyClinic.Address, ClinicPassword = MyClinic.Password}; 
-        else return null;
+        if (MyClinic != null)
+        {
+            return new ClinicModel { ClinicName = MyClinic.Name, ClinicAddress = MyClinic.Address, ClinicPassword = MyClinic.Password };
+        }
+        else
+        {
+            return null;
+        }
     }
 
     // Create Clinic
@@ -63,5 +70,4 @@ public class ClinicsService {
             _dbContext.SaveChanges();
         }
     }
-
 }

@@ -72,7 +72,7 @@ dotnet_remove_unnecessary_suppression_exclusions = none
 
 # New line preferences
 dotnet_style_allow_multiple_blank_lines_experimental = false:error
-dotnet_style_allow_statement_immediately_after_block_experimental = true
+dotnet_style_allow_statement_immediately_after_block_experimental = false:error
 
 #### C# Coding Conventions ####
 
@@ -236,3 +236,4 @@ tab_width = 4
 indent_size = 4
 end_of_line = crlf
 dotnet_style_null_propagation = true:suggestion
+csharp_prefer_braces = true:error
