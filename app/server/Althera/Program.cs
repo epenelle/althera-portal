@@ -1,5 +1,6 @@
 using Althera.Models.Persistence;
 using Althera.Services;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services
@@ -18,29 +19,34 @@ builder.Services
     .AddScoped<ClinicsService>()
     .AddControllers();
 
-// services.AddEndpointsApiExplorer();
-// services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Althera Portal API",
+        Version = "v1",
+        Description = "Welcome to the Althera Portal API documentation. This API adheres to RESTful principles, offering a comprehensive set of endpoints to interact with the Althera Portal.",
+    });
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    // app.UseSwagger();
-    // app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Althera Portal API V1");
+    });
 }
 
+// Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
-
 app.UseRouting();
-
 app.UseCors("AllowSpecificOrigin");
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
 
 /*
