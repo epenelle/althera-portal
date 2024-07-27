@@ -19,7 +19,7 @@ public class ClinicsService {
         var AllClinics = _dbContext.Clinics.ToList();
         var AllClinicModel = new List<ClinicModel>();
         foreach (var clinic in AllClinics) {
-            var clinicModelService = new ClinicModel{clinicName = clinic.Name, clinicAddress= clinic.Address, clinicPassword = clinic.Password };
+            var clinicModelService = new ClinicModel{ClinicName = clinic.Name, ClinicAddress= clinic.Address, ClinicPassword = clinic.Password };
             AllClinicModel.Add(clinicModelService);
         }
         return AllClinicModel;
@@ -29,14 +29,14 @@ public class ClinicsService {
     public ClinicModel? GetCliniqueById(int id)
     {
         var MyClinic = _dbContext.Clinics.SingleOrDefault(c => c.Id == id);
-        if(MyClinic != null) return new ClinicModel{clinicName = MyClinic.Name, clinicAddress= MyClinic.Address, clinicPassword = MyClinic.Password}; 
+        if(MyClinic != null) return new ClinicModel{ClinicName = MyClinic.Name, ClinicAddress= MyClinic.Address, ClinicPassword = MyClinic.Password}; 
         else return null;
     }
 
     // Create Clinic
     public void CreateClinic(ClinicModel clinic)
     {
-        _dbContext.Clinics.Add(new ClinicDB{Name= clinic.clinicName, Address= clinic.clinicAddress, Password=clinic.clinicPassword });
+        _dbContext.Clinics.Add(new ClinicDB{Name= clinic.ClinicName, Address= clinic.ClinicAddress, Password=clinic.ClinicPassword });
         _dbContext.SaveChanges();
     }
 
@@ -46,9 +46,9 @@ public class ClinicsService {
         var clinic = _dbContext.Clinics.SingleOrDefault(c => c.Id == id);
         if (clinic != null)
         {
-            clinic.Name = updatedClinic.clinicName;
-            clinic.Password = updatedClinic.clinicPassword;
-            clinic.Address = updatedClinic.clinicAddress;
+            clinic.Name = updatedClinic.ClinicName;
+            clinic.Password = updatedClinic.ClinicPassword;
+            clinic.Address = updatedClinic.ClinicAddress;
             _dbContext.SaveChanges();
         }
     }

@@ -1,7 +1,7 @@
 namespace Althera.Models.Api;
 
 public record ClinicModel {
-    public string? clinicName { get; set; }
-    public string? clinicPassword { get; set; }
-    public string? clinicAddress { get; set; }
+    public string? ClinicName { get; set; }
+    public string? ClinicPassword { get; set; }
+    public string? ClinicAddress { get; set; }
 }
