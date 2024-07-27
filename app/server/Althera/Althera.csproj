@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <PropertyGroup>
+    <AnalysisMode>all</AnalysisMode>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
   </PropertyGroup>
 

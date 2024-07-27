@@ -4,6 +4,8 @@ namespace Althera.Models.Persistence;
 
 public record ClinicDB
 {
+    private readonly List<PatientDB> patients = [];
+
     [Key]
     public int Id { get; set; }
     public string? Name { get; set; }
@@ -11,5 +13,5 @@ public record ClinicDB
     public string? Address { get; set; }
 
     // Reverse navigation property
-    public ICollection<PatientDB>? Patients { get; set; }
+    public List<PatientDB>? Patients { get => patients; }
 }

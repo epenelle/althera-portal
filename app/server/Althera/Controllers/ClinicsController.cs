@@ -27,6 +27,7 @@ public class ClinicsController : ControllerBase {
         if(order == null){
             return NotFound();
         }
+
         return order;
     }
 
@@ -36,10 +37,10 @@ public class ClinicsController : ControllerBase {
         if(clinic == null){
             return BadRequest();
         }
+
         _clinicsService.CreateClinic(clinic);
         return StatusCode(201, clinic);
     }
-
 
     // PUT action (Modification/Edit)
     [HttpPut("{id}")]
@@ -48,12 +49,10 @@ public class ClinicsController : ControllerBase {
         return NoContent();
     }
 
-
     // DELETE action
     [HttpDelete("{id}")]
     public IActionResult DeleteClinic(int id){
         _clinicsService.DeleteClinic(id);
         return NoContent();
     }
-
 }
