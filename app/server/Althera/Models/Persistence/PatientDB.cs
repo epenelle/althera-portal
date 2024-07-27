@@ -18,5 +18,5 @@ public record PatientDB
     public ClinicDB? Clinic { get; set; }
 
     // Propriété de navigation inverse
-    public ICollection<OrderDB>? Orders { get; set; }
+    public List<OrderDB>? Orders { get; } = [];
 }
