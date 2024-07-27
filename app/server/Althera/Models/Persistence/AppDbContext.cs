@@ -8,8 +8,6 @@ public class AppDbContext : DbContext
     public DbSet<PatientEntity> Patients { get; set; }
     public DbSet<OrderEntity> Orders { get; set; }
 
-    public string? DbPath { get; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=MyDatabase;Trusted_Connection=True;");
