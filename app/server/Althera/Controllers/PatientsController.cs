@@ -15,14 +15,12 @@ public class PatientsController : ControllerBase
         _patientsService = patientServices;
     }
 
-    // GET all action
     [HttpGet]
     public ActionResult<List<PatientModel>> GetAllPatients()
     {
         return _patientsService.GetAllPatients();
     }
 
-    // GET by Id action
     [HttpGet("{id}")]
     public ActionResult<PatientModel> GetPatient(int id)
     {
@@ -35,7 +33,6 @@ public class PatientsController : ControllerBase
         return patient;
     }
 
-    // POST action
     [HttpPost]
     public IActionResult CreatePatient(PatientModel patient)
     {
@@ -48,7 +45,6 @@ public class PatientsController : ControllerBase
         return StatusCode(201, patient);
     }
 
-    // PUT action (Modification/Edit)
     [HttpPut("{id}")]
     public IActionResult UpdatePatient(int id, PatientModel patient)
     {
@@ -56,7 +52,6 @@ public class PatientsController : ControllerBase
         return NoContent();
     }
 
-    // DELETE action
     [HttpDelete("{id}")]
     public IActionResult DeletePatient(int id)
     {

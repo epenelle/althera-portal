@@ -15,14 +15,12 @@ public class ClinicsController : ControllerBase
         _clinicsService = clinicServices;
     }
 
-    // GET all action
     [HttpGet]
     public ActionResult<List<ClinicModel>> GetAllClinics()
     {
         return _clinicsService.GetAllClinics();
     }
 
-    // GET by Id action
     [HttpGet("{id}")]
     public ActionResult<ClinicModel> GetClinics(int id)
     {
@@ -31,7 +29,6 @@ public class ClinicsController : ControllerBase
         return order == null ? NotFound() : order;
     }
 
-    // POST action
     [HttpPost]
     public IActionResult CreateClinic(ClinicModel clinic)
     {
@@ -44,7 +41,6 @@ public class ClinicsController : ControllerBase
         return StatusCode(201, clinic);
     }
 
-    // PUT action (Modification/Edit)
     [HttpPut("{id}")]
     public IActionResult UpdateClinic(int id, ClinicModel clinic)
     {
@@ -52,7 +48,6 @@ public class ClinicsController : ControllerBase
         return NoContent();
     }
 
-    // DELETE action
     [HttpDelete("{id}")]
     public IActionResult DeleteClinic(int id)
     {
