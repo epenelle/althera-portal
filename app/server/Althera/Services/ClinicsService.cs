@@ -21,7 +21,7 @@ public class ClinicsService
         var AllClinicModel = new List<ClinicModel>();
         foreach (var clinic in AllClinics)
         {
-            var clinicModelService = new ClinicModel { ClinicName = clinic.Name, ClinicAddress = clinic.Address, ClinicPassword = clinic.Password };
+            var clinicModelService = new ClinicModel { Name = clinic.Name, Address = clinic.Address };
             AllClinicModel.Add(clinicModelService);
         }
 
@@ -34,7 +34,7 @@ public class ClinicsService
         var MyClinic = _dbContext.Clinics.SingleOrDefault(c => c.Id == id);
         if (MyClinic != null)
         {
-            return new ClinicModel { ClinicName = MyClinic.Name, ClinicAddress = MyClinic.Address, ClinicPassword = MyClinic.Password };
+            return new ClinicModel { Name = MyClinic.Name, Address = MyClinic.Address };
         }
         else
         {
@@ -45,7 +45,7 @@ public class ClinicsService
     // Create Clinic
     public void CreateClinic(ClinicModel clinic)
     {
-        _dbContext.Clinics.Add(new ClinicEntity { Name = clinic.ClinicName, Address = clinic.ClinicAddress, Password = clinic.ClinicPassword });
+        _dbContext.Clinics.Add(new ClinicEntity { Name = clinic.Name, Address = clinic.Address });
         _dbContext.SaveChanges();
     }
 
@@ -55,9 +55,8 @@ public class ClinicsService
         var clinic = _dbContext.Clinics.SingleOrDefault(c => c.Id == id);
         if (clinic != null)
         {
-            clinic.Name = updatedClinic.ClinicName;
-            clinic.Password = updatedClinic.ClinicPassword;
-            clinic.Address = updatedClinic.ClinicAddress;
+            clinic.Name = updatedClinic.Name;
+            clinic.Address = updatedClinic.Address;
             _dbContext.SaveChanges();
         }
     }
