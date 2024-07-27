@@ -6,54 +6,61 @@ namespace Althera.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class PatientsController : ControllerBase {
-     private readonly PatientsService _patientsService;
+public class PatientsController : ControllerBase
+{
+    private readonly PatientsService _patientsService;
 
-    public PatientsController(PatientsService patientServices){
+    public PatientsController(PatientsService patientServices)
+    {
         _patientsService = patientServices;
     }
 
     // GET all action
     [HttpGet]
-    public ActionResult<List<PatientModel>> GetAllPatients(){
+    public ActionResult<List<PatientModel>> GetAllPatients()
+    {
         return _patientsService.GetAllPatients();
-        
     }
 
     // GET by Id action
     [HttpGet("{id}")]
-    public ActionResult<PatientModel> GetPatient(int id){
+    public ActionResult<PatientModel> GetPatient(int id)
+    {
         var patient = _patientsService.GetPatientById(id);
-        if(patient == null){
+        if (patient == null)
+        {
             return NotFound();
         }
+
         return patient;
     }
 
     // POST action
     [HttpPost]
-    public IActionResult CreatePatient(PatientModel patient){
-        if(patient == null){
+    public IActionResult CreatePatient(PatientModel patient)
+    {
+        if (patient == null)
+        {
             return BadRequest();
         }
-        _patientsService.CreatePatient(patient);
-        return StatusCode(201, patient);    
-    }
 
+        _patientsService.CreatePatient(patient);
+        return StatusCode(201, patient);
+    }
 
     // PUT action (Modification/Edit)
     [HttpPut("{id}")]
-    public IActionResult UpdatePatient(int id, PatientModel patient){
+    public IActionResult UpdatePatient(int id, PatientModel patient)
+    {
         _patientsService.UpdatePatient(id, patient);
         return NoContent();
     }
 
-
     // DELETE action
     [HttpDelete("{id}")]
-    public IActionResult DeletePatient(int id){
+    public IActionResult DeletePatient(int id)
+    {
         _patientsService.DeletePatient(id);
         return NoContent();
     }
-
 }

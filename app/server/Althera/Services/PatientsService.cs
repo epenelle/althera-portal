@@ -3,7 +3,8 @@ using Althera.Models.Persistence;
 
 namespace Althera.Services;
 
-public class PatientsService {
+public class PatientsService
+{
     private readonly AppDbContext _dbContext;
 
     public PatientsService(AppDbContext dbContext)
@@ -18,10 +19,12 @@ public class PatientsService {
     {
         var Allpatients = _dbContext.Patients.ToList();
         var AllPatientModel = new List<PatientModel>();
-        foreach (var patient in Allpatients) {
-            var patientModelService = new PatientModel{patientFirstname = patient.FirstName, patientLastname= patient.LastName, healthInsuranceCard = patient.HealthInsuranceNumber, clinicId= patient.ClinicId };
+        foreach (var patient in Allpatients)
+        {
+            var patientModelService = new PatientModel { FirstName = patient.FirstName, LastName = patient.LastName, HealthInsuranceNumber = patient.HealthInsuranceNumber, ClinicId = patient.ClinicId };
             AllPatientModel.Add(patientModelService);
         }
+
         return AllPatientModel;
     }
 
@@ -29,15 +32,20 @@ public class PatientsService {
     public PatientModel? GetPatientById(int id)
     {
         var patient = _dbContext.Patients.SingleOrDefault(c => c.Id == id);
-        if(patient != null) return new PatientModel{patientFirstname = patient.FirstName, patientLastname= patient.LastName, healthInsuranceCard = patient.HealthInsuranceNumber, clinicId= patient.ClinicId };
-        else return null;
+        if (patient != null)
+        {
+            return new PatientModel { FirstName = patient.FirstName, LastName = patient.LastName, HealthInsuranceNumber = patient.HealthInsuranceNumber, ClinicId = patient.ClinicId };
+        }
+        else
+        {
+            return null;
+        }
     }
 
     // Create new Patient
     public void CreatePatient(PatientModel patient)
     {
-        
-        _dbContext.Patients.Add(new PatientDB{FirstName = patient.patientFirstname, LastName= patient.patientLastname, HealthInsuranceNumber = patient.healthInsuranceCard, ClinicId= patient.clinicId });
+        _dbContext.Patients.Add(new PatientDB { FirstName = patient.FirstName, LastName = patient.LastName, HealthInsuranceNumber = patient.HealthInsuranceNumber, ClinicId = patient.ClinicId });
         _dbContext.SaveChanges();
     }
 
@@ -47,10 +55,10 @@ public class PatientsService {
         var patient = _dbContext.Patients.SingleOrDefault(p => p.Id == id);
         if (patient != null)
         {
-            patient.FirstName = updatedPatient.patientFirstname;
-            patient.LastName = updatedPatient.patientLastname;
-            patient.HealthInsuranceNumber = updatedPatient.healthInsuranceCard;
-            patient.ClinicId = updatedPatient.clinicId;
+            patient.FirstName = updatedPatient.FirstName;
+            patient.LastName = updatedPatient.LastName;
+            patient.HealthInsuranceNumber = updatedPatient.HealthInsuranceNumber;
+            patient.ClinicId = updatedPatient.ClinicId;
             _dbContext.SaveChanges();
         }
     }
@@ -65,6 +73,4 @@ public class PatientsService {
             _dbContext.SaveChanges();
         }
     }
-
-
 }

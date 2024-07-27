@@ -1,9 +1,9 @@
 ﻿namespace Althera.Models.Api;
-public record PatientModel {
-    public string? patientFirstname { get; set; }
-    public string? patientLastname { get; set; }
-    public int? healthInsuranceCard { get; set; }
+public record PatientModel
+{
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+    public int? HealthInsuranceNumber { get; set; }
 
-    // Clé étrangère
-    public int clinicId { get; set; }
+    public int ClinicId { get; set; }
 }

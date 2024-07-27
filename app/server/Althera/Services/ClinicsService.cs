@@ -3,7 +3,8 @@ using Althera.Models.Persistence;
 
 namespace Althera.Services;
 
-public class ClinicsService {
+public class ClinicsService
+{
     private readonly AppDbContext _dbContext;
 
     public ClinicsService(AppDbContext dbContext)
@@ -18,8 +19,9 @@ public class ClinicsService {
     {
         var AllClinics = _dbContext.Clinics.ToList();
         var AllClinicModel = new List<ClinicModel>();
-        foreach (var clinic in AllClinics) {
-            var clinicModelService = new ClinicModel{ClinicName = clinic.Name, ClinicAddress= clinic.Address, ClinicPassword = clinic.Password };
+        foreach (var clinic in AllClinics)
+        {
+            var clinicModelService = new ClinicModel { ClinicName = clinic.Name, ClinicAddress = clinic.Address, ClinicPassword = clinic.Password };
             AllClinicModel.Add(clinicModelService);
         }
 
@@ -43,7 +45,7 @@ public class ClinicsService {
     // Create Clinic
     public void CreateClinic(ClinicModel clinic)
     {
-        _dbContext.Clinics.Add(new ClinicDB{Name= clinic.ClinicName, Address= clinic.ClinicAddress, Password=clinic.ClinicPassword });
+        _dbContext.Clinics.Add(new ClinicDB { Name = clinic.ClinicName, Address = clinic.ClinicAddress, Password = clinic.ClinicPassword });
         _dbContext.SaveChanges();
     }
 

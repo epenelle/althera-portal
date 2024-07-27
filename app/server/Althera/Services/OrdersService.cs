@@ -3,7 +3,8 @@ using Althera.Models.Persistence;
 
 namespace Althera.Services;
 
-public class OrdersService {
+public class OrdersService
+{
     private readonly AppDbContext _dbContext;
 
     public OrdersService(AppDbContext dbContext)
@@ -18,10 +19,21 @@ public class OrdersService {
     {
         var Allorder = _dbContext.Orders.ToList();
         var AllOrderModel = new List<OrderModel>();
-        foreach (var order in Allorder) {
-            var orderModelService = new OrderModel{ orthesisModel= order.OrthosisModel, orthesisInfo= order.OrthosisInformation, orthesisScan= order.OrthosisScan, orderDate= order.Date, orderState = order.State, orthesisComment= order.Comments, patientId=order.PatientId };
+        foreach (var order in Allorder)
+        {
+            var orderModelService = new OrderModel
+            {
+                OrthesisModel = order.OrthosisModel,
+                OrthesisInfo = order.OrthosisInformation,
+                OrthesisScan = order.OrthosisScan,
+                OrderDate = order.Date,
+                OrderState = order.State,
+                OrthesisComment = order.Comments,
+                PatientId = order.PatientId
+            };
             AllOrderModel.Add(orderModelService);
         }
+
         return AllOrderModel;
     }
 
@@ -29,14 +41,20 @@ public class OrdersService {
     public OrderModel? GetOrderById(int id)
     {
         var order = _dbContext.Orders.SingleOrDefault(c => c.Id == id);
-        if(order != null) return new OrderModel{orthesisModel= order.OrthosisModel, orthesisInfo= order.OrthosisInformation, orthesisScan= order.OrthosisScan, orderDate= order.Date, orderState = order.State, orthesisComment= order.Comments, patientId= order.PatientId };
-        else return null;
+        if (order != null)
+        {
+            return new OrderModel { OrthesisModel = order.OrthosisModel, OrthesisInfo = order.OrthosisInformation, OrthesisScan = order.OrthosisScan, OrderDate = order.Date, OrderState = order.State, OrthesisComment = order.Comments, PatientId = order.PatientId };
+        }
+        else
+        {
+            return null;
+        }
     }
 
     // Create new Order
     public void CreateOrder(OrderModel order)
     {
-        _dbContext.Orders.Add(new OrderDB{OrthosisModel= order.orthesisModel, OrthosisInformation= order.orthesisInfo, OrthosisScan= order.orthesisScan, Date= order.orderDate, State = order.orderState, Comments= order.orthesisComment, PatientId= order.patientId });
+        _dbContext.Orders.Add(new OrderDB { OrthosisModel = order.OrthesisModel, OrthosisInformation = order.OrthesisInfo, OrthosisScan = order.OrthesisScan, Date = order.OrderDate, State = order.OrderState, Comments = order.OrthesisComment, PatientId = order.PatientId });
         _dbContext.SaveChanges();
     }
 
@@ -46,13 +64,13 @@ public class OrdersService {
         var order = _dbContext.Orders.SingleOrDefault(c => c.Id == id);
         if (order != null)
         {
-            order.OrthosisModel = updatedOrder.orthesisModel;
-            order.OrthosisInformation = updatedOrder.orthesisInfo;
-            order.OrthosisScan = updatedOrder.orthesisScan;
-            order.Date = updatedOrder.orderDate;
-            order.State = updatedOrder.orderState;
-            order.Comments = updatedOrder.orthesisComment;
-            order.PatientId = updatedOrder.patientId;
+            order.OrthosisModel = updatedOrder.OrthesisModel;
+            order.OrthosisInformation = updatedOrder.OrthesisInfo;
+            order.OrthosisScan = updatedOrder.OrthesisScan;
+            order.Date = updatedOrder.OrderDate;
+            order.State = updatedOrder.OrderState;
+            order.Comments = updatedOrder.OrthesisComment;
+            order.PatientId = updatedOrder.PatientId;
             _dbContext.SaveChanges();
         }
     }

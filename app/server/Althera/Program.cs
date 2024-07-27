@@ -1,7 +1,6 @@
 using Althera.Models.Persistence;
 using Althera.Services;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,7 +15,6 @@ builder.Services.AddCors(options =>
         );
 });
 
-
 // Ajouter DbContext
 builder.Services.AddDbContext<AppDbContext>();
 
@@ -26,7 +24,6 @@ builder.Services.AddScoped<OrdersService>();
 builder.Services.AddScoped<ClinicsService>();
 
 builder.Services.AddControllers();
-
 
 // builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
