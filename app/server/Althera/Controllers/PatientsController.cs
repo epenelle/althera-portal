@@ -1,4 +1,4 @@
-using Althera.Models.Api;
+using Althera.Models.Api.Patient;
 using Althera.Services;
 using Microsoft.AspNetCore.Mvc;
 

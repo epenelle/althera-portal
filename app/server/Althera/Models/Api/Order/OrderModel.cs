@@ -1,4 +1,4 @@
-﻿namespace Althera.Models.Api;
+﻿namespace Althera.Models.Api.Order;
 public record OrderModel
 {
     public string? OrthesisModel { get; set; }

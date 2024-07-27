@@ -1,4 +1,4 @@
-using Althera.Models.Api;
+using Althera.Models.Api.Clinic;
 using Althera.Models.Persistence;
 
 namespace Althera.Services;
@@ -21,7 +21,7 @@ public class ClinicsService
         var AllClinicModel = new List<ClinicModel>();
         foreach (var clinic in AllClinics)
         {
-            var clinicModelService = new ClinicModel { Name = clinic.Name, Address = clinic.Address };
+            var clinicModelService = new ClinicModel { Name = clinic.Name, Site = clinic.Address };
             AllClinicModel.Add(clinicModelService);
         }
 
@@ -34,7 +34,7 @@ public class ClinicsService
         var MyClinic = _dbContext.Clinics.SingleOrDefault(c => c.Id == id);
         if (MyClinic != null)
         {
-            return new ClinicModel { Name = MyClinic.Name, Address = MyClinic.Address };
+            return new ClinicModel { Name = MyClinic.Name, Site = MyClinic.Address };
         }
         else
         {
@@ -45,7 +45,7 @@ public class ClinicsService
     // Create Clinic
     public void CreateClinic(ClinicModel clinic)
     {
-        _dbContext.Clinics.Add(new ClinicEntity { Name = clinic.Name, Address = clinic.Address });
+        _dbContext.Clinics.Add(new ClinicEntity { Name = clinic.Name, Address = clinic.Site });
         _dbContext.SaveChanges();
     }
 
@@ -56,7 +56,7 @@ public class ClinicsService
         if (clinic != null)
         {
             clinic.Name = updatedClinic.Name;
-            clinic.Address = updatedClinic.Address;
+            clinic.Address = updatedClinic.Site;
             _dbContext.SaveChanges();
         }
     }
