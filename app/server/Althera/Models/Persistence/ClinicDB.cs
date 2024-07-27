@@ -12,6 +12,4 @@ public record ClinicDB
 
     // Reverse navigation property
     public ICollection<PatientDB>? Patients { get; set; }
-
-    //    public List<Patient> Patients { get; } = new();
 }
