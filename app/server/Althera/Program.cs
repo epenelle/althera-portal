@@ -2,10 +2,10 @@ using Althera.Models.Persistence;
 using Althera.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var services = builder.Services;
 // Add services to the container.
 
-builder.Services.AddCors(options =>
+services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
         builder => builder
@@ -15,18 +15,15 @@ builder.Services.AddCors(options =>
         );
 });
 
-// Ajouter DbContext
-builder.Services.AddDbContext<AppDbContext>();
+services.AddDbContext<AppDbContext>();
+services.AddScoped<PatientsService>();
+services.AddScoped<OrdersService>();
+services.AddScoped<ClinicsService>();
 
-// Enregistrer vos services
-builder.Services.AddScoped<PatientsService>();
-builder.Services.AddScoped<OrdersService>();
-builder.Services.AddScoped<ClinicsService>();
+services.AddControllers();
 
-builder.Services.AddControllers();
-
-// builder.Services.AddEndpointsApiExplorer();
-// builder.Services.AddSwaggerGen();
+// services.AddEndpointsApiExplorer();
+// services.AddSwaggerGen();
 
 var app = builder.Build();
 
