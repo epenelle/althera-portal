@@ -2,7 +2,7 @@
 
 namespace Althera.Models.Persistence;
 
-public record ClinicDB
+public record ClinicEntity
 {
     [Key]
     public int Id { get; set; }
@@ -11,5 +11,5 @@ public record ClinicDB
     public string? Address { get; set; }
 
     // Reverse navigation property
-    public List<PatientDB>? Patients { get; } = [];
+    public List<PatientEntity>? Patients { get; } = [];
 }

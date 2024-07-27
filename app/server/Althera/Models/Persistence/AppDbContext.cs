@@ -4,9 +4,9 @@ namespace Althera.Models.Persistence;
 
 public class AppDbContext : DbContext
 {
-    public DbSet<ClinicDB> Clinics { get; set; }
-    public DbSet<PatientDB> Patients { get; set; }
-    public DbSet<OrderDB> Orders { get; set; }
+    public DbSet<ClinicEntity> Clinics { get; set; }
+    public DbSet<PatientEntity> Patients { get; set; }
+    public DbSet<OrderEntity> Orders { get; set; }
 
     public string? DbPath { get; }
 
@@ -17,19 +17,19 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<ClinicDB>()
+        modelBuilder.Entity<ClinicEntity>()
             .HasKey(c => c.Id);
-        modelBuilder.Entity<PatientDB>()
+        modelBuilder.Entity<PatientEntity>()
             .HasKey(k => k.Id);
-        modelBuilder.Entity<OrderDB>()
+        modelBuilder.Entity<OrderEntity>()
             .HasKey(k => k.Id);
 
-        modelBuilder.Entity<PatientDB>()
+        modelBuilder.Entity<PatientEntity>()
             .HasOne(p => p.Clinic)
             .WithMany(c => c.Patients)
             .HasForeignKey(p => p.ClinicId);
 
-        modelBuilder.Entity<OrderDB>()
+        modelBuilder.Entity<OrderEntity>()
             .HasOne(c => c.Patient)
             .WithMany(p => p.Orders)
             .HasForeignKey(c => c.Patient);

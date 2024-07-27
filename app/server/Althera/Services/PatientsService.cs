@@ -45,7 +45,7 @@ public class PatientsService
     // Create new Patient
     public void CreatePatient(PatientModel patient)
     {
-        _dbContext.Patients.Add(new PatientDB { FirstName = patient.FirstName, LastName = patient.LastName, HealthInsuranceNumber = patient.HealthInsuranceNumber, ClinicId = patient.ClinicId });
+        _dbContext.Patients.Add(new PatientEntity { FirstName = patient.FirstName, LastName = patient.LastName, HealthInsuranceNumber = patient.HealthInsuranceNumber, ClinicId = patient.ClinicId });
         _dbContext.SaveChanges();
     }
 

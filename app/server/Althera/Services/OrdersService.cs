@@ -54,7 +54,7 @@ public class OrdersService
     // Create new Order
     public void CreateOrder(OrderModel order)
     {
-        _dbContext.Orders.Add(new OrderDB { OrthosisModel = order.OrthesisModel, OrthosisInformation = order.OrthesisInfo, OrthosisScan = order.OrthesisScan, Date = order.OrderDate, State = order.OrderState, Comments = order.OrthesisComment, PatientId = order.PatientId });
+        _dbContext.Orders.Add(new OrderEntity { OrthosisModel = order.OrthesisModel, OrthosisInformation = order.OrthesisInfo, OrthosisScan = order.OrthesisScan, Date = order.OrderDate, State = order.OrderState, Comments = order.OrthesisComment, PatientId = order.PatientId });
         _dbContext.SaveChanges();
     }
 

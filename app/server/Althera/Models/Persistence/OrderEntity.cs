@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Althera.Models.Persistence;
 
-public record OrderDB
+public record OrderEntity
 {
     [Key]
     public int Id { get; set; }
@@ -18,5 +18,5 @@ public record OrderDB
     public int PatientId { get; set; }
 
     // Navigation property
-    public PatientDB? Patient { get; set; }
+    public PatientEntity? Patient { get; set; }
 }

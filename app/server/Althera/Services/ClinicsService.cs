@@ -45,7 +45,7 @@ public class ClinicsService
     // Create Clinic
     public void CreateClinic(ClinicModel clinic)
     {
-        _dbContext.Clinics.Add(new ClinicDB { Name = clinic.ClinicName, Address = clinic.ClinicAddress, Password = clinic.ClinicPassword });
+        _dbContext.Clinics.Add(new ClinicEntity { Name = clinic.ClinicName, Address = clinic.ClinicAddress, Password = clinic.ClinicPassword });
         _dbContext.SaveChanges();
     }
 
