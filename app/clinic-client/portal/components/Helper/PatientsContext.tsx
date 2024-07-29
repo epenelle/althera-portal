@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
+import { fetchPatients as fetchPatientsFromAPI } from '@/api/patients';
 
 interface Patient {
   id: number;
@@ -19,22 +20,21 @@ export const PatientsProvider = ({ children }: { children: ReactNode }) => {
   const [patients, setPatients] = useState<Patient[]>([]);
 
   const fetchPatients = async () => {
-	try {
-	  const response = await fetch('/api/patients');
-	  const data = await response.json();
-	  setPatients(data);
-	} catch (error) {
-	  console.error('Error fetching patients:', error);
-	}
+    try {
+      const data = await fetchPatientsFromAPI();
+      setPatients(data);
+    } catch (error) {
+      console.error('Error fetching patients:', error);
+    }
   };
 
   useEffect(() => {
-	fetchPatients();
+    fetchPatients();
   }, []);
 
   return (
-	<PatientsContext.Provider value={{ patients, fetchPatients }}>
-	  {children}
-	</PatientsContext.Provider>
+    <PatientsContext.Provider value={{ patients, fetchPatients }}>
+      {children}
+    </PatientsContext.Provider>
   );
 };

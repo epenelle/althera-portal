@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React, { useContext } from 'react';
 import { PatientsData } from '@/data/data';
 import PatientCard from '../ItemCard';
 import { BsPeopleFill } from 'react-icons/bs';
@@ -7,18 +6,20 @@ import { FaSearch } from 'react-icons/fa';
 import { FaSortUp, FaSortDown } from 'react-icons/fa';
 import PaginationMenu from '../../Helper/PaginationMenu';
 import { useRouter } from 'next/router';
-import { PatientsProvider } from '@/components/Helper/PatientsContext';
+import { PatientsContext, PatientsProvider } from '@/components/Helper/PatientsContext';
+
 
 
 
 
 const ListePatients = () => {
-  const router = useRouter();
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const patientsPerPage = 10;
-  const indexOfLastPatient = currentPage * patientsPerPage;
-  const indexOfFirstPatient = indexOfLastPatient - patientsPerPage;
-  const currentPatients = PatientsData.slice(indexOfFirstPatient, indexOfLastPatient);
+    const router = useRouter();
+    const { patients } = useContext(PatientsContext) || { patients: [] };
+    const [currentPage, setCurrentPage] = React.useState(1);
+    const patientsPerPage = 10;
+    const indexOfLastPatient = currentPage * patientsPerPage;
+    const indexOfFirstPatient = indexOfLastPatient - patientsPerPage;
+    const currentPatients = patients.slice(indexOfFirstPatient, indexOfLastPatient);
 
   const totalPages = Math.ceil(PatientsData.length / patientsPerPage);
   const pageNumbers = [];

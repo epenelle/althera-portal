@@ -1,23 +1,36 @@
-// app/clinic-client/portal/pages/api/patients.ts
-import { NextApiRequest, NextApiResponse } from 'next';
+interface PatientData {
+  id: number;
+  idclinique: number;
+  firstName: string;
+  lastName: string;
+  numSec: string;
+}
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-    if (req.method === 'GET') {
-        try {
-            // Remplacez ceci par votre logique pour récupérer les patients depuis la base de données
-            const patients = [
-                { id: 1, idclinique: 1, firstName: 'Joseph', lastName: 'Mukendi', numSec: '123456789413' },
-                { id: 2, idclinique: 1, firstName: 'Marie', lastName: 'Dupont', numSec: '987654321012' },
-                // Ajoutez d'autres patients ici
-            ];
-            res.status(200).json(patients);
-        } catch (error) {
-            res.status(500).json({ error: 'Failed to fetch patients' });
-        }
-    } else {
-        res.setHeader('Allow', ['GET']);
-        res.status(405).end(`Method ${req.method} Not Allowed`);
-    }
+export const fetchPatients = async (): Promise<PatientData[]> => {
+  try {
+	const response = await fetch('http://localhost:5125/patient', {
+	  method: "GET",
+	  headers: {
+		'Content-Type': 'application/json'
+	  }
+	});
+	if (!response.ok) {
+	  throw new Error(`HTTP error! status: ${response.status}`);
+	}
+	const json = await response.json();
+
+	// Transformation des données reçues
+	const patientsData: PatientData[] = json.map((patient: any, index: number) => ({
+	  id: index + 1,
+	  idclinique: patient.idclinique || 1, // Remplacez par la logique appropriée si nécessaire
+	  firstName: patient.firstName || "Unknown",
+	  lastName: patient.lastName || "Unknown",
+	  numSec: patient.numSec || "Unknown",
+	}));
+
+	return patientsData;
+  } catch (error) {
+	console.error('Error fetching patients:', error);
+	throw error;
+  }
 };
-
-export default handler;
