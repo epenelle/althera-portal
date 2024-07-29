@@ -21,7 +21,7 @@ const ListePatients = () => {
     const indexOfFirstPatient = indexOfLastPatient - patientsPerPage;
     const currentPatients = patients.slice(indexOfFirstPatient, indexOfLastPatient);
 
-  const totalPages = Math.ceil(PatientsData.length / patientsPerPage);
+  const totalPages = Math.ceil(patients.length / patientsPerPage);
   const pageNumbers = [];
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
@@ -76,7 +76,7 @@ return (
                         </div>
                     </div>
                 </div>
-                {currentPatients.map((patient) => (
+                {PatientsData.map((patient) => (
                     <PatientCard key={patient.id} data={patient} />
                 ))}
                 <PaginationMenu currentPage={currentPage} totalPages={totalPages} navigateToPage={navigateToPage} />

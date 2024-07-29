@@ -9,6 +9,10 @@ interface PaginationMenuProps {
 }
 
 const PaginationMenu: React.FC<PaginationMenuProps> = ({ currentPage, totalPages, navigateToPage }) => {
+    if (totalPages <= 1) {
+        return null;
+    }
+
     return (
         <div className='flex justify-center items-center mt-4 space-x-2'>
             <div className='flex items-center'><FaBackward onClick={() => navigateToPage(1)} className='mx-1 hover:text-secondary-light-blue cursor-pointer' /></div>
