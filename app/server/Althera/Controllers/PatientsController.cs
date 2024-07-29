@@ -1,4 +1,6 @@
+using Althera.Extensions;
 using Althera.Models.Api.Patient;
+using Althera.Requests;
 using Althera.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,56 +8,66 @@ namespace Althera.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class PatientsController : ControllerBase
+public class PatientsController(PatientsService patientServices) : ControllerBase
 {
-    private readonly PatientsService _patientsService;
-
-    public PatientsController(PatientsService patientServices)
-    {
-        _patientsService = patientServices;
-    }
+    private readonly PatientsService _patientsService = patientServices;
 
     [HttpGet]
     public ActionResult<List<PatientModel>> GetAllPatients()
     {
-        return _patientsService.GetAllPatients();
+        return _patientsService.GetAll().Select(patient => patient.ToApi()).ToList();
     }
 
     [HttpGet("{id}")]
-    public ActionResult<PatientModel> GetPatient(int id)
+    public ActionResult<PatientModel> GetPatient(string id)
     {
-        var patient = _patientsService.GetPatientById(id);
+        var patient = _patientsService.GetPatient(id);
+
         if (patient == null)
         {
             return NotFound();
         }
 
-        return patient;
+        return patient.ToApi();
     }
 
     [HttpPost]
-    public IActionResult CreatePatient(PatientModel patient)
+    public ActionResult<PatientModel> CreatePatient(PatientCreateRequest patientCreateRequest)
     {
-        if (patient == null)
+        if (patientCreateRequest == null)
         {
             return BadRequest();
         }
 
-        _patientsService.CreatePatient(patient);
-        return StatusCode(201, patient);
+        var patient = _patientsService.CreatePatient(patientCreateRequest);
+        return StatusCode(201, patient.ToApi());
     }
 
     [HttpPut("{id}")]
-    public IActionResult UpdatePatient(int id, PatientModel patient)
+    public ActionResult UpdatePatient(string id, PatientUpdateRequest patientUpdateRequest)
     {
-        _patientsService.UpdatePatient(id, patient);
-        return NoContent();
+        try
+        {
+            var patient = _patientsService.UpdatePatient(id, patientUpdateRequest);
+            return StatusCode(200, patient.ToApi());
+        }
+        catch (InvalidOperationException)
+        {
+            return NotFound();
+        }
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeletePatient(int id)
+    public IActionResult DeletePatient(string id)
     {
-        _patientsService.DeletePatient(id);
-        return NoContent();
+        try
+        {
+            _patientsService.DeletePatient(id);
+            return NoContent();
+        }
+        catch (InvalidOperationException)
+        {
+            return NotFound();
+        }
     }
 }

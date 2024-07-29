@@ -1,4 +1,13 @@
-namespace Althera.Models.Api.Clinic;
+﻿namespace Althera.Models.Domain;
+
+public record Clinic
+{
+    public required string Id { get; init; }
+
+    public required string Name { get; init; }
+
+    public Site? Address { get; init; }
+}
 
 public record Site
 {

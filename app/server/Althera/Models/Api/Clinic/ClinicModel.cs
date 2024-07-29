@@ -6,5 +6,16 @@ public record ClinicModel
 
     public required string Name { get; init; }
 
-    public Site? Site { get; set; }
+    public SiteModel? Site { get; set; }
+}
+
+public record SiteModel
+{
+    public required string Id { get; init; }
+    public required string Name { get; init; }
+    public string? Street { get; init; }
+    public string? City { get; init; }
+    public string? Zip { get; init; }
+    public string Region { get; } = "QC";
+    public string Country { get; } = "Canada";
 }

@@ -1,88 +1,60 @@
-using Althera.Models.Api.Order;
+using Althera.Extensions;
+using Althera.Models.Domain;
 using Althera.Models.Persistence;
+using Althera.Requests;
 
 namespace Althera.Services;
 
-public class OrdersService
+public class OrdersService(AppDbContext dbContext)
 {
-    private readonly AppDbContext _dbContext;
+    private readonly AppDbContext _dbContext = dbContext;
 
-    public OrdersService(AppDbContext dbContext)
+    public List<Order> GetAll()
     {
-        _dbContext = dbContext;
+        var orderEntities = _dbContext.Orders.ToList();
+        return orderEntities.Select(order => order.ToDomain()).ToList();
     }
 
-    // Orders
-
-    // Get All Orders
-    public List<OrderModel> GetAllOrders()
+    public Order? GetOrder(string id)
     {
-        var Allorder = _dbContext.Orders.ToList();
-        var AllOrderModel = new List<OrderModel>();
-        foreach (var order in Allorder)
-        {
-            var orderModelService = new OrderModel
-            {
-                OrthesisModel = order.OrthosisModel,
-                OrthesisInfo = order.OrthosisInformation,
-                OrthesisScan = order.OrthosisScan,
-                OrderDate = order.Date,
-                OrderState = order.State,
-                OrthesisComment = order.Comments,
-                PatientId = order.PatientId
-            };
-            AllOrderModel.Add(orderModelService);
-        }
-
-        return AllOrderModel;
+        var orderEntity = _dbContext.Orders.SingleOrDefault(c => c.Id == id);
+        return orderEntity?.ToDomain();
     }
 
-    // Get order by ID
-    public OrderModel? GetOrderById(int id)
+    public Order CreateOrder(OrderCreateRequest orderCreateRequest)
     {
-        var order = _dbContext.Orders.SingleOrDefault(c => c.Id == id);
-        if (order != null)
+        var orderEntity = new OrderEntity
         {
-            return new OrderModel { OrthesisModel = order.OrthosisModel, OrthesisInfo = order.OrthosisInformation, OrthesisScan = order.OrthosisScan, OrderDate = order.Date, OrderState = order.State, OrthesisComment = order.Comments, PatientId = order.PatientId };
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    // Create new Order
-    public void CreateOrder(OrderModel order)
-    {
-        _dbContext.Orders.Add(new OrderEntity { OrthosisModel = order.OrthesisModel, OrthosisInformation = order.OrthesisInfo, OrthosisScan = order.OrthesisScan, Date = order.OrderDate, State = order.OrderState, Comments = order.OrthesisComment, PatientId = order.PatientId });
+            Id = Guid.NewGuid().ToString(),
+            OrthosisModel = orderCreateRequest.OrthesisModel,
+            OrthosisInformation = orderCreateRequest.OrthesisInfo,
+            OrthosisScan = orderCreateRequest.OrthesisScan,
+            Comments = orderCreateRequest.OrthesisComment,
+            PatientId = orderCreateRequest.PatientId,
+            Date = DateTime.UtcNow,
+            State = "created", // TODO : Replace with enum
+        };
+        _dbContext.Orders.Add(orderEntity);
         _dbContext.SaveChanges();
+
+        return orderEntity.ToDomain();
     }
 
-    // Edit order by Id
-    public void UpdateOrder(int id, OrderModel updatedOrder)
+    public Order UpdateOrder(string id, OrderUpdateRequest orderUpdateRequest)
     {
-        var order = _dbContext.Orders.SingleOrDefault(c => c.Id == id);
-        if (order != null)
-        {
-            order.OrthosisModel = updatedOrder.OrthesisModel;
-            order.OrthosisInformation = updatedOrder.OrthesisInfo;
-            order.OrthosisScan = updatedOrder.OrthesisScan;
-            order.Date = updatedOrder.OrderDate;
-            order.State = updatedOrder.OrderState;
-            order.Comments = updatedOrder.OrthesisComment;
-            order.PatientId = updatedOrder.PatientId;
-            _dbContext.SaveChanges();
-        }
+        var orderEntity = _dbContext.Orders.SingleOrDefault(c => c.Id == id) ?? throw new InvalidOperationException("Order not found.");
+        orderEntity.OrthosisInformation = orderUpdateRequest.OrthesisInfo;
+        orderEntity.Comments = orderUpdateRequest.OrthesisComment;
+        orderEntity.PatientId = orderUpdateRequest.PatientId;
+        _dbContext.SaveChanges();
+
+        return orderEntity.ToDomain();
     }
 
-    // Delete Order by ID
-    public void DeleteOrder(int id)
+    public void DeleteOrder(string id)
     {
-        var order = _dbContext.Orders.SingleOrDefault(c => c.Id == id);
-        if (order != null)
-        {
-            _dbContext.Orders.Remove(order);
-            _dbContext.SaveChanges();
-        }
+        var order = _dbContext.Orders.SingleOrDefault(c => c.Id == id) ?? throw new InvalidOperationException("Order not found.");
+        _dbContext.Orders.Remove(order);
+        _dbContext.SaveChanges();
     }
 }

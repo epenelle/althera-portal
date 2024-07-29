@@ -1,4 +1,6 @@
+using Althera.Extensions;
 using Althera.Models.Api.Order;
+using Althera.Requests;
 using Althera.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,54 +8,44 @@ namespace Althera.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class OrdersController : ControllerBase
+public class OrdersController(OrdersService orderServices) : ControllerBase
 {
-    private readonly OrdersService _ordersService;
-
-    public OrdersController(OrdersService orderServices)
-    {
-        _ordersService = orderServices;
-    }
+    private readonly OrdersService _ordersService = orderServices;
 
     [HttpGet]
     public ActionResult<List<OrderModel>> GetAllOrders()
     {
-        return _ordersService.GetAllOrders();
+        return _ordersService.GetAll().Select(order => order.ToApi()).ToList();
     }
 
     [HttpGet("{id}")]
-    public ActionResult<OrderModel> GetOrders(int id)
+    public ActionResult<OrderModel> GetOrder(string id)
     {
-        var order = _ordersService.GetOrderById(id);
-        if (order == null)
-        {
-            return NotFound();
-        }
-
-        return order;
+        var order = _ordersService.GetOrder(id);
+        return order == null ? NotFound() : order.ToApi();
     }
 
     [HttpPost]
-    public IActionResult CreateOrder(OrderModel order)
+    public ActionResult<OrderModel> CreateOrder(OrderCreateRequest orderCreateRequest)
     {
-        if (order == null)
+        if (orderCreateRequest == null)
         {
             return BadRequest();
         }
 
-        _ordersService.CreateOrder(order);
-        return StatusCode(201, order);
+        var order = _ordersService.CreateOrder(orderCreateRequest);
+        return StatusCode(201, order.ToApi());
     }
 
     [HttpPut("{id}")]
-    public IActionResult UpdateOrder(int id, OrderModel order)
+    public ActionResult<OrderModel> UpdateOrder(string id, OrderUpdateRequest orderUpdateRequest)
     {
-        _ordersService.UpdateOrder(id, order);
-        return NoContent();
+        var order = _ordersService.UpdateOrder(id, orderUpdateRequest);
+        return StatusCode(200, order.ToApi());
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteOrder(int id)
+    public IActionResult DeleteOrder(string id)
     {
         _ordersService.DeleteOrder(id);
         return NoContent();

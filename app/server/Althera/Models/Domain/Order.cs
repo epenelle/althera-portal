@@ -1,11 +1,7 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace Althera.Models.Domain;
 
-namespace Althera.Models.Persistence;
-
-public record OrderEntity
+public record Order
 {
-    [Key]
     public required string Id { get; init; }
     public string? OrthosisModel { get; set; }
     public string? OrthosisInformation { get; set; }
@@ -14,9 +10,5 @@ public record OrderEntity
     public string? State { get; set; }
     public string? Comments { get; set; }
 
-    [ForeignKey("patientId")]
-    public int PatientId { get; set; }
-
-    // Navigation property
-    public PatientEntity? Patient { get; set; }
+    public Patient? Patient { get; init; }
 }

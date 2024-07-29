@@ -1,4 +1,6 @@
+using Althera.Extensions;
 using Althera.Models.Api.Clinic;
+using Althera.Requests;
 using Althera.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,50 +8,45 @@ namespace Althera.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ClinicsController : ControllerBase
+public class ClinicsController(ClinicsService clinicServices) : ControllerBase
 {
-    private readonly ClinicsService _clinicsService;
-
-    public ClinicsController(ClinicsService clinicServices)
-    {
-        _clinicsService = clinicServices;
-    }
+    private readonly ClinicsService _clinicsService = clinicServices;
 
     [HttpGet]
     public ActionResult<List<ClinicModel>> GetAllClinics()
     {
-        return _clinicsService.GetAllClinics();
+        return _clinicsService.GetAll().Select(clinic => clinic.ToApi()).ToList();
     }
 
     [HttpGet("{id}")]
-    public ActionResult<ClinicModel> GetClinics(int id)
+    public ActionResult<ClinicModel> GetClinic(string id)
     {
-        var order = _clinicsService.GetCliniqueById(id);
+        var clinic = _clinicsService.GetClinic(id);
 
-        return order == null ? NotFound() : order;
+        return clinic == null ? NotFound() : clinic.ToApi();
     }
 
     [HttpPost]
-    public IActionResult CreateClinic(ClinicModel clinic)
+    public ActionResult<ClinicModel> CreateClinic(ClinicCreateRequest clinicCreateRequest)
     {
-        if (clinic == null)
+        if (clinicCreateRequest == null)
         {
             return BadRequest();
         }
 
-        _clinicsService.CreateClinic(clinic);
-        return StatusCode(201, clinic);
+        var clinic = _clinicsService.CreateClinic(clinicCreateRequest);
+        return StatusCode(201, clinic.ToApi());
     }
 
     [HttpPut("{id}")]
-    public IActionResult UpdateClinic(int id, ClinicModel clinic)
+    public ActionResult<ClinicModel> UpdateClinic(string id, ClinicUpdateRequest clinicUpdateRequest)
     {
-        _clinicsService.UpdateClinic(id, clinic);
-        return NoContent();
+        var clinic = _clinicsService.UpdateClinic(id, clinicUpdateRequest);
+        return StatusCode(200, clinic.ToApi());
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteClinic(int id)
+    public IActionResult DeleteClinic(string id)
     {
         _clinicsService.DeleteClinic(id);
         return NoContent();
