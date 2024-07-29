@@ -4,7 +4,7 @@ using Althera.Requests;
 using Althera.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Althera.Controllers;
+namespace Althera.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
