@@ -43,7 +43,7 @@ return (
             <div className='flex flex-col md:flex-row justify-center items-center w-full mt-4'>
                 <div className='flex flex-col md:flex-row justify-center items-center w-full p-2 border-2 border-light-gray rounded-lg'>
                     <input type='text' placeholder='Search, add a comma (,) between each searched value' className='border-2 border-light-gray rounded-lg p-2 w-full' />
-                    <FaSearch size={30} className='mt-4 md:mt-0 md:ml-2 shrink-0 self-center' />
+                    <FaSearch size={30} className='mt-4 md:mt-0 md:ml-2 shrink-0 self-center cursor-pointer hover:text-secondary-medium-blue' />
                 </div>
                 <button className='h-12 mt-4 mb-4  md:ml-5 bg-medium-green hover:bg-dark-green text-white font-bold py-2 px-4 transition duration-300 ease-in-out shadow-lg hover:shadow-xl rounded-lg'
                 onClick={handleAddOrderClick}>
@@ -52,7 +52,7 @@ return (
             </div>
             <div className='hidden md:grid md:grid-cols-[160px_150px_140px_130px_150px] w-full items-center gap-4 pl-28 mt-4 p-2 border-2 bg-light-gray border-medium-gray rounded-lg mb-5'>
                 <div className='flex items-center border-l-2 pl-3 border-r-2 border-medium-gray'>
-                    <span className='font-bold text-lg'>N° sécurité</span>
+                    <span className='font-bold text-lg'>Numéro</span>
                     <div className='grid grid-rows-[5px_5px] mb-2 ml-2'>
                         <FaSortUp className='cursor-pointer' />
                         <FaSortDown className='cursor-pointer' />

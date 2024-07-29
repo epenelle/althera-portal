@@ -36,7 +36,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
                   {!edit && <MdLock size={20} className='ml-2' />}
                 </div>
                 <div className="flex items-center mb-2">
-                  <label className="w-2/5 text-right whitespace-nowrap">Numéro de <br /> sécurité sociale : </label>
+                  <label className="w-2/5 text-right whitespace-nowrap">Numéro de <br /> d'assurance maladie : </label>
                   <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
                    disabled={!edit}
                    value={numSecu}/>
