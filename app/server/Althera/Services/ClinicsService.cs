@@ -1,8 +1,8 @@
+using Althera.Api.Requests;
 using Althera.Domain;
 using Althera.Extensions;
 using Althera.Models.Persistence;
 using Althera.Persistence;
-using Althera.Requests;
 
 namespace Althera.Services;
 

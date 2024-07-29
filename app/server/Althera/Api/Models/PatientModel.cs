@@ -1,4 +1,4 @@
-﻿namespace Althera.Models.Api.Patient;
+﻿namespace Althera.Api.Models;
 public record PatientModel
 {
     public required string Id { get; init; }

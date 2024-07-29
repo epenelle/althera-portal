@@ -1,4 +1,4 @@
-﻿namespace Althera.Models.Api.Order;
+﻿namespace Althera.Api.Models;
 public record OrderModel
 {
     public required string Id { get; init; }

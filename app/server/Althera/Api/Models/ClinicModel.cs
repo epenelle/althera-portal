@@ -1,4 +1,4 @@
-namespace Althera.Models.Api.Clinic;
+namespace Althera.Api.Models;
 
 public record ClinicModel
 {

@@ -1,4 +1,4 @@
-﻿namespace Althera.Requests;
+﻿namespace Althera.Api.Requests;
 public record OrderCreateRequest
 {
     public string? OrthesisInfo { get; set; }

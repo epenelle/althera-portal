@@ -1,4 +1,4 @@
-namespace Althera.Models.Api;
+namespace Althera.Api.Models;
 
 public record TestModel
 {

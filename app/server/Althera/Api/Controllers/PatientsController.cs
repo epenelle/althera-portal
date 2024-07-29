@@ -1,6 +1,6 @@
+using Althera.Api.Models;
+using Althera.Api.Requests;
 using Althera.Extensions;
-using Althera.Models.Api.Patient;
-using Althera.Requests;
 using Althera.Services;
 using Microsoft.AspNetCore.Mvc;
 

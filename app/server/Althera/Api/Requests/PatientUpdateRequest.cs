@@ -1,4 +1,4 @@
-﻿namespace Althera.Requests;
+﻿namespace Althera.Api.Requests;
 public record PatientUpdateRequest
 {
     public string? FirstName { get; init; }

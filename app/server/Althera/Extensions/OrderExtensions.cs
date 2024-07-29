@@ -1,5 +1,5 @@
-﻿using Althera.Domain;
-using Althera.Models.Api.Order;
+﻿using Althera.Api.Models;
+using Althera.Domain;
 using Althera.Models.Persistence;
 
 namespace Althera.Extensions;

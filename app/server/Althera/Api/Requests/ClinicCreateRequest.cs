@@ -1,4 +1,4 @@
-﻿namespace Althera.Requests;
+﻿namespace Althera.Api.Requests;
 public record ClinicCreateRequest
 {
     public required string Name { get; init; }
