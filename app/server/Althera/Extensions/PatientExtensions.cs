@@ -1,5 +1,5 @@
-﻿using Althera.Models.Api.Patient;
-using Althera.Models.Domain;
+﻿using Althera.Domain;
+using Althera.Models.Api.Patient;
 using Althera.Models.Persistence;
 
 namespace Althera.Extensions;

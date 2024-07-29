@@ -1,5 +1,5 @@
+using Althera.Domain;
 using Althera.Extensions;
-using Althera.Models.Domain;
 using Althera.Models.Persistence;
 using Althera.Requests;
 

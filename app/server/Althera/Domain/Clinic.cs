@@ -1,4 +1,4 @@
-﻿namespace Althera.Models.Domain;
+﻿namespace Althera.Domain;
 
 public record Clinic
 {
