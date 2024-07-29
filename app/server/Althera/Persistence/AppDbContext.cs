@@ -1,6 +1,7 @@
+using Althera.Models.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace Althera.Models.Persistence;
+namespace Althera.Persistence;
 
 public class AppDbContext : DbContext
 {

@@ -1,4 +1,4 @@
-using Althera.Models.Persistence;
+using Althera.Persistence;
 using Althera.Services;
 using Microsoft.OpenApi.Models;
 
