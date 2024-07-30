@@ -24,7 +24,7 @@ function App() {
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        const response = await fetch('http://localhost:5125/patient', {
+        const response = await fetch('http://localhost:5125/patients', {
           method: "GET",
           headers: {
             'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ function App() {
 
     const fetchOrders = async () => {
       try {
-        const response = await fetch('http://localhost:5125/order', {
+        const response = await fetch('http://localhost:5125/orders', {
           method: "GET",
           headers: {
             'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ function App() {
 
     const fetchClinic = async () => {
       try {
-        const response = await fetch('http://localhost:5125/clinic', {
+        const response = await fetch('http://localhost:5125/clinics', {
           method: "GET",
           headers: {
             'Content-Type': 'application/json'
@@ -104,7 +104,7 @@ function App() {
 
   const createPatient = async () => {
     try {
-      const response = await fetch('http://localhost:5125/patient', {
+      const response = await fetch('http://localhost:5125/patients', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -124,7 +124,7 @@ function App() {
 
   const createOrder = async () => {
     try {
-      const response = await fetch('http://localhost:5125/order', {
+      const response = await fetch('http://localhost:5125/orders', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -145,7 +145,7 @@ function App() {
   const createClinic = async () => {
     console.log("Create Clinic")
     try {
-      const response = await fetch('http://localhost:5125/clinic', {
+      const response = await fetch('http://localhost:5125/clinics', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -177,7 +177,7 @@ function App() {
 
   const deletePatient = async () => {
     try {
-      const response = await fetch(`http://localhost:5125/patient/${deleteIdPatient}`, {
+      const response = await fetch(`http://localhost:5125/patients/${deleteIdPatient}`, {
         method: "DELETE",
         headers: {
           'Content-Type': 'application/json'
@@ -195,7 +195,7 @@ function App() {
 
   const deleteOrder = async () => {
     try {
-      const response = await fetch(`http://localhost:5125/order/${deleteIdOrder}`, {
+      const response = await fetch(`http://localhost:5125/orders/${deleteIdOrder}`, {
         method: "DELETE",
         headers: {
           'Content-Type': 'application/json'
@@ -213,7 +213,7 @@ function App() {
 
   const deleteClinic = async () => {
     try {
-      const response = await fetch(`http://localhost:5125/clinic/${deleteIdClinic}`, {
+      const response = await fetch(`http://localhost:5125/clinics/${deleteIdClinic}`, {
         method: "DELETE",
         headers: {
           'Content-Type': 'application/json'
