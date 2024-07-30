@@ -15,7 +15,7 @@ public record OrderEntity
     public string? Comments { get; set; }
 
     [ForeignKey("patientId")]
-    public int PatientId { get; set; }
+    public string? PatientId { get; set; }
 
     // Navigation property
     public PatientEntity? Patient { get; set; }

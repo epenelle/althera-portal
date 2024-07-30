@@ -26,6 +26,7 @@ public class OrdersService(AppDbContext dbContext)
     {
         var orderEntity = new OrderEntity
         {
+            // TOEXPLAIN => NO NEED TO GENERATE STRING ???????? ID (why string....) => DB AUTO GENERATE ID
             Id = Guid.NewGuid().ToString(),
             OrthosisModel = orderCreateRequest.OrthesisModel,
             OrthosisInformation = orderCreateRequest.OrthesisInfo,

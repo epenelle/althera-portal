@@ -3,5 +3,5 @@ public record OrderUpdateRequest
 {
     public string? OrthesisInfo { get; set; }
     public string? OrthesisComment { get; set; }
-    public int PatientId { get; set; }
+    public string? PatientId { get; set; }
 }
