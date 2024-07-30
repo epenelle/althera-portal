@@ -6,7 +6,7 @@ import { FaSearch } from 'react-icons/fa';
 import { FaSortUp, FaSortDown } from 'react-icons/fa';
 import PaginationMenu from '../../Helper/PaginationMenu';
 import { useRouter } from 'next/router';
-import { PatientsContext, PatientsProvider } from '@/components/Helper/PatientsContext';
+import { PatientsContext } from '@/components/Helper/PatientsContext';
 
 
 
@@ -36,7 +36,6 @@ const ListePatients = () => {
   };
 
 return (
-    <PatientsProvider>
         <div className='flex justify-center pt-9 pb-9 bg-primary-dark-blue min-h-screen ml-[10vh] md:ml-[15vh]'>
             <div className='w-4/5 mt-8 md:mt-16 mx-auto p-6 bg-light-white rounded-lg shadow-md'>
                 <div className='border-b-2 border-light-gray pb-4 flex items-center justify-center'>
@@ -76,13 +75,12 @@ return (
                         </div>
                     </div>
                 </div>
-                {PatientsData.map((patient) => (
+                {currentPatients.map((patient) => (
                     <PatientCard key={patient.id} data={patient} />
                 ))}
                 <PaginationMenu currentPage={currentPage} totalPages={totalPages} navigateToPage={navigateToPage} />
             </div>
         </div>
-    </PatientsProvider>
 );
 }
 
