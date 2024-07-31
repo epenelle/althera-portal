@@ -11,6 +11,7 @@ import ListePatients from '@/components/Home/ListePatients/ListePatients';
 import ListeCommandes from '@/components/Home/ListeCommandes/ListeCommandes';
 import Account from '@/components/Home/Account/Account';
 import { PatientsProvider } from '@/components/Helper/PatientsContext';
+import { OrdersProvider } from '@/components/Helper/OrdersContext';
 
 const Home = () => {
   const router = useRouter();
@@ -23,10 +24,12 @@ const Home = () => {
           <ResponsiveNav />
         <main>
         <PatientsProvider>
+        <OrdersProvider>
           {type === 'dashboard' && <Statistics />}
           {type === 'patients' && <ListePatients />}
           {type === 'orders' && <ListeCommandes />}
           {type === 'account' && <Account />}
+        </OrdersProvider>
         </PatientsProvider>
         </main>
         <ScrollToTop/>

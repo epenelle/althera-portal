@@ -12,7 +12,7 @@ type Patient = {
 };
 
 type Order = {
-    num: string;
+    id: number;
     firstName: string;
     lastName: string;
     date: string;
@@ -20,7 +20,7 @@ type Order = {
 };
 
 type Props = {
-    data: Patient | Order;
+    data: any;
 }
 
 const isPatient = (data: Patient | Order): data is Patient => {
@@ -45,13 +45,13 @@ const PatientCard = ({data}: Props) => {
                         <IoIosArrowForward size={24} className='font-bold justify-self-end text-secondary-dark-blue hover:text-primary-light-blue' />
                     </div>
                 ) : (
-                    <div onClick={() => handleClick('order', data.num.toString())} className='grid-cols-1 grid items-center gap-4 sm:grid-cols-2 sm:gap-2 md:grid-cols-[100px_150px_150px_150px_150px_1fr_24px]'>
+                    <div onClick={() => handleClick('order', data.id.toString())} className='grid-cols-1 grid items-center gap-4 sm:grid-cols-2 sm:gap-2 md:grid-cols-[100px_150px_150px_150px_150px_1fr_24px]'>
                         <LiaSnowmanSolid size={48} className='font-bold text-secondary-dark-blue md:block sm:hidden' />
-                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.num}</h1>
+                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.id}</h1>
                         <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.lastName}</h1>
                         <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.firstName}</h1>
-                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.date}</h1>
-                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.statut}</h1>
+                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.orderDate}</h1>
+                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.orderState}</h1>
                         <IoIosArrowForward size={24} className='font-bold justify-self-end text-secondary-dark-blue hover:text-primary-light-blue' />
                     </div>
                 )}

@@ -1,10 +1,11 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
+import { fetchOrders as fetchOrdersFromAPI } from '@/api/orders';
 
-export interface Order {
-  id: number;
-  product: string;
-  quantity: number;
-  price: number;
+interface Order {
+	id?: number;
+	orthesisModel: string;
+	orthesisComment: string;
+	patientId: number;
 }
 
 interface OrdersContextProps {
@@ -18,22 +19,21 @@ export const OrdersProvider = ({ children }: { children: ReactNode }) => {
   const [orders, setOrders] = useState<Order[]>([]);
 
   const fetchOrders = async () => {
-	try {
-	  const response = await fetch('/api/orders');
-	  const data = await response.json();
-	  setOrders(data);
-	} catch (error) {
-	  console.error('Error fetching orders:', error);
-	}
+    try {
+      const data = await fetchOrdersFromAPI();
+      setOrders(data);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+    }
   };
 
   useEffect(() => {
-	fetchOrders();
+    fetchOrders();
   }, []);
 
   return (
-	<OrdersContext.Provider value={{ orders, fetchOrders }}>
-	  {children}
-	</OrdersContext.Provider>
+    <OrdersContext.Provider value={{ orders, fetchOrders }}>
+      {children}
+    </OrdersContext.Provider>
   );
 };

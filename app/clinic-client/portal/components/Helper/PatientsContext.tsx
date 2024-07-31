@@ -2,11 +2,11 @@ import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import { fetchPatients as fetchPatientsFromAPI } from '@/api/patients';
 
 interface Patient {
-  id: number;
-  idclinique: number;
-  firstName: string;
-  lastName: string;
-  numSec: string;
+	id?: number;
+	firstName: string;
+	lastName: string;
+	healthInsuranceNumber: string;
+	ClinicId?: string;
 }
 
 interface PatientsContextProps {

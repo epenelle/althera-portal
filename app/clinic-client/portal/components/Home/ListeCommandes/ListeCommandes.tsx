@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { OrdersData } from '@/data/data';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import ItemCard from '../ItemCard';
 import { BsPeopleFill } from 'react-icons/bs';
 import { FaSearch } from 'react-icons/fa';
@@ -7,20 +6,21 @@ import { FaSortUp, FaSortDown } from 'react-icons/fa';
 import SelectCalendrier from '@/components/Helper/Calendrier';
 import PaginationMenu from '../../Helper/PaginationMenu';
 import { useRouter } from 'next/router';
-import { OrdersProvider } from '@/components/Helper/OrdersContext';
+import { OrdersContext, OrdersProvider } from '@/components/Helper/OrdersContext';
 
 
 
 
 const ListePatients = () => {
   const router = useRouter();
+  const { orders } = useContext(OrdersContext) || { orders: [] };
   const [currentPage, setCurrentPage] = React.useState(1);
   const ordersPerPage = 10;
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
-  const currentOrders = OrdersData.slice(indexOfFirstOrder, indexOfLastOrder);
+  const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
 
-  const totalPages = Math.ceil(OrdersData.length / ordersPerPage);
+  const totalPages = Math.ceil(orders.length / ordersPerPage);
   const pageNumbers = [];
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
