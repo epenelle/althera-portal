@@ -16,6 +16,6 @@ public record Site
     public string? Street { get; init; }
     public string? City { get; init; }
     public string? Zip { get; init; }
-    public string Region { get; } = "QC";
-    public string Country { get; } = "Canada";
+    //public string? Region { get; init; }
+    //public string? Country { get; init; }
 }

@@ -5,7 +5,7 @@ function App() {
   const [patients, setPatients] = useState(null);
   const [loadingPatients, setLoadingPatients] = useState(true);
   const [errorPatients, setErrorPatients] = useState(null);
-  const [newPatient, setNewPatient] = useState({ patientFirstname: '', patientLastname: '', healthInsuranceCard: '', ClinicId: '' });
+  const [newPatient, setNewPatient] = useState({ FirstName: '', LastName: '', HealthInsuranceNumber: '', ClinicId: '' });
   const [deleteIdPatient, setDeleteIdPatient] = useState('');
 
   const [orders, setOrders] = useState(null);
@@ -116,7 +116,7 @@ function App() {
       }
       const createdPatient = await response.json();
       setPatients(prevState => [...prevState, createdPatient]);
-      setNewPatient({ patientFirstname: '', patientLastname: '', healthInsuranceCard: '', clinicId: '' });
+      setNewPatient({ FirstName: '', LastName: '', HealthInsuranceNumber: '', ClinicId: '' });
     } catch (error) {
       setErrorPatients(error);
     }
@@ -247,19 +247,19 @@ function App() {
         <form onSubmit={(e) => { e.preventDefault(); createPatient(); }}>
           <div>
             <label>First Name:</label>
-            <input type="text" name="patientFirstname" value={newPatient.patientFirstname} onChange={handlePatientInputChange} />
+            <input type="text" name="FirstName" value={newPatient.FirstName} onChange={handlePatientInputChange} />
           </div>
           <div>
             <label>Last Name:</label>
-            <input type="text" name="patientLastname" value={newPatient.patientLastname} onChange={handlePatientInputChange} />
+            <input type="text" name="LastName" value={newPatient.LastName} onChange={handlePatientInputChange} />
           </div>
           <div>
             <label>Health Insurance Card:</label>
-            <input type="text" name="healthInsuranceCard" value={newPatient.healthInsuranceCard} onChange={handlePatientInputChange} />
+            <input type="text" name="HealthInsuranceNumber" value={newPatient.HealthInsuranceNumber} onChange={handlePatientInputChange} />
           </div>
           <div>
             <label>Clinic ID:</label>
-            <input type="text" name="clinicId" value={newPatient.clinicId} onChange={handlePatientInputChange} />
+            <input type="number" name="ClinicId" value={newPatient.ClinicId} onChange={handlePatientInputChange} />
           </div>
           <button type="submit">Add Patient</button>
         </form>
@@ -283,32 +283,24 @@ function App() {
         <h2>Add New Order</h2>
         <form onSubmit={(e) => { e.preventDefault(); createOrder(); }}>
           <div>
-            <label>Orthesis Model:</label>
-            <input type="text" name="orthesisModel" value={newOrder.orthesisModel} onChange={handleOrderInputChange} />
-          </div>
-          <div>
-            <label>Orthesis Info:</label>
+            <label>Info:</label>
             <input type="text" name="orthesisInfo" value={newOrder.orthesisInfo} onChange={handleOrderInputChange} />
           </div>
           <div>
-            <label>Orthesis Scan:</label>
-            <input type="text" name="orthesisScan" value={newOrder.orthesisScan} onChange={handleOrderInputChange} />
-          </div>
-          <div>
-            <label>Date:</label>
-            <input type="datetime-local" name="orderDate" value={newOrder.orderDate} onChange={handleOrderInputChange} />
-          </div>
-          <div>
-            <label>order State:</label>
-            <input type="text" name="orderState" value={newOrder.orderState} onChange={handleOrderInputChange} />
-          </div>
-          <div>
-            <label>Orthesis Comment:</label>
+            <label>Comment:</label>
             <input type="text" name="orthesisComment" value={newOrder.orthesisComment} onChange={handleOrderInputChange} />
           </div>
           <div>
+            <label>Model:</label>
+            <input type="text" name="orthesisModel" value={newOrder.orthesisModel} onChange={handleOrderInputChange} />
+          </div>
+          <div>
+            <label>Scan:</label>
+            <input type="text" name="orthesisScan" value={newOrder.orthesisScan} onChange={handleOrderInputChange} />
+          </div>
+          <div>
             <label>Patient Id:</label>
-            <input type="text" name="patientId" value={newOrder.patientId} onChange={handleOrderInputChange} />
+            <input type="number" name="patientId" value={newOrder.patientId} onChange={handleOrderInputChange} />
           </div>
           <button type="submit">Add Order</button>
         </form>
@@ -332,16 +324,20 @@ function App() {
         <h2>Add New Clinic</h2>
         <form onSubmit={(e) => { e.preventDefault(); createClinic(); }}>
           <div>
-            <label>Clinic Name:</label>
-            <input type="text" name="clinicName" value={newClinic.clinicName} onChange={handleClinicInputChange} />
+            <label>Name:</label>
+            <input type="text" name="name" value={newClinic.name} onChange={handleClinicInputChange} />
           </div>
           <div>
-            <label>Clinic Password:</label>
-            <input type="text" name="clinicPassword" value={newClinic.clinicPassword} onChange={handleClinicInputChange} />
+            <label>Street:</label>
+            <input type="text" name="street" value={newClinic.street} onChange={handleClinicInputChange} />
           </div>
           <div>
-            <label>Clinic Address:</label>
-            <input type="text" name="clinicAddress" value={newClinic.clinicAddress} onChange={handleClinicInputChange} />
+            <label>City:</label>
+            <input type="text" name="city" value={newClinic.city} onChange={handleClinicInputChange} />
+          </div>
+          <div>
+            <label>zip:</label>
+            <input type="text" name="zip" value={newClinic.zip} onChange={handleClinicInputChange} />
           </div>
           <button type="submit">Add CLinic</button>
         </form>

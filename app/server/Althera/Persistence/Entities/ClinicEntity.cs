@@ -10,8 +10,8 @@ public record ClinicEntity
     public string? Street { get; set; }
     public string? City { get; set; }
     public string? Zip { get; set; }
-    public string Region { get; } = "QC";
-    public string Country { get; } = "Canada";
+    //public string? Region { get; set; }
+    //public string? Country { get; set; }
 
     // Reverse navigation property
     public List<PatientEntity>? Patients { get; } = [];
