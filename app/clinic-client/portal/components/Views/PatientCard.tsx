@@ -9,26 +9,27 @@ type PatientCardProps = {
 };
 
 interface Patient {
-  id: number;
+  id?: number;
   firstName: string;
   lastName: string;
-  numSec: string;
+  healthInsuranceNumber: string;
+  idClinique?: string;
 }
 
 const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
   const [edit, setEdit] = useState(false);
   const [patientData, setPatientData] = useState<Patient | null>(null);
-  const [nom, setNom] = useState('');
-  const [prenom, setPrenom] = useState('');
-  const [numSecu, setNumSecu] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [healthInsuranceNumber, setHealthInsuranceNumber] = useState('');
 
   const fetchPatients = async () => {
     try {
       const data = await fetchPatientById(id);
       setPatientData(data);
-      setNom(data.lastName);
-      setPrenom(data.firstName);
-      setNumSecu(data.numSec);
+      setLastName(data.lastName);
+      setFirstName(data.firstName);
+      setHealthInsuranceNumber(data.healthInsuranceNumber);
     } catch (error) {
       console.error('Error fetching patients:', error);
     }
@@ -50,24 +51,24 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
             <label className="w-2/5 text-right whitespace-nowrap">Nom : </label>
             <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
             disabled={!edit}
-            value={nom}
-            onChange={(e) => setNom(e.target.value)} />
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)} />
             {!edit && <MdLock size={20} className='ml-2' />}
           </div>
           <div className="flex items-center mb-2">
             <label className="w-2/5 text-right whitespace-nowrap">Prénom : </label>
             <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
             disabled={!edit}
-            value={prenom}
-            onChange={(e) => setPrenom(e.target.value)} />
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)} />
             {!edit && <MdLock size={20} className='ml-2' />}
           </div>
           <div className="flex items-center mb-2">
             <label className="w-2/5 text-right whitespace-nowrap">Numéro de <br /> d'assurance maladie : </label>
             <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
             disabled={!edit}
-            value={numSecu}
-            onChange={(e) => setNumSecu(e.target.value)} />
+            value={healthInsuranceNumber}
+            onChange={(e) => setHealthInsuranceNumber(e.target.value)} />
             {!edit && <MdLock size={20} className='ml-2' />}
           </div>
           <div className="flex justify-center mt-6">

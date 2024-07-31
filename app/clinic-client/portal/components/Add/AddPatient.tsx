@@ -1,38 +1,57 @@
-import React from 'react'
+import React, { useState } from 'react';
 import PopUp from '../Helper/PopUp';
 import { BsPeopleFill } from 'react-icons/bs';
 import { useRouter } from 'next/router';
+import { addPatient } from '../../api/patients';
 
 const AddPatient = () => {
   const router = useRouter();
-  const [isPopUpVisible, setIsPopUpVisible] = React.useState(false);
-  const [typePopUp, setTypePopUp] = React.useState(false);
-  const [messagePopUp, setMessagePopUp] = React.useState("");
+  const [isPopUpVisible, setIsPopUpVisible] = useState(false);
+  const [typePopUp, setTypePopUp] = useState(false);
+  const [messagePopUp, setMessagePopUp] = useState("");
 
-    const handleOk = () => {
-        setIsPopUpVisible(false);
-        router.push('/Home?type=patients');
-    };
+  const [lastName, setLastName] = useState<string>("");
+  const [firstName, setFirstName] = useState<string>("");
+  const [numAssu, setNumAssu] = useState<string>("");
 
-    const handleCancel = () => {
-        setIsPopUpVisible(false);
-    };
+  const handleOk = () => {
+    setIsPopUpVisible(false);
+    router.push('/Home?type=patients');
+  };
 
-    const showPopUp = (message: string, type: boolean) => {
-        setMessagePopUp(message);
-        setTypePopUp(type);
-        setIsPopUpVisible(true);
-    };
+  const handleCancel = () => {
+    setIsPopUpVisible(false);
+  };
+
+  const showPopUp = (message: string, type: boolean) => {
+    setMessagePopUp(message);
+    setTypePopUp(type);
+    setIsPopUpVisible(true);
+  };
+
+  const handleAddPatient = async () => {
+    try {
+      const response = await addPatient({ firstName, lastName, healthInsuranceNumber: numAssu, ClinicId: '1' });
+      if (response.success) {
+        showPopUp("Le patient a bien été ajouté !", false);
+      } else {
+        showPopUp("Erreur lors de l'ajout du patient.", true);
+      }
+    } catch (error) {
+      showPopUp("Erreur lors de l'ajout du patient.", true);
+    }
+  };
+
   return (
     <div>
       {isPopUpVisible && (
-            <PopUp
-                message={messagePopUp}
-                type={typePopUp}
-                onOk={handleOk}
-                onCancel={handleCancel}
-            />
-        )}
+        <PopUp
+          message={messagePopUp}
+          type={typePopUp}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        />
+      )}
       <div className='flex justify-center pt-9 pb-9 bg-primary-dark-blue min-h-screen ml-[10vh] md:ml-[15vh]'>
         <div className='w-4/5 mt-4 md:mt-16 mx-auto p-6 bg-light-white rounded-lg shadow-md'>
           <div className='border-b-2 border-light-gray pb-4 flex items-center justify-center'>
@@ -42,21 +61,27 @@ const AddPatient = () => {
           <div className="flex flex-col mb-4 mt-8">
             <div className="flex items-center mb-2">
               <label className="w-2/5 text-right whitespace-nowrap">Nom : </label>
-              <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" />
+              <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)} />
             </div>
             <div className="flex items-center mb-2">
               <label className="w-2/5 text-right whitespace-nowrap">Prénom : </label>
-              <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" />
+              <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)} />
             </div>
             <div className="flex items-center mb-2">
               <label className="w-2/5 text-right whitespace-nowrap">Numéro de <br /> d'assurance maladie : </label>
-              <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" />
+              <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
+                value={numAssu}
+                onChange={(e) => setNumAssu(e.target.value)} />
             </div>
           </div>
           <div className="flex justify-center">
             <button className="h-11 pl-5 pr-5 bg-medium-red border-2 border-black outline-none rounded-full shadow-sm cursor-pointer text-base text-white font-semibold
-            transform active:scale-95 transition duration-150 ease-in-out hover:bg-dark-red"
-            onClick={() => showPopUp("Le patient a bien été ajouté !", false)}>
+              transform active:scale-95 transition duration-150 ease-in-out hover:bg-dark-red"
+              onClick={handleAddPatient}>
               Ajouter patient
             </button>
           </div>

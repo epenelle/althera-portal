@@ -6,7 +6,7 @@ import { LiaSnowmanSolid } from 'react-icons/lia';
 
 type Patient = {
     id : number;
-    numSec: string;
+    healthInsuranceNumber: string;
     firstName: string;
     lastName: string;
 };
@@ -24,7 +24,7 @@ type Props = {
 }
 
 const isPatient = (data: Patient | Order): data is Patient => {
-    return (data as Patient).numSec !== undefined;
+    return (data as Patient).healthInsuranceNumber !== undefined;
 };
 
 const PatientCard = ({data}: Props) => {
@@ -41,7 +41,7 @@ const PatientCard = ({data}: Props) => {
                         <LiaSnowmanSolid size={48} className='font-bold text-secondary-dark-blue md:block sm:hidden' />
                         <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.lastName}</h1>
                         <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.firstName}</h1>
-                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.numSec}</h1>
+                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.healthInsuranceNumber}</h1>
                         <IoIosArrowForward size={24} className='font-bold justify-self-end text-secondary-dark-blue hover:text-primary-light-blue' />
                     </div>
                 ) : (
