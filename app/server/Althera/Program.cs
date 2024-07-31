@@ -1,5 +1,4 @@
 using Althera.Persistence;
-using Althera.Providers;
 using Althera.Services;
 using Microsoft.OpenApi.Models;
 
@@ -18,7 +17,6 @@ builder.Services
     .AddScoped<PatientsService>()
     .AddScoped<OrdersService>()
     .AddScoped<ClinicsService>()
-    .AddScoped<ClinicProvider>()
     .AddControllers();
 
 builder.Services.AddSwaggerGen(options =>

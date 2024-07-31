@@ -16,7 +16,7 @@ public class OrdersService(AppDbContext dbContext)
         return orderEntities.Select(order => order.ToDomain()).ToList();
     }
 
-    public Order? GetOrder(string id)
+    public Order? GetOrder(long id)
     {
         var orderEntity = _dbContext.Orders.SingleOrDefault(c => c.Id == id);
         return orderEntity?.ToDomain();
@@ -26,8 +26,6 @@ public class OrdersService(AppDbContext dbContext)
     {
         var orderEntity = new OrderEntity
         {
-            // TOEXPLAIN => NO NEED TO GENERATE STRING ???????? ID (why string....) => DB AUTO GENERATE ID
-            Id = Guid.NewGuid().ToString(),
             OrthosisModel = orderCreateRequest.OrthesisModel,
             OrthosisInformation = orderCreateRequest.OrthesisInfo,
             OrthosisScan = orderCreateRequest.OrthesisScan,
@@ -42,7 +40,7 @@ public class OrdersService(AppDbContext dbContext)
         return orderEntity.ToDomain();
     }
 
-    public Order UpdateOrder(string id, OrderUpdateRequest orderUpdateRequest)
+    public Order UpdateOrder(long id, OrderUpdateRequest orderUpdateRequest)
     {
         var orderEntity = _dbContext.Orders.SingleOrDefault(c => c.Id == id) ?? throw new InvalidOperationException("Order not found.");
         orderEntity.OrthosisInformation = orderUpdateRequest.OrthesisInfo;
@@ -53,7 +51,7 @@ public class OrdersService(AppDbContext dbContext)
         return orderEntity.ToDomain();
     }
 
-    public void DeleteOrder(string id)
+    public void DeleteOrder(long id)
     {
         var order = _dbContext.Orders.SingleOrDefault(c => c.Id == id) ?? throw new InvalidOperationException("Order not found.");
         _dbContext.Orders.Remove(order);

@@ -5,7 +5,7 @@ namespace Althera.Models.Persistence;
 public record ClinicEntity
 {
     [Key]
-    public required string Id { get; init; }
+    public long Id { get; init; }
     public required string Name { get; set; }
     public string? Street { get; set; }
     public string? City { get; set; }

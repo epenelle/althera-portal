@@ -43,7 +43,7 @@ public class PatientsController(PatientsService patientServices) : ControllerBas
     }
 
     [HttpGet("{id}")]
-    public ActionResult<PatientModel> GetPatient(string id)
+    public ActionResult<PatientModel> GetPatient(long id)
     {
         try {
             var patient = _patientsService.GetPatient(id);
@@ -108,7 +108,7 @@ public class PatientsController(PatientsService patientServices) : ControllerBas
     }
 
     [HttpPut("{id}")]
-    public ActionResult UpdatePatient(string id, PatientUpdateRequest patientUpdateRequest)
+    public ActionResult UpdatePatient(long id, PatientUpdateRequest patientUpdateRequest)
     {
         try
         {
@@ -148,7 +148,7 @@ public class PatientsController(PatientsService patientServices) : ControllerBas
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeletePatient(string id)
+    public IActionResult DeletePatient(long id)
     {
        try
         {

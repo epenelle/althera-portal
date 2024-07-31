@@ -43,7 +43,7 @@ public class OrdersController(OrdersService orderServices) : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public ActionResult<OrderModel> GetOrder(string id)
+    public ActionResult<OrderModel> GetOrder(long id)
     {
 
         try {
@@ -106,7 +106,7 @@ public class OrdersController(OrdersService orderServices) : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public ActionResult<OrderModel> UpdateOrder(string id, OrderUpdateRequest orderUpdateRequest)
+    public ActionResult<OrderModel> UpdateOrder(long id, OrderUpdateRequest orderUpdateRequest)
     {
         try
         {
@@ -150,7 +150,7 @@ public class OrdersController(OrdersService orderServices) : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteOrder(string id)
+    public IActionResult DeleteOrder(long id)
     {
         try
         {

@@ -6,7 +6,7 @@ namespace Althera.Models.Persistence;
 public record OrderEntity
 {
     [Key]
-    public required string Id { get; init; }
+    public long Id { get; init; }
     public string? OrthosisModel { get; set; }
     public string? OrthosisInformation { get; set; }
     public string? OrthosisScan { get; set; }
@@ -15,7 +15,7 @@ public record OrderEntity
     public string? Comments { get; set; }
 
     [ForeignKey("patientId")]
-    public string? PatientId { get; set; }
+    public long? PatientId { get; set; }
 
     // Navigation property
     public PatientEntity? Patient { get; set; }

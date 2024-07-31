@@ -2,7 +2,7 @@
 
 public record Clinic
 {
-    public required string Id { get; init; }
+    public required long Id { get; init; }
 
     public required string Name { get; init; }
 
@@ -11,7 +11,7 @@ public record Clinic
 
 public record Site
 {
-    public required string Id { get; init; }
+    public required long Id { get; init; }
     public required string Name { get; init; }
     public string? Street { get; init; }
     public string? City { get; init; }

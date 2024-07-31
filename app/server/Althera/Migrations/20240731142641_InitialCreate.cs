@@ -15,7 +15,8 @@ namespace Althera.Migrations
                 name: "Clinics",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -30,11 +31,12 @@ namespace Althera.Migrations
                 name: "Patients",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HealthInsuranceNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClinicId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    ClinicId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -51,14 +53,15 @@ namespace Althera.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     OrthosisModel = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OrthosisInformation = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OrthosisScan = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: true),
                     State = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Comments = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PatientId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    PatientId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {

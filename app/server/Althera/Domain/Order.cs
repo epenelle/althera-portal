@@ -2,7 +2,7 @@
 
 public record Order
 {
-    public required string Id { get; init; }
+    public required long Id { get; init; }
     public string? OrthosisModel { get; set; }
     public string? OrthosisInformation { get; set; }
     public string? OrthosisScan { get; set; }

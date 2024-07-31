@@ -5,19 +5,19 @@ function App() {
   const [patients, setPatients] = useState(null);
   const [loadingPatients, setLoadingPatients] = useState(true);
   const [errorPatients, setErrorPatients] = useState(null);
-  const [newPatient, setNewPatient] = useState({ patientFirstname: '', patientLastname: '', healthInsuranceCard: '', clinicId: '' });
+  const [newPatient, setNewPatient] = useState({ patientFirstname: '', patientLastname: '', healthInsuranceCard: '', ClinicId: '' });
   const [deleteIdPatient, setDeleteIdPatient] = useState('');
 
   const [orders, setOrders] = useState(null);
   const [loadingOrders, setLoadingOrders] = useState(true);
   const [errorOrders, setErrorOrders] = useState(null);
-  const [newOrder, setNewOrder] = useState({ orthesisModel: '', orthesisInfo: '', orthesisScan: '', orderDate: '', orderState: '', orthesisComment: '', patientId: '' });
+  const [newOrder, setNewOrder] = useState({ orthesisInfo: '', orthesisComment: '', orthesisModel: '', orthesisScan: '', patientId: ''});
   const [deleteIdOrder, setDeleteIdOrder] = useState('');
 
   const [clinics, setClinics] = useState(null);
   const [loadingClinics, setLoadingClinics] = useState(true);
   const [errorClinics, setErrorClinics] = useState(null);
-  const [newClinic, setNewClinic] = useState({ clinicName: '', clinicPassword: '', clinicAddress: '' });
+  const [newClinic, setNewClinic] = useState({ name: '', street: '', city: '', zip: '' });
   const [deleteIdClinic, setDeleteIdClinic] = useState('');
 
 

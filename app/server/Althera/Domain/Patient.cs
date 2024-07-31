@@ -1,11 +1,13 @@
-﻿namespace Althera.Domain;
+﻿using System.ComponentModel.DataAnnotations;
+namespace Althera.Domain;
 
 public record Patient
 {
-    public required string Id { get; init; }
+    [Key]
+    public required long Id { get; init; }
     public required string FirstName { get; init; }
     public required string LastName { get; init; }
     public string? HealthInsuranceNumber { get; init; }
-    public required string ClinicId { get; init; }
+    public required long ClinicId { get; init; }
 }
 

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Althera.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240730152744_InitialCreate")]
+    [Migration("20240731142641_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,8 +27,11 @@ namespace Althera.Migrations
 
             modelBuilder.Entity("Althera.Models.Persistence.ClinicEntity", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
@@ -50,8 +53,11 @@ namespace Althera.Migrations
 
             modelBuilder.Entity("Althera.Models.Persistence.OrderEntity", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Comments")
                         .HasColumnType("nvarchar(max)");
@@ -68,8 +74,8 @@ namespace Althera.Migrations
                     b.Property<string>("OrthosisScan")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PatientId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<long?>("PatientId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
@@ -83,12 +89,14 @@ namespace Althera.Migrations
 
             modelBuilder.Entity("Althera.Models.Persistence.PatientEntity", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
 
-                    b.Property<string>("ClinicId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("ClinicId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("FirstName")
                         .IsRequired()

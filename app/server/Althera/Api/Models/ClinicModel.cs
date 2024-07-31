@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
 namespace Althera.Api.Models;
 
 public record ClinicModel
 {
-    public required string Id { get; init; }
+    [Key]
+    public required long Id { get; init; }
 
     public required string Name { get; init; }
 
@@ -11,7 +13,7 @@ public record ClinicModel
 
 public record SiteModel
 {
-    public required string Id { get; init; }
+    public required long Id { get; init; }
     public required string Name { get; init; }
     public string? Street { get; init; }
     public string? City { get; init; }

@@ -45,7 +45,7 @@ public class ClinicsController(ClinicsService clinicServices) : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public ActionResult<ClinicModel> GetClinic(string id)
+    public ActionResult<ClinicModel> GetClinic(long id)
     {
         try
         {
@@ -114,7 +114,7 @@ public class ClinicsController(ClinicsService clinicServices) : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public ActionResult<ClinicModel> UpdateClinic(string id, ClinicUpdateRequest clinicUpdateRequest)
+    public ActionResult<ClinicModel> UpdateClinic(long id, ClinicUpdateRequest clinicUpdateRequest)
     {
         try
         {
@@ -158,7 +158,7 @@ public class ClinicsController(ClinicsService clinicServices) : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteClinic(string id)
+    public IActionResult DeleteClinic(long id)
     {
         try
         {
