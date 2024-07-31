@@ -28,7 +28,7 @@ const isPatient = (data: Patient | Order): data is Patient => {
 };
 
 const PatientCard = ({data}: Props) => {
-    const router = useRouter(); 
+    const router = useRouter();
 
     const handleClick = (type: string, id: string) => {
         router.push(`/View?type=${type}&num=${id}`);

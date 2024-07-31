@@ -1,6 +1,5 @@
 interface PatientData {
   id: number;
-  idclinique: number;
   firstName: string;
   lastName: string;
   numSec: string;
@@ -8,15 +7,14 @@ interface PatientData {
 
 const transformPatientData = (patient: any, index: number = 0): PatientData => ({
   id: patient.id || index + 1,
-  idclinique: patient.clinicId || 1,
-  firstName: patient.patientFirstname || "Unknown",
-  lastName: patient.patientLastname || "Unknown",
-  numSec: patient.healthInsuranceCard || "Unknown",
+  firstName: patient.firstName || "Unknown",
+  lastName: patient.lastName || "Unknown",
+  numSec: patient.healthInsuranceNumber || "Unknown",
 });
 
 export const fetchPatients = async (): Promise<PatientData[]> => {
   try {
-	const response = await fetch('http://localhost:5125/patient', {
+	const response = await fetch('http://localhost:5125/patients', {
 	  method: "GET",
 	  headers: {
 		'Content-Type': 'application/json'
@@ -26,7 +24,6 @@ export const fetchPatients = async (): Promise<PatientData[]> => {
 	  throw new Error(`HTTP error! status: ${response.status}`);
 	}
 	const json = await response.json();
-
 	const patientsData: PatientData[] = json.map((patient: any, index: number) => transformPatientData(patient, index));
 
 	return patientsData;
@@ -36,9 +33,9 @@ export const fetchPatients = async (): Promise<PatientData[]> => {
   }
 };
 
-export const fetchPatientById = async (id: number): Promise<PatientData> => {
+export const fetchPatientById = async (id: string): Promise<PatientData> => {
   try {
-	const response = await fetch(`http://localhost:5125/patient/${id}`, {
+	const response = await fetch(`http://localhost:5125/patients/${id}`, {
 	  method: "GET",
 	  headers: {
 		'Content-Type': 'application/json'
