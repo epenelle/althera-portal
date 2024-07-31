@@ -15,7 +15,7 @@ public record OrderEntity
     public string? Comments { get; set; }
 
     [ForeignKey("patientId")]
-    public long? PatientId { get; set; }
+    public required long PatientId { get; set; }
 
     // Navigation property
     public PatientEntity? Patient { get; set; }

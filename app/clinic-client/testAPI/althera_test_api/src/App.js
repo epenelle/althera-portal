@@ -136,7 +136,7 @@ function App() {
       }
       const createdOrder = await response.json();
       setOrders(prevState => [...prevState, createdOrder]);
-      setNewOrder({ orthesisModel: '', orthesisInfo: '', orthesisScan: '', orderDate: '', orderState: '', orthesisComment: '', patientId: '' });
+      setNewOrder({ orthesisInfo: '', orthesisComment: '', orthesisModel: '', orthesisScan: '', patientId: '' });
     } catch (error) {
       setErrorOrders(error);
     }
@@ -157,7 +157,7 @@ function App() {
       }
       const createdClinic = await response.json();
       setOrders(prevState => [...prevState, createdClinic]);
-      setNewClinic({ clinicName: '', clinicPassword: '', clinicAddress: ''});
+      setNewClinic({ name: '', street: '', city: '', zip: '' });
     } catch (error) {
       setErrorClinics(error);
     }

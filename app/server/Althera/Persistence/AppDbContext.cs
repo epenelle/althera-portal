@@ -16,6 +16,8 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+        // Primary Key
         modelBuilder.Entity<ClinicEntity>()
             .HasKey(c => c.Id);
         modelBuilder.Entity<PatientEntity>()
@@ -23,11 +25,12 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<OrderEntity>()
             .HasKey(k => k.Id);
 
+        // Foreign Key
         modelBuilder.Entity<PatientEntity>()
             .HasOne(p => p.Clinic)
             .WithMany(c => c.Patients)
             .HasForeignKey(p => p.ClinicId);
-
+        // Foreign Key
         modelBuilder.Entity<OrderEntity>()
             .HasOne(c => c.Patient)
             .WithMany(p => p.Orders)
