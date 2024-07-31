@@ -21,7 +21,7 @@ public class ClinicsController(ClinicsService clinicServices) : ControllerBase
 
             if (clinics == null)
             {
-                return NotFound("No Clinic Found");
+                return NotFound("No Clinics Found");
             }
 
             // Same as Return 200
@@ -118,7 +118,6 @@ public class ClinicsController(ClinicsService clinicServices) : ControllerBase
     {
         try
         {
-
             if (clinicUpdateRequest == null)
             {
                 return BadRequest();

@@ -15,32 +15,96 @@ public class PatientsController(PatientsService patientServices) : ControllerBas
     [HttpGet]
     public ActionResult<List<PatientModel>> GetAllPatients()
     {
-        return _patientsService.GetAll().Select(patient => patient.ToApi()).ToList();
+        try{
+            var patients = _patientsService.GetAll().Select(patient => patient.ToApi()).ToList();
+
+            if(patients == null){
+                return NotFound("No Patients Found");
+            }
+
+            // Same as Return 200
+            return Ok(patients);
+        }
+        catch (ArgumentNullException argEx)
+        {
+            // Exception Null Args
+            return BadRequest("Invalid argument: " + argEx.Message);
+        }
+        catch (InvalidOperationException invOpEx)
+        {
+            // Exception invalide operation
+            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
+        }
+        catch (Exception ex)
+        {
+            // Exception other error
+            return StatusCode(500, "Internal Server error: " + ex.Message);
+        }
     }
 
     [HttpGet("{id}")]
     public ActionResult<PatientModel> GetPatient(string id)
     {
-        var patient = _patientsService.GetPatient(id);
+        try {
+            var patient = _patientsService.GetPatient(id);
 
-        if (patient == null)
-        {
-            return NotFound();
+            if (patient == null)
+            {
+                return NotFound("No Patient Found");
+            }
+
+            // Same as Return 200
+            return Ok(patient.ToApi());
         }
-
-        return patient.ToApi();
+        catch (ArgumentNullException argEx)
+        {
+            // Exception Null Args
+            return BadRequest("Invalid argument: " + argEx.Message);
+        }
+        catch (InvalidOperationException invOpEx)
+        {
+            // Exception invalide operation
+            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
+        }
+        catch (Exception ex)
+        {
+            // Exception other error
+            return StatusCode(500, "Internal Server error: " + ex.Message);
+        }
     }
 
     [HttpPost]
     public ActionResult<PatientModel> CreatePatient(PatientCreateRequest patientCreateRequest)
     {
-        if (patientCreateRequest == null)
-        {
-            return BadRequest();
-        }
+        try {
+            if (patientCreateRequest == null) {
+                return BadRequest();
+            }
 
-        var patient = _patientsService.CreatePatient(patientCreateRequest);
-        return StatusCode(201, patient.ToApi());
+            var patient = _patientsService.CreatePatient(patientCreateRequest);
+            
+            if(patient == null){
+                return StatusCode(500, "Error Server");
+            }
+            
+            // Return code 201 => Create Successfull
+            return StatusCode(201, patient.ToApi());
+        }
+        catch (ArgumentNullException argEx)
+        {
+            // Exception Null Args
+            return BadRequest("Invalid argument: " + argEx.Message);
+        }
+        catch (InvalidOperationException invOpEx)
+        {
+            // Exception invalide operation
+            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
+        }
+        catch (Exception ex)
+        {
+            // Exception other error
+            return StatusCode(500, "Internal Server error: " + ex.Message);
+        }
     }
 
     [HttpPut("{id}")]
@@ -48,26 +112,73 @@ public class PatientsController(PatientsService patientServices) : ControllerBas
     {
         try
         {
+            if(patientUpdateRequest == null){
+                return BadRequest();
+            }
+
+            var patientById = _patientsService.GetPatient(id);
+             
+            if(patientById == null ){
+                return NotFound("Patient Not Found");
+            }
+           
             var patient = _patientsService.UpdatePatient(id, patientUpdateRequest);
-            return StatusCode(200, patient.ToApi());
+           
+            if(patient == null){
+                return BadRequest();
+            }
+
+            return Ok(patient.ToApi());
         }
-        catch (InvalidOperationException)
+        catch (ArgumentNullException argEx)
         {
-            return NotFound();
+            // Exception Null Args
+            return BadRequest("Invalid argument: " + argEx.Message);
+        }
+        catch (InvalidOperationException invOpEx)
+        {
+            // Exception invalide operation
+            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
+        }
+        catch (Exception ex)
+        {
+            // Exception other error
+            return StatusCode(500, "Internal Server error: " + ex.Message);
         }
     }
 
     [HttpDelete("{id}")]
     public IActionResult DeletePatient(string id)
     {
-        try
+       try
         {
+            var patient = _patientsService.GetPatient(id);
+
+            if (patient == null)
+            {
+                return NotFound("Patient Not Found");
+            }
+
             _patientsService.DeletePatient(id);
+
+            // Return 204 No Content
             return NoContent();
+
         }
-        catch (InvalidOperationException)
+        catch (ArgumentNullException argEx)
         {
-            return NotFound();
+            // Exception Null Args
+            return BadRequest("Invalid argument: " + argEx.Message);
+        }
+        catch (InvalidOperationException invOpEx)
+        {
+            // Exception invalide operation
+            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
+        }
+        catch (Exception ex)
+        {
+            // Exception other error
+            return StatusCode(500, "Internal Server error: " + ex.Message);
         }
     }
 }

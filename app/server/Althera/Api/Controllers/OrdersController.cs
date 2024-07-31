@@ -15,39 +15,172 @@ public class OrdersController(OrdersService orderServices) : ControllerBase
     [HttpGet]
     public ActionResult<List<OrderModel>> GetAllOrders()
     {
-        return _ordersService.GetAll().Select(order => order.ToApi()).ToList();
+        try{
+            var orders = _ordersService.GetAll().Select(order => order.ToApi()).ToList();
+
+            if(orders == null){
+                return NotFound("No Orders Found");
+            }
+
+            // Same as Return 200
+            return Ok(orders);
+        }
+        catch (ArgumentNullException argEx)
+        {
+            // Exception Null Args
+            return BadRequest("Invalid argument: " + argEx.Message);
+        }
+        catch (InvalidOperationException invOpEx)
+        {
+            // Exception invalide operation
+            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
+        }
+        catch (Exception ex)
+        {
+            // Exception other error
+            return StatusCode(500, "Internal Server error: " + ex.Message);
+        }
     }
 
     [HttpGet("{id}")]
     public ActionResult<OrderModel> GetOrder(string id)
     {
-        var order = _ordersService.GetOrder(id);
-        return order == null ? NotFound() : order.ToApi();
+
+        try {
+            var order = _ordersService.GetOrder(id);
+
+            if(order == null){
+                return NotFound("No Orders Found");
+            }
+            // Same as Return 200
+            return Ok(order.ToApi());
+        }
+        catch (ArgumentNullException argEx)
+        {
+            // Exception Null Args
+            return BadRequest("Invalid argument: " + argEx.Message);
+        }
+        catch (InvalidOperationException invOpEx)
+        {
+            // Exception invalide operation
+            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
+        }
+        catch (Exception ex)
+        {
+            // Exception other error
+            return StatusCode(500, "Internal Server error: " + ex.Message);
+        }
     }
 
     [HttpPost]
     public ActionResult<OrderModel> CreateOrder(OrderCreateRequest orderCreateRequest)
     {
-        if (orderCreateRequest == null)
-        {
-            return BadRequest();
-        }
+        try {
+            if (orderCreateRequest == null)
+            {
+                return BadRequest();
+            }
 
-        var order = _ordersService.CreateOrder(orderCreateRequest);
-        return StatusCode(201, order.ToApi());
+            var order = _ordersService.CreateOrder(orderCreateRequest);
+            if(order == null){
+                return StatusCode(500, "Error Server");
+            }
+            // Return code 201 => Create Successsfull
+            return StatusCode(201, order.ToApi());
+        }
+        catch (ArgumentNullException argEx)
+        {
+            // Exception Null Args
+            return BadRequest("Invalid argument: " + argEx.Message);
+        }
+        catch (InvalidOperationException invOpEx)
+        {
+            // Exception invalide operation
+            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
+        }
+        catch (Exception ex)
+        {
+            // Exception other error
+            return StatusCode(500, "Internal Server error: " + ex.Message);
+        }
     }
 
     [HttpPut("{id}")]
     public ActionResult<OrderModel> UpdateOrder(string id, OrderUpdateRequest orderUpdateRequest)
     {
-        var order = _ordersService.UpdateOrder(id, orderUpdateRequest);
-        return StatusCode(200, order.ToApi());
+        try
+        {
+            if (orderUpdateRequest == null)
+            {
+                return BadRequest();
+            }
+            
+            var orderById = _ordersService.GetOrder(id);
+            
+            if (orderById == null)
+            {
+                return NotFound("order Not Found");
+            }
+
+            var order = _ordersService.UpdateOrder(id, orderUpdateRequest);
+
+            if (order == null)
+            {
+                return BadRequest();
+            }
+            
+            // Same as Return 200
+            return Ok(order.ToApi());
+        }
+        catch (ArgumentNullException argEx)
+        {
+            // Exception Null Args
+            return BadRequest("Invalid argument: " + argEx.Message);
+        }
+        catch (InvalidOperationException invOpEx)
+        {
+            // Exception invalide operation
+            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
+        }
+        catch (Exception ex)
+        {
+            // Exception other error
+            return StatusCode(500, "Internal Server error: " + ex.Message);
+        }
     }
 
     [HttpDelete("{id}")]
     public IActionResult DeleteOrder(string id)
     {
-        _ordersService.DeleteOrder(id);
-        return NoContent();
+        try
+        {
+            var order = _ordersService.GetOrder(id);
+
+            if (order == null)
+            {
+                return NotFound("Order Not Found");
+            }
+
+            _ordersService.DeleteOrder(id);
+
+            // Return 204 No Content
+            return NoContent();
+
+        }
+        catch (ArgumentNullException argEx)
+        {
+            // Exception Null Args
+            return BadRequest("Invalid argument: " + argEx.Message);
+        }
+        catch (InvalidOperationException invOpEx)
+        {
+            // Exception invalide operation
+            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
+        }
+        catch (Exception ex)
+        {
+            // Exception other error
+            return StatusCode(500, "Internal Server error: " + ex.Message);
+        }
     }
 }
