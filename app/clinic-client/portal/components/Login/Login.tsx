@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 const Login = () => {
     const router = useRouter();
@@ -63,7 +63,8 @@ const Login = () => {
         <div className="w-[420px] bg-transparent border-0 md:border-2 border-white/20 backdrop-blur-[20px] shadow-lg text-white rounded-lg p-8"
         style={{ boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)' }}>
           <div className='flex justify-center mt-5 mb-10'>
-            <Image src="/images/logo_althera_blanc.png" alt="Logo" width={200} height={200}/>
+            <Image src="/images/logo_althera_blanc.png" alt="Logo" width={300} height={200}
+            className="object-contain object-center"/>
           </div>
           <div className="relative w-full my-6">
             <input

@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { BiX } from 'react-icons/bi';
 import { navLinks } from '@/Constants/Constants';
 import Link from 'next/link';

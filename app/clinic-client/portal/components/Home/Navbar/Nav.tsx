@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { navLinks } from '@/Constants/Constants';
 import Link from 'next/link';
 import { FaBars } from 'react-icons/fa';
@@ -32,7 +32,8 @@ const Nav = ({openNav}:Props) => {
         {/* Contenu de la navbar, caché en affichage mobile */}
         <div className='fixed left-0 top-0 h-full z-10 bg-primary-light-blue shadow-lg hidden md:flex flex-col items-center py-10 -col justify-between'>
             <div className='px-5 mt-5'>
-                <Image src="/images/logo_althera_full_blanc.png" alt="Logo" width={150} height={150}/>
+                <Image src="/images/logo_althera_full_blanc.png" alt="Logo" width={150} height={70} priority 
+                className="object-contain object-center"/>
             </div>
             {/* Nav Links */}
             <div className='flex flex-col items-center space-y-10'>
