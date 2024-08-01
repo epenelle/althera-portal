@@ -3,7 +3,6 @@ namespace Althera.Api.Models;
 
 public record OrderModel
 {
-    [Key]
     public required long Id { get; init; }
     public string? OrthesisModel { get; set; }
     public string? OrthesisInfo { get; set; }
