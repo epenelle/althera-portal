@@ -17,7 +17,7 @@ public static class OrderExtensions
             Comments = orderEntity.Comments,
             Date = orderEntity.Date,
             State = orderEntity.State,
-            Patient = orderEntity.Patient?.ToDomain(),
+            PatientId = orderEntity.PatientId,
         };
     }
 
@@ -32,7 +32,7 @@ public static class OrderExtensions
             OrthesisScan = orderDomain.OrthosisScan,
             OrderDate = orderDomain.Date,
             OrderState = orderDomain.State,
-            PatientId = orderDomain.Patient?.Id,
+            PatientId = orderDomain.PatientId,
         };
     }
 }

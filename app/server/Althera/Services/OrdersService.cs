@@ -24,7 +24,8 @@ public class OrdersService(AppDbContext dbContext)
 
     public Order CreateOrder(OrderCreateRequest orderCreateRequest)
     {
-        // Get PAtient ID => Get patient to create Order
+        // Get Patient ID => Get patient to create Order
+
         var orderEntity = new OrderEntity
         {
             OrthosisModel = orderCreateRequest.OrthesisModel,

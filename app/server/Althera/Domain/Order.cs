@@ -10,5 +10,5 @@ public record Order
     public string? State { get; set; }
     public string? Comments { get; set; }
 
-    public Patient? Patient { get; init; }
+    public required long PatientId { get; set; }
 }
