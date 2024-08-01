@@ -70,7 +70,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
 
   const handleOk = () => {
     setIsPopUpVisible(false);
-    router.push('/Home?type=orders');
+    router.push('/Home?type=patients');
   };
 
 
