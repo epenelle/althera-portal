@@ -38,7 +38,6 @@ const transformOrder = (order: any, index: number = 0): Order => ({
 		throw new Error(`HTTP error! status: ${response.status}`);
 	  }
 	  const json = await response.json();
-	  console.log('Orders:', json);
 	  const ordersData: Order[] = json.map((order: any, index: number) => transformOrder(order, index));
   
 	  return ordersData;
@@ -60,7 +59,6 @@ const transformOrder = (order: any, index: number = 0): Order => ({
 		throw new Error(`HTTP error! status: ${response.status}`);
 	  }
 	  const order = await response.json();
-	  console.log('Order:', order);
 	  const orderData: Order = transformOrder(order);
   
 	  return orderData;
@@ -78,11 +76,13 @@ const transformOrder = (order: any, index: number = 0): Order => ({
 		  'Content-Type': 'application/json'
 		}
 	  });
+	  if (response.status === 204) {
+		return []; 
+	}
 	  if (!response.ok) {
 		throw new Error(`HTTP error! status: ${response.status}`);
 	  }
 	  const json = await response.json();
-	  console.log('Orders:', json);
 	  const ordersData: Order[] = json.map((order: any, index: number) => transformOrder(order, index));
   
 	  return ordersData;
@@ -94,7 +94,6 @@ const transformOrder = (order: any, index: number = 0): Order => ({
 
 export const addOrder = async (order: Order): Promise<{ success: boolean; message: string }> => {
     try {
-        console.log('Sending patient data:', order);
         const response = await fetch('http://localhost:5125/orders', {
             method: 'POST',
             headers: {
