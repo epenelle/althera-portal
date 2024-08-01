@@ -30,11 +30,12 @@ public class AppDbContext : DbContext
             .HasOne(p => p.Clinic)
             .WithMany(c => c.Patients)
             .HasForeignKey(p => p.ClinicId);
+        
         // Foreign Key
         modelBuilder.Entity<OrderEntity>()
-            .HasOne(c => c.Patient)
+            .HasOne(o => o.Patient)
             .WithMany(p => p.Orders)
-            .HasForeignKey(c => c.PatientId);
+            .HasForeignKey(o => o.PatientId);
     }
 }
 
