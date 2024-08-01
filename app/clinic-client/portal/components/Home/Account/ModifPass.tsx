@@ -10,34 +10,34 @@ const ModifPass = () => {
     const [messagePopUp, setMessagePopUp] = React.useState("");
 
     const handleOk = () => {
-        setIsPopUpVisible(false);
-        router.push('/Home?type=dashboard');
+      setIsPopUpVisible(false);
+      router.push('/Home?type=dashboard');
     };
     const handleValider = () => {
-        setIsPopUpVisible(false);
-        showPopUp("La demande a bien été envoyée", false);
+      setIsPopUpVisible(false);
+      showPopUp("La demande a bien été envoyée", false);
     };
     const handleCancel = () => {
-        setIsPopUpVisible(false);
+      setIsPopUpVisible(false);
     };
 
     const showPopUp = (message: string, type: boolean) => {
-        setMessagePopUp(message);
-        setTypePopUp(type);
-        setIsPopUpVisible(true);
+      setMessagePopUp(message);
+      setTypePopUp(type);
+      setIsPopUpVisible(true);
     };
 
   return (
     <div className='flex-row w-3/4'>
-        {isPopUpVisible && (
-            <PopUp
-                message={messagePopUp}
-                type={typePopUp}
-                onOk={handleOk}
-                onCancel={handleCancel}
-                onValider={handleValider}
-            />
-        )}
+      {isPopUpVisible && (
+        <PopUp
+          message={messagePopUp}
+          type={typePopUp}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          onValider={handleValider}
+        />
+      )}
       <div className="rounded-lg p-8 border-2 border-light-grayshadow-lg flex flex-col items-center">
         <h1 className='text-center font-bold text-2xl p-2 md:text-4x1 text-secondary-dark-blue mb-4'>Modification du mot de passe</h1>
         <div className="w-full max-w-lg">

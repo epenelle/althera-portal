@@ -27,13 +27,13 @@ const ModifAccount = () => {
   
   return (
     <div className="rounded-lg w-3/4 p-8 border-2 border-light-grayshadow-lg flex flex-col items-center">
-        {isPopUpVisible && (
-            <PopUp
-                message={messagePopUp}
-                type={typePopUp}
-                onOk={handleOk}
-            />
-        )}
+      {isPopUpVisible && (
+        <PopUp
+          message={messagePopUp}
+          type={typePopUp}
+          onOk={handleOk}
+        />
+      )}
       <h1 className='text-center font-bold text-2xl p-2 md:text-4x1 text-secondary-dark-blue mb-4'>Modification des coordonnées</h1>
       <div className="w-full max-w-md">
         <div className="flex flex-col mb-4">

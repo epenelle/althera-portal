@@ -14,7 +14,6 @@ function SelectCalendrier() {
 function handleSelect(ranges: any) {
 	setSelectionRange(ranges.selection);
   }
-
   return (
 	<div>
 	  <DateRangePicker

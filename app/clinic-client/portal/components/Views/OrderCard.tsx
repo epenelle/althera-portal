@@ -4,28 +4,11 @@ import React, { useEffect } from 'react';
 import { IoMdListBox } from 'react-icons/io';
 import { MdLock } from 'react-icons/md';
 import PopUp from '../Helper/PopUp';
+import { Order } from '@/Constants/Types';
 
 type OrderCardProps = {
     id: string;
 };
-
-interface Patient {
-	id?: number;
-	firstName: string;
-	lastName: string;
-	healthInsuranceNumber: string;
-	ClinicId?: string;
-}
-
-interface Order {
-	id?: number;
-	orthesisModel: string;
-	orthesisComment: string;
-	patientId?: number;
-	orderDate?: string;
-	orderState?: string;
-	patient?: Patient;
-}
 
 const OrderCard: React.FC<OrderCardProps> = ({ id }) => {
   const router = useRouter();

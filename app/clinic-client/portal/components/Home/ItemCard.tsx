@@ -1,24 +1,9 @@
 'use client';
+import { Patient, Order } from '@/Constants/Types';
 import { useRouter } from 'next/router';
 import React from 'react'
 import { IoIosArrowForward } from 'react-icons/io';
 import { LiaSnowmanSolid } from 'react-icons/lia';
-
-type Patient = {
-    id : number;
-    healthInsuranceNumber: string;
-    firstName: string;
-    lastName: string;
-};
-
-type Order = {
-    id: number;
-    firstName: string;
-    lastName: string;
-    date: string;
-    statut: string;
-    patient: Patient;
-};
 
 type Props = {
     data: any;
@@ -27,7 +12,6 @@ type Props = {
 const isPatient = (data: Patient | Order): data is Patient => {
     return (data as Patient).healthInsuranceNumber !== undefined;
 };
-
 
 const PatientCard = ({data}: Props) => {
     const router = useRouter();

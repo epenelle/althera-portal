@@ -1,25 +1,8 @@
-// app/clinic-client/portal/components/Helper/GlobalContext.tsx
-import React, { createContext, useState, useEffect, ReactNode, useContext } from 'react';
+import React, { createContext, useState, ReactNode, useContext } from 'react';
 import { fetchPatients as fetchPatientsFromAPI } from '@/api/patients';
 import { fetchOrders as fetchOrdersFromAPI } from '@/api/orders';
+import { Patient, Order } from '@/Constants/Types';
 
-interface Patient {
-    id?: number;
-    firstName: string;
-    lastName: string;
-    healthInsuranceNumber: string;
-    ClinicId?: string;
-}
-
-interface Order {
-	id?: number;
-	orthesisModel: string;
-	orthesisComment: string;
-	patientId: number;
-	orderDate?: string;
-	orderState?: string;
-	patient: Patient;
-}
 interface GlobalContextProps {
     patients: Patient[];
     orders: Order[];

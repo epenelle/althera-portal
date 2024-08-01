@@ -1,20 +1,4 @@
-interface Patient {
-	id?: number;
-	firstName: string;
-	lastName: string;
-	healthInsuranceNumber: string;
-	ClinicId?: string;
-}
-
-interface Order {
-	id?: number;
-	orthesisModel: string;
-	orthesisComment: string;
-	patientId?: number;
-	orderDate?: string;
-	orderState?: string;
-	patient?: Patient;
-}
+import { Order } from "@/Constants/Types";
 
 const transformOrder = (order: any, index: number = 0): Order => ({
 	id: order.id || index + 1,
@@ -24,9 +8,9 @@ const transformOrder = (order: any, index: number = 0): Order => ({
 	orderDate: order.orderDate || "Unknown",
 	orderState: order.orderState || "Unknown",
 	patient: order.patient || {},
-  });
+});
 
-  export const fetchOrders = async (): Promise<Order[]> => {
+export const fetchOrders = async (): Promise<Order[]> => {
 	try {
 	  const response = await fetch('http://localhost:5125/orders', {
 		method: "GET",
@@ -39,15 +23,14 @@ const transformOrder = (order: any, index: number = 0): Order => ({
 	  }
 	  const json = await response.json();
 	  const ordersData: Order[] = json.map((order: any, index: number) => transformOrder(order, index));
-  
 	  return ordersData;
 	} catch (error) {
 	  console.error('Error fetching orders:', error);
 	  throw error;
 	}
-  };
+};
   
-  export const fetchOrderById = async (id: string): Promise<Order> => {
+export const fetchOrderById = async (id: string): Promise<Order> => {
 	try {
 	  const response = await fetch(`http://localhost:5125/orders/${id}`, {
 		method: "GET",
@@ -60,15 +43,14 @@ const transformOrder = (order: any, index: number = 0): Order => ({
 	  }
 	  const order = await response.json();
 	  const orderData: Order = transformOrder(order);
-  
 	  return orderData;
 	} catch (error) {
 	  console.error(`Error fetching patient with id ${id}:`, error);
 	  throw error;
 	}
-  };
+};
 
-  export const fetchOrdersByIdPatient = async (id: string): Promise<Order[]> => {
+export const fetchOrdersByIdPatient = async (id: string): Promise<Order[]> => {
 	try {
 	  const response = await fetch(`http://localhost:5125/orders/ByPatient/${id}`, {
 		method: "GET",
@@ -84,13 +66,12 @@ const transformOrder = (order: any, index: number = 0): Order => ({
 	  }
 	  const json = await response.json();
 	  const ordersData: Order[] = json.map((order: any, index: number) => transformOrder(order, index));
-  
 	  return ordersData;
 	} catch (error) {
 	  console.error('Error fetching orders:', error);
 	  throw error;
 	}
-  };
+};
 
 export const addOrder = async (order: Order): Promise<{ success: boolean; message: string }> => {
     try {
@@ -104,9 +85,7 @@ export const addOrder = async (order: Order): Promise<{ success: boolean; messag
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-
         await response.json();
-
         return {
             success: true,
             message: 'Order added successfully'
@@ -131,9 +110,6 @@ export const deleteById = async (id: string): Promise<{ success: boolean }> => {
 	if (!response.ok) {
 		throw new Error(`HTTP error! status: ${response.status}`);
 	}
-
-	await response.json();
-
 	return {
 		success: true,
 	};

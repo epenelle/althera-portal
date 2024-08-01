@@ -1,10 +1,4 @@
-interface Patient {
-	id?: number;
-	firstName: string;
-	lastName: string;
-	healthInsuranceNumber: string;
-	ClinicId?: string;
-}
+import { Patient } from "@/Constants/Types";
 
 const transformPatientData = (patient: any, index: number = 0): Patient => ({
   id: patient.id || index + 1,
@@ -26,7 +20,6 @@ export const fetchPatients = async (): Promise<Patient[]> => {
 	}
 	const json = await response.json();
 	const patientsData: Patient[] = json.map((patient: any, index: number) => transformPatientData(patient, index));
-
 	return patientsData;
   } catch (error) {
 	console.error('Error fetching patients:', error);
@@ -47,7 +40,6 @@ export const fetchPatientById = async (id: string): Promise<Patient> => {
 	}
 	const patient = await response.json();
 	const patientData: Patient = transformPatientData(patient);
-
 	return patientData;
   } catch (error) {
 	console.error(`Error fetching patient with id ${id}:`, error);
@@ -67,9 +59,7 @@ export const addPatient = async (patient: Patient): Promise<{ success: boolean; 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-
         await response.json();
-
         return {
             success: true,
             message: 'Patient added successfully'
@@ -94,7 +84,6 @@ export const deleteById = async (id: string): Promise<{ success: boolean }> => {
 	if (!response.ok) {
 		throw new Error(`HTTP error! status: ${response.status}`);
 	}
-
 	return {
 		success: true,
 	};
