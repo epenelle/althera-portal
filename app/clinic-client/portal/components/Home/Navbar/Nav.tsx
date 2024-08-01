@@ -23,34 +23,30 @@ const Nav = ({openNav}:Props) => {
         router.push('/Home?type=' + type);
     };
     
-  return (
-    <div>
-        {/* Icône pour ouvrir la navbar en affichage mobile */}
-        <div className='fixed top-0 left-0 z-20 items-center p-5 md:hidden'>
-            <FaBars onClick={openNav} className='w-6 h-6 cursor-pointer'/>
-        </div>
-        {/* Contenu de la navbar, caché en affichage mobile */}
-        <div className='fixed left-0 top-0 h-full z-10 bg-primary-light-blue shadow-lg hidden md:flex flex-col items-center py-10 -col justify-between'>
-            <div className='px-5 mt-5'>
-                <Image src="/images/logo_althera_full_blanc.png" alt="Logo" width={150} height={70} priority 
-                className="object-contain object-center"/>
+    return (
+        <div>
+            <div className='fixed top-0 left-0 z-20 items-center p-5 md:hidden'>
+                <FaBars onClick={openNav} className='w-6 h-6 cursor-pointer'/>
             </div>
-            {/* Nav Links */}
-            <div className='flex flex-col items-center space-y-10'>
-                {navLinks.map((link)=>{
-                    return (
-                        <button key={link.id} onClick={() => handleMenuClick(link.url)} className='text-lg font-semibold cursor-pointer hover:text-secondary-dark-blue transition-all duration-200 text-white'>{link.label}</button>
-                    )
-                })}
-            </div>
-            {/* Icons */}
-            <div className='flex flex-col items-center space-y-8'>
-                <MdLanguage className='w-6 h-6 cursor-pointer hover:text-light-white'/>
-                <CiLogout className='w-6 h-6 cursor-pointer hover:text-medium-red' onClick={handleSubmit}  />
+            <div className='fixed left-0 top-0 h-full z-10 bg-primary-light-blue shadow-lg hidden md:flex flex-col items-center py-10 -col justify-between'>
+                <div className='px-5 mt-5'>
+                    <Image src="/images/logo_althera_full_blanc.png" alt="Logo" width={150} height={70} priority 
+                    className="object-contain object-center"/>
+                </div>
+                <div className='flex flex-col items-center space-y-10'>
+                    {navLinks.map((link)=>{
+                        return (
+                            <button key={link.id} onClick={() => handleMenuClick(link.url)} className='text-lg font-semibold cursor-pointer hover:text-secondary-dark-blue transition-all duration-200 text-white'>{link.label}</button>
+                        )
+                    })}
+                </div>
+                <div className='flex flex-col items-center space-y-8'>
+                    <MdLanguage className='w-6 h-6 cursor-pointer hover:text-light-white'/>
+                    <CiLogout className='w-6 h-6 cursor-pointer hover:text-medium-red' onClick={handleSubmit}  />
+                </div>
             </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default Nav;

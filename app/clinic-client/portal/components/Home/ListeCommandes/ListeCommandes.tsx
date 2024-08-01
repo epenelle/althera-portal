@@ -8,37 +8,34 @@ import PaginationMenu from '../../Helper/PaginationMenu';
 import { useRouter } from 'next/router';
 import { useGlobalContext } from '@/components/Helper/GlobalContext';
 
-
-
-
 const ListePatients = () => {
-  const router = useRouter();
-  const { orders, fetchOrders } = useGlobalContext();
+    const router = useRouter();
+    const { orders, fetchOrders } = useGlobalContext();
 
     useEffect(() => {
         fetchOrders();
     }, []);
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const ordersPerPage = 10;
-  const indexOfLastOrder = currentPage * ordersPerPage;
-  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
-  const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
+    const [currentPage, setCurrentPage] = React.useState(1);
+    const ordersPerPage = 10;
+    const indexOfLastOrder = currentPage * ordersPerPage;
+    const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+    const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
 
-  const totalPages = Math.ceil(orders.length / ordersPerPage);
-  const pageNumbers = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pageNumbers.push(i);
-  }
+    const totalPages = Math.ceil(orders.length / ordersPerPage);
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(i);
+    }
 
-  const navigateToPage = (pageNumber: number): void => {
-    setCurrentPage(pageNumber);
-  };
+    const navigateToPage = (pageNumber: number): void => {
+      setCurrentPage(pageNumber);
+    };
 
-  const handleAddOrderClick = () => {
-    router.push('/Add?type=order');
-  };
+    const handleAddOrderClick = () => {
+      router.push('/Add?type=order');
+    };
 
-return (
+    return (
         <div className='flex justify-center pt-9 pb-9 bg-primary-dark-blue min-h-screen ml-[10vh] md:ml-[15vh]'>
             <div className='w-4/5 mt-8 md:mt-16 mx-auto p-6 bg-light-white rounded-lg shadow-md'>
                 <div className='border-b-2 border-light-gray pb-4 flex items-center justify-center'>
@@ -98,7 +95,7 @@ return (
                 {/*<SelectCalendrier />*/}
             </div>
         </div>
-);
+    );
 }
 
 export default ListePatients;

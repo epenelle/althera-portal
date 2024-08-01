@@ -5,28 +5,11 @@ import { deleteById, fetchPatientById } from '@/api/patients';
 import { fetchOrdersByIdPatient } from '@/api/orders';
 import { useRouter } from 'next/router';
 import PopUp from '../Helper/PopUp';
+import { Patient, Order } from '@/Constants/Types';
 
 type PatientCardProps = {
   id: string;
 };
-
-interface Patient {
-  id?: number;
-  firstName: string;
-  lastName: string;
-  healthInsuranceNumber: string;
-  idClinique?: string;
-}
-
-interface Order {
-	id?: number;
-	orthesisModel: string;
-	orthesisComment: string;
-	patientId?: number;
-	orderDate?: string;
-	orderState?: string;
-	patient?: Patient;
-}
 
 const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
   const router = useRouter();

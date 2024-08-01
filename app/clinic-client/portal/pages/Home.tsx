@@ -1,11 +1,8 @@
 import React from 'react'
 import '../app/globals.css';
-
 import { useRouter } from 'next/router';
-
 import ResponsiveNav from '../components/Home/Navbar/ResponsiveNav';
 import ScrollToTop from '../components/Helper/ScrollToTop';
-
 import Statistics from '../components/Home/Statistics/Statistics';
 import ListePatients from '@/components/Home/ListePatients/ListePatients';
 import ListeCommandes from '@/components/Home/ListeCommandes/ListeCommandes';
@@ -21,12 +18,12 @@ const Home = () => {
       <div >
           <ResponsiveNav />
         <main>
-        <GlobalProvider>
-          {type === 'dashboard' && <Statistics />}
-          {type === 'patients' && <ListePatients/>}
-          {type === 'orders' && <ListeCommandes/>}
-          {type === 'account' && <Account />}
-        </GlobalProvider>
+          <GlobalProvider>
+            {type === 'dashboard' && <Statistics />}
+            {type === 'patients' && <ListePatients/>}
+            {type === 'orders' && <ListeCommandes/>}
+            {type === 'account' && <Account />}
+          </GlobalProvider>
         </main>
         <ScrollToTop/>
       </div>

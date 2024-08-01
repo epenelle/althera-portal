@@ -2,7 +2,6 @@ import React from 'react'
 import PopUp from '../Helper/PopUp';
 import { BsPeopleFill } from 'react-icons/bs';
 import { useRouter } from 'next/router';
-import { FaSortDown } from 'react-icons/fa';
 import { addOrder } from '@/api/orders';
 
 const AddOrder = () => {
@@ -29,7 +28,6 @@ const AddOrder = () => {
     setTypePopUp(type);
     setIsPopUpVisible(true);
   };
-    
 
   const handleAddOrder = async () => {
     try {
@@ -43,16 +41,16 @@ const AddOrder = () => {
       showPopUp("Erreur lors de l'ajout de la commande.", true);
     }
   };
-  
+
   return (
     <div>
       {isPopUpVisible && (
-            <PopUp
-                message={messagePopUp}
-                type={typePopUp}
-                onOk={handleOk}
-                onCancel={handleCancel}
-            />
+        <PopUp
+          message={messagePopUp}
+          type={typePopUp}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        />
         )}
       <div className='flex justify-center pt-9 pb-9 bg-primary-dark-blue min-h-screen ml-[10vh] md:ml-[15vh]'>
         <div className='w-4/5 mt-4 md:mt-16 mx-auto p-6 bg-light-white rounded-lg shadow-md'>
@@ -66,7 +64,6 @@ const AddOrder = () => {
               <input type='number' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
               value={patientId}
               onChange={(e) => setPatientId(parseInt(e.target.value))}/>
-              {/*<FaSortDown className='cursor-pointer' />*/}
             </div>
             <div className="flex items-center mb-2">
               <label className="w-2/5 text-right whitespace-nowrap">Modèle d'attelle : </label>
