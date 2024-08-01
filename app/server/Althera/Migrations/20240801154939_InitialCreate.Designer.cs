@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Althera.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240801144601_InitialCreate")]
+    [Migration("20240801154939_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

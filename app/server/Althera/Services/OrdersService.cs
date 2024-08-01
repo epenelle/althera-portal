@@ -28,6 +28,16 @@ public class OrdersService
         return orderEntity?.ToDomain();
     }
 
+    public List<Order> GetOrdersByPatientId(long patientId)
+    {
+        var orderEntities = _dbContext.Orders
+            .Include(o => o.Patient)
+            .Where(o => o.PatientId == patientId)
+            .ToList();
+
+        return orderEntities.Select(order => order.ToDomain()).ToList();
+    }
+
     public Order CreateOrder(OrderCreateRequest orderCreateRequest)
     {
         var patientEntity = _dbContext.Patients.SingleOrDefault(p => p.Id == orderCreateRequest.PatientId) ??
