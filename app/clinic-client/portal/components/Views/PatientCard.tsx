@@ -17,6 +17,7 @@ interface Patient {
 }
 
 const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
+  console.log('Patient ID:', id);
   const [edit, setEdit] = useState(false);
   const [patientData, setPatientData] = useState<Patient | null>(null);
   const [lastName, setLastName] = useState('');
@@ -26,6 +27,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
   const fetchPatients = async () => {
     try {
       const data = await fetchPatientById(id);
+      console.log('Patient:', data);
       setPatientData(data);
       setLastName(data.lastName);
       setFirstName(data.firstName);

@@ -38,7 +38,7 @@ const Nav = ({openNav}:Props) => {
             <div className='flex flex-col items-center space-y-10'>
                 {navLinks.map((link)=>{
                     return (
-                        <button onClick={() => handleMenuClick(link.url)} className='text-lg font-semibold cursor-pointer hover:text-secondary-dark-blue transition-all duration-200 text-white'>{link.label}</button>
+                        <button key={link.id} onClick={() => handleMenuClick(link.url)} className='text-lg font-semibold cursor-pointer hover:text-secondary-dark-blue transition-all duration-200 text-white'>{link.label}</button>
                     )
                 })}
             </div>

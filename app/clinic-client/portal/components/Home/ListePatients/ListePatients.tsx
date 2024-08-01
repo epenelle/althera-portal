@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
-import { PatientsData } from '@/data/data';
+import React, { useEffect } from 'react';
 import PatientCard from '../ItemCard';
 import { BsPeopleFill } from 'react-icons/bs';
 import { FaSearch } from 'react-icons/fa';
 import { FaSortUp, FaSortDown } from 'react-icons/fa';
 import PaginationMenu from '../../Helper/PaginationMenu';
 import { useRouter } from 'next/router';
-import { PatientsContext } from '@/components/Helper/PatientsContext';
+import { useGlobalContext } from '@/components/Helper/GlobalContext';
 
 
 
@@ -14,7 +13,12 @@ import { PatientsContext } from '@/components/Helper/PatientsContext';
 
 const ListePatients = () => {
     const router = useRouter();
-    const { patients } = useContext(PatientsContext) || { patients: [] };
+    const { patients, fetchPatients } = useGlobalContext();
+
+    useEffect(() => {
+        fetchPatients();
+    }, []);
+
     const [currentPage, setCurrentPage] = React.useState(1);
     const patientsPerPage = 10;
     const indexOfLastPatient = currentPage * patientsPerPage;

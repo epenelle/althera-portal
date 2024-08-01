@@ -1,3 +1,11 @@
+interface Patient {
+	id?: number;
+	firstName: string;
+	lastName: string;
+	healthInsuranceNumber: string;
+	ClinicId?: string;
+}
+
 interface Order {
 	id?: number;
 	orthesisModel: string;
@@ -5,6 +13,7 @@ interface Order {
 	patientId: number;
 	orderDate?: string;
 	orderState?: string;
+	patient: Patient;
 }
 
 const transformOrder = (order: any, index: number = 0): Order => ({
@@ -14,6 +23,7 @@ const transformOrder = (order: any, index: number = 0): Order => ({
 	patientId: order.patientId || 0,
 	orderDate: order.orderDate || "Unknown",
 	orderState: order.orderState || "Unknown",
+	patient: order.patient || {},
   });
   
   export const fetchOrders = async (): Promise<Order[]> => {
@@ -28,7 +38,7 @@ const transformOrder = (order: any, index: number = 0): Order => ({
 		throw new Error(`HTTP error! status: ${response.status}`);
 	  }
 	  const json = await response.json();
-	  console.log('json:', json);
+	  console.log('Orders:', json);
 	  const ordersData: Order[] = json.map((order: any, index: number) => transformOrder(order, index));
   
 	  return ordersData;

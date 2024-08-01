@@ -6,14 +6,18 @@ import { FaSortUp, FaSortDown } from 'react-icons/fa';
 import SelectCalendrier from '@/components/Helper/Calendrier';
 import PaginationMenu from '../../Helper/PaginationMenu';
 import { useRouter } from 'next/router';
-import { OrdersContext, OrdersProvider } from '@/components/Helper/OrdersContext';
+import { useGlobalContext } from '@/components/Helper/GlobalContext';
 
 
 
 
 const ListePatients = () => {
   const router = useRouter();
-  const { orders } = useContext(OrdersContext) || { orders: [] };
+  const { orders, fetchOrders } = useGlobalContext();
+
+    useEffect(() => {
+        fetchOrders();
+    }, []);
   const [currentPage, setCurrentPage] = React.useState(1);
   const ordersPerPage = 10;
   const indexOfLastOrder = currentPage * ordersPerPage;
@@ -35,7 +39,6 @@ const ListePatients = () => {
   };
 
 return (
-    <OrdersProvider>
         <div className='flex justify-center pt-9 pb-9 bg-primary-dark-blue min-h-screen ml-[10vh] md:ml-[15vh]'>
             <div className='w-4/5 mt-8 md:mt-16 mx-auto p-6 bg-light-white rounded-lg shadow-md'>
                 <div className='border-b-2 border-light-gray pb-4 flex items-center justify-center'>
@@ -95,7 +98,6 @@ return (
                 {/*<SelectCalendrier />*/}
             </div>
         </div>
-    </OrdersProvider>
 );
 }
 

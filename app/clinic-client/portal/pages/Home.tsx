@@ -10,27 +10,23 @@ import Statistics from '../components/Home/Statistics/Statistics';
 import ListePatients from '@/components/Home/ListePatients/ListePatients';
 import ListeCommandes from '@/components/Home/ListeCommandes/ListeCommandes';
 import Account from '@/components/Home/Account/Account';
-import { PatientsProvider } from '@/components/Helper/PatientsContext';
-import { OrdersProvider } from '@/components/Helper/OrdersContext';
+import { GlobalProvider } from '@/components/Helper/GlobalContext';
 
 const Home = () => {
   const router = useRouter();
   const { query } = router;
   const { type } = query;
-  
+
   return (
-    
       <div >
           <ResponsiveNav />
         <main>
-        <PatientsProvider>
-        <OrdersProvider>
+        <GlobalProvider>
           {type === 'dashboard' && <Statistics />}
-          {type === 'patients' && <ListePatients />}
-          {type === 'orders' && <ListeCommandes />}
+          {type === 'patients' && <ListePatients/>}
+          {type === 'orders' && <ListeCommandes/>}
           {type === 'account' && <Account />}
-        </OrdersProvider>
-        </PatientsProvider>
+        </GlobalProvider>
         </main>
         <ScrollToTop/>
       </div>

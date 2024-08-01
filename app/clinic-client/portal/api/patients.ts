@@ -25,6 +25,7 @@ export const fetchPatients = async (): Promise<Patient[]> => {
 	  throw new Error(`HTTP error! status: ${response.status}`);
 	}
 	const json = await response.json();
+  console.log('Patients:', json);
 	const patientsData: Patient[] = json.map((patient: any, index: number) => transformPatientData(patient, index));
 
 	return patientsData;
@@ -46,7 +47,7 @@ export const fetchPatientById = async (id: string): Promise<Patient> => {
 	  throw new Error(`HTTP error! status: ${response.status}`);
 	}
 	const patient = await response.json();
-
+  console.log('Patient:', patient);
 	const patientData: Patient = transformPatientData(patient);
 
 	return patientData;
