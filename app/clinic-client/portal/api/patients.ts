@@ -85,3 +85,28 @@ export const addPatient = async (patient: Patient): Promise<{ success: boolean; 
         };
     }
 };
+
+export const deleteById = async (id: string): Promise<{ success: boolean }> => {
+	try {
+	  const response = await fetch(`http://localhost:5125/patients/${id}`, {
+		method: "DELETE",
+		headers: {
+		  'Content-Type': 'application/json'
+		}
+	});
+	if (!response.ok) {
+		throw new Error(`HTTP error! status: ${response.status}`);
+	}
+
+	await response.json();
+
+	return {
+		success: true,
+	};
+	} catch (error) {
+	console.error('Error deleting patient:', error);
+		return {
+			success: false,
+		};
+	}
+};
