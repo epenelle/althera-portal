@@ -134,7 +134,7 @@ public class OrdersController(OrdersService orderServices) : ControllerBase
         catch (InvalidOperationException invOpEx)
         {
             // Exception invalide operation
-            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
+            return StatusCode(404, invOpEx.Message);
         }
         catch (Exception ex)
         {

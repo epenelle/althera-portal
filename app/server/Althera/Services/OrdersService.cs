@@ -45,6 +45,9 @@ public class OrdersService(AppDbContext dbContext)
 
     public Order UpdateOrder(long id, OrderUpdateRequest orderUpdateRequest)
     {
+        var patientEntity = _dbContext.Patients.SingleOrDefault(p => p.Id == orderUpdateRequest.PatientId) ??
+            throw new InvalidOperationException($"Patient with id {orderUpdateRequest.PatientId} not found.");
+
         var orderEntity = _dbContext.Orders.SingleOrDefault(c => c.Id == id) ?? throw new InvalidOperationException("Order not found.");
         orderEntity.OrthosisInformation = orderUpdateRequest.OrthesisInfo;
         orderEntity.Comments = orderUpdateRequest.OrthesisComment;
