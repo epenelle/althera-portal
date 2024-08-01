@@ -38,7 +38,6 @@ const Login = () => {
             throw new Error(errorMessage);
           }
           const data = await response.json();
-          console.log(data);
           const token = data.token;
           localStorage.setItem('token', token);
           const userId = data.userId;
@@ -52,7 +51,6 @@ const Login = () => {
           console.error("Erreur lors de la connexion :", error);
           setErrorMessage("Identifiants incorrects. Veuillez réessayer.");
         }*/
-          console.log('Connexion réussie');
           router.push("/Home?type=dashboard");
 
         };

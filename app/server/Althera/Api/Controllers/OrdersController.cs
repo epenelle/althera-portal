@@ -82,7 +82,7 @@ public ActionResult<List<OrderModel>> GetOrdersByPatientId(long patientId)
 
         if (orders.Count == 0)
         {
-            return NotFound("No Orders Found for the given Patient ID");
+            return StatusCode(204, "No Orders Found for this user");
         }
 
         return Ok(orders);

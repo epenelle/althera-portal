@@ -19,7 +19,6 @@ const MobileNav = ({closeNav, nav}:Props) => {
     const router = useRouter();
 
     const handleSubmit = async (e: React.MouseEvent<SVGElement, MouseEvent>) => {
-        console.log('Déconnexion réussite');
         router.push("/LoginPage");
 
     };
