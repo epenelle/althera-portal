@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MdLock, MdPerson } from 'react-icons/md';
 import ItemCard from '../Home/ItemCard';
 import { fetchPatientById } from '@/api/patients';
-import { useGlobalContext } from '../Helper/GlobalContext';
+import { fetchOrdersByIdPatient } from '@/api/orders';
 
 type PatientCardProps = {
   id: string;
@@ -16,34 +16,49 @@ interface Patient {
   idClinique?: string;
 }
 
+interface Order {
+	id?: number;
+	orthesisModel: string;
+	orthesisComment: string;
+	patientId?: number;
+	orderDate?: string;
+	orderState?: string;
+	patient?: Patient;
+}
+
 const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
   const [edit, setEdit] = useState(false);
   const [patientData, setPatientData] = useState<Patient | null>(null);
+  const [ orders, setOrders ] = useState<Order[]>([]);
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [healthInsuranceNumber, setHealthInsuranceNumber] = useState('');
 
-  const fetchPatients = async () => {
-    try {
-      const data = await fetchPatientById(id);
-      setPatientData(data);
-      setLastName(data.lastName);
-      setFirstName(data.firstName);
-      setHealthInsuranceNumber(data.healthInsuranceNumber);
-    } catch (error) {
-      console.error('Error fetching patients:', error);
-    }
-  };
-
   useEffect(() => {
-    fetchPatients();
-  }, [id]);
-  /*
-  const { orders, fetchOrders } = useGlobalContext();
+    const fetchPatients = async () => {
+      try {
+        const data = await fetchPatientById(id);
+        setPatientData(data);
+        setLastName(data.lastName);
+        setFirstName(data.firstName);
+        setHealthInsuranceNumber(data.healthInsuranceNumber);
+      } catch (error) {
+        console.error('Error fetching patients:', error);
+      }
+    };
+    const fetchOrders = async () => {
+      try {
 
-    useEffect(() => {
-        fetchOrders();
-    }, []);*/
+        const ordersOfId = await fetchOrdersByIdPatient(id);
+        setOrders(ordersOfId);
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+      }
+    };
+    fetchPatients();
+    fetchOrders();
+  }, [id]);
+
 
   return (
     <div className='flex justify-center pt-9 pb-9 bg-primary-dark-blue min-h-screen ml-[10vh] md:ml-[15vh]'>
@@ -90,11 +105,11 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
               Supprimer le patient
             </button>
           </div>
-          {/*<div className='mt-4'>
+          <div className='mt-4'>
             {orders.map((order) => (
               <ItemCard key={order.id} data={order} />
             ))}
-          </div>*/}
+          </div>
         </div>
       </div>
     </div>

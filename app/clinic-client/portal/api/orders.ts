@@ -70,6 +70,28 @@ const transformOrder = (order: any, index: number = 0): Order => ({
 	}
   };
 
+  export const fetchOrdersByIdPatient = async (id: string): Promise<Order[]> => {
+	try {
+	  const response = await fetch(`http://localhost:5125/orders/ByPatient/${id}`, {
+		method: "GET",
+		headers: {
+		  'Content-Type': 'application/json'
+		}
+	  });
+	  if (!response.ok) {
+		throw new Error(`HTTP error! status: ${response.status}`);
+	  }
+	  const json = await response.json();
+	  console.log('Orders:', json);
+	  const ordersData: Order[] = json.map((order: any, index: number) => transformOrder(order, index));
+  
+	  return ordersData;
+	} catch (error) {
+	  console.error('Error fetching orders:', error);
+	  throw error;
+	}
+  };
+
 export const addOrder = async (order: Order): Promise<{ success: boolean; message: string }> => {
     try {
         console.log('Sending patient data:', order);
