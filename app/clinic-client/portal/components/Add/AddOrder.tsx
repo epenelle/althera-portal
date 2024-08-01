@@ -15,34 +15,35 @@ const AddOrder = () => {
   const [orthesisModel, setOrthesisModel] = React.useState<string>("");
   const [orthesisComment, setOrthesisComment] = React.useState<string>("");
 
-    const handleOk = () => {
-        setIsPopUpVisible(false);
-        router.push('/Home?type=orders');
-    };
+  const handleOk = () => {
+    setIsPopUpVisible(false);
+    router.push('/Home?type=orders');
+  };
 
-    const handleCancel = () => {
-        setIsPopUpVisible(false);
-    };
+  const handleCancel = () => {
+    setIsPopUpVisible(false);
+  };
 
-    const showPopUp = (message: string, type: boolean) => {
-        setMessagePopUp(message);
-        setTypePopUp(type);
-        setIsPopUpVisible(true);
-    };
+  const showPopUp = (message: string, type: boolean) => {
+    setMessagePopUp(message);
+    setTypePopUp(type);
+    setIsPopUpVisible(true);
+  };
     
 
-    const handleAddOrder = async () => {
-      try {
-        const response = await addOrder({ patientId, orthesisModel, orthesisComment });
-        if (response.success) {
-          showPopUp("La commande a bien été ajoutée !", false);
-        } else {
-          showPopUp("Erreur lors de l'ajout de la commande.", true);
-        }
-      } catch (error) {
+  const handleAddOrder = async () => {
+    try {
+      const response = await addOrder({ patientId, orthesisModel, orthesisComment });
+      if (response.success) {
+        showPopUp("La commande a bien été ajoutée !", false);
+      } else {
         showPopUp("Erreur lors de l'ajout de la commande.", true);
       }
-    };
+    } catch (error) {
+      showPopUp("Erreur lors de l'ajout de la commande.", true);
+    }
+  };
+  
   return (
     <div>
       {isPopUpVisible && (

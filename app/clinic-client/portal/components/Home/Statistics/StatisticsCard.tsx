@@ -2,7 +2,6 @@
 import React from 'react'
 import Tilt from 'react-parallax-tilt';
 import Image from "next/legacy/image";
-import { BsHeart } from 'react-icons/bs';
 import { IoMdArrowDropright } from 'react-icons/io';
 
 type Props = {

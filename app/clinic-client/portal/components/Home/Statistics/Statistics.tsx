@@ -1,5 +1,5 @@
 import React from 'react'
-import { stats } from '@/data/data';
+import { stats } from '@/Constants/Constants';
 import StatisticsCard from './StatisticsCard';
 import { IoBarChartOutline } from 'react-icons/io5';
 
