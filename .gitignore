@@ -1,0 +1,6 @@
+*.user
+
+.vs/
+app/server/Althera/obj/
+app/server/Althera/bin/
+app/server/Migrations/
