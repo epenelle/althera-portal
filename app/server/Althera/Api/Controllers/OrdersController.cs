@@ -88,15 +88,9 @@ public class OrdersController(OrdersService orderServices) : ControllerBase
             // Return code 201 => Create Successsfull
             return StatusCode(201, order.ToApi());
         }
-        catch (ArgumentNullException argEx)
-        {
-            // Exception Null Args
-            return BadRequest("Invalid argument: " + argEx.Message);
-        }
         catch (InvalidOperationException invOpEx)
         {
-            // Exception invalide operation
-            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
+            return StatusCode(404, invOpEx.Message);
         }
         catch (Exception ex)
         {

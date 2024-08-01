@@ -24,7 +24,8 @@ public class OrdersService(AppDbContext dbContext)
 
     public Order CreateOrder(OrderCreateRequest orderCreateRequest)
     {
-        // Get Patient ID => Get patient to create Order
+        var patientEntity = _dbContext.Patients.SingleOrDefault(p => p.Id == orderCreateRequest.PatientId) ?? 
+            throw new InvalidOperationException($"Patient with id {orderCreateRequest.PatientId} not found.");
 
         var orderEntity = new OrderEntity
         {
