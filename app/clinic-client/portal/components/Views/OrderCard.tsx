@@ -1,4 +1,5 @@
-import React from 'react';
+import { fetchOrderById } from '@/api/orders';
+import React, { useEffect } from 'react';
 import { IoMdListBox } from 'react-icons/io';
 import { MdLock } from 'react-icons/md';
 
@@ -6,11 +7,50 @@ type OrderCardProps = {
     id: string;
 };
 
+interface Patient {
+	id?: number;
+	firstName: string;
+	lastName: string;
+	healthInsuranceNumber: string;
+	ClinicId?: string;
+}
+
+interface Order {
+	id?: number;
+	orthesisModel: string;
+	orthesisComment: string;
+	patientId?: number;
+	orderDate?: string;
+	orderState?: string;
+	patient?: Patient;
+}
+
 const OrderCard: React.FC<OrderCardProps> = ({ id }) => {
     const [edit, setedit] = React.useState(false);
-    const nom = 'nom';
-    const prenom = 'prenom';
-    const numAttelle = 'numAttelle';
+    
+    const [orderData, setOrderData] = React.useState<Order | null>(null);
+    const [lastName, setLastName] = React.useState<string>("");
+    const [firstName, setFirstName] = React.useState<string>("");
+    const [orthesisModel, setOrthesisModel] = React.useState<string>("");
+    const [orthesisComment, setOrthesisComment] = React.useState<string>("");
+
+    const fetchOrders = async () => {
+      try {
+        const data = await fetchOrderById(id);
+        setOrderData(data);
+        setLastName(data.patient?.lastName || "");
+        setFirstName(data.patient?.firstName || "");
+        setOrthesisModel(data.orthesisModel);
+        setOrthesisComment(data.orthesisComment);
+      } catch (error) {
+        console.error('Error fetching patients:', error);
+      }
+    };
+
+    useEffect(() => {
+      fetchOrders();
+    }, [id]);
+  
 
     return (
         <div className='flex justify-center pt-9 pb-9 bg-primary-dark-blue min-h-screen ml-[10vh] md:ml-[15vh]'>
@@ -24,26 +64,28 @@ const OrderCard: React.FC<OrderCardProps> = ({ id }) => {
                   <label className="w-2/5 text-right whitespace-nowrap">Nom : </label>
                   <input type='text' className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
                   disabled={!edit}
-                  value={nom}/>
+                  value={lastName}/>
                   {!edit && <MdLock size={20} className='ml-2' />}
                 </div>
                 <div className="flex items-center mb-2">
                   <label className="w-2/5 text-right whitespace-nowrap">Prénom : </label>
                   <input type='text' className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
                   disabled={!edit}
-                  value={prenom}/>
+                  value={firstName}/>
                   {!edit && <MdLock size={20} className='ml-2' />}
                 </div>
                 <div className="flex items-center mb-2">
-                  <label className="w-2/5 text-right whitespace-nowrap">N° Attelle : </label>
+                  <label className="w-2/5 text-right whitespace-nowrap">Modèle d'attelle : </label>
                   <input type='text' className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
                   disabled={!edit}
-                  value={numAttelle}/>
+                  value={orthesisModel}/>
                   {!edit && <MdLock size={20} className='ml-2' />}
                 </div>
                 <div className="flex items-center mb-2">
-                  <label className="w-2/5 text-right whitespace-nowrap">Scan : </label>
-                  <input type='text' className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" disabled={!edit}/>
+                  <label className="w-2/5 text-right whitespace-nowrap">Informations Attelle : </label>
+                  <input type='text' className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
+                  disabled={!edit}
+                  value={orthesisComment}/>
                   {!edit && <MdLock size={20} className='ml-2' />}
                 </div>
                 <div className="flex justify-center mt-6">
