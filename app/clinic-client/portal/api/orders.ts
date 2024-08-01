@@ -10,10 +10,10 @@ interface Order {
 	id?: number;
 	orthesisModel: string;
 	orthesisComment: string;
-	patientId: number;
+	patientId?: number;
 	orderDate?: string;
 	orderState?: string;
-	patient: Patient;
+	patient?: Patient;
 }
 
 const transformOrder = (order: any, index: number = 0): Order => ({
@@ -25,7 +25,7 @@ const transformOrder = (order: any, index: number = 0): Order => ({
 	orderState: order.orderState || "Unknown",
 	patient: order.patient || {},
   });
-  
+
   export const fetchOrders = async (): Promise<Order[]> => {
 	try {
 	  const response = await fetch('http://localhost:5125/orders', {
@@ -60,7 +60,7 @@ const transformOrder = (order: any, index: number = 0): Order => ({
 		throw new Error(`HTTP error! status: ${response.status}`);
 	  }
 	  const patient = await response.json();
-  
+	  console.log('Patient:', patient);
 	  const patientData: Order = transformOrder(patient);
   
 	  return patientData;

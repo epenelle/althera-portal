@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { MdLock, MdPerson } from 'react-icons/md';
-import { OrdersData } from '@/data/data';
 import ItemCard from '../Home/ItemCard';
 import { fetchPatientById } from '@/api/patients';
+import { useGlobalContext } from '../Helper/GlobalContext';
 
 type PatientCardProps = {
   id: string;
@@ -17,7 +17,6 @@ interface Patient {
 }
 
 const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
-  console.log('Patient ID:', id);
   const [edit, setEdit] = useState(false);
   const [patientData, setPatientData] = useState<Patient | null>(null);
   const [lastName, setLastName] = useState('');
@@ -27,7 +26,6 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
   const fetchPatients = async () => {
     try {
       const data = await fetchPatientById(id);
-      console.log('Patient:', data);
       setPatientData(data);
       setLastName(data.lastName);
       setFirstName(data.firstName);
@@ -40,6 +38,12 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
   useEffect(() => {
     fetchPatients();
   }, [id]);
+  /*
+  const { orders, fetchOrders } = useGlobalContext();
+
+    useEffect(() => {
+        fetchOrders();
+    }, []);*/
 
   return (
     <div className='flex justify-center pt-9 pb-9 bg-primary-dark-blue min-h-screen ml-[10vh] md:ml-[15vh]'>
@@ -86,11 +90,11 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
               Supprimer le patient
             </button>
           </div>
-          <div className='mt-4'>
-            {OrdersData.map((order) => (
+          {/*<div className='mt-4'>
+            {orders.map((order) => (
               <ItemCard key={order.id} data={order} />
             ))}
-          </div>
+          </div>*/}
         </div>
       </div>
     </div>

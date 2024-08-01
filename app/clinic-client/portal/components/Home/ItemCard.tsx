@@ -47,7 +47,6 @@ const PatientCard = ({data}: Props) => {
                         <IoIosArrowForward size={24} className='font-bold justify-self-end text-secondary-dark-blue hover:text-primary-light-blue' />
                     </div>
                 ) : (
-                    console.log('Order:', data),
                     <div onClick={() => handleClick('order', data.id.toString())} className='grid-cols-1 grid items-center gap-4 sm:grid-cols-2 sm:gap-2 md:grid-cols-[100px_150px_150px_150px_150px_1fr_24px]'>
                         <LiaSnowmanSolid size={48} className='font-bold text-secondary-dark-blue md:block sm:hidden' />
                         <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.id}</h1>

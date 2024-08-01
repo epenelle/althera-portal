@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PopUp from '../Helper/PopUp';
 import { BsPeopleFill } from 'react-icons/bs';
 import { useRouter } from 'next/router';
-import { addPatient } from '../../api/patients';
+import { addPatient } from '@/api/patients';
 
 const AddPatient = () => {
   const router = useRouter();
