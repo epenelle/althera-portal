@@ -47,7 +47,7 @@ export const fetchPatientById = async (id: string): Promise<Patient> => {
 	  throw new Error(`HTTP error! status: ${response.status}`);
 	}
 	const patient = await response.json();
-  console.log('Patient:', patient);
+  	console.log('Patient:', patient);
 	const patientData: Patient = transformPatientData(patient);
 
 	return patientData;
@@ -97,8 +97,6 @@ export const deleteById = async (id: string): Promise<{ success: boolean }> => {
 	if (!response.ok) {
 		throw new Error(`HTTP error! status: ${response.status}`);
 	}
-
-	await response.json();
 
 	return {
 		success: true,
