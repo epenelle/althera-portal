@@ -61,7 +61,7 @@ namespace Althera.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: true),
                     State = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Comments = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PatientId = table.Column<long>(type: "bigint", nullable: true)
+                    PatientId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,7 +70,8 @@ namespace Althera.Migrations
                         name: "FK_Orders_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

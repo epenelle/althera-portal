@@ -8,17 +8,24 @@ namespace Althera.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class OrdersController(OrdersService orderServices) : ControllerBase
+public class OrdersController : ControllerBase
 {
-    private readonly OrdersService _ordersService = orderServices;
+    private readonly OrdersService _ordersService;
+
+    public OrdersController(OrdersService ordersService)
+    {
+        _ordersService = ordersService;
+    }
 
     [HttpGet]
     public ActionResult<List<OrderModel>> GetAllOrders()
     {
-        try{
+        try
+        {
             var orders = _ordersService.GetAll().Select(order => order.ToApi()).ToList();
 
-            if(orders == null){
+            if (orders == null)
+            {
                 return NotFound("No Orders Found");
             }
 
@@ -45,11 +52,12 @@ public class OrdersController(OrdersService orderServices) : ControllerBase
     [HttpGet("{id}")]
     public ActionResult<OrderModel> GetOrder(long id)
     {
-
-        try {
+        try
+        {
             var order = _ordersService.GetOrder(id);
 
-            if(order == null){
+            if (order == null)
+            {
                 return NotFound("No Orders Found");
             }
             // Same as Return 200
@@ -75,14 +83,16 @@ public class OrdersController(OrdersService orderServices) : ControllerBase
     [HttpPost]
     public ActionResult<OrderModel> CreateOrder(OrderCreateRequest orderCreateRequest)
     {
-        try {
+        try
+        {
             if (orderCreateRequest == null)
             {
                 return BadRequest();
             }
 
             var order = _ordersService.CreateOrder(orderCreateRequest);
-            if(order == null){
+            if (order == null)
+            {
                 return StatusCode(500, "Error Server");
             }
             // Return code 201 => Create Successsfull
@@ -108,9 +118,9 @@ public class OrdersController(OrdersService orderServices) : ControllerBase
             {
                 return BadRequest();
             }
-            
+
             var orderById = _ordersService.GetOrder(id);
-            
+
             if (orderById == null)
             {
                 return NotFound("order Not Found");
@@ -122,7 +132,7 @@ public class OrdersController(OrdersService orderServices) : ControllerBase
             {
                 return BadRequest();
             }
-            
+
             // Same as Return 200
             return Ok(order.ToApi());
         }
@@ -159,7 +169,6 @@ public class OrdersController(OrdersService orderServices) : ControllerBase
 
             // Return 204 No Content
             return NoContent();
-
         }
         catch (ArgumentNullException argEx)
         {

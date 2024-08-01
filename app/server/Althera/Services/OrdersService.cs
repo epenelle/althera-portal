@@ -7,32 +7,31 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Althera.Services;
 
-public class OrdersService(AppDbContext dbContext)
+public class OrdersService
 {
-    private readonly AppDbContext _dbContext = dbContext;
+    private readonly AppDbContext _dbContext;
+
+    public OrdersService(AppDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
 
     public List<Order> GetAll()
     {
-        var orderEntities = _dbContext.Orders.ToList();
-        _dbContext.Orders.Include(o => o.Patient).Load();
+        var orderEntities = _dbContext.Orders.Include(o => o.Patient).ToList();
         return orderEntities.Select(order => order.ToDomain()).ToList();
     }
 
     public Order? GetOrder(long id)
     {
-        var orderEntity = _dbContext.Orders.SingleOrDefault(c => c.Id == id);
-        if (orderEntity != null)
-        {
-            _dbContext.Entry(orderEntity).Reference(o => o.Patient).Load();
-        }
-
+        var orderEntity = _dbContext.Orders.Include(o => o.Patient).SingleOrDefault(c => c.Id == id);
         return orderEntity?.ToDomain();
     }
 
     public Order CreateOrder(OrderCreateRequest orderCreateRequest)
     {
-        var patientEntity = _dbContext.Patients.SingleOrDefault(p => p.Id == orderCreateRequest.PatientId) ?? 
-            throw new InvalidOperationException($"Patient with id {orderCreateRequest.PatientId} not found.");
+        var patientEntity = _dbContext.Patients.SingleOrDefault(p => p.Id == orderCreateRequest.PatientId) ??
+                            throw new InvalidOperationException($"Patient with id {orderCreateRequest.PatientId} not found.");
 
         var orderEntity = new OrderEntity
         {
@@ -43,7 +42,7 @@ public class OrdersService(AppDbContext dbContext)
             PatientId = patientEntity.Id,
             Patient = patientEntity,
             Date = DateTime.UtcNow,
-            State = "created", // TODO : Replace with enum
+            State = "created", // TODO: Replace with enum
         };
         _dbContext.Orders.Add(orderEntity);
         _dbContext.SaveChanges();
@@ -54,7 +53,7 @@ public class OrdersService(AppDbContext dbContext)
     public Order UpdateOrder(long id, OrderUpdateRequest orderUpdateRequest)
     {
         var patientEntity = _dbContext.Patients.SingleOrDefault(p => p.Id == orderUpdateRequest.PatientId) ??
-            throw new InvalidOperationException($"Patient with id {orderUpdateRequest.PatientId} not found.");
+                            throw new InvalidOperationException($"Patient with id {orderUpdateRequest.PatientId} not found.");
 
         var orderEntity = _dbContext.Orders.SingleOrDefault(c => c.Id == id) ?? throw new InvalidOperationException("Order not found.");
         orderEntity.OrthosisInformation = orderUpdateRequest.OrthesisInfo;

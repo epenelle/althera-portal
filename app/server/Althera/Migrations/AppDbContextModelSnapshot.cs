@@ -71,7 +71,7 @@ namespace Althera.Migrations
                     b.Property<string>("OrthosisScan")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("PatientId")
+                    b.Property<long>("PatientId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("State")
@@ -117,7 +117,9 @@ namespace Althera.Migrations
                 {
                     b.HasOne("Althera.Models.Persistence.PatientEntity", "Patient")
                         .WithMany("Orders")
-                        .HasForeignKey("PatientId");
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Patient");
                 });

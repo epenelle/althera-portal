@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Althera.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240731142641_InitialCreate")]
+    [Migration("20240801144601_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -74,7 +74,7 @@ namespace Althera.Migrations
                     b.Property<string>("OrthosisScan")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("PatientId")
+                    b.Property<long>("PatientId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("State")
@@ -120,7 +120,9 @@ namespace Althera.Migrations
                 {
                     b.HasOne("Althera.Models.Persistence.PatientEntity", "Patient")
                         .WithMany("Orders")
-                        .HasForeignKey("PatientId");
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Patient");
                 });
