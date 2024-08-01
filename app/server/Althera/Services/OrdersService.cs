@@ -3,6 +3,7 @@ using Althera.Domain;
 using Althera.Extensions;
 using Althera.Models.Persistence;
 using Althera.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Althera.Services;
 
@@ -13,12 +14,18 @@ public class OrdersService(AppDbContext dbContext)
     public List<Order> GetAll()
     {
         var orderEntities = _dbContext.Orders.ToList();
+        _dbContext.Orders.Include(o => o.Patient).Load();
         return orderEntities.Select(order => order.ToDomain()).ToList();
     }
 
     public Order? GetOrder(long id)
     {
         var orderEntity = _dbContext.Orders.SingleOrDefault(c => c.Id == id);
+        if (orderEntity != null)
+        {
+            _dbContext.Entry(orderEntity).Reference(o => o.Patient).Load();
+        }
+
         return orderEntity?.ToDomain();
     }
 
@@ -33,7 +40,8 @@ public class OrdersService(AppDbContext dbContext)
             OrthosisInformation = orderCreateRequest.OrthesisInfo,
             OrthosisScan = orderCreateRequest.OrthesisScan,
             Comments = orderCreateRequest.OrthesisComment,
-            PatientId = orderCreateRequest.PatientId,
+            PatientId = patientEntity.Id,
+            Patient = patientEntity,
             Date = DateTime.UtcNow,
             State = "created", // TODO : Replace with enum
         };
@@ -51,7 +59,8 @@ public class OrdersService(AppDbContext dbContext)
         var orderEntity = _dbContext.Orders.SingleOrDefault(c => c.Id == id) ?? throw new InvalidOperationException("Order not found.");
         orderEntity.OrthosisInformation = orderUpdateRequest.OrthesisInfo;
         orderEntity.Comments = orderUpdateRequest.OrthesisComment;
-        orderEntity.PatientId = orderUpdateRequest.PatientId;
+        orderEntity.PatientId = patientEntity.Id;
+        orderEntity.Patient = patientEntity;
         _dbContext.SaveChanges();
 
         return orderEntity.ToDomain();

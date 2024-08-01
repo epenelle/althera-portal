@@ -18,5 +18,5 @@ public record OrderEntity
     public required long PatientId { get; set; }
 
     // Navigation property
-    public PatientEntity? Patient { get; set; }
+    public required PatientEntity Patient { get; set; }
 }

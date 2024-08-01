@@ -10,5 +10,5 @@ public record OrderModel
     public DateTime? OrderDate { get; set; }
     public string? OrderState { get; set; }
     public string? OrthesisComment { get; set; }
-    public long? PatientId { get; set; }
+    public required PatientModel Patient { get; init; }
 }
