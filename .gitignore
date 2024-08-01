@@ -3,4 +3,4 @@
 .vs/
 app/server/Althera/obj/
 app/server/Althera/bin/
-app/server/Migrations/
+app/server/Althera/Migrations/
