@@ -11,8 +11,8 @@ const Account = () => {
   }
 
   return (
-    <div className='flex flex-col justify-center pt-9 pb-9 bg-primary-dark-blue min-h-screen ml-[10vh] md:ml-[15vh]'>
-      <div className='flex flex-col grow w-4/5 mt-8 md:mt-16 mx-auto p-6 bg-light-white shadow-md rounded-lg justify-center'>
+    <div className='ml-[10vh] md:ml-[15vh]'>
+            <div className='w-4/5 mx-auto p-6 bg-light-white '>
         <div className='pb-4 flex items-center justify-center'>
           <MdAccountCircle size={30} className='mr-2' />
           <h1 className='text-center font-bold text-3xl p-2 md:text-4x1 text-secondary-dark-blue '>Gestion du compte</h1>
@@ -27,7 +27,7 @@ const Account = () => {
               Modification du mot de passe
           </div>
         </div>
-        <div className='flex grow justify-center items-center'>
+        <div className='flex grow justify-center items-center mt-8'>
           {activeSection === 'modifCompte' && <ModifAccount/>}
           {activeSection === 'modifPass' && <ModifPass />}
         </div>

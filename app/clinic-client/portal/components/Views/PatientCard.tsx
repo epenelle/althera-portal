@@ -75,7 +75,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
 
 
   return (
-    <div className='flex justify-center pt-9 pb-9 bg-primary-dark-blue min-h-screen ml-[10vh] md:ml-[15vh]'>
+    <div className='ml-[10vh] md:ml-[15vh]'>
       {isPopUpVisible && (
         <PopUp
           message={messagePopUp}
@@ -83,7 +83,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
           onOk={handleOk}
         />
       )}
-      <div className='w-4/5 mt-4 md:mt-16 mx-auto p-6 bg-light-white rounded-lg shadow-md'>
+      <div className='w-4/5 mx-auto p-6 bg-light-white '>
         <div className='border-b-2 border-light-gray pb-4 flex items-center justify-center'>
           <MdPerson size={30} className='mr-2' />
           <h1 className='text-center font-bold text-3xl p-2 md:text-4x1 text-secondary-dark-blue '>Fiche patient N°{id}</h1>
