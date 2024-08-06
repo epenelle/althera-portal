@@ -74,11 +74,20 @@ public class OrdersService
 
         return orderEntity.ToDomain();
     }
-
+/*
     public void DeleteOrder(long id)
     {
         var order = _dbContext.Orders.SingleOrDefault(c => c.Id == id) ?? throw new InvalidOperationException("Order not found.");
         _dbContext.Orders.Remove(order);
         _dbContext.SaveChanges();
+    } */
+    public void DeleteOrder(long id)
+    {
+        var order = _dbContext.Orders.SingleOrDefault(c => c.Id == id);
+        if(order != null){
+            order.IsDeleted = true;
+            order.DeleteTime = DateTime.UtcNow;
+            _dbContext.SaveChangesAsync();
+        }
     }
 }

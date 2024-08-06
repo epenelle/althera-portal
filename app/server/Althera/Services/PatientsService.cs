@@ -16,6 +16,14 @@ public class PatientsService(AppDbContext dbContext)
         return patientEntities.Select(patient => patient.ToDomain()).ToList();
     }
 
+    /*
+    // Get all patient Including soft deleted
+    public async Task<List<PatientDB>> GetAllPatientsIncludingDeletedAsync()
+    {
+        return await _context.Patients.IgnoreQueryFilters().ToListAsync();
+    }
+    */
+
     public Patient? GetPatient(long id)
     {
         var patientEntity = _dbContext.Patients.SingleOrDefault(x => x.Id == id);
@@ -49,12 +57,21 @@ public class PatientsService(AppDbContext dbContext)
         return patientEntity.ToDomain();
 
     }
-
+/*
     public void DeletePatient(long id)
     {
         // TODO : We might want to 'soft delete' patients, since some orders might be related to it.
         var patient = _dbContext.Patients.SingleOrDefault(p => p.Id == id) ?? throw new InvalidOperationException("Patient not found.");
         _dbContext.Patients.Remove(patient);
         _dbContext.SaveChanges();
+    }*/
+     public void DeletePatient(long id)
+    {
+        var patient = _dbContext.Patients.SingleOrDefault(p => p.Id == id);
+        if(patient != null){
+            patient.IsDeleted = true;
+            patient.DeleteTime = DateTime.UtcNow;
+            _dbContext.SaveChangesAsync();
+        }
     }
 }

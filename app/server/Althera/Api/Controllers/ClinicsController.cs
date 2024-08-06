@@ -27,16 +27,6 @@ public class ClinicsController(ClinicsService clinicServices) : ControllerBase
             // Same as Return 200
             return Ok(clinics);
         }
-        catch (ArgumentNullException argEx)
-        {
-            // Exception Null Args
-            return BadRequest("Invalid argument: " + argEx.Message);
-        }
-        catch (InvalidOperationException invOpEx)
-        {
-            // Exception invalide operation
-            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
-        }
         catch (Exception ex)
         {
             // Exception other error
@@ -59,16 +49,6 @@ public class ClinicsController(ClinicsService clinicServices) : ControllerBase
             // Same as Return 200
             return Ok(clinic.ToApi());
         }
-        catch (ArgumentNullException argEx)
-        {
-            // Exception Null Args
-            return BadRequest("Invalid argument: " + argEx.Message);
-        }
-        catch (InvalidOperationException invOpEx)
-        {
-            // Exception invalide operation
-            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
-        }
         catch (Exception ex)
         {
             // Exception other error
@@ -88,11 +68,6 @@ public class ClinicsController(ClinicsService clinicServices) : ControllerBase
 
             var clinic = _clinicsService.CreateClinic(clinicCreateRequest);
 
-            if (clinic == null)
-            {
-                return StatusCode(500, "Error Server");
-            }
-
             // Return code 201 => Create Successsfull
             return StatusCode(201, clinic.ToApi());
         }
@@ -100,11 +75,6 @@ public class ClinicsController(ClinicsService clinicServices) : ControllerBase
         {
             // Exception Null Args
             return BadRequest("Invalid argument: " + argEx.Message);
-        }
-        catch (InvalidOperationException invOpEx)
-        {
-            // Exception invalide operation
-            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
         }
         catch (Exception ex)
         {

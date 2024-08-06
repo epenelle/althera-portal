@@ -19,4 +19,8 @@ public record OrderEntity
 
     // Navigation property
     public required PatientEntity Patient { get; set; }
+
+    // Soft Delete Property
+    public bool IsDeleted { get; set; }
+    public DateTime? DeleteTime { get; set; }
 }

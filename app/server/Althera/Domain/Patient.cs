@@ -9,5 +9,8 @@ public record Patient
     public required string LastName { get; init; }
     public string? HealthInsuranceNumber { get; init; }
     public required long ClinicId { get; init; }
+    // Soft Delete Property
+    public bool IsDeleted { get; set; }
+    public DateTime? DeleteTime { get; set; }
 }
 

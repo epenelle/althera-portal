@@ -1,0 +1,6 @@
+DELETE 
+
+Soft Delete => new Colum => (True/False) => Delete 
++ Date => To check (to not store too long)
+
+May change true/False => With only Date (Null => Not Soft Delete) / (NotNull => Is Soft Delete => Check if 6 month+)

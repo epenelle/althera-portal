@@ -16,6 +16,7 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
 
         // Primary Key
         modelBuilder.Entity<ClinicEntity>()
@@ -36,6 +37,15 @@ public class AppDbContext : DbContext
             .HasOne(o => o.Patient)
             .WithMany(p => p.Orders)
             .HasForeignKey(o => o.PatientId);
+
+        //Soft Delete Patient
+        modelBuilder.Entity<PatientEntity>()
+            .HasQueryFilter(p => !p.IsDeleted);
+
+        //Soft Delete Order
+        modelBuilder.Entity<OrderEntity>()
+            .HasQueryFilter(o => !o.IsDeleted);
+
     }
 }
 

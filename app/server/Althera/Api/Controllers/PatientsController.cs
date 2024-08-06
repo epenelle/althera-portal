@@ -30,11 +30,6 @@ public class PatientsController(PatientsService patientServices) : ControllerBas
             // Exception Null Args
             return BadRequest("Invalid argument: " + argEx.Message);
         }
-        catch (InvalidOperationException invOpEx)
-        {
-            // Exception invalide operation
-            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
-        }
         catch (Exception ex)
         {
             // Exception other error
@@ -61,11 +56,6 @@ public class PatientsController(PatientsService patientServices) : ControllerBas
             // Exception Null Args
             return BadRequest("Invalid argument: " + argEx.Message);
         }
-        catch (InvalidOperationException invOpEx)
-        {
-            // Exception invalide operation
-            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
-        }
         catch (Exception ex)
         {
             // Exception other error
@@ -83,10 +73,6 @@ public class PatientsController(PatientsService patientServices) : ControllerBas
 
             var patient = _patientsService.CreatePatient(patientCreateRequest);
             
-            if(patient == null){
-                return StatusCode(500, "Error Server");
-            }
-            
             // Return code 201 => Create Successfull
             return StatusCode(201, patient.ToApi());
         }
@@ -94,11 +80,6 @@ public class PatientsController(PatientsService patientServices) : ControllerBas
         {
             // Exception Null Args
             return BadRequest("Invalid argument: " + argEx.Message);
-        }
-        catch (InvalidOperationException invOpEx)
-        {
-            // Exception invalide operation
-            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
         }
         catch (Exception ex)
         {
@@ -134,11 +115,6 @@ public class PatientsController(PatientsService patientServices) : ControllerBas
         {
             // Exception Null Args
             return BadRequest("Invalid argument: " + argEx.Message);
-        }
-        catch (InvalidOperationException invOpEx)
-        {
-            // Exception invalide operation
-            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
         }
         catch (Exception ex)
         {

@@ -19,4 +19,8 @@ public record PatientEntity
 
     // Propriété de navigation inverse
     public List<OrderEntity>? Orders { get; } = [];
+
+    // Soft Delete Property
+    public bool IsDeleted { get; set; }
+    public DateTime? DeleteTime { get; set; }
 }

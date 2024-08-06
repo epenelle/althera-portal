@@ -35,10 +35,6 @@ public class OrdersController : ControllerBase
         {
             return BadRequest("Invalid argument: " + argEx.Message);
         }
-        catch (InvalidOperationException invOpEx)
-        {
-            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
-        }
         catch (Exception ex)
         {
             return StatusCode(500, "Internal Server error: " + ex.Message);
@@ -62,10 +58,6 @@ public class OrdersController : ControllerBase
         catch (ArgumentNullException argEx)
         {
             return BadRequest("Invalid argument: " + argEx.Message);
-        }
-        catch (InvalidOperationException invOpEx)
-        {
-            return StatusCode(400, "Invalid operation: " + invOpEx.Message);
         }
         catch (Exception ex)
         {
@@ -91,10 +83,6 @@ public ActionResult<List<OrderModel>> GetOrdersByPatientId(long patientId)
     {
         return BadRequest("Invalid argument: " + argEx.Message);
     }
-    catch (InvalidOperationException invOpEx)
-    {
-        return StatusCode(400, "Invalid operation: " + invOpEx.Message);
-    }
     catch (Exception ex)
     {
         return StatusCode(500, "Internal Server error: " + ex.Message);
@@ -112,12 +100,12 @@ public ActionResult<List<OrderModel>> GetOrdersByPatientId(long patientId)
             }
 
             var order = _ordersService.CreateOrder(orderCreateRequest);
-            if (order == null)
-            {
-                return StatusCode(500, "Error Server");
-            }
 
             return StatusCode(201, order.ToApi());
+        }
+        catch (ArgumentNullException argEx)
+        {
+            return BadRequest("Invalid argument: " + argEx.Message);
         }
         catch (InvalidOperationException invOpEx)
         {
