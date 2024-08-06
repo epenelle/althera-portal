@@ -9,7 +9,7 @@ const transformPatientData = (patient: any, index: number = 0): Patient => ({
 
 export const fetchPatients = async (): Promise<Patient[]> => {
   try {
-	const response = await fetch('http://localhost:5125/patients', {
+	const response = await fetch('https://localhost:7025/patients', {
 	  method: "GET",
 	  headers: {
 		'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ export const fetchPatients = async (): Promise<Patient[]> => {
 
 export const fetchPatientById = async (id: string): Promise<Patient> => {
   try {
-	const response = await fetch(`http://localhost:5125/patients/${id}`, {
+	const response = await fetch(`https://localhost:7025/patients/${id}`, {
 	  method: "GET",
 	  headers: {
 		'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ export const fetchPatientById = async (id: string): Promise<Patient> => {
 
 export const addPatient = async (patient: Patient): Promise<{ success: boolean; message: string }> => {
     try {
-        const response = await fetch('http://localhost:5125/patients', {
+        const response = await fetch('https://localhost:7025/patients', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -75,7 +75,7 @@ export const addPatient = async (patient: Patient): Promise<{ success: boolean; 
 
 export const deleteById = async (id: string): Promise<{ success: boolean }> => {
 	try {
-	  const response = await fetch(`http://localhost:5125/patients/${id}`, {
+	  const response = await fetch(`https://localhost:7025/patients/${id}`, {
 		method: "DELETE",
 		headers: {
 		  'Content-Type': 'application/json'
