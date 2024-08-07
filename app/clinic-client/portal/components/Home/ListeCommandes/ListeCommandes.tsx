@@ -1,20 +1,24 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, {useEffect, useState  } from 'react';
+import Modal from 'react-modal';
 import ItemCard from '../ItemCard';
 import { BsPeopleFill } from 'react-icons/bs';
 import { FaSearch } from 'react-icons/fa';
 import { FaSortUp, FaSortDown } from 'react-icons/fa';
 import SelectCalendrier from '@/components/Helper/Calendrier';
 import PaginationMenu from '../../Helper/PaginationMenu';
-import { useRouter } from 'next/router';
 import { useGlobalContext } from '@/components/Helper/GlobalContext';
+import AddOrder from '@/components/Add/AddOrder';
+
+if (typeof window !== 'undefined') {
+    Modal.setAppElement(document.body);
+}
 
 const ListePatients = () => {
-    const router = useRouter();
+    {/* Orders recover*/}
     const { orders, fetchOrders } = useGlobalContext();
+    useEffect(() => {fetchOrders();}, []);
 
-    useEffect(() => {
-        fetchOrders();
-    }, []);
+    {/* Pagination system */}
     const [currentPage, setCurrentPage] = React.useState(1);
     const ordersPerPage = 10;
     const indexOfLastOrder = currentPage * ordersPerPage;
@@ -23,20 +27,24 @@ const ListePatients = () => {
 
     const totalPages = Math.ceil(orders.length / ordersPerPage);
     const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pageNumbers.push(i);
-    }
+    for (let i = 1; i <= totalPages; i++) pageNumbers.push(i);
+    const navigateToPage = (pageNumber: number): void => setCurrentPage(pageNumber);
 
-    const navigateToPage = (pageNumber: number): void => {
-      setCurrentPage(pageNumber);
-    };
-
-    const handleAddOrderClick = () => {
-      router.push('/Add?type=order');
-    };
+    {/* Modal system */}
+    const [isAddOrderModalVisible, setIsAddOrderModalVisible] = useState(false);
+    const openAddOrderModal = () => setIsAddOrderModalVisible(true);
+    const closeAddOrderModal = () => setIsAddOrderModalVisible(false);
 
     return (
         <div className='ml-[10vh] md:ml-[15vh]'>
+            <Modal
+                isOpen={isAddOrderModalVisible}
+                onRequestClose={closeAddOrderModal}
+                overlayClassName="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+                className="relative bg-white rounded-lg p-6 w-full max-w-lg mx-auto z-50 focus:outline-none"
+            >
+                <AddOrder onClose={closeAddOrderModal} />
+            </Modal>
             <div className='w-4/5 mx-auto p-6 bg-light-white '>
                 <div className='border-b-2 border-light-gray pb-4 flex items-center justify-center'>
                     <BsPeopleFill size={30} className='mr-2' />
@@ -48,7 +56,7 @@ const ListePatients = () => {
                         <FaSearch size={30} className='mt-4 md:mt-0 md:ml-2 shrink-0 self-center cursor-pointer hover:text-secondary-medium-blue' />
                     </div>
                     <button className='h-12 mt-4 mb-4  md:ml-5 bg-medium-green hover:bg-dark-green text-white font-bold py-2 px-4 transition duration-300 ease-in-out shadow-lg hover:shadow-xl rounded-lg'
-                    onClick={handleAddOrderClick}>
+                    onClick={openAddOrderModal}>
                         Ajouter
                     </button>
                 </div>
