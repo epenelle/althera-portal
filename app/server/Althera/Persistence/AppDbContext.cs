@@ -3,16 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Althera.Persistence;
 
-public class AppDbContext : DbContext
+public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<ClinicEntity> Clinics { get; set; }
     public DbSet<PatientEntity> Patients { get; set; }
     public DbSet<OrderEntity> Orders { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=MyDatabase;Trusted_Connection=True;");
-    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

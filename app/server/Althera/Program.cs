@@ -1,5 +1,6 @@
 using Althera.Persistence;
 using Althera.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +14,11 @@ builder.Services
                 .AllowAnyHeader()
             );
     })
-    .AddDbContext<AppDbContext>()
+    .AddDbContext<AppDbContext>(options => 
+    {
+        string? connectionString = builder.Configuration.GetRequiredSection("Database").GetValue<string>("ConnectionString");
+        options.UseSqlServer(connectionString);
+    })
     .AddScoped<PatientsService>()
     .AddScoped<OrdersService>()
     .AddScoped<ClinicsService>()
