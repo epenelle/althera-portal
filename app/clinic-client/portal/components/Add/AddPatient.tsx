@@ -22,7 +22,7 @@ const AddPatient: React.FC<AddOrderProps> = ({ onClose }) => {
 
   const handleOk = () => {
     setIsPopUpVisible(false);
-    router.push('/Home?type=patients');
+    onClose();
   };
 
   const handleCancel = () => {

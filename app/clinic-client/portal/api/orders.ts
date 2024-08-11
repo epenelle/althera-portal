@@ -23,6 +23,7 @@ export const fetchOrders = async (): Promise<Order[]> => {
 	  }
 	  const json = await response.json();
 	  const ordersData: Order[] = json.map((order: any, index: number) => transformOrder(order, index));
+	  console.log(ordersData);
 	  return ordersData;
 	} catch (error) {
 	  console.error('Error fetching orders:', error);

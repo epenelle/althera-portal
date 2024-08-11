@@ -4,8 +4,8 @@ import { fetchOrders as fetchOrdersFromAPI } from '@/api/orders';
 import { Patient, Order } from '@/Constants/Types';
 
 interface GlobalContextProps {
-    patients: Patient[];
-    orders: Order[];
+    Patients: Patient[];
+    Orders: Order[];
     fetchPatients: () => void;
     fetchOrders: () => void;
 }
@@ -13,8 +13,8 @@ interface GlobalContextProps {
 const GlobalContext = createContext<GlobalContextProps | undefined>(undefined);
 
 export const GlobalProvider = ({ children }: { children: ReactNode }) => {
-    const [patients, setPatients] = useState<Patient[]>([]);
-    const [orders, setOrders] = useState<Order[]>([]);
+    const [Patients, setPatients] = useState<Patient[]>([]);
+    const [Orders, setOrders] = useState<Order[]>([]);
 
     const fetchPatients = async () => {
         try {
@@ -35,7 +35,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
     };
 
     return (
-        <GlobalContext.Provider value={{ patients, orders, fetchPatients, fetchOrders }}>
+        <GlobalContext.Provider value={{ Patients, Orders, fetchPatients, fetchOrders }}>
             {children}
         </GlobalContext.Provider>
     );
