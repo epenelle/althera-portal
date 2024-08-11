@@ -12,7 +12,7 @@ const transformOrder = (order: any, index: number = 0): Order => ({
 
 export const fetchOrders = async (): Promise<Order[]> => {
 	try {
-	  const response = await fetch('https://localhost:7025/orders', {
+	  const response = await fetch('http://localhost:5125/orders', {
 		method: "GET",
 		headers: {
 		  'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ export const fetchOrders = async (): Promise<Order[]> => {
   
 export const fetchOrderById = async (id: string): Promise<Order> => {
 	try {
-	  const response = await fetch(`https://localhost:7025/orders/${id}`, {
+	  const response = await fetch(`http://localhost:5125/orders/${id}`, {
 		method: "GET",
 		headers: {
 		  'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ export const fetchOrderById = async (id: string): Promise<Order> => {
 
 export const fetchOrdersByIdPatient = async (id: string): Promise<Order[]> => {
 	try {
-	  const response = await fetch(`https://localhost:7025/orders/ByPatient/${id}`, {
+	  const response = await fetch(`http://localhost:5125/orders/ByPatient/${id}`, {
 		method: "GET",
 		headers: {
 		  'Content-Type': 'application/json'
@@ -76,7 +76,7 @@ export const fetchOrdersByIdPatient = async (id: string): Promise<Order[]> => {
 
 export const addOrder = async (order: Order): Promise<{ success: boolean; message: string }> => {
     try {
-        const response = await fetch('https://localhost:7025/orders', {
+        const response = await fetch('http://localhost:5125/orders', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -102,7 +102,7 @@ export const addOrder = async (order: Order): Promise<{ success: boolean; messag
 
 export const deleteById = async (id: string): Promise<{ success: boolean }> => {
 	try {
-	  const response = await fetch(`https://localhost:7025/orders/${id}`, {
+	  const response = await fetch(`http://localhost:5125/orders/${id}`, {
 		method: "DELETE",
 		headers: {
 		  'Content-Type': 'application/json'
