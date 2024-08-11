@@ -1,21 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Select, { GroupBase } from 'react-select';
 import PopUp from '../Helper/PopUp';
 import { BsPeopleFill } from 'react-icons/bs';
 import { addOrder } from '@/api/orders';
+import { fetchPatients } from '@/api/patients';
+import { Patient } from '@/Constants/Types';
 
 type AddOrderProps = {
   onClose: () => void;
 };
 
-const AddOrder: React.FC<AddOrderProps> = ({ onClose }) => {
-  const [isPopUpVisible, setIsPopUpVisible] = React.useState(false);
-  const [typePopUp, setTypePopUp] = React.useState(false);
-  const [messagePopUp, setMessagePopUp] = React.useState("");
+type PatientOption = {
+  value?: Patient;
+  label?: string;
+};
 
-  const [patientId, setPatientId] = React.useState<number>(1);
-  const [orthesisModel, setOrthesisModel] = React.useState<string>("");
-  const [orthesisComment, setOrthesisComment] = React.useState<string>("");
-  const isFormValid = patientId && orthesisModel;
+
+const AddOrder: React.FC<AddOrderProps> = ({ onClose }) => {
+  const [isPopUpVisible, setIsPopUpVisible] = useState(false);
+  const [typePopUp, setTypePopUp] = useState(false);
+  const [messagePopUp, setMessagePopUp] = useState("");
+
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
+  const [orthesisModel, setOrthesisModel] = useState<string>("");
+  const [orthesisComment, setOrthesisComment] = useState<string>("");
+  const isFormValid = selectedPatient && orthesisModel;
+
+  useEffect(() => {
+    const loadPatients = async () => {
+      const patientsData = await fetchPatients();
+      setPatients(patientsData);
+    };
+    loadPatients();
+  }, []);
 
   const handleOk = () => {
     setIsPopUpVisible(false);
@@ -31,17 +49,35 @@ const AddOrder: React.FC<AddOrderProps> = ({ onClose }) => {
   };
 
   const handleAddOrder = async () => {
-    try {
-      const response = await addOrder({ patientId, orthesisModel, orthesisComment });
-      if (response.success) {
-        showPopUp("La commande a bien été ajoutée !", false);
-      } else {
-        showPopUp("Erreur lors de l'ajout de la commande.", true);
+    if (selectedPatient && orthesisModel) {
+      const orderData = {
+        patientId: selectedPatient.value.id,
+        orthesisModel,
+        orthesisComment,
+      };
+      try {
+        await addOrder(orderData);
+        setMessagePopUp("Commande ajoutée avec succès.");
+        setTypePopUp(false);
+        setIsPopUpVisible(true);
+      } catch (error) {
+        setMessagePopUp(
+          "Une erreur est survenue lors de l'ajout de la commande."
+        );
+        setTypePopUp(false);
+        setIsPopUpVisible(true);
       }
-    } catch (error) {
-      showPopUp("Erreur lors de l'ajout de la commande.", true);
     }
   };
+
+  const patientOptions: GroupBase<PatientOption>[] = [
+    {
+      options: patients.map(patient => ({
+        value: patient,
+        label: `${patient.firstName} ${patient.lastName}`,
+      })),
+    },
+  ];
 
   return (
     <div>
@@ -59,10 +95,14 @@ const AddOrder: React.FC<AddOrderProps> = ({ onClose }) => {
       </div>
       <div className="flex flex-col mb-4 mt-8">
         <div className="flex items-center mb-2">
-          <label className="w-2/5 text-right whitespace-nowrap">Patient id : </label>
-          <input type='number' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
-          value={patientId}
-          onChange={(e) => setPatientId(parseInt(e.target.value))} autoFocus/>
+          <label className="w-2/5 text-right whitespace-nowrap">Patient : </label>
+          <Select
+            className="ml-4 w-3/5"
+            options={patientOptions as unknown as readonly (Patient | GroupBase<Patient>)[]}
+            value={selectedPatient}
+            onChange={setSelectedPatient}
+            placeholder="Sélectionner un patient"
+          />
         </div>
         <div className="flex items-center mb-2">
           <label className="w-2/5 text-right whitespace-nowrap">Modèle d'attelle : </label>
@@ -75,19 +115,9 @@ const AddOrder: React.FC<AddOrderProps> = ({ onClose }) => {
           <textarea required className="w-56 ml-4 h-12 border border-light-gray text-base px-5 resize-none overflow-hidden" rows={1} onInput={(e) => {
             const target = e.target as HTMLTextAreaElement;
             target.style.height = 'auto';
-            target.style.height = `${target.scrollHeight}px`;
-          }} 
-          value={orthesisComment}
-          onChange={(e) => setOrthesisComment(e.target.value)}/>
+          }} value={orthesisComment} onChange={(e) => setOrthesisComment(e.target.value)} />
         </div>
-      </div>
-      <div className="flex justify-center">
-        <button className="h-11 pl-5 pr-5 bg-primary-light-blue outline-none rounded-full shadow-sm cursor-pointer text-base text-white font-semibold
-        transform active:scale-95 transition duration-150 ease-in-out hover:bg-secondary-medium-blue disabled:bg-medium-gray"
-        disabled={!isFormValid}
-        onClick={handleAddOrder}>
-          Ajouter la commande
-        </button>
+        <button onClick={handleAddOrder} disabled={!isFormValid} className="mt-4 bg-blue-500 text-white p-2 rounded-full">Ajouter la commande</button>
       </div>
     </div>
   );
