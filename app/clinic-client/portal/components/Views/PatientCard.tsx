@@ -25,7 +25,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
   const [healthInsuranceNumber, setHealthInsuranceNumber] = useState('');
 
   useEffect(() => {
-    const fetchPatients = async () => {
+    const fetchPatient = async () => {
       try {
         const data = await fetchPatientById(id);
         setPatientData(data);
@@ -45,7 +45,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
         console.error('Error fetching orders:', error);
       }
     };
-    fetchPatients();
+    fetchPatient();
     fetchOrders();
   }, [id]);
 
