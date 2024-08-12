@@ -90,7 +90,7 @@ const ListePatients = () => {
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className='border-2 border-light-gray rounded-lg p-2 w-full' />
                     </div>
-                    <button className='h-12 mt-4 mb-4  md:ml-5 bg-medium-green hover:bg-dark-green text-white font-bold py-2 px-4 transition duration-300 ease-in-out shadow-lg hover:shadow-xl rounded-lg'
+                    <button className='h-12 mt-4 mb-4  md:ml-5 bg-primary-light-blue hover:bg-secondary-medium-blue text-white font-bold py-2 px-4 transition duration-300 ease-in-out shadow-lg hover:shadow-xl rounded-lg'
                     onClick={openAddOrderModal}>
                         Ajouter
                     </button>
