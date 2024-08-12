@@ -19,7 +19,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
   const [messagePopUp, setMessagePopUp] = React.useState("");
   
   const [patientData, setPatientData] = useState<Patient | null>(null);
-  const [ orders, setOrders ] = useState<Order[]>([]);
+  const [orders, setOrders ] = useState<Order[]>([]);
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [healthInsuranceNumber, setHealthInsuranceNumber] = useState('');
