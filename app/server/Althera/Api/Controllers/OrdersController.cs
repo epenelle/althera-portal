@@ -3,6 +3,7 @@ using Althera.Api.Requests;
 using Althera.Extensions;
 using Althera.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace Althera.Api.Controllers;
 
@@ -18,27 +19,41 @@ public class OrdersController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<List<OrderModel>> GetAllOrders()
+    public ActionResult<List<OrderModel>> GetAllOrders([FromQuery] long patientId)
     {
-        try
+        if (patientId > 0)
         {
-            var orders = _ordersService.GetAll().Select(order => order.ToApi()).ToList();
-
-            if (orders == null)
+            try
             {
-                return NotFound("No Orders Found");
-            }
+                var orders = _ordersService.GetOrdersByPatientId(patientId).Select(order => order.ToApi()).ToList();
 
-            return Ok(orders);
+                return Ok(orders);
+            }
+            catch (ArgumentNullException argEx)
+            {
+                return BadRequest("Invalid argument: " + argEx.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server error: " + ex.Message);
+            }
         }
-        catch (ArgumentNullException argEx)
+        else
         {
-            return BadRequest("Invalid argument: " + argEx.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, "Internal Server error: " + ex.Message);
-        }
+            try 
+            {
+                var orders = _ordersService.GetAll().Select(order => order.ToApi()).ToList();
+                return Ok(orders);
+            }
+            catch (ArgumentNullException argEx)
+            {
+                return BadRequest("Invalid argument: " + argEx.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server error: " + ex.Message);
+            }
+        }    
     }
 
     [HttpGet("{id}")]
@@ -54,30 +69,6 @@ public class OrdersController : ControllerBase
             }
 
             return Ok(order.ToApi());
-        }
-        catch (ArgumentNullException argEx)
-        {
-            return BadRequest("Invalid argument: " + argEx.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, "Internal Server error: " + ex.Message);
-        }
-    }
-
-    [HttpGet("ByPatient/{patientId}")]
-    public ActionResult<List<OrderModel>> GetOrdersByPatientId(long patientId)
-    {
-        try
-        {
-            var orders = _ordersService.GetOrdersByPatientId(patientId).Select(order => order.ToApi()).ToList();
-
-            if (orders.Count == 0)
-            {
-                return StatusCode(204, "No Orders Found for this user");
-            }
-
-            return Ok(orders);
         }
         catch (ArgumentNullException argEx)
         {
