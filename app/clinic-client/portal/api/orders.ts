@@ -47,7 +47,7 @@ export const fetchOrderById = async (id: string): Promise<Order> => {
 	  const orderData: Order = transformOrder(order);
 	  return orderData;
 	} catch (error) {
-	  console.error(`Error fetching patient with id ${id}:`, error);
+	  console.error(`Error fetching order with id ${id}:`, error);
 	  throw error;
 	}
 };
