@@ -38,7 +38,7 @@ const PatientCard = ({data}: Props) => {
                         <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.id}</h1>
                         <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.patient.lastName}</h1>
                         <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.patient.firstName}</h1>
-                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{format(new Date(data.orderDate),'dd/MM HH:mm')}</h1>
+                        <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{format(new Date(data.orderDate),'yyyy-MM-dd HH:mm')}</h1>
                         <h1 className='font-bold text-base text-secondary-dark-blue truncate'>{data.orderState}</h1>
                         <IoIosArrowForward size={24} className='font-bold justify-self-end text-secondary-dark-blue hover:text-primary-light-blue' />
                     </div>
