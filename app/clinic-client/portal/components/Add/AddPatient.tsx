@@ -62,18 +62,18 @@ const AddPatient: React.FC<AddOrderProps> = ({ onClose }) => {
         <BsPeopleFill size={30} className='mr-2' />
         <h1 className='text-center font-bold text-3xl p-2 md:text-4x1 text-secondary-dark-blue '>Ajout patient</h1>
       </div>
-      <div className="flex flex-col mb-4 mt-8">
+        <div className="flex items-center mb-4 mt-8">
+          <label className="w-2/5 text-right whitespace-nowrap">Prénom : </label>
+          <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)} autoFocus/>
+        </div>
+      <div className="flex flex-col mb-2">
         <div className="flex items-center mb-2">
           <label className="w-2/5 text-right whitespace-nowrap">Nom : </label>
           <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
             value={lastName}
-            onChange={(e) => setLastName(e.target.value)} autoFocus/>
-        </div>
-        <div className="flex items-center mb-2">
-          <label className="w-2/5 text-right whitespace-nowrap">Prénom : </label>
-          <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)} />
+            onChange={(e) => setLastName(e.target.value)}/>
         </div>
         <div className="flex items-center mb-2">
           <label className="w-2/5 text-right whitespace-nowrap">Numéro<br />d'assurance maladie : </label>
