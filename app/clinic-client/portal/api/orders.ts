@@ -52,9 +52,9 @@ export const fetchOrderById = async (id: string): Promise<Order> => {
 	}
 };
 
-export const fetchPatientOrders = async (id: string): Promise<Order[]> => {
+export const fetchPatientOrders = async (patientId: string): Promise<Order[]> => {
 	try {
-	  const response = await fetch(`${baseUrl}?patientId=${id}`, {
+	  const response = await fetch(`${baseUrl}?patientId=${patientId}`, {
 		method: "GET",
 		headers: {
 		  'Content-Type': 'application/json'
