@@ -95,7 +95,7 @@ const AddOrder: React.FC<AddOrderProps> = ({ onClose }) => {
       </div>
       <div className="flex flex-col mb-4 mt-8">
         <div className="flex items-center mb-2">
-          <label className="w-2/5 text-right whitespace-nowrap">Patient : </label>
+          <label className="w-2/5 text-right whitespace-nowrap">Patient </label>
           <Select
             className="ml-4 w-3/5"
             options={patientOptions as unknown as readonly (Patient | GroupBase<Patient>)[]}
@@ -105,13 +105,16 @@ const AddOrder: React.FC<AddOrderProps> = ({ onClose }) => {
           />
         </div>
         <div className="flex items-center mb-2">
-          <label className="w-2/5 text-right whitespace-nowrap">Modèle d'attelle : </label>
-          <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
+          <label className="w-2/5 text-right whitespace-nowrap">Modèle d'attelle </label>
+          <input
+            type='text'
+            required 
+            className="input-common" 
           value={orthesisModel}
           onChange={(e) => setOrthesisModel(e.target.value)}/>
         </div>
         <div className="flex items-center mb-2">
-          <label className="w-2/5 text-right whitespace-nowrap">Infos attelle : </label>
+          <label className="w-2/5 text-right whitespace-nowrap">Infos attelle </label>
           <textarea required className="w-56 ml-4 h-12 border border-light-gray text-base px-5 resize-none overflow-hidden" rows={1} onInput={(e) => {
             const target = e.target as HTMLTextAreaElement;
             target.style.height = 'auto';
