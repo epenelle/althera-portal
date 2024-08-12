@@ -16,8 +16,8 @@ const Nav = ({openNav}:Props) => {
         router.push("/LoginPage");
     };
 
-    const handleMenuClick = (type: string) => {
-        router.push('/Home?type=' + type);
+    const handleMenuClick = (type: string | undefined) => {
+        type === undefined ? router.push('/Home') : router.push('/Home?type=' + type);
     };
     
     return (

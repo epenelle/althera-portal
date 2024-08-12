@@ -19,7 +19,7 @@ const Home = () => {
           <ResponsiveNav />
         <main>
           <GlobalProvider>
-            {type === 'dashboard' && <Statistics />}
+            {type === undefined && <Statistics />}
             {type === 'patients' && <ListePatients/>}
             {type === 'orders' && <ListeCommandes/>}
             {type === 'account' && <Account />}
