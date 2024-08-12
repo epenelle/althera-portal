@@ -64,20 +64,20 @@ const AddPatient: React.FC<AddOrderProps> = ({ onClose }) => {
       </div>
         <div className="flex items-center mb-4 mt-8">
           <label className="w-2/5 text-right whitespace-nowrap">Prénom : </label>
-          <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
+          <input type='text' required className="ml-4 h-12 border-b border-b-light-gray text-base px-5" 
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)} autoFocus/>
         </div>
       <div className="flex flex-col mb-2">
         <div className="flex items-center mb-2">
           <label className="w-2/5 text-right whitespace-nowrap">Nom : </label>
-          <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
+          <input type='text' required className="ml-4 h-12 border-b border-b-light-gray text-base px-5" 
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}/>
         </div>
         <div className="flex items-center mb-2">
           <label className="w-2/5 text-right whitespace-nowrap">Numéro<br />d'assurance maladie : </label>
-          <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
+          <input type='text' required className="ml-4 h-12 border-b border-b-light-gray text-base px-5" 
             value={numAssu}
             onChange={(e) => setNumAssu(e.target.value)} />
         </div>
