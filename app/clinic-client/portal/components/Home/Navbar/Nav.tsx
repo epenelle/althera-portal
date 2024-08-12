@@ -30,13 +30,13 @@ const Nav = ({openNav}:Props) => {
                     <Image src="/images/logo_althera_full_blanc.png" alt="Logo" width={150} height={70} priority 
                     className="object-contain object-center"/>
                 </div>
-                <div className='flex flex-col items-center space-y-5 w-full'>
+                <div className='flex flex-col items-center space-y-2 w-full'>
                     {navLinks.map((link)=>{
                         return (
                             <button
                                 key={link.id}
                                 onClick={() => handleMenuClick(link.url)}
-                                className='text-lg font-semibold cursor-pointer hover:text-secondary-light-blue transition-all duration-200 text-white'>{link.label}
+                                className='block text-lg font-semibold hover:text-secondary-light-blue transition-all duration-200 text-white w-full py-2'>{link.label}
                             </button>
                         )
                     })}
