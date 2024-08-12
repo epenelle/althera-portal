@@ -4,6 +4,6 @@
 
 @layer components {
     .input-common {
-        @apply ml-4 h-12 border-b border-b-light-gray text-base px-5;
+        @apply ml-2 h-12 border-b border-b-light-gray text-base px-5 focus:outline-none focus:border-b-primary-light-blue;
     }
 }
