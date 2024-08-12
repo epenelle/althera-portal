@@ -90,7 +90,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
         </div>
         <div className="flex flex-col mb-4 mt-8">
           <div className="flex items-center mb-2">
-            <label className="w-2/5 text-right whitespace-nowrap">Prénom : </label>
+            <label className="w-2/5 text-right whitespace-nowrap">Prénom</label>
             <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
             disabled={!edit}
             value={firstName}
@@ -98,7 +98,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
             {!edit && <MdLock size={20} className='ml-2' />}
           </div>
           <div className="flex items-center mb-2">
-            <label className="w-2/5 text-right whitespace-nowrap">Nom : </label>
+            <label className="w-2/5 text-right whitespace-nowrap">Nom</label>
             <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
             disabled={!edit}
             value={lastName}
@@ -106,7 +106,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
             {!edit && <MdLock size={20} className='ml-2' />}
           </div>
           <div className="flex items-center mb-2">
-            <label className="w-2/5 text-right whitespace-nowrap">Numéro de <br /> d'assurance maladie : </label>
+            <label className="w-2/5 text-right whitespace-nowrap">Numéro <br/> d'assurance maladie</label>
             <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
             disabled={!edit}
             value={healthInsuranceNumber}
