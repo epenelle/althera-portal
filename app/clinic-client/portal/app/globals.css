@@ -1,3 +1,9 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@layer components {
+    .input-common {
+        @apply ml-4 h-12 border-b border-b-light-gray text-base px-5;
+    }
+}

@@ -60,24 +60,27 @@ const AddPatient: React.FC<AddOrderProps> = ({ onClose }) => {
       )}
       <div className='border-b-2 border-light-gray pb-4 flex items-center justify-center'>
         <BsPeopleFill size={30} className='mr-2' />
-        <h1 className='text-center font-bold text-3xl p-2 md:text-4x1 text-secondary-dark-blue '>Ajout patient</h1>
+        <h1 className='text-center font-bold text-3xl p-2 md:text-4x1 text-secondary-dark-blue'>Ajout patient</h1>
       </div>
         <div className="flex items-center mb-4 mt-8">
           <label className="w-2/5 text-right whitespace-nowrap">Prénom : </label>
-          <input type='text' required className="ml-4 h-12 border-b border-b-light-gray text-base px-5" 
+          <input 
+            type='text' required className="input-common" 
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)} autoFocus/>
         </div>
       <div className="flex flex-col mb-2">
         <div className="flex items-center mb-2">
           <label className="w-2/5 text-right whitespace-nowrap">Nom : </label>
-          <input type='text' required className="ml-4 h-12 border-b border-b-light-gray text-base px-5" 
+          <input 
+            type='text' required className="input-common" 
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}/>
         </div>
         <div className="flex items-center mb-2">
           <label className="w-2/5 text-right whitespace-nowrap">Numéro<br />d'assurance maladie : </label>
-          <input type='text' required className="ml-4 h-12 border-b border-b-light-gray text-base px-5" 
+          <input type='text' required 
+            className="input-common" 
             value={numAssu}
             onChange={(e) => setNumAssu(e.target.value)} />
         </div>
