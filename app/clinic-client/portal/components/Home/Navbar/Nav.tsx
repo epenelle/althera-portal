@@ -1,9 +1,7 @@
 import React from 'react';
 import Image from "next/legacy/image";
 import { navLinks } from '@/Constants/Constants';
-import Link from 'next/link';
 import { FaBars } from 'react-icons/fa';
-import { MdLanguage } from 'react-icons/md';
 import { CiLogout } from 'react-icons/ci';
 import { useRouter } from 'next/navigation';
 
@@ -16,7 +14,6 @@ const Nav = ({openNav}:Props) => {
 
     const handleSubmit = async (e: React.MouseEvent<SVGElement, MouseEvent>) => {
         router.push("/LoginPage");
-
     };
 
     const handleMenuClick = (type: string) => {
@@ -41,7 +38,6 @@ const Nav = ({openNav}:Props) => {
                     })}
                 </div>
                 <div className='flex flex-col items-center space-y-8'>
-                    <MdLanguage className='w-6 h-6 cursor-pointer hover:text-light-white'/>
                     <CiLogout className='w-6 h-6 cursor-pointer hover:text-medium-red' onClick={handleSubmit}  />
                 </div>
             </div>
