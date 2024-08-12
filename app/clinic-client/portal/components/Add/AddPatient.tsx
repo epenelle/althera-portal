@@ -76,7 +76,7 @@ const AddPatient: React.FC<AddOrderProps> = ({ onClose }) => {
             onChange={(e) => setFirstName(e.target.value)} />
         </div>
         <div className="flex items-center mb-2">
-          <label className="w-2/5 text-right whitespace-nowrap">Numéro de <br /> d'assurance maladie : </label>
+          <label className="w-2/5 text-right whitespace-nowrap">Numéro<br />d'assurance maladie : </label>
           <input type='text' required className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
             value={numAssu}
             onChange={(e) => setNumAssu(e.target.value)} />
