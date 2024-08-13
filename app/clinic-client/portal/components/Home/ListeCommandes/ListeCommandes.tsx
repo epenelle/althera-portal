@@ -1,9 +1,7 @@
 import React, {useEffect, useState  } from 'react';
 import Modal from 'react-modal';
 import ItemCard from '../ItemCard';
-import { BsPeopleFill } from 'react-icons/bs';
-import { FaSortUp, FaSortDown } from 'react-icons/fa';
-import SelectCalendrier from '@/components/Helper/Calendrier';
+import { FiBox } from 'react-icons/fi';
 import PaginationMenu from '../../Helper/PaginationMenu';
 import { useGlobalContext } from '@/components/Helper/GlobalContext';
 import AddOrder from '@/components/Add/AddOrder';
@@ -76,7 +74,7 @@ const ListePatients = () => {
             </Modal>
             <div className='w-4/5 mx-auto p-6 bg-light-white '>
                 <div className='border-b-2 border-light-gray pb-4 flex items-center justify-center'>
-                    <BsPeopleFill size={30} className='mr-2' />
+                    <FiBox size={30} className='mr-2' />
                     <h1 className='text-center font-bold text-3xl p-2 md:text-4x1 text-secondary-dark-blue '>Liste des commandes</h1>
                 </div>
                 <div className='flex flex-col md:flex-row justify-center items-center w-full mt-4'>
