@@ -2,7 +2,7 @@ export const navLinks = [
   {
     id: 1,
     url: undefined,
-    label: "Tableau de bord",
+    label: "Accueil",
   },
   {
     id: 2,
