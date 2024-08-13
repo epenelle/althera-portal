@@ -7,7 +7,7 @@ public record Order
     public string? OrthosisInformation { get; set; }
     public string? OrthosisScan { get; set; }
     public DateTime? Date { get; set; }
-    public string? State { get; set; }
+    public OrderState State { get; set; }
     public string? Comments { get; set; }
     public required Patient Patient { get; set; }
     // Soft Delete Property

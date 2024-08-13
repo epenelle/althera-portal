@@ -31,7 +31,7 @@ public static class OrderExtensions
             OrthesisComment = orderDomain.Comments,
             OrthesisScan = orderDomain.OrthosisScan,
             OrderDate = orderDomain.Date,
-            OrderState = orderDomain.State,
+            OrderState = orderDomain.State.ToString(),
             Patient = orderDomain.Patient.ToApi(),
         };
     }

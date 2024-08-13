@@ -52,7 +52,7 @@ public class OrdersService
             PatientId = patientEntity.Id,
             Patient = patientEntity,
             Date = DateTime.UtcNow,
-            State = "created", // TODO: Replace with enum
+            State = OrderState.Submitted,
         };
         _dbContext.Orders.Add(orderEntity);
         _dbContext.SaveChanges();

@@ -1,3 +1,4 @@
+using Althera.Domain;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,7 +12,7 @@ public record OrderEntity
     public string? OrthosisInformation { get; set; }
     public string? OrthosisScan { get; set; }
     public DateTime? Date { get; set; }
-    public string? State { get; set; }
+    public OrderState State { get; set; }
     public string? Comments { get; set; }
 
     [ForeignKey("patientId")]

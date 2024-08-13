@@ -26,7 +26,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasOne(p => p.Clinic)
             .WithMany(c => c.Patients)
             .HasForeignKey(p => p.ClinicId);
-        
+
         // Foreign Key
         modelBuilder.Entity<OrderEntity>()
             .HasOne(o => o.Patient)
@@ -41,6 +41,10 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         modelBuilder.Entity<OrderEntity>()
             .HasQueryFilter(o => !o.IsDeleted);
 
+        // Enum to string conversion
+        modelBuilder.Entity<OrderEntity>()
+            .Property(o => o.State)
+            .HasConversion<string>();
     }
 }
 
