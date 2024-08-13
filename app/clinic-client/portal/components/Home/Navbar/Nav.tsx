@@ -25,8 +25,8 @@ const Nav = ({openNav}:Props) => {
             <div className='fixed top-0 left-0 z-20 items-center p-5 md:hidden'>
                 <FaBars onClick={openNav} className='w-6 h-6 cursor-pointer'/>
             </div>
-            <div className='fixed left-0 top-0 h-full z-10 bg-primary-dark-blue shadow-lg hidden md:flex flex-col items-center py-10 -col justify-between'>
-                <div className='px-5 mt-5'>
+            <div className='fixed left-0 top-0 h-full z-10 bg-primary-dark-blue shadow-lg hidden md:flex flex-col items-center -col justify-between'>
+                <div className='px-5'>
                     <Image src="/images/logo_althera_blanc.png" alt="Logo" width={150} height={70} priority 
                     className="object-contain object-center"/>
                 </div>
