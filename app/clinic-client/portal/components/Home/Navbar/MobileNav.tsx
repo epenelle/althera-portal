@@ -26,7 +26,7 @@ const MobileNav = ({closeNav, nav}:Props) => {
     return (
         <div className={`transform ${ResponsiveNav} transition-all duration-500 fixed top-0 left-0 z-50 h-[100vh] right-0 bottom-0 bg-primary-light-blue`}>
             <div>
-                <Image src="/images/logo_althera_full_blanc.png" alt="Logo" width={180} height={180} className='mt-5 ml-5'/>
+                <Image src="/images/logo_althera_blanc.png" alt="Logo" width={180} height={180} className='mt-5 ml-5'/>
                 <BiX onClick={closeNav} className='w-8 h-8 absolute top-[2rem] text-black z-[202] right-[2rem]'/>
             </div>
             <div className='relative z-[201] space-y-12 flex flex-col items-center justify-center h-[60%]'>
