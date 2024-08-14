@@ -3,13 +3,15 @@ import PopUp from '../Helper/PopUp';
 import { BsPeopleFill } from 'react-icons/bs';
 import { useRouter } from 'next/router';
 import { addPatient } from '@/api/patients';
+import { Patient } from '@/Constants/Types';
 
-type AddOrderProps = {
+type AddPatientProps = {
   onClose: () => void;
+  onPatientAdded: (patient: Patient) => void;
 };
 
 
-const AddPatient: React.FC<AddOrderProps> = ({ onClose }) => {
+const AddPatient: React.FC<AddPatientProps> = ({ onClose, onPatientAdded }) => {
   const router = useRouter();
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
   const [typePopUp, setTypePopUp] = useState(false);
@@ -40,11 +42,15 @@ const AddPatient: React.FC<AddOrderProps> = ({ onClose }) => {
       const response = await addPatient({ firstName, lastName, healthInsuranceNumber: numAssu, ClinicId: '1' });
       if (response.success) {
         showPopUp("Le patient a bien été ajouté !", false);
+        if (response.patient) {
+          onPatientAdded(response.patient);
+        }
       } else {
-        showPopUp("Erreur lors de l'ajout du patient.", true);
+        showPopUp("Erreur lors de l'ajout du patient !", true);
       }
     } catch (error) {
-      showPopUp("Erreur lors de l'ajout du patient.", true);
+      console.error('Error adding patient:', error);
+      showPopUp("Erreur lors de l'ajout du patient !", true);
     }
   };
 

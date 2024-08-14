@@ -49,7 +49,7 @@ export const fetchPatientById = async (id: string): Promise<Patient> => {
   }
 };
 
-export const addPatient = async (patient: Patient): Promise<{ success: boolean; message: string }> => {
+export const addPatient = async (patient: Patient): Promise<{ success: boolean; message: string; patient:Patient | null }> => {
     try {
         const response = await fetch(`${baseUrl}`, {
             method: 'POST',
@@ -61,16 +61,18 @@ export const addPatient = async (patient: Patient): Promise<{ success: boolean; 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        await response.json();
+        const rep = await response.json();
         return {
             success: true,
-            message: 'Patient added successfully'
+            message: 'Patient added successfully',
+			patient : rep
         };
     } catch (error) {
         console.error('Error adding patient:', error);
         return {
             success: false,
-            message: `Error adding patient: ${(error as Error).message}`
+            message: `Error adding patient: ${(error as Error).message}`,
+			patient : null
         };
     }
 };

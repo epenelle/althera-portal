@@ -8,6 +8,7 @@ import PaginationMenu from '../../Helper/PaginationMenu';
 import { useGlobalContext } from '@/components/Helper/GlobalContext';
 import AddPatient from '@/components/Add/AddPatient';
 import { Patient } from '@/Constants/Types';
+import { useRouter } from 'next/router';
 
 if (typeof window !== 'undefined') {
     Modal.setAppElement(document.body);
@@ -21,10 +22,13 @@ const ListePatients = () => {
     {/* Modal system */}
     const [isAddOrderModalVisible, setIsAddOrderModalVisible] = useState(false);
     const openAddOrderModal = () => setIsAddOrderModalVisible(true);
-    const closeAddOrderModal = async () => {
-        fetchPatients();
-        setDisplayedPatients(Patients);
+    const closeAddOrderModal = () => {
         setIsAddOrderModalVisible(false);
+    };
+
+    const router = useRouter();
+    const handleAddPatient = (newPatient: Patient) => {
+        router.push(`/View?type=patient&num=${newPatient.id}`);
     };
 
     {/* Search bar */}
@@ -54,7 +58,7 @@ const ListePatients = () => {
         setDisplayedPatients(searchResults);
     };
 
-      {/* Pagination system */}
+    {/* Pagination system */}
     const [currentPage, setCurrentPage] = React.useState(1);
     const patientsPerPage = 10;
     const indexOfLastPatient = currentPage * patientsPerPage;
@@ -74,7 +78,7 @@ const ListePatients = () => {
                 overlayClassName="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
                 className="relative bg-white rounded-lg p-6 w-full max-w-lg mx-auto z-50 focus:outline-none"
             >
-                <AddPatient onClose={closeAddOrderModal} />
+                <AddPatient onClose={closeAddOrderModal} onPatientAdded={handleAddPatient} />
             </Modal>
             <div className='w-4/5 mx-auto p-6 bg-light-white '>
                 <div className='border-b-2 border-light-gray pb-4 flex items-center justify-center'>

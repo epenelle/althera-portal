@@ -2,10 +2,14 @@ import React, {useEffect, useState  } from 'react';
 import Modal from 'react-modal';
 import ItemCard from '../ItemCard';
 import { FiBox } from 'react-icons/fi';
+import { BsPeopleFill } from 'react-icons/bs';
+import { FaSortUp, FaSortDown } from 'react-icons/fa';
+import SelectCalendrier from '@/components/Helper/Calendrier';
 import PaginationMenu from '../../Helper/PaginationMenu';
 import { useGlobalContext } from '@/components/Helper/GlobalContext';
 import AddOrder from '@/components/Add/AddOrder';
 import { Order } from '@/Constants/Types';
+import { useRouter } from 'next/router';
 
 if (typeof window !== 'undefined') {
     Modal.setAppElement(document.body);
@@ -19,11 +23,15 @@ const ListePatients = () => {
     {/* Modal system */}
     const [isAddOrderModalVisible, setIsAddOrderModalVisible] = useState(false);
     const openAddOrderModal = () => setIsAddOrderModalVisible(true);
-    const closeAddOrderModal = async () => {
-        fetchOrders();
-        setDisplayedOrders(Orders);
+    const closeAddOrderModal = () => {
         setIsAddOrderModalVisible(false);
     };
+
+    const router = useRouter();
+    const handleAddOrder = (newOrder: Order) => {
+        router.push(`/View?type=order&num=${newOrder.id}`);
+    };
+
     {/* Search bar */}
     const [searchQuery, setSearchQuery] = useState('');
     const [displayedOrders, setDisplayedOrders] = useState<Order[]>([]);
@@ -35,7 +43,7 @@ const ListePatients = () => {
         handleSearch();
     }, [searchQuery]);
     
-      const handleSearch = () => {
+    const handleSearch = () => {
         if (!searchQuery) {
             setDisplayedOrders(Orders);
             return;
@@ -70,7 +78,7 @@ const ListePatients = () => {
                 overlayClassName="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
                 className="relative bg-white rounded-lg p-6 w-full max-w-lg mx-auto z-50 focus:outline-none"
             >
-                <AddOrder onClose={closeAddOrderModal} />
+                <AddOrder onClose={closeAddOrderModal} onOrderAdded={handleAddOrder}/>
             </Modal>
             <div className='w-4/5 mx-auto p-6 bg-light-white '>
                 <div className='border-b-2 border-light-gray pb-4 flex items-center justify-center'>

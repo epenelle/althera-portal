@@ -71,7 +71,7 @@ public class PatientsService(AppDbContext dbContext)
         if(patient != null){
             patient.IsDeleted = true;
             patient.DeleteTime = DateTime.UtcNow;
-            _dbContext.SaveChangesAsync();
+             _dbContext.SaveChanges();
         }
     }
 }

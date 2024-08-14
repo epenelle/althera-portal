@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+ import React, { useEffect, useState } from 'react';
 import { MdLock, MdPerson } from 'react-icons/md';
 import ItemCard from '../Home/ItemCard';
 import { deleteById, fetchPatientById } from '@/api/patients';
@@ -71,11 +71,25 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
     setIsPopUpVisible(false);
     router.push('/Home?type=patients');
   };
+  const handleValider = () => {
+    setIsPopUpVisible(false);
+    handleDelete(id);
+  };
+  const handleCancel = () => {
+    setIsPopUpVisible(false);
+  };
+
 
   return (
     <div className="ml-[10vh] md:ml-[15vh]">
       {isPopUpVisible && (
-        <PopUp message={messagePopUp} type={typePopUp} onOk={handleOk} />
+        <PopUp
+          message={messagePopUp}
+          type={typePopUp}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          onValider={handleValider}
+        />
       )}
       <div className="w-4/5 mx-auto p-6 bg-light-white ">
         <div className="border-b-2 border-light-gray pb-4 flex items-center justify-center">
@@ -136,8 +150,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
             <button
               className="h-11 pl-5 pr-5 bg-medium-red border-2 border-black outline-none rounded-full shadow-sm cursor-pointer text-base text-white font-semibold
                 transform active:scale-95 transition duration-150 ease-in-out hover:bg-dark-red"
-              onClick={() => handleDelete(id)}
-            >
+                onClick={() => showPopUp("Confirmer la suppression du patient ?", true)}>
               Supprimer le patient
             </button>
           </div>

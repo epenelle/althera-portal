@@ -63,7 +63,13 @@ const OrderCard: React.FC<OrderCardProps> = ({ id }) => {
     setIsPopUpVisible(false);
     router.push('/Home?type=orders');
   };
-
+  const handleValider = () => {
+    setIsPopUpVisible(false);
+    handleDelete(id);
+  };
+  const handleCancel = () => {
+    setIsPopUpVisible(false);
+  };
   
   return (
     <div className='ml-[10vh] md:ml-[15vh]'>
@@ -73,6 +79,8 @@ const OrderCard: React.FC<OrderCardProps> = ({ id }) => {
           message={messagePopUp}
           type={typePopUp}
           onOk={handleOk}
+          onCancel={handleCancel}
+          onValider={handleValider}
         />
       )}
       <div className='w-4/5 mx-auto p-6 bg-light-white '>
@@ -119,7 +127,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ id }) => {
           <div className="flex justify-center mt-6">
             <button className="h-11 pl-5 pr-5 bg-medium-red border-2 border-black outline-none rounded-full shadow-sm cursor-pointer text-base text-white font-semibold
               transform active:scale-95 transition duration-150 ease-in-out hover:bg-dark-red"
-              onClick={() => handleDelete(id)}>
+              onClick={() => showPopUp("Confirmer de suppression de la commande ?", true)}>
               Supprimer la commande
             </button>
           </div>

@@ -60,13 +60,11 @@ export const fetchPatientOrders = async (patientId: string): Promise<Order[]> =>
 		  'Content-Type': 'application/json'
 		}
 	  });
-	  if (response.status === 204) {
-		return []; 
-	}
 	  if (!response.ok) {
 		throw new Error(`HTTP error! status: ${response.status}`);
 	  }
 	  const json = await response.json();
+	  console.log(json);
 	  const ordersData: Order[] = json.map((order: any, index: number) => transformOrder(order, index));
 	  return ordersData;
 	} catch (error) {
@@ -75,7 +73,7 @@ export const fetchPatientOrders = async (patientId: string): Promise<Order[]> =>
 	}
 };
 
-export const addOrder = async (order: Order): Promise<{ success: boolean; message: string }> => {
+export const addOrder = async (order: Order): Promise<{ success: boolean; message: string; order: Order | null }> => {
     try {
         const response = await fetch(baseUrl, {
             method: 'POST',
@@ -87,16 +85,18 @@ export const addOrder = async (order: Order): Promise<{ success: boolean; messag
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        await response.json();
+        const rep = await response.json();
         return {
             success: true,
-            message: 'Order added successfully'
+            message: 'Order added successfully',
+			order : rep
         };
     } catch (error) {
         console.error('Error adding order:', error);
         return {
             success: false,
-            message: `Error adding order: ${(error as Error).message}`
+            message: `Error adding order: ${(error as Error).message}`,
+			order: null
         };
     }
 };

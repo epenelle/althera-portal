@@ -80,6 +80,25 @@ public class OrdersController : ControllerBase
         }
     }
 
+    [HttpGet("ByPatient/{patientId}")]
+public ActionResult<List<OrderModel>> GetOrdersByPatientId(long patientId)
+{
+    try
+    {
+        var orders = _ordersService.GetOrdersByPatientId(patientId).Select(order => order.ToApi()).ToList();
+
+        return Ok(orders);
+    }
+    catch (ArgumentNullException argEx)
+    {
+        return BadRequest("Invalid argument: " + argEx.Message);
+    }
+    catch (Exception ex)
+    {
+        return StatusCode(500, "Internal Server error: " + ex.Message);
+    }
+}
+
     [HttpPost]
     public ActionResult<OrderModel> CreateOrder(OrderCreateRequest orderCreateRequest)
     {

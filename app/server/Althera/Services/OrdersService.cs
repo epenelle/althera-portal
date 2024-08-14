@@ -87,7 +87,7 @@ public class OrdersService
         if(order != null){
             order.IsDeleted = true;
             order.DeleteTime = DateTime.UtcNow;
-            _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
         }
     }
 }

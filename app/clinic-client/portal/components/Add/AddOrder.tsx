@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import Select, { GroupBase } from 'react-select';
+import Select, { GroupBase, components } from 'react-select';
 import PopUp from '../Helper/PopUp';
+import AddPatient from '../Add/AddPatient';
 import { BsPeopleFill } from 'react-icons/bs';
 import { addOrder } from '@/api/orders';
 import { fetchPatients } from '@/api/patients';
-import { Patient } from '@/Constants/Types';
+import { Order, Patient } from '@/Constants/Types';
+import Modal from 'react-modal';
 
 type AddOrderProps = {
   onClose: () => void;
+  onOrderAdded: (order: Order) => void;
 };
 
 type PatientOption = {
-  value?: Patient;
-  label?: string;
+  value: Patient;
+  label: string;
 };
 
-
-const AddOrder: React.FC<AddOrderProps> = ({ onClose }) => {
+const AddOrder: React.FC<AddOrderProps> = ({ onClose, onOrderAdded }) => {
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
   const [typePopUp, setTypePopUp] = useState(false);
   const [messagePopUp, setMessagePopUp] = useState("");
@@ -25,6 +27,7 @@ const AddOrder: React.FC<AddOrderProps> = ({ onClose }) => {
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
   const [orthesisModel, setOrthesisModel] = useState<string>("");
   const [orthesisComment, setOrthesisComment] = useState<string>("");
+  const [isAddPatientModalVisible, setIsAddPatientModalVisible] = useState(false);
   const isFormValid = selectedPatient && orthesisModel;
 
   useEffect(() => {
@@ -51,21 +54,21 @@ const AddOrder: React.FC<AddOrderProps> = ({ onClose }) => {
   const handleAddOrder = async () => {
     if (selectedPatient && orthesisModel) {
       const orderData = {
-        patientId: selectedPatient.value.id,
+        patientId: selectedPatient.id,
         orthesisModel,
         orthesisComment,
       };
       try {
-        await addOrder(orderData);
-        setMessagePopUp("Commande ajoutée avec succès.");
-        setTypePopUp(false);
-        setIsPopUpVisible(true);
+        const response = await addOrder(orderData);
+        console.log(orderData);
+        if(response.success) {
+          showPopUp("Commande ajoutée avec succès.", false);
+          if (response.order) {
+            onOrderAdded(response.order);
+          }
+        }
       } catch (error) {
-        setMessagePopUp(
-          "Une erreur est survenue lors de l'ajout de la commande."
-        );
-        setTypePopUp(false);
-        setIsPopUpVisible(true);
+        showPopUp("Une erreur est survenue lors de l'ajout de la commande.", false);
       }
     }
   };
@@ -79,6 +82,28 @@ const AddOrder: React.FC<AddOrderProps> = ({ onClose }) => {
     },
   ];
 
+  const handlePatientChange = (selectedOption: PatientOption | null) => {
+    setSelectedPatient(selectedOption?.value || null);
+  };
+
+  const handleAddPatient = (newPatient: Patient) => {
+    setPatients([...patients, newPatient]);
+    setSelectedPatient(newPatient);
+    setIsAddPatientModalVisible(false);
+  };
+
+  const MenuList = (props: any) => (
+    <components.MenuList {...props}>
+      <button
+        onClick={() => setIsAddPatientModalVisible(true)}
+        className="w-full text-left p-2 bg-blue-500 text-white"
+      >
+        Créer un nouveau patient
+      </button>
+      {props.children}
+    </components.MenuList>
+  );
+
   return (
     <div>
       {isPopUpVisible && (
@@ -89,19 +114,30 @@ const AddOrder: React.FC<AddOrderProps> = ({ onClose }) => {
           onCancel={handleCancel}
         />
       )}
+      {isAddPatientModalVisible && (
+        <Modal
+        isOpen={isAddPatientModalVisible}
+        onRequestClose={() => setIsAddPatientModalVisible(false)}
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        className="relative bg-white rounded-lg p-6 w-full max-w-lg mx-auto z-50 focus:outline-none"
+      >
+        <AddPatient onClose={() => setIsAddPatientModalVisible(false)} onPatientAdded={handleAddPatient} />
+      </Modal>
+      )}
       <div className='border-b-2 border-light-gray pb-4 flex items-center justify-center'>
         <BsPeopleFill size={30} className='mr-2' />
         <h1 className='text-center font-bold text-3xl p-2 md:text-4x1 text-secondary-dark-blue '>Ajout commande</h1>
       </div>
       <div className="flex flex-col mb-4 mt-8">
         <div className="flex items-center mb-2">
-          <label className="w-2/5 text-right whitespace-nowrap">Patient </label>
+          <label className="w-2/5 text-right whitespace-nowrap">Patient : </label>
           <Select
             className="ml-4 w-3/5"
-            options={patientOptions as unknown as readonly (Patient | GroupBase<Patient>)[]}
-            value={selectedPatient}
-            onChange={setSelectedPatient}
+            options={patientOptions}
+            value={selectedPatient ? { value: selectedPatient, label: `${selectedPatient.firstName} ${selectedPatient.lastName}` } : null}
+            onChange={handlePatientChange}
             placeholder="Sélectionner un patient"
+            components={{ MenuList }}
           />
         </div>
         <div className="flex items-center mb-2">
