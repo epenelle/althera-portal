@@ -43,6 +43,7 @@ const AddPatient: React.FC<AddPatientProps> = ({ onClose, onPatientAdded }) => {
       if (response.success) {
         showPopUp("Le patient a bien été ajouté !", false);
         if (response.patient) {
+          console.log("Patient added:", response.patient);
           onPatientAdded(response.patient);
         }
       } else {

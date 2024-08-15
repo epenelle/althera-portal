@@ -28,6 +28,7 @@ const ListePatients = () => {
 
     const router = useRouter();
     const handleAddPatient = (newPatient: Patient) => {
+        console.log("test", newPatient);
         router.push(`/View?type=patient&num=${newPatient.id}`);
     };
 

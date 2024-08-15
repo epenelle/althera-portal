@@ -5,6 +5,8 @@ import { IoMdListBox } from 'react-icons/io';
 import { MdLock } from 'react-icons/md';
 import PopUp from '../Helper/PopUp';
 import { Order } from '@/Constants/Types';
+import DisplayP from './DisplayP';
+import EditP from './EditP';
 
 type OrderCardProps = {
     id: string;
@@ -18,6 +20,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ id }) => {
   const [messagePopUp, setMessagePopUp] = React.useState("");
     
   const [orderData, setOrderData] = React.useState<Order | null>(null);
+  const [idPatient, setIdPatient] = React.useState<number>(0);
   const [lastName, setLastName] = React.useState<string>("");
   const [firstName, setFirstName] = React.useState<string>("");
   const [orthesisModel, setOrthesisModel] = React.useState<string>("");
@@ -27,6 +30,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ id }) => {
     try {
       const data = await fetchOrderById(id);
       setOrderData(data);
+      setIdPatient(data.patient?.id || 0);
       setLastName(data.patient?.lastName || "");
       setFirstName(data.patient?.firstName || "");
       setOrthesisModel(data.orthesisModel);
@@ -70,6 +74,8 @@ const OrderCard: React.FC<OrderCardProps> = ({ id }) => {
   const handleCancel = () => {
     setIsPopUpVisible(false);
   };
+
+  
   
   return (
     <div className='ml-[10vh] md:ml-[15vh]'>
@@ -89,30 +95,21 @@ const OrderCard: React.FC<OrderCardProps> = ({ id }) => {
           <h1 className='text-center font-bold text-3xl p-2 md:text-4x1 text-secondary-dark-blue '>Commande {id}</h1>
         </div>
         <div className="flex flex-col mb-4 mt-8">
-          <div className="flex items-center mb-2">
-            <label className="w-2/5 text-right whitespace-nowrap">Nom : </label>
-            <input type='text' className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
-            disabled={!edit}
-            value={lastName}/>
-            {!edit && <MdLock size={20} className='ml-2' />}
-          </div>
-          <div className="flex items-center mb-2">
-            <label className="w-2/5 text-right whitespace-nowrap">Prénom : </label>
-            <input type='text' className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
-            disabled={!edit}
-            value={firstName}/>
-            {!edit && <MdLock size={20} className='ml-2' />}
-          </div>
+          {edit ? (
+            <EditP patient={orderData?.patient} />
+          ) : (
+            <DisplayP idPatient={idPatient} lastName={lastName} firstName={firstName} />
+          )}
           <div className="flex items-center mb-2">
             <label className="w-2/5 text-right whitespace-nowrap">Modèle d'attelle : </label>
-            <input type='text' className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
+            <input type='text' className="ml-4 h-12 border border-light-gray rounded-full text-base px-5 w-56" 
             disabled={!edit}
             value={orthesisModel}/>
             {!edit && <MdLock size={20} className='ml-2' />}
           </div>
           <div className="flex items-center mb-2">
             <label className="w-2/5 text-right whitespace-nowrap">Informations Attelle : </label>
-            <input type='text' className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" 
+            <input type='text' className="ml-4 h-12 border border-light-gray rounded-full text-base px-5 w-56" 
             disabled={!edit}
             value={orthesisComment}/>
             {!edit && <MdLock size={20} className='ml-2' />}
