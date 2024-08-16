@@ -78,8 +78,9 @@ export const addPatient = async (patient: Patient): Promise<{ success: boolean; 
 };
 
 export const deleteById = async (id: string): Promise<{ success: boolean }> => {
+	console.log("deleteById", id);
 	try {
-	  const response = await fetch(baseUrl, {
+	  const response = await fetch(`${baseUrl}/${id}`, {
 		method: "DELETE",
 		headers: {
 		  'Content-Type': 'application/json'

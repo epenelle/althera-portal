@@ -28,6 +28,7 @@ const ListePatients = () => {
 
     const router = useRouter();
     const handleAddPatient = (newPatient: Patient) => {
+        console.log("test", newPatient);
         router.push(`/View?type=patient&num=${newPatient.id}`);
     };
 
@@ -101,10 +102,10 @@ const ListePatients = () => {
                 </div>
                 <div className='hidden md:grid md:grid-cols-[150px_160px_200px_40px] w-full items-center gap-4 mt-4 pl-24 mb-5 p-2 border-2 bg-light-gray border-medium-gray rounded-lg sm:gap-2 '>
                     <div className='flex items-center border-l-2 pl-3 border-r-2 border-medium-gray'>
-                        <span className='font-bold text-lg'>Nom</span>
+                        <span className='font-bold text-lg'>Prénom</span>
                     </div>
                     <div className='flex items-center border-r-2 border-medium-gray'>
-                        <span className='font-bold text-lg'>Prénom</span>
+                        <span className='font-bold text-lg'>Nom</span>
                     </div>
                     <div className='flex items-center'>
                         <span className='font-bold text-lg'>N° assurance maladie</span>
