@@ -5,8 +5,8 @@ import { IoMdListBox } from 'react-icons/io';
 import { MdLock } from 'react-icons/md';
 import PopUp from '../Helper/PopUp';
 import { Order } from '@/Constants/Types';
-import DisplayP from './DisplayP';
-import EditP from './EditP';
+import DisplayP from './PatientDetails';
+import EditP from './EditPatient';
 
 type OrderCardProps = {
     id: string;
@@ -75,8 +75,6 @@ const OrderCard: React.FC<OrderCardProps> = ({ id }) => {
     setIsPopUpVisible(false);
   };
 
-  
-  
   return (
     <div className='ml-[10vh] md:ml-[15vh]'>
             
@@ -98,18 +96,18 @@ const OrderCard: React.FC<OrderCardProps> = ({ id }) => {
           {edit ? (
             <EditP patient={orderData?.patient} />
           ) : (
-            <DisplayP idPatient={idPatient} lastName={lastName} firstName={firstName} />
+            <DisplayP patient={orderData?.patient} />
           )}
           <div className="flex items-center mb-2">
             <label className="w-2/5 text-right whitespace-nowrap">Modèle d'attelle : </label>
-            <input type='text' className="ml-4 h-12 border border-light-gray rounded-full text-base px-5 w-56" 
+            <input type='text' className="input-common ml-4" 
             disabled={!edit}
             value={orthesisModel}/>
             {!edit && <MdLock size={20} className='ml-2' />}
           </div>
           <div className="flex items-center mb-2">
             <label className="w-2/5 text-right whitespace-nowrap">Informations Attelle : </label>
-            <input type='text' className="ml-4 h-12 border border-light-gray rounded-full text-base px-5 w-56" 
+            <input type='text' className="input-common ml-4" 
             disabled={!edit}
             value={orthesisComment}/>
             {!edit && <MdLock size={20} className='ml-2' />}

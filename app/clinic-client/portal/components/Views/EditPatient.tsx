@@ -2,7 +2,6 @@ import { fetchPatients } from '@/api/patients';
 import { Patient } from '@/Constants/Types';
 import React, { useEffect, useState } from 'react'
 import Select, { GroupBase, components } from 'react-select';
-import PopUp from '../Helper/PopUp';
 import Modal from 'react-modal';
 import AddPatient from '../Add/AddPatient';
 
@@ -15,7 +14,7 @@ interface EditPProps {
   patient?: Patient;
 }
 
-const EditP: React.FC<EditPProps>  = ({patient}) => {
+const EditPatient: React.FC<EditPProps>  = ({patient}) => {
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
   const [typePopUp, setTypePopUp] = useState(false);
   const [messagePopUp, setMessagePopUp] = useState("");
@@ -37,19 +36,6 @@ const EditP: React.FC<EditPProps>  = ({patient}) => {
       setSelectedPatient(patient);
     }
   }, [patient]);
-
-  const handleOk = () => {
-    setIsPopUpVisible(false);
-    //onClose();
-  };
-
-  const handleCancel = () => setIsPopUpVisible(false);
-
-  const showPopUp = (message: string, type: boolean) => {
-    setMessagePopUp(message);
-    setTypePopUp(type);
-    setIsPopUpVisible(true);
-  };
 
   const patientOptions: GroupBase<PatientOption>[] = [
     {
@@ -84,14 +70,6 @@ const EditP: React.FC<EditPProps>  = ({patient}) => {
 
   return (
     <div className="flex items-center mb-2">
-      {isPopUpVisible && (
-        <PopUp
-          message={messagePopUp}
-          type={typePopUp}
-          onOk={handleOk}
-          onCancel={handleCancel}
-        />
-      )}
       {isAddPatientModalVisible && (
         <Modal
         isOpen={isAddPatientModalVisible}
@@ -115,4 +93,4 @@ const EditP: React.FC<EditPProps>  = ({patient}) => {
   )
 }
 
-export default EditP;
+export default EditPatient;
