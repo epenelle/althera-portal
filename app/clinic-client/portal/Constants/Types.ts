@@ -1,18 +1,18 @@
 export interface Patient {
-    value?: any;
-    id?: number;
-    firstName: string;
-    lastName: string;
-    healthInsuranceNumber: string;
-    ClinicId?: string;
+  value?: any;
+  id?: number;
+  firstName: string;
+  lastName: string;
+  healthInsuranceNumber: string;
+  ClinicId?: string;
 }
 
 export interface Order {
-    id?: number;
-    orthesisModel: string;
-    orthesisComment: string;
-    patientId?: number;
-    orderDate?: string;
-    orderState?: string;
-    patient?: Patient;
+  id?: number;
+  orthesisModel: string;
+  orthesisComment: string;
+  patientId?: number;
+  orderDate?: string;
+  orderState?: string;
+  patient?: Patient;
 }

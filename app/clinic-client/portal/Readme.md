@@ -1,9 +1,11 @@
-## To build the project 
+## To build the project
+
 ```bash
 npm install
 ```
 
-## To run the project 
+## To run the project
+
 ```bash
 npm run dev
 ```

@@ -6,21 +6,18 @@ import { addDays } from 'date-fns';
 
 function SelectCalendrier() {
   const [selectionRange, setSelectionRange] = useState({
-	startDate: new Date(),
-	endDate: addDays(new Date(), 7),
-	key: 'selection',
+    startDate: new Date(),
+    endDate: addDays(new Date(), 7),
+    key: 'selection',
   });
 
-function handleSelect(ranges: any) {
-	setSelectionRange(ranges.selection);
+  function handleSelect(ranges: any) {
+    setSelectionRange(ranges.selection);
   }
   return (
-	<div>
-	  <DateRangePicker
-		ranges={[selectionRange]}
-		onChange={handleSelect}
-	  />
-	</div>
+    <div>
+      <DateRangePicker ranges={[selectionRange]} onChange={handleSelect} />
+    </div>
   );
 }
 

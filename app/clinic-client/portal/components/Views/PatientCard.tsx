@@ -1,4 +1,4 @@
- import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdLock, MdPerson } from 'react-icons/md';
 import ItemCard from '../Home/ItemCard';
 import { deleteById, fetchPatientById } from '@/api/patients';
@@ -79,7 +79,6 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
     setIsPopUpVisible(false);
   };
 
-
   return (
     <div className="ml-[10vh] md:ml-[15vh]">
       {isPopUpVisible && (
@@ -150,7 +149,10 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
             <button
               className="h-11 pl-5 pr-5 bg-medium-red border-2 border-black outline-none rounded-full shadow-sm cursor-pointer text-base text-white font-semibold
                 transform active:scale-95 transition duration-150 ease-in-out hover:bg-dark-red"
-                onClick={() => showPopUp("Confirmer la suppression du patient ?", true)}>
+              onClick={() =>
+                showPopUp('Confirmer la suppression du patient ?', true)
+              }
+            >
               Supprimer le patient
             </button>
           </div>

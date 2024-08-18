@@ -1,20 +1,16 @@
-import { fetchPatients } from '@/api/patients';
-import { Patient } from '@/Constants/Types';
 import React, { useEffect, useState } from 'react';
 import Select, { GroupBase, components } from 'react-select';
+import { fetchPatients } from '@/api/patients';
+import { Order, Patient } from '@/Constants/Types';
 import Modal from 'react-modal';
-import AddPatient from '../Add/AddPatient';
+import AddPatient from './AddPatient';
 
 type PatientOption = {
   value: Patient;
   label: string;
 };
 
-interface EditPProps {
-  patient?: Patient;
-}
-
-const EditPatient: React.FC<EditPProps> = ({ patient }) => {
+const SelectModel = () => {
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
   const [typePopUp, setTypePopUp] = useState(false);
   const [messagePopUp, setMessagePopUp] = useState('');
@@ -31,12 +27,6 @@ const EditPatient: React.FC<EditPProps> = ({ patient }) => {
     };
     loadPatients();
   }, []);
-
-  useEffect(() => {
-    if (patient) {
-      setSelectedPatient(patient);
-    }
-  }, [patient]);
 
   const patientOptions: GroupBase<PatientOption>[] = [
     {
@@ -70,7 +60,7 @@ const EditPatient: React.FC<EditPProps> = ({ patient }) => {
   );
 
   return (
-    <div className="flex items-center mb-2">
+    <div className="flex flex-col items-center w-full">
       {isAddPatientModalVisible && (
         <Modal
           isOpen={isAddPatientModalVisible}
@@ -84,24 +74,36 @@ const EditPatient: React.FC<EditPProps> = ({ patient }) => {
           />
         </Modal>
       )}
-      <label className="w-2/5 text-right whitespace-nowrap">Patient : </label>
-      <Select
-        className="ml-4 w-56"
-        options={patientOptions}
-        value={
-          selectedPatient
-            ? {
-                value: selectedPatient,
-                label: `${selectedPatient.firstName} ${selectedPatient.lastName}`,
-              }
-            : null
-        }
-        onChange={handlePatientChange}
-        placeholder="Sélectionner un patient"
-        components={{ MenuList }}
-      />
+      <div className="flex justify-center items-center mb-2 w-5/6">
+        <label className="text-right whitespace-nowrap">Patient : </label>
+        <Select
+          className="ml-4 w-3/5"
+          options={patientOptions}
+          value={
+            selectedPatient
+              ? {
+                  value: selectedPatient,
+                  label: `${selectedPatient.firstName} ${selectedPatient.lastName}`,
+                }
+              : null
+          }
+          onChange={handlePatientChange}
+          placeholder="Sélectionner un patient"
+          components={{ MenuList }}
+        />
+      </div>
+      {selectedPatient && (
+        <div className="flex items-center mb-2 mt-4 w-5/6">
+          <button className="bg-white p-2 rounded mr-2 w-1/3 border-2 border-black">
+            Poignet
+          </button>
+          <button className="bg-primary-light-blue text-white p-2 rounded w-2/3 border-2 border-black">
+            Doigts
+          </button>
+        </div>
+      )}
     </div>
   );
 };
 
-export default EditPatient;
+export default SelectModel;

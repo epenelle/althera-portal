@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import '../app/globals.css';
 import { useRouter } from 'next/router';
 import ResponsiveNav from '../components/Home/Navbar/ResponsiveNav';
@@ -15,19 +15,19 @@ const Home = () => {
   const { type } = query;
 
   return (
-      <div >
-          <ResponsiveNav />
-        <main>
-          <GlobalProvider>
-            {type === undefined && <Statistics />}
-            {type === 'patients' && <ListePatients/>}
-            {type === 'orders' && <ListeCommandes/>}
-            {type === 'account' && <Account />}
-          </GlobalProvider>
-        </main>
-        <ScrollToTop/>
-      </div>
-  )
-}
+    <div>
+      <ResponsiveNav />
+      <main>
+        <GlobalProvider>
+          {type === undefined && <Statistics />}
+          {type === 'patients' && <ListePatients />}
+          {type === 'orders' && <ListeCommandes />}
+          {type === 'account' && <Account />}
+        </GlobalProvider>
+      </main>
+      <ScrollToTop />
+    </div>
+  );
+};
 
 export default Home;
