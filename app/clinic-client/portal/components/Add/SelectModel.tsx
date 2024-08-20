@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import Select, { GroupBase, components } from 'react-select';
 import { fetchPatients } from '@/api/patients';
-import { Order, Patient } from '@/Constants/Types';
-import Modal from 'react-modal';
-import AddPatient from './AddPatient';
-
-type PatientOption = {
-  value: Patient;
-  label: string;
-};
+import { Patient } from '@/Constants/Types';
+import SelectMember from './AddOrderOptions/SelectMember';
+import SelectSide from './AddOrderOptions/SelectSide';
+import PatientSelector from './AddOrderOptions/PatientSelector';
+import SelectFinger from './AddOrderOptions/SelectFinger';
+import SelectFingerModel from './AddOrderOptions/SelectFingerModel';
 
 const SelectModel = () => {
-  const [isPopUpVisible, setIsPopUpVisible] = useState(false);
-  const [typePopUp, setTypePopUp] = useState(false);
-  const [messagePopUp, setMessagePopUp] = useState('');
-
   const [patients, setPatients] = useState<Patient[]>([]);
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
-  const [isAddPatientModalVisible, setIsAddPatientModalVisible] =
-    useState(false);
+  const [selectedMember, setSelectedMember] = useState('');
+  const [selectedSide, setSelectedSide] = useState('');
+  const [selectedFinger, setSelectedFinger] = useState('');
 
   useEffect(() => {
     const loadPatients = async () => {
@@ -28,78 +22,53 @@ const SelectModel = () => {
     loadPatients();
   }, []);
 
-  const patientOptions: GroupBase<PatientOption>[] = [
-    {
-      options: patients.map((patient) => ({
-        value: patient,
-        label: `${patient.firstName} ${patient.lastName}`,
-      })),
-    },
-  ];
-
-  const handlePatientChange = (selectedOption: PatientOption | null) => {
-    setSelectedPatient(selectedOption?.value || null);
+  const handleButtonClick = (member: string) => {
+    setSelectedMember(member);
+    setSelectedSide('');
+    setSelectedFinger('');
   };
 
-  const handleAddPatient = (newPatient: Patient) => {
-    setPatients([...patients, newPatient]);
-    setSelectedPatient(newPatient);
-    setIsAddPatientModalVisible(false);
+  const handleWristClick = (wrist: string) => {
+    setSelectedSide(wrist);
   };
 
-  const MenuList = (props: any) => (
-    <components.MenuList {...props}>
-      <button
-        onClick={() => setIsAddPatientModalVisible(true)}
-        className="w-full text-left p-2 bg-blue-500 text-white"
-      >
-        Créer un nouveau patient
-      </button>
-      {props.children}
-    </components.MenuList>
-  );
+  const handleFingerChange = (finger: string) => {
+    setSelectedFinger(finger);
+  };
 
   return (
     <div className="flex flex-col items-center w-full">
-      {isAddPatientModalVisible && (
-        <Modal
-          isOpen={isAddPatientModalVisible}
-          onRequestClose={() => setIsAddPatientModalVisible(false)}
-          overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          className="relative bg-white rounded-lg p-6 w-full max-w-lg mx-auto z-50 focus:outline-none"
-        >
-          <AddPatient
-            onClose={() => setIsAddPatientModalVisible(false)}
-            onPatientAdded={handleAddPatient}
-          />
-        </Modal>
-      )}
-      <div className="flex justify-center items-center mb-2 w-5/6">
-        <label className="text-right whitespace-nowrap">Patient : </label>
-        <Select
-          className="ml-4 w-3/5"
-          options={patientOptions}
-          value={
-            selectedPatient
-              ? {
-                  value: selectedPatient,
-                  label: `${selectedPatient.firstName} ${selectedPatient.lastName}`,
-                }
-              : null
-          }
-          onChange={handlePatientChange}
-          placeholder="Sélectionner un patient"
-          components={{ MenuList }}
+      <div className="grid grid-rows-2 w-5/6 mb-2 mt-4 pb-4 border-b-2 border-light-gray">
+        <p className="flex justify-center underline font-bold text-lg">Patient : </p>
+        <PatientSelector
+          patients={patients}
+          selectedPatient={selectedPatient}
+          setSelectedPatient={setSelectedPatient}
+          setPatients={setPatients}
         />
       </div>
       {selectedPatient && (
-        <div className="flex items-center mb-2 mt-4 w-5/6">
-          <button className="bg-white p-2 rounded mr-2 w-1/3 border-2 border-black">
-            Poignet
-          </button>
-          <button className="bg-primary-light-blue text-white p-2 rounded w-2/3 border-2 border-black">
-            Doigts
-          </button>
+        <div className="grid grid-rows-2 w-5/6 mb-2 mt-4">
+          <p className="flex justify-center underline font-bold text-lg">Membre concerné : </p>
+          <SelectMember selectedMember={selectedMember} handleButtonClick={handleButtonClick} />
+        </div>
+      )}
+      {selectedMember === 'poignet' && (
+        <div className="grid grid-rows-2 w-5/6 mb-2 mt-4">
+          <p className="flex justify-center underline font-bold text-lg">Poignet : </p>
+          <SelectSide selectedSide={selectedSide} handleSideChange={handleWristClick} />
+        </div>
+      )}
+      {selectedMember === 'doigts' && (
+        <div className="grid grid-rows-2 w-5/6 mb-2 mt-4 pb-4 border-b-2 border-light-gray">
+          <p className="flex justify-center underline font-bold text-lg">Doigt : </p>
+          <SelectFinger selectedFinger={selectedFinger} handleFingerChange={handleFingerChange} />
+        </div>
+      )}
+      {selectedFinger && (
+        <div className="grid grid-rows-2 w-5/6 mb-2 mt-4 pb-4 border-b-2 border-light-gray">
+          <p className="flex justify-center underline font-bold text-lg">Modèle : </p>
+          <SelectFingerModel />
         </div>
       )}
     </div>

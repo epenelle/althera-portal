@@ -61,19 +61,10 @@ const AddPatient: React.FC<AddPatientProps> = ({ onClose, onPatientAdded }) => {
 
   return (
     <div>
-      {isPopUpVisible && (
-        <PopUp
-          message={messagePopUp}
-          type={typePopUp}
-          onOk={handleOk}
-          onCancel={handleCancel}
-        />
-      )}
+      {isPopUpVisible && <PopUp message={messagePopUp} type={typePopUp} onOk={handleOk} onCancel={handleCancel} />}
       <div className="border-b-2 border-light-gray pb-4 flex items-center justify-center">
         <BsPeopleFill size={30} className="mr-2" />
-        <h1 className="text-center font-bold text-3xl p-2 md:text-4x1 text-secondary-dark-blue">
-          Ajout patient
-        </h1>
+        <h1 className="text-center font-bold text-3xl p-2 md:text-4x1 text-secondary-dark-blue">Ajout patient</h1>
       </div>
       <div className="flex items-center mb-4 mt-8">
         <label className="w-2/5 text-right whitespace-nowrap">Prénom</label>
