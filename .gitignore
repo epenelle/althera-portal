@@ -5,3 +5,5 @@ app/server/Althera/obj/
 app/server/Althera/bin/
 app/server/Althera/Migrations/
 *.code-workspace
+
+app/server/populateDB/node_modules

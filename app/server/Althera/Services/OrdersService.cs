@@ -53,6 +53,7 @@ public class OrdersService
             Patient = patientEntity,
             Date = DateTime.UtcNow,
             State = OrderState.Submitted,
+            LastModified = DateTime.UtcNow,
         };
         _dbContext.Orders.Add(orderEntity);
         _dbContext.SaveChanges();
@@ -70,6 +71,7 @@ public class OrdersService
         orderEntity.Comments = orderUpdateRequest.OrthesisComment;
         orderEntity.PatientId = patientEntity.Id;
         orderEntity.Patient = patientEntity;
+        orderEntity.LastModified = DateTime.UtcNow;
         _dbContext.SaveChanges();
 
         return orderEntity.ToDomain();
@@ -87,6 +89,7 @@ public class OrdersService
         if(order != null){
             order.IsDeleted = true;
             order.DeleteTime = DateTime.UtcNow;
+            order.LastModified = DateTime.UtcNow;
             _dbContext.SaveChanges();
         }
     }

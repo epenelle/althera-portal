@@ -16,7 +16,7 @@ dotnet restore
 ```
 If the folder : "Migrations" already exist, delete it with :
 ```
-dotnet ef migration remove
+dotnet ef migrations remove
 ```
 Make sure the Database deosn't existe (look with SQL Server Managment Studio and delete the database)
 

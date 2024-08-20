@@ -32,6 +32,7 @@ public class PatientsService(AppDbContext dbContext)
 
     public Patient CreatePatient(PatientCreateRequest patientCreateRequest)
     {
+
         var patientEntity = new PatientEntity
         {
             FirstName = patientCreateRequest.FirstName,
