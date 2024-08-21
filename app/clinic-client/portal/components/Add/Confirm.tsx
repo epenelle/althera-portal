@@ -30,15 +30,7 @@ const Confirm = () => {
         )}
         <p className="text-lg">
           <span className="font-semibold underline">Scan à envoyer :</span>{' '}
-          <ul className="list-disc list-inside mt-2">
-            {scanFile
-              ? Array.from(scanFile).map((file, index) => (
-                  <li key={index} className="text-gray-700">
-                    {file.name}
-                  </li>
-                ))
-              : 'No file uploaded'}
-          </ul>
+          {scanFile ? scanFile.name : 'No file uploaded'}
         </p>
       </div>
     </div>

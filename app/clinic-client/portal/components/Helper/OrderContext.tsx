@@ -12,8 +12,8 @@ interface OrderContextProps {
   setSide: (side: string) => void;
   model: string;
   setModel: (model: string) => void;
-  scanFile: FileList | null;
-  setScanFile: (file: FileList | null) => void;
+  scanFile: File | null;
+  setScanFile: (file: File | null) => void;
 }
 
 const OrderContext = createContext<OrderContextProps | undefined>(undefined);
@@ -24,7 +24,7 @@ export const OrderProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [finger, setFinger] = useState<string>('');
   const [side, setSide] = useState<string>('');
   const [model, setModel] = useState<string>('');
-  const [scanFile, setScanFile] = useState<FileList | null>(null);
+  const [scanFile, setScanFile] = useState<File | null>(null);
 
   return (
     <OrderContext.Provider

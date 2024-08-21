@@ -8,12 +8,14 @@ const SelectMeasures = () => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
-    setScanFile(files);
+    if (files && files.length > 0) {
+      setScanFile(files[0]);
+    }
   };
 
   return (
     <div className="flex flex-col items-center justify-center h-full text-center border-2 border-light-gray rounded-lg">
-      <input type="file" id="file-upload" onChange={handleFileChange} multiple className="hidden" />
+      <input type="file" id="file-upload" onChange={handleFileChange} className="hidden" />
       <label
         htmlFor="file-upload"
         className="cursor-pointer flex flex-col items-center justify-center border-2 border-dashed border-gray-400 p-10 rounded-lg transition-colors duration-300 hover:border-gray-600"
@@ -23,13 +25,9 @@ const SelectMeasures = () => {
       </label>
       {scanFile && (
         <div className="mt-6">
-          <h3 className="text-lg font-semibold">Fichiers sélectionnés :</h3>
+          <h3 className="text-lg font-semibold">Fichier sélectionné :</h3>
           <ul className="list-disc list-inside mt-2">
-            {Array.from(scanFile).map((file, index) => (
-              <li key={index} className="text-gray-700">
-                {file.name}
-              </li>
-            ))}
+            <li className="text-gray-700">{scanFile.name}</li>
           </ul>
         </div>
       )}
