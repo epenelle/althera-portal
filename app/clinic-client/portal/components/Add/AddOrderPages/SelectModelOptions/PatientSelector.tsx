@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Select, { GroupBase, components } from 'react-select';
 import { Patient } from '@/Constants/Types';
 import Modal from 'react-modal';
-import AddPatient from '../AddPatient';
+import AddPatient from '../../AddPatient';
 
 interface PatientOption {
   value: Patient;

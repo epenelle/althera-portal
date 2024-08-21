@@ -1,4 +1,4 @@
-import { Patient } from '@/Constants/Types';
+import { Patient, Measurement } from '@/Constants/Types';
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface OrderContextProps {
@@ -14,6 +14,8 @@ interface OrderContextProps {
   setModel: (model: string) => void;
   scanFile: File | null;
   setScanFile: (file: File | null) => void;
+  measurements: Measurement[];
+  setMeasurements: (measurements: Measurement[]) => void;
 }
 
 const OrderContext = createContext<OrderContextProps | undefined>(undefined);
@@ -25,6 +27,7 @@ export const OrderProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [side, setSide] = useState<string>('');
   const [model, setModel] = useState<string>('');
   const [scanFile, setScanFile] = useState<File | null>(null);
+  const [measurements, setMeasurements] = useState<Measurement[]>([]);
 
   return (
     <OrderContext.Provider
@@ -41,6 +44,8 @@ export const OrderProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         setModel,
         scanFile,
         setScanFile,
+        measurements,
+        setMeasurements,
       }}
     >
       {children}

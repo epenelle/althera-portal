@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { fetchPatients } from '@/api/patients';
 import { Patient } from '@/Constants/Types';
 import { useOrderContext } from '@/components/Helper/OrderContext';
-import SelectMember from './AddOrderOptions/SelectMember';
-import SelectSide from './AddOrderOptions/SelectSide';
-import PatientSelector from './AddOrderOptions/PatientSelector';
-import SelectFinger from './AddOrderOptions/SelectFinger';
-import SelectFingerModel from './AddOrderOptions/SelectFingerModel';
+import SelectMember from './SelectModelOptions/SelectMember';
+import SelectSide from './SelectModelOptions/SelectSide';
+import PatientSelector from './SelectModelOptions/PatientSelector';
+import SelectFinger from './SelectModelOptions/SelectFinger';
+import SelectFingerModel from './SelectModelOptions/SelectFingerModel';
 
 const SelectModel = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
@@ -22,20 +22,6 @@ const SelectModel = () => {
   }, []);
 
   const handleButtonClick = (member: string) => {
-    console.log(
-      'patient :',
-      patient,
-      'member :',
-      member,
-      'side :',
-      side,
-      'finger :',
-      finger,
-      'model :',
-      model,
-      'scanFile :',
-      scanFile,
-    );
     setMember(member);
     setSide('');
     setFinger('');

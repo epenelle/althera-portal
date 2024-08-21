@@ -58,3 +58,5 @@ export const stats = [
     nb: 212,
   },
 ];
+
+export const MEASURE_LABELS = ['Mesure 1', 'Mesure 2', 'Mesure 3', 'Mesure 4', 'Mesure 5', 'Mesure 6'];

@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { useOrderContext } from '@/components/Helper/OrderContext';
 
-const SelectMeasures = () => {
-  const { scanFile, setScanFile } = useOrderContext();
+const ScanFileUpload = () => {
+  const { scanFile, setScanFile, setMeasurements } = useOrderContext();
+
+  useEffect(() => {
+    setMeasurements([]);
+  }, [setMeasurements]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -14,7 +18,7 @@ const SelectMeasures = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full text-center border-2 border-light-gray rounded-lg">
+    <div className="flex flex-col items-center justify-center h-full text-center ">
       <input type="file" id="file-upload" onChange={handleFileChange} className="hidden" />
       <label
         htmlFor="file-upload"
@@ -35,4 +39,4 @@ const SelectMeasures = () => {
   );
 };
 
-export default SelectMeasures;
+export default ScanFileUpload;

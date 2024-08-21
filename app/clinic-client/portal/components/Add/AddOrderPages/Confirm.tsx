@@ -2,7 +2,7 @@ import React from 'react';
 import { useOrderContext } from '@/components/Helper/OrderContext';
 
 const Confirm = () => {
-  const { patient, member, finger, side, model, scanFile } = useOrderContext();
+  const { patient, member, finger, side, model, scanFile, measurements } = useOrderContext();
 
   return (
     <div className="mx-auto p-6 bg-white">
@@ -28,10 +28,20 @@ const Confirm = () => {
             </p>
           </>
         )}
-        <p className="text-lg">
-          <span className="font-semibold underline">Scan à envoyer :</span>{' '}
-          {scanFile ? scanFile.name : 'No file uploaded'}
-        </p>
+        {!scanFile ? (
+          <div className="text-lg">
+            <span className="font-semibold underline">Mesures :</span>
+            {measurements.map((measurement, index) => (
+              <p key={index}>
+                <span className="font-semibold">{measurement.label}</span> - {measurement.value}
+              </p>
+            ))}
+          </div>
+        ) : (
+          <p className="text-lg">
+            <span className="font-semibold underline">Scan à envoyer :</span> {scanFile.name}
+          </p>
+        )}
       </div>
     </div>
   );

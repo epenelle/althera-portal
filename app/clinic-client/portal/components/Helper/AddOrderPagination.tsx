@@ -1,5 +1,6 @@
 import React from 'react';
 import { useOrderContext } from '@/components/Helper/OrderContext';
+import { MEASURE_LABELS } from '@/Constants/Constants';
 
 type NavigationButtonsProps = {
   currentStep: number;
@@ -16,14 +17,13 @@ const AddOrderPagination: React.FC<NavigationButtonsProps> = ({
   onNext,
   onOrder,
 }) => {
-  const { model, side, scanFile } = useOrderContext();
+  const { model, side, scanFile, measurements } = useOrderContext();
 
   const isNextDisabled = () => {
-    console.log('currentStep :', currentStep, 'model :', model, 'side :', side);
     if (currentStep === 0 && !model && !side) {
       return true;
     }
-    if (currentStep === 1 && !scanFile) {
+    if (currentStep === 1 && !scanFile && measurements.length !== MEASURE_LABELS.length) {
       return true;
     }
     return false;
@@ -33,7 +33,7 @@ const AddOrderPagination: React.FC<NavigationButtonsProps> = ({
     <div className="flex justify-between mt-auto">
       <button
         onClick={onPrevious}
-        className="bg-gray-300 p-2 rounded"
+        className="bg-medium-gray p-2 rounded hover:bg-light-gray"
         style={{ visibility: currentStep === 0 ? 'hidden' : 'visible' }}
       >
         Précédent
@@ -53,11 +53,19 @@ const AddOrderPagination: React.FC<NavigationButtonsProps> = ({
         ))}
       </div>
       {currentStep < 2 ? (
-        <button onClick={onNext} disabled={isNextDisabled()} className="bg-blue-500 text-white p-2 rounded">
+        <button
+          onClick={onNext}
+          className={`p-2 rounded ${
+            isNextDisabled()
+              ? 'bg-light-gray cursor-not-allowed border-2 border-gray-500'
+              : 'bg-primary-light-blue text-white hover:bg-secondary-medium-blue'
+          }`}
+          disabled={isNextDisabled()}
+        >
           Suivant
         </button>
       ) : (
-        <button onClick={onOrder} className="bg-green-500 text-white p-2 rounded">
+        <button onClick={onOrder} className="bg-medium-green text-white p-2 rounded">
           Commander
         </button>
       )}

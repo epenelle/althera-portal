@@ -21,9 +21,7 @@ export const fetchPatients = async (): Promise<Patient[]> => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const json = await response.json();
-    const patientsData: Patient[] = json.map((patient: any, index: number) =>
-      transformPatientData(patient, index),
-    );
+    const patientsData: Patient[] = json.map((patient: any, index: number) => transformPatientData(patient, index));
     return patientsData;
   } catch (error) {
     console.error('Error fetching patients:', error);
@@ -82,7 +80,6 @@ export const addPatient = async (
 };
 
 export const deleteById = async (id: string): Promise<{ success: boolean }> => {
-  console.log('deleteById', id);
   try {
     const response = await fetch(`${baseUrl}/${id}`, {
       method: 'DELETE',

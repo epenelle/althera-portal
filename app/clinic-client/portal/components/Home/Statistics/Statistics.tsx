@@ -3,8 +3,6 @@ import { stats } from '@/Constants/Constants';
 import Modal from 'react-modal';
 import StatisticsCard from './StatisticsCard';
 import { IoBarChartOutline, IoAddCircleOutline } from 'react-icons/io5';
-import Tilt from 'react-parallax-tilt';
-import Image from 'next/legacy/image';
 import { Order, Patient } from '@/Constants/Types';
 import { useRouter } from 'next/router';
 import AddOrder from '@/components/Add/AddOrder';

@@ -34,7 +34,6 @@ const ListePatients = () => {
 
   const router = useRouter();
   const handleAddPatient = (newPatient: Patient) => {
-    console.log('test', newPatient);
     router.push(`/View?type=patient&num=${newPatient.id}`);
   };
 
@@ -59,9 +58,7 @@ const ListePatients = () => {
     const searchTerms = searchQuery.toLowerCase().split(' ');
     const searchResults = Patients.filter((patient) =>
       searchTerms.some((term) =>
-        `${patient.firstName} ${patient.lastName} (${patient.healthInsuranceNumber})`
-          .toLowerCase()
-          .includes(term),
+        `${patient.firstName} ${patient.lastName} (${patient.healthInsuranceNumber})`.toLowerCase().includes(term),
       ),
     );
     setDisplayedPatients(searchResults);
@@ -74,16 +71,12 @@ const ListePatients = () => {
   const patientsPerPage = 10;
   const indexOfLastPatient = currentPage * patientsPerPage;
   const indexOfFirstPatient = indexOfLastPatient - patientsPerPage;
-  const currentPatients = displayedPatients.slice(
-    indexOfFirstPatient,
-    indexOfLastPatient,
-  );
+  const currentPatients = displayedPatients.slice(indexOfFirstPatient, indexOfLastPatient);
 
   const totalPages = Math.ceil(displayedPatients.length / patientsPerPage);
   const pageNumbers = [];
   for (let i = 1; i <= totalPages; i++) pageNumbers.push(i);
-  const navigateToPage = (pageNumber: number): void =>
-    setCurrentPage(pageNumber);
+  const navigateToPage = (pageNumber: number): void => setCurrentPage(pageNumber);
 
   return (
     <div className="ml-[10vh] md:ml-[15vh]">
@@ -93,10 +86,7 @@ const ListePatients = () => {
         overlayClassName="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
         className="relative bg-white rounded-lg p-6 w-full max-w-lg mx-auto z-50 focus:outline-none"
       >
-        <AddPatient
-          onClose={closeAddOrderModal}
-          onPatientAdded={handleAddPatient}
-        />
+        <AddPatient onClose={closeAddOrderModal} onPatientAdded={handleAddPatient} />
       </Modal>
       <div className="w-4/5 mx-auto p-6 bg-light-white ">
         <div className="border-b-2 border-light-gray pb-4 flex items-center justify-center">
@@ -136,11 +126,7 @@ const ListePatients = () => {
         {currentPatients.map((patient) => (
           <PatientCard key={patient.id} data={patient} />
         ))}
-        <PaginationMenu
-          currentPage={currentPage}
-          totalPages={totalPages}
-          navigateToPage={navigateToPage}
-        />
+        <PaginationMenu currentPage={currentPage} totalPages={totalPages} navigateToPage={navigateToPage} />
       </div>
     </div>
   );

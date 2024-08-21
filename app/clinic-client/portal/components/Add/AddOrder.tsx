@@ -7,9 +7,9 @@ import { addOrder } from '@/api/orders';
 import { fetchPatients } from '@/api/patients';
 import { Order, Patient } from '@/Constants/Types';
 import Modal from 'react-modal';
-import SelectModel from './SelectModel';
-import SelectMeasures from './SelectMeasures';
-import Confirm from './Confirm';
+import SelectModel from './AddOrderPages/SelectModel';
+import SelectMeasures from './AddOrderPages/SelectMeasures';
+import Confirm from './AddOrderPages/Confirm';
 import { OrderProvider } from '@/components/Helper/OrderContext';
 import AddOrderPagination from '@/components/Helper/AddOrderPagination';
 
