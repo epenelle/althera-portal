@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { useOrderContext } from '@/components/Helper/OrderContext';
 
 const SelectMeasures = () => {
-  const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
+  const { scanFile, setScanFile } = useOrderContext();
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedFiles(event.target.files);
+    const files = event.target.files;
+    setScanFile(files);
   };
 
   return (
@@ -19,11 +21,11 @@ const SelectMeasures = () => {
         <FontAwesomeIcon icon={faUpload} size="4x" className="text-gray-500 mb-4" />
         <p className="text-gray-500">Ajouter le fichier de scan</p>
       </label>
-      {selectedFiles && (
+      {scanFile && (
         <div className="mt-6">
           <h3 className="text-lg font-semibold">Fichiers sélectionnés :</h3>
           <ul className="list-disc list-inside mt-2">
-            {Array.from(selectedFiles).map((file, index) => (
+            {Array.from(scanFile).map((file, index) => (
               <li key={index} className="text-gray-700">
                 {file.name}
               </li>

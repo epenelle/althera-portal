@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchPatients } from '@/api/patients';
 import { Patient } from '@/Constants/Types';
+import { useOrderContext } from '@/components/Helper/OrderContext';
 import SelectMember from './AddOrderOptions/SelectMember';
 import SelectSide from './AddOrderOptions/SelectSide';
 import PatientSelector from './AddOrderOptions/PatientSelector';
@@ -9,10 +10,8 @@ import SelectFingerModel from './AddOrderOptions/SelectFingerModel';
 
 const SelectModel = () => {
   const [patients, setPatients] = useState<Patient[]>([]);
-  const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
-  const [selectedMember, setSelectedMember] = useState('');
-  const [selectedSide, setSelectedSide] = useState('');
-  const [selectedFinger, setSelectedFinger] = useState('');
+  const { patient, setPatient, member, setMember, finger, setFinger, side, setSide, model, setModel, scanFile } =
+    useOrderContext();
 
   useEffect(() => {
     const loadPatients = async () => {
@@ -23,17 +22,36 @@ const SelectModel = () => {
   }, []);
 
   const handleButtonClick = (member: string) => {
-    setSelectedMember(member);
-    setSelectedSide('');
-    setSelectedFinger('');
+    console.log(
+      'patient :',
+      patient,
+      'member :',
+      member,
+      'side :',
+      side,
+      'finger :',
+      finger,
+      'model :',
+      model,
+      'scanFile :',
+      scanFile,
+    );
+    setMember(member);
+    setSide('');
+    setFinger('');
+    setModel('');
   };
 
   const handleWristClick = (wrist: string) => {
-    setSelectedSide(wrist);
+    setSide(wrist);
   };
 
   const handleFingerChange = (finger: string) => {
-    setSelectedFinger(finger);
+    setFinger(finger);
+  };
+
+  const handleModelChange = (model: string) => {
+    setModel(model);
   };
 
   return (
@@ -42,33 +60,33 @@ const SelectModel = () => {
         <p className="flex justify-center underline font-bold text-lg">Patient : </p>
         <PatientSelector
           patients={patients}
-          selectedPatient={selectedPatient}
-          setSelectedPatient={setSelectedPatient}
+          selectedPatient={patient}
+          setSelectedPatient={setPatient}
           setPatients={setPatients}
         />
       </div>
-      {selectedPatient && (
+      {patient && (
         <div className="grid grid-rows-2 w-5/6 mb-2 mt-4">
           <p className="flex justify-center underline font-bold text-lg">Membre concerné : </p>
-          <SelectMember selectedMember={selectedMember} handleButtonClick={handleButtonClick} />
+          <SelectMember selectedMember={member} handleButtonClick={handleButtonClick} />
         </div>
       )}
-      {selectedMember === 'poignet' && (
+      {member === 'poignet' && (
         <div className="grid grid-rows-2 w-5/6 mb-2 mt-4">
           <p className="flex justify-center underline font-bold text-lg">Poignet : </p>
-          <SelectSide selectedSide={selectedSide} handleSideChange={handleWristClick} />
+          <SelectSide selectedSide={side} handleSideChange={handleWristClick} />
         </div>
       )}
-      {selectedMember === 'doigts' && (
+      {member === 'doigts' && (
         <div className="grid grid-rows-2 w-5/6 mb-2 mt-4 pb-4 border-b-2 border-light-gray">
           <p className="flex justify-center underline font-bold text-lg">Doigt : </p>
-          <SelectFinger selectedFinger={selectedFinger} handleFingerChange={handleFingerChange} />
+          <SelectFinger selectedFinger={finger} handleFingerChange={handleFingerChange} />
         </div>
       )}
-      {selectedFinger && (
+      {finger && (
         <div className="grid grid-rows-2 w-5/6 mb-2 mt-4 pb-4 border-b-2 border-light-gray">
           <p className="flex justify-center underline font-bold text-lg">Modèle : </p>
-          <SelectFingerModel />
+          <SelectFingerModel selectedModel={model} handleModelChange={handleModelChange} />
         </div>
       )}
     </div>

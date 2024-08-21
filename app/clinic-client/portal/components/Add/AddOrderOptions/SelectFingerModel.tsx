@@ -12,11 +12,14 @@ type FingerModelOption = {
   label: string;
 };
 
-const SelectFingerModel = () => {
-  const [selectedFingerModel, setSelectedFingerModel] = useState<SingleValue<FingerModelOption>>(null);
+interface SelectFingerModelProps {
+  selectedModel: string;
+  handleModelChange: (model: string) => void;
+}
 
+const SelectFingerModel: React.FC<SelectFingerModelProps> = ({ selectedModel, handleModelChange }) => {
   const handleFingerChange = (selectedOption: SingleValue<FingerModelOption>) => {
-    setSelectedFingerModel(selectedOption);
+    handleModelChange(selectedOption?.value || '');
   };
 
   return (
@@ -24,9 +27,9 @@ const SelectFingerModel = () => {
       <Select
         className="ml-4 w-3/5"
         options={fingerModelOptions}
-        value={selectedFingerModel}
+        value={fingerModelOptions.find((option) => option.value === selectedModel) || null}
         onChange={handleFingerChange}
-        placeholder="Sélectionner un modèle"
+        placeholder="Sélectionner un doigt"
         menuPortalTarget={document.body}
         styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
       />
