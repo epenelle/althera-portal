@@ -5,7 +5,7 @@ import { deleteById, fetchPatientById } from '@/api/patients';
 import { fetchPatientOrders } from '@/api/orders';
 import { useRouter } from 'next/router';
 import PopUp from '../Helper/PopUp';
-import { Patient, Order } from '@/Constants/Types';
+import { Patient, Order, PopUpVariant } from '@/Constants/Types';
 
 type PatientCardProps = {
   id: string;
@@ -15,7 +15,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
   const router = useRouter();
   const [edit, setEdit] = React.useState(false);
   const [isPopUpVisible, setIsPopUpVisible] = React.useState(false);
-  const [typePopUp, setTypePopUp] = React.useState(false);
+  const [typePopUp, setTypePopUp] = React.useState<PopUpVariant>('default');
   const [messagePopUp, setMessagePopUp] = React.useState('');
 
   const [patientData, setPatientData] = useState<Patient | null>(null);
@@ -52,16 +52,16 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
     try {
       const result = await deleteById(orderId);
       if (result) {
-        showPopUp('Le patient à bien été supprimé !', false);
+        showPopUp('Le patient à bien été supprimé !', 'default');
       } else {
-        showPopUp("Le patient n'a pas pu être supprimé !", false);
+        showPopUp("Le patient n'a pas pu être supprimé !", 'default');
       }
     } catch (error) {
-      showPopUp("Le patient n'a pas pu être supprimé !", false);
+      showPopUp("Le patient n'a pas pu être supprimé !", 'default');
     }
   };
 
-  const showPopUp = (message: string, type: boolean) => {
+  const showPopUp = (message: string, type: PopUpVariant) => {
     setMessagePopUp(message);
     setTypePopUp(type);
     setIsPopUpVisible(true);
@@ -84,7 +84,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
       {isPopUpVisible && (
         <PopUp
           message={messagePopUp}
-          type={typePopUp}
+          variant={typePopUp}
           onOk={handleOk}
           onCancel={handleCancel}
           onValider={handleValider}
@@ -149,9 +149,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
             <button
               className="h-11 pl-5 pr-5 bg-medium-red border-2 border-black outline-none rounded-full shadow-sm cursor-pointer text-base text-white font-semibold
                 transform active:scale-95 transition duration-150 ease-in-out hover:bg-dark-red"
-              onClick={() =>
-                showPopUp('Confirmer la suppression du patient ?', true)
-              }
+              onClick={() => showPopUp('Confirmer la suppression du patient ?', 'confirmation')}
             >
               Supprimer le patient
             </button>

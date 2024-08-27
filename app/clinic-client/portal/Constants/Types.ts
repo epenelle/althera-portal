@@ -21,3 +21,4 @@ export interface Measurement {
   label: string;
   value: string;
 }
+export type PopUpVariant = 'default' | 'confirmation' | 'exit';

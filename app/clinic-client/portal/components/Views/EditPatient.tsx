@@ -15,14 +15,9 @@ interface EditPProps {
 }
 
 const EditPatient: React.FC<EditPProps> = ({ patient }) => {
-  const [isPopUpVisible, setIsPopUpVisible] = useState(false);
-  const [typePopUp, setTypePopUp] = useState(false);
-  const [messagePopUp, setMessagePopUp] = useState('');
-
   const [patients, setPatients] = useState<Patient[]>([]);
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
-  const [isAddPatientModalVisible, setIsAddPatientModalVisible] =
-    useState(false);
+  const [isAddPatientModalVisible, setIsAddPatientModalVisible] = useState(false);
 
   useEffect(() => {
     const loadPatients = async () => {
@@ -59,10 +54,7 @@ const EditPatient: React.FC<EditPProps> = ({ patient }) => {
 
   const MenuList = (props: any) => (
     <components.MenuList {...props}>
-      <button
-        onClick={() => setIsAddPatientModalVisible(true)}
-        className="w-full text-left p-2 bg-blue-500 text-white"
-      >
+      <button onClick={() => setIsAddPatientModalVisible(true)} className="w-full text-left p-2 bg-blue-500 text-white">
         Créer un nouveau patient
       </button>
       {props.children}
@@ -78,10 +70,7 @@ const EditPatient: React.FC<EditPProps> = ({ patient }) => {
           overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
           className="relative bg-white rounded-lg p-6 w-full max-w-lg mx-auto z-50 focus:outline-none"
         >
-          <AddPatient
-            onClose={() => setIsAddPatientModalVisible(false)}
-            onPatientAdded={handleAddPatient}
-          />
+          <AddPatient onClose={() => setIsAddPatientModalVisible(false)} onPatientAdded={handleAddPatient} />
         </Modal>
       )}
       <label className="w-2/5 text-right whitespace-nowrap">Patient : </label>

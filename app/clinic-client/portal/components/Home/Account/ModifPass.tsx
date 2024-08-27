@@ -2,11 +2,12 @@
 import React from 'react';
 import PopUp from '../../Helper/PopUp';
 import { useRouter } from 'next/router';
+import { PopUpVariant } from '@/Constants/Types';
 
 const ModifPass = () => {
   const router = useRouter();
   const [isPopUpVisible, setIsPopUpVisible] = React.useState(false);
-  const [typePopUp, setTypePopUp] = React.useState(false);
+  const [typePopUp, setTypePopUp] = React.useState<PopUpVariant>('default');
   const [messagePopUp, setMessagePopUp] = React.useState('');
 
   const handleOk = () => {
@@ -15,13 +16,13 @@ const ModifPass = () => {
   };
   const handleValider = () => {
     setIsPopUpVisible(false);
-    showPopUp('La demande a bien été envoyée', false);
+    showPopUp('La demande a bien été envoyée', 'default');
   };
   const handleCancel = () => {
     setIsPopUpVisible(false);
   };
 
-  const showPopUp = (message: string, type: boolean) => {
+  const showPopUp = (message: string, type: PopUpVariant) => {
     setMessagePopUp(message);
     setTypePopUp(type);
     setIsPopUpVisible(true);
@@ -32,7 +33,7 @@ const ModifPass = () => {
       {isPopUpVisible && (
         <PopUp
           message={messagePopUp}
-          type={typePopUp}
+          variant={typePopUp}
           onOk={handleOk}
           onCancel={handleCancel}
           onValider={handleValider}
@@ -45,40 +46,23 @@ const ModifPass = () => {
         <div className="w-full max-w-lg">
           <div className="flex flex-col mb-4">
             <div className="flex items-center mb-2">
-              <label className="w-2/5 text-right whitespace-nowrap">
-                Mot de passe actuel :{' '}
-              </label>
-              <input
-                type="password"
-                className="ml-4 h-12 border border-light-gray rounded-full text-base px-5"
-              />
+              <label className="w-2/5 text-right whitespace-nowrap">Mot de passe actuel : </label>
+              <input type="password" className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" />
             </div>
             <div className="flex items-center mb-2">
-              <label className="w-2/5 text-right whitespace-nowrap">
-                Nouveau mot de passe :{' '}
-              </label>
-              <input
-                type="password"
-                className="ml-4 h-12 border border-light-gray rounded-full text-base px-5"
-              />
+              <label className="w-2/5 text-right whitespace-nowrap">Nouveau mot de passe : </label>
+              <input type="password" className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" />
             </div>
             <div className="flex items-center mb-2">
-              <label className="w-2/5 text-right whitespace-nowrap">
-                Confirmer le mot de passe :{' '}
-              </label>
-              <input
-                type="password"
-                className="ml-4 h-12 border border-light-gray rounded-full text-base px-5"
-              />
+              <label className="w-2/5 text-right whitespace-nowrap">Confirmer le mot de passe : </label>
+              <input type="password" className="ml-4 h-12 border border-light-gray rounded-full text-base px-5" />
             </div>
           </div>
           <div className="flex justify-center">
             <button
               className="h-11 pl-5 pr-5 bg-medium-red border-2 border-black outline-none rounded-full shadow-sm cursor-pointer text-base text-white font-semibold
             transform active:scale-95 transition duration-150 ease-in-out hover:bg-dark-red"
-              onClick={() =>
-                showPopUp('Le mot de passe a bien été modifié !', false)
-              }
+              onClick={() => showPopUp('Le mot de passe a bien été modifié !', 'default')}
             >
               Modifier le mot de passe
             </button>
@@ -89,12 +73,7 @@ const ModifPass = () => {
         <button
           className="h-11 px-5 bg-medium-red border-2 border-black shadow-sm rounded-full text-white underline font-semibold cursor-pointer
         transform active:scale-95 transition duration-150 ease-in-out hover:bg-dark-red"
-          onClick={() =>
-            showPopUp(
-              'Confirmer la demande de suppression du compte et de ses données ?',
-              true,
-            )
-          }
+          onClick={() => showPopUp('Confirmer la demande de suppression du compte et de ses données ?', 'confirmation')}
         >
           Demander la suppression du compte
         </button>

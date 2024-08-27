@@ -5,7 +5,7 @@ import AddPatient from '../Add/AddPatient';
 import { BsPeopleFill } from 'react-icons/bs';
 import { addOrder } from '@/api/orders';
 import { fetchPatients } from '@/api/patients';
-import { Order, Patient } from '@/Constants/Types';
+import { Order, Patient, PopUpVariant } from '@/Constants/Types';
 import Modal from 'react-modal';
 import SelectModel from './AddOrderPages/SelectModel';
 import SelectMeasures from './AddOrderPages/SelectMeasures';
@@ -25,7 +25,7 @@ type PatientOption = {
 
 const AddOrder: React.FC<AddOrderProps> = ({ onClose, onOrderAdded }) => {
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
-  const [typePopUp, setTypePopUp] = useState(false);
+  const [typePopUp, setTypePopUp] = useState<PopUpVariant>('default');
   const [messagePopUp, setMessagePopUp] = useState('');
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -38,7 +38,7 @@ const AddOrder: React.FC<AddOrderProps> = ({ onClose, onOrderAdded }) => {
 
   const handleCancel = () => setIsPopUpVisible(false);
 
-  const showPopUp = (message: string, type: boolean) => {
+  const showPopUp = (message: string, type: PopUpVariant) => {
     setMessagePopUp(message);
     setTypePopUp(type);
     setIsPopUpVisible(true);
@@ -56,7 +56,7 @@ const AddOrder: React.FC<AddOrderProps> = ({ onClose, onOrderAdded }) => {
         <div className="relative mb-4 border-b-2 border-light-gray">
           <h1 className="text-2xl font-bold text-center">{['Modèle', 'Mesures', 'Confirmation'][currentStep]}</h1>
           <button
-            onClick={() => showPopUp('Voulez-vous quitter la création de la commande ?', true)}
+            onClick={() => showPopUp('Voulez-vous quitter la création de la commande ?', 'exit')}
             className="absolute right-0 bottom-1 text-5xl font-bold hover:text-medium-red"
           >
             &times;
@@ -70,15 +70,15 @@ const AddOrder: React.FC<AddOrderProps> = ({ onClose, onOrderAdded }) => {
           onPrevious={() => setCurrentStep(currentStep - 1)}
           onNext={() => setCurrentStep(currentStep + 1)}
           onOrder={() => {
-            showPopUp('Commande créée avec succès', false);
+            showPopUp('Commande créée avec succès', 'default');
           }}
         />
 
         {isPopUpVisible && (
           <PopUp
             message={messagePopUp}
-            type={typePopUp}
-            onValider={handleValider}
+            variant={typePopUp}
+            onQuitter={onClose}
             onCancel={handleCancel}
             onOk={handleValider}
           />
