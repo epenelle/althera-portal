@@ -1,6 +1,7 @@
 import React from 'react';
 import PopUp from '../../Helper/PopUp';
 import { useRouter } from 'next/router';
+import { PopUpVariant } from '@/Constants/Types';
 
 const ModifAccount = () => {
   const router = useRouter();
@@ -10,7 +11,7 @@ const ModifAccount = () => {
   const defaultEmail = 'clinique@sherbrooke.com';
 
   const [isPopUpVisible, setIsPopUpVisible] = React.useState(false);
-  const [typePopUp, setTypePopUp] = React.useState(false);
+  const [typePopUp, setTypePopUp] = React.useState<PopUpVariant>('default');
   const [messagePopUp, setMessagePopUp] = React.useState('');
 
   const handleOk = () => {
@@ -18,7 +19,7 @@ const ModifAccount = () => {
     router.push('/Home?type=dashboard');
   };
 
-  const showPopUp = (message: string, type: boolean) => {
+  const showPopUp = (message: string, type: PopUpVariant) => {
     setMessagePopUp(message);
     setTypePopUp(type);
     setIsPopUpVisible(true);
@@ -26,18 +27,14 @@ const ModifAccount = () => {
 
   return (
     <div className="rounded-lg w-3/4 p-8 border-2 border-light-grayshadow-lg flex flex-col items-center">
-      {isPopUpVisible && (
-        <PopUp message={messagePopUp} type={typePopUp} onOk={handleOk} />
-      )}
+      {isPopUpVisible && <PopUp message={messagePopUp} variant={typePopUp} onOk={handleOk} />}
       <h1 className="text-center font-bold text-2xl p-2 md:text-4x1 text-secondary-dark-blue mb-4">
         Modification des coordonnées
       </h1>
       <div className="w-full max-w-md">
         <div className="flex flex-col mb-4">
           <div className="flex items-center mb-2">
-            <label className="w-1/3 text-right whitespace-nowrap">
-              Nom clinique :{' '}
-            </label>
+            <label className="w-1/3 text-right whitespace-nowrap">Nom clinique : </label>
             <input
               type="text"
               placeholder={defaultNomClinique}
@@ -45,9 +42,7 @@ const ModifAccount = () => {
             />
           </div>
           <div className="flex items-center mb-2">
-            <label className="w-1/3 text-right whitespace-nowrap">
-              Adresse postale :{' '}
-            </label>
+            <label className="w-1/3 text-right whitespace-nowrap">Adresse postale : </label>
             <input
               type="text"
               placeholder={defaultAdresse}
@@ -55,9 +50,7 @@ const ModifAccount = () => {
             />
           </div>
           <div className="flex items-center mb-2">
-            <label className="w-1/3 text-right whitespace-nowrap flex justify-end">
-              Numéro de téléphone :{' '}
-            </label>
+            <label className="w-1/3 text-right whitespace-nowrap flex justify-end">Numéro de téléphone : </label>
             <input
               type="text"
               placeholder={defaultTelephone}
@@ -65,9 +58,7 @@ const ModifAccount = () => {
             />
           </div>
           <div className="flex items-center mb-2">
-            <label className="w-1/3 text-right whitespace-nowrap">
-              Email :{' '}
-            </label>
+            <label className="w-1/3 text-right whitespace-nowrap">Email : </label>
             <input
               type="email"
               placeholder={defaultEmail}
@@ -79,9 +70,7 @@ const ModifAccount = () => {
           <button
             className="h-11 pl-5 pr-5 bg-medium-red border-2 border-black outline-none rounded-full shadow-sm cursor-pointer text-base text-white font-semibold
           transform active:scale-95 transition duration-150 ease-in-out hover:bg-dark-red"
-            onClick={() =>
-              showPopUp('Les modifications ont bien été enregistrées !', false)
-            }
+            onClick={() => showPopUp('Les modifications ont bien été enregistrées !', 'default')}
           >
             Enregistrer les modifications
           </button>

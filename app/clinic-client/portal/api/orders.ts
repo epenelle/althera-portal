@@ -24,9 +24,7 @@ export const fetchOrders = async (): Promise<Order[]> => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const json = await response.json();
-    const ordersData: Order[] = json.map((order: any, index: number) =>
-      transformOrder(order, index),
-    );
+    const ordersData: Order[] = json.map((order: any, index: number) => transformOrder(order, index));
     return ordersData;
   } catch (error) {
     console.error('Error fetching orders:', error);
@@ -54,9 +52,7 @@ export const fetchOrderById = async (id: string): Promise<Order> => {
   }
 };
 
-export const fetchPatientOrders = async (
-  patientId: string,
-): Promise<Order[]> => {
+export const fetchPatientOrders = async (patientId: string): Promise<Order[]> => {
   try {
     const response = await fetch(`${baseUrl}?patientId=${patientId}`, {
       method: 'GET',
@@ -68,10 +64,7 @@ export const fetchPatientOrders = async (
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const json = await response.json();
-    console.log(json);
-    const ordersData: Order[] = json.map((order: any, index: number) =>
-      transformOrder(order, index),
-    );
+    const ordersData: Order[] = json.map((order: any, index: number) => transformOrder(order, index));
     return ordersData;
   } catch (error) {
     console.error('Error fetching orders:', error);
@@ -79,9 +72,7 @@ export const fetchPatientOrders = async (
   }
 };
 
-export const addOrder = async (
-  order: Order,
-): Promise<{ success: boolean; message: string; order: Order | null }> => {
+export const addOrder = async (order: Order): Promise<{ success: boolean; message: string; order: Order | null }> => {
   try {
     const response = await fetch(baseUrl, {
       method: 'POST',

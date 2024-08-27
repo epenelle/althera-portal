@@ -1,37 +1,28 @@
-import { fetchPatients } from '@/api/patients';
-import { Patient } from '@/Constants/Types';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Select, { GroupBase, components } from 'react-select';
+import { Patient } from '@/Constants/Types';
 import Modal from 'react-modal';
-import AddPatient from '../Add/AddPatient';
+import AddPatient from '../../AddPatient';
 
-type PatientOption = {
+interface PatientOption {
   value: Patient;
   label: string;
-};
-
-interface EditPProps {
-  patient?: Patient;
 }
 
-const EditPatient: React.FC<EditPProps> = ({ patient }) => {
-  const [patients, setPatients] = useState<Patient[]>([]);
-  const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
+interface PatientSelectorProps {
+  patients: Patient[];
+  selectedPatient: Patient | null;
+  setSelectedPatient: (patient: Patient | null) => void;
+  setPatients: (patients: Patient[]) => void;
+}
+
+const PatientSelector: React.FC<PatientSelectorProps> = ({
+  patients,
+  selectedPatient,
+  setSelectedPatient,
+  setPatients,
+}) => {
   const [isAddPatientModalVisible, setIsAddPatientModalVisible] = useState(false);
-
-  useEffect(() => {
-    const loadPatients = async () => {
-      const patientsData = await fetchPatients();
-      setPatients(patientsData);
-    };
-    loadPatients();
-  }, []);
-
-  useEffect(() => {
-    if (patient) {
-      setSelectedPatient(patient);
-    }
-  }, [patient]);
 
   const patientOptions: GroupBase<PatientOption>[] = [
     {
@@ -62,20 +53,9 @@ const EditPatient: React.FC<EditPProps> = ({ patient }) => {
   );
 
   return (
-    <div className="flex items-center mb-2">
-      {isAddPatientModalVisible && (
-        <Modal
-          isOpen={isAddPatientModalVisible}
-          onRequestClose={() => setIsAddPatientModalVisible(false)}
-          overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          className="relative bg-white rounded-lg p-6 w-full max-w-lg mx-auto z-50 focus:outline-none"
-        >
-          <AddPatient onClose={() => setIsAddPatientModalVisible(false)} onPatientAdded={handleAddPatient} />
-        </Modal>
-      )}
-      <label className="w-2/5 text-right whitespace-nowrap">Patient : </label>
+    <div className="flex justify-center items-center">
       <Select
-        className="ml-4 w-56"
+        className="ml-4 w-3/5"
         options={patientOptions}
         value={
           selectedPatient
@@ -89,8 +69,18 @@ const EditPatient: React.FC<EditPProps> = ({ patient }) => {
         placeholder="Sélectionner un patient"
         components={{ MenuList }}
       />
+      {isAddPatientModalVisible && (
+        <Modal
+          isOpen={isAddPatientModalVisible}
+          onRequestClose={() => setIsAddPatientModalVisible(false)}
+          overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          className="relative bg-white rounded-lg p-6 w-full max-w-lg mx-auto z-50 focus:outline-none"
+        >
+          <AddPatient onClose={() => setIsAddPatientModalVisible(false)} onPatientAdded={handleAddPatient} />
+        </Modal>
+      )}
     </div>
   );
 };
 
-export default EditPatient;
+export default PatientSelector;

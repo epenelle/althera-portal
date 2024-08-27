@@ -16,3 +16,9 @@ export interface Order {
   orderState?: string;
   patient?: Patient;
 }
+
+export interface Measurement {
+  label: string;
+  value: string;
+}
+export type PopUpVariant = 'default' | 'confirmation' | 'exit';
