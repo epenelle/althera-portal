@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { FaUpload } from 'react-icons/fa6';
 import { useOrderContext } from '@/components/Helper/OrderContext';
 
 const ScanFileUpload = () => {
@@ -24,7 +23,7 @@ const ScanFileUpload = () => {
         htmlFor="file-upload"
         className="cursor-pointer flex flex-col items-center justify-center border-2 border-dashed border-gray-400 p-10 rounded-lg transition-colors duration-300 hover:border-gray-600"
       >
-        <FontAwesomeIcon icon={faUpload} size="4x" className="text-gray-500 mb-4" />
+        <FaUpload size="4em" className="text-gray-500 mb-4" />
         <p className="text-gray-500">Ajouter le fichier de scan</p>
       </label>
       {scanFile && (

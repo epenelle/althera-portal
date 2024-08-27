@@ -21,7 +21,7 @@ interface SelectFingerProps {
 
 const SelectFinger: React.FC<SelectFingerProps> = ({ selectedFinger, handleFingerChange }) => {
   const handleChange = (selectedOption: SingleValue<FingerOption>) => {
-    handleFingerChange(selectedOption?.value || '');
+    handleFingerChange(selectedOption?.label || '');
   };
 
   return (
@@ -29,7 +29,7 @@ const SelectFinger: React.FC<SelectFingerProps> = ({ selectedFinger, handleFinge
       <Select
         className="ml-4 w-3/5"
         options={fingerOptions}
-        value={fingerOptions.find((option) => option.value === selectedFinger) || null}
+        value={fingerOptions.find((option) => option.label === selectedFinger) || null}
         onChange={handleChange}
         placeholder="Sélectionner un doigt"
         menuPortalTarget={document.body}
