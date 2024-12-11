@@ -1,4 +1,4 @@
-import { Order } from '@/Constants/Types';
+import { Order, Patient } from '@/Constants/Types';
 
 const baseUrl = 'http://localhost:5125/orders';
 
@@ -13,63 +13,114 @@ const transformOrder = (order: any, index: number = 0): Order => ({
 });
 
 export const fetchOrders = async (): Promise<Order[]> => {
-  try {
-    const response = await fetch(baseUrl, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const json = await response.json();
-    const ordersData: Order[] = json.map((order: any, index: number) => transformOrder(order, index));
-    return ordersData;
-  } catch (error) {
-    console.error('Error fetching orders:', error);
-    throw error;
-  }
+  // try {
+  //   const response = await fetch(baseUrl, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   });
+  //   if (!response.ok) {
+  //     throw new Error(`HTTP error! status: ${response.status}`);
+  //   }
+  //   const json = await response.json();
+  //   const ordersData: Order[] = json.map((order: any, index: number) => transformOrder(order, index));
+  //   return ordersData;
+  // } catch (error) {
+  //   console.error('Error fetching orders:', error);
+  //   throw error;
+  // }
+  const patient: Patient = {
+    id: 123,
+    firstName: "John",
+    lastName: "Doe",
+    healthInsuranceNumber: "123456789",
+    ClinicId: "1",
+  };
+  const order: Order = {
+    id: 1,
+    orthesisModel: "Model ABC",
+    orthesisComment: "Standard fit",
+    patientId: 123,
+    orderDate: "2024-12-11",
+    orderState: "Pending",
+    patient: patient,
+  };
+  return [order];
 };
 
 export const fetchOrderById = async (id: string): Promise<Order> => {
-  try {
-    const response = await fetch(`${baseUrl}/${id}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const order = await response.json();
-    const orderData: Order = transformOrder(order);
-    return orderData;
-  } catch (error) {
-    console.error(`Error fetching order with id ${id}:`, error);
-    throw error;
-  }
+  // try {
+  //   const response = await fetch(`${baseUrl}/${id}`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   });
+  //   if (!response.ok) {
+  //     throw new Error(`HTTP error! status: ${response.status}`);
+  //   }
+  //   const order = await response.json();
+  //   const orderData: Order = transformOrder(order);
+  //   return orderData;
+  // } catch (error) {
+  //   console.error(`Error fetching order with id ${id}:`, error);
+  //   throw error;
+  // }
+  const patient: Patient = {
+    id: 123,
+    firstName: "John",
+    lastName: "Doe",
+    healthInsuranceNumber: "123456789",
+    ClinicId: "1",
+  };
+  const order: Order = {
+    id: 1,
+    orthesisModel: "Model ABC",
+    orthesisComment: "Standard fit",
+    patientId: 123,
+    orderDate: "2024-12-11",
+    orderState: "Pending",
+    patient: patient,
+  };
+  return order;
 };
 
 export const fetchPatientOrders = async (patientId: string): Promise<Order[]> => {
-  try {
-    const response = await fetch(`${baseUrl}?patientId=${patientId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const json = await response.json();
-    const ordersData: Order[] = json.map((order: any, index: number) => transformOrder(order, index));
-    return ordersData;
-  } catch (error) {
-    console.error('Error fetching orders:', error);
-    throw error;
-  }
+  // try {
+  //   const response = await fetch(`${baseUrl}?patientId=${patientId}`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   });
+  //   if (!response.ok) {
+  //     throw new Error(`HTTP error! status: ${response.status}`);
+  //   }
+  //   const json = await response.json();
+  //   const ordersData: Order[] = json.map((order: any, index: number) => transformOrder(order, index));
+  //   return ordersData;
+  // } catch (error) {
+  //   console.error('Error fetching orders:', error);
+  //   throw error;
+  // }
+  const patient: Patient = {
+    id: 123,
+    firstName: "John",
+    lastName: "Doe",
+    healthInsuranceNumber: "123456789",
+    ClinicId: "1",
+  };
+  const order: Order = {
+    id: 1,
+    orthesisModel: "Model ABC",
+    orthesisComment: "Standard fit",
+    patientId: 123,
+    orderDate: "2024-12-11",
+    orderState: "Pending",
+    patient: patient,
+  };
+  return [order];
 };
 
 export const addOrder = async (order: Order): Promise<{ success: boolean; message: string; order: Order | null }> => {

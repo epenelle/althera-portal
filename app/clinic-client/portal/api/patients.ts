@@ -10,43 +10,59 @@ const transformPatientData = (patient: any, index: number = 0): Patient => ({
 });
 
 export const fetchPatients = async (): Promise<Patient[]> => {
-  try {
-    const response = await fetch(baseUrl, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const json = await response.json();
-    const patientsData: Patient[] = json.map((patient: any, index: number) => transformPatientData(patient, index));
-    return patientsData;
-  } catch (error) {
-    console.error('Error fetching patients:', error);
-    throw error;
-  }
+  // try {
+  //   const response = await fetch(baseUrl, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   });
+  //   if (!response.ok) {
+  //     throw new Error(`HTTP error! status: ${response.status}`);
+  //   }
+  //   const json = await response.json();
+  //   const patientsData: Patient[] = json.map((patient: any, index: number) => transformPatientData(patient, index));
+  //   return patientsData;
+  // } catch (error) {
+  //   console.error('Error fetching patients:', error);
+  //   throw error;
+  // }
+  const patient: Patient = {
+    id: 123,
+    firstName: "John",
+    lastName: "Doe",
+    healthInsuranceNumber: "123456789",
+    ClinicId: "1",
+  };
+  return [patient];
 };
 
 export const fetchPatientById = async (id: string): Promise<Patient> => {
-  try {
-    const response = await fetch(`${baseUrl}/${id}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const patient = await response.json();
-    const patientData: Patient = transformPatientData(patient);
-    return patientData;
-  } catch (error) {
-    console.error(`Error fetching patient with id ${id}:`, error);
-    throw error;
-  }
+  // try {
+  //   const response = await fetch(`${baseUrl}/${id}`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   });
+  //   if (!response.ok) {
+  //     throw new Error(`HTTP error! status: ${response.status}`);
+  //   }
+  //   const patient = await response.json();
+  //   const patientData: Patient = transformPatientData(patient);
+  //   return patientData;
+  // } catch (error) {
+  //   console.error(`Error fetching patient with id ${id}:`, error);
+  //   throw error;
+  // }
+  const patient: Patient = {
+    id: 123,
+    firstName: "John",
+    lastName: "Doe",
+    healthInsuranceNumber: "123456789",
+    ClinicId: "1",
+  };
+  return patient;
 };
 
 export const addPatient = async (
