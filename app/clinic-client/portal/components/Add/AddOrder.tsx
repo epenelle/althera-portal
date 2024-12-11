@@ -29,7 +29,7 @@ const AddOrder: React.FC<AddOrderProps> = ({ onClose, onOrderAdded }) => {
   const [messagePopUp, setMessagePopUp] = useState('');
 
   const [currentStep, setCurrentStep] = useState(0);
-  const steps = [<SelectModel />, <SelectMeasures />, <Confirm />];
+  const steps = [<SelectModel key="select-model"/>, <SelectMeasures key="select-measures"/>, <Confirm key="confirm"/>];
 
   const handleValider = () => {
     setIsPopUpVisible(false);
