@@ -124,7 +124,7 @@ const PatientCard: React.FC<PatientCardProps> = ({ id }) => {
           </div>
           <div className="flex items-center mb-2">
             <label className="w-2/5 text-right whitespace-nowrap">
-              Numéro <br /> d'assurance maladie
+              NAS
             </label>
             <input
               type="text"

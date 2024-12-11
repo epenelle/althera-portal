@@ -94,7 +94,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ id }) => {
         <div className="flex flex-col mb-4 mt-8">
           {edit ? <EditP patient={orderData?.patient} /> : <DisplayP patient={orderData?.patient} />}
           <div className="flex items-center mb-2">
-            <label className="w-2/5 text-right whitespace-nowrap">Modèle d'attelle : </label>
+            <label className="w-2/5 text-right whitespace-nowrap">Modèle : </label>
             <input type="text" className="input-common ml-4" disabled={!edit} value={orthesisModel} />
             {!edit && <MdLock size={20} className="ml-2" />}
           </div>
