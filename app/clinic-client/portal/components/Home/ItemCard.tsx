@@ -26,7 +26,7 @@ const PatientCard = ({ data }: Props) => {
     <div className="border-light-gray border-2 border-opacity-30 cursor-pointer hover:shadow-md mb-2 p-5 rounded-2xl sm:p-3 transition-all duration-150">
       {isPatient(data) ? (
         <div
-          onClick={() => handleClick('patient', data.id.toString())}
+          onClick={() => handleClick('patient', '123')}
           className="grid-cols-1 grid items-center gap-4 sm:grid-cols-2 sm:gap-2 md:grid-cols-[100px_150px_150px_1fr_24px]"
         >
           <BsPersonFill
