@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import PatientCard from '../ItemCard';
 import { BsPeopleFill } from 'react-icons/bs';
-import { FaSearch } from 'react-icons/fa';
-import { FaSortUp, FaSortDown } from 'react-icons/fa';
 import PaginationMenu from '../../Helper/PaginationMenu';
 import { useGlobalContext } from '@/components/Helper/GlobalContext';
 import AddPatient from '@/components/Add/AddPatient';

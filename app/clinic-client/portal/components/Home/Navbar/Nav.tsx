@@ -28,6 +28,7 @@ const Nav = ({ openNav }: Props) => {
         <FaBars onClick={openNav} className="w-6 h-6 cursor-pointer" />
       </div>
       <div className="fixed left-0 top-0 h-full z-10 bg-primary-dark-blue shadow-lg hidden md:flex flex-col items-center -col justify-between">
+        {/* LOGO ALTHERA */}
         <div className="px-5">
           <Image
             src="/images/logo_althera_blanc.png"
@@ -38,6 +39,7 @@ const Nav = ({ openNav }: Props) => {
             className="object-contain object-center"
           />
         </div>
+        {/* BOUTONS */}
         <div className="flex flex-col items-center space-y-2 w-full">
           {navLinks.map((link) => {
             return (
