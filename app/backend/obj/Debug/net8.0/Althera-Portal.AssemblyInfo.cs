@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Althera-Portal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f53817eacc00e94a1460478eee54d85127823619")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+121eeadcb78955d833022efae215c37b01806ea3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Althera-Portal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Althera-Portal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
