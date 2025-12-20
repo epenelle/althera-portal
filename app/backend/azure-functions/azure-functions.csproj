@@ -34,7 +34,7 @@
     <PackageReference Include="Microsoft.Azure.Functions.Worker.ApplicationInsights" Version="2.50.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Portal\Portal.csproj" />
+    <ProjectReference Include="..\Portal\Portal.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
