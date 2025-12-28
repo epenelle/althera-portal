@@ -18,9 +18,10 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ReactElement, useEffect, useState } from 'react';
 import { Patient } from '@/lib/api/patientClient';
-import { fileClient } from '@/lib/api/fileClient';
-import { AnonymousCredential, AnonymousCredentialPolicy, BlobServiceClient, BlockBlobClient, RequestPolicy, RequestPolicyOptions, StoragePipelineOptions, StorageSharedKeyCredential } from '@azure/storage-blob';
-import { DefaultAzureCredential } from "@azure/identity";
+// import { fileClient } from '@/lib/api/fileClient';
+// import { AnonymousCredential, AnonymousCredentialPolicy, BlobServiceClient, BlockBlobClient, RequestPolicy, RequestPolicyOptions, StoragePipelineOptions, StorageSharedKeyCredential } from '@azure/storage-blob';
+import { BlobServiceClient } from '@azure/storage-blob';
+// import { DefaultAzureCredential } from "@azure/identity";
 
 const FormSchema = z
     .object({
@@ -163,15 +164,15 @@ export default function CreateOrderForm({ patients, sheetTrigger }: CreateOrderF
             //         };
             //     },
             // };
-            const connectionString = 
-            "BlobEndpoint=https://altherasandboxstorage.blob.core.windows.net/;" + 
-            "QueueEndpoint=https://altherasandboxstorage.queue.core.windows.net/;" + 
-            "FileEndpoint=https://altherasandboxstorage.file.core.windows.net/;" + 
-            "TableEndpoint=https://altherasandboxstorage.table.core.windows.net/;" + 
-            "SharedAccessSignature=sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2025-08-27T19:47:30Z&st=2025-08-27T11:32:30Z&spr=https&sig=IGXS3MrjvH41HPB9g0BUsk9G0i9PE1gtGUxK1dpN%2Fiw%3D"
+            // const connectionString = 
+            // "BlobEndpoint=https://altherasandboxstorage.blob.core.windows.net/;" + 
+            // "QueueEndpoint=https://altherasandboxstorage.queue.core.windows.net/;" + 
+            // "FileEndpoint=https://altherasandboxstorage.file.core.windows.net/;" + 
+            // "TableEndpoint=https://altherasandboxstorage.table.core.windows.net/;" + 
+            // "SharedAccessSignature=sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2025-08-27T19:47:30Z&st=2025-08-27T11:32:30Z&spr=https&sig=IGXS3MrjvH41HPB9g0BUsk9G0i9PE1gtGUxK1dpN%2Fiw%3D"
             const sasToken = "sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2025-08-27T19:47:30Z&st=2025-08-27T11:32:30Z&spr=https&sig=IGXS3MrjvH41HPB9g0BUsk9G0i9PE1gtGUxK1dpN%2Fiw%3D";
-            const blobServiceSasurl = "https://altherasandboxstorage.blob.core.windows.net/?sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2025-08-27T19:47:30Z&st=2025-08-27T11:32:30Z&spr=https&sig=IGXS3MrjvH41HPB9g0BUsk9G0i9PE1gtGUxK1dpN%2Fiw%3D";
-            const fileServiceSasurl = "https://altherasandboxstorage.file.core.windows.net/?sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2025-08-27T19:47:30Z&st=2025-08-27T11:32:30Z&spr=https&sig=IGXS3MrjvH41HPB9g0BUsk9G0i9PE1gtGUxK1dpN%2Fiw%3D";
+            // const blobServiceSasurl = "https://altherasandboxstorage.blob.core.windows.net/?sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2025-08-27T19:47:30Z&st=2025-08-27T11:32:30Z&spr=https&sig=IGXS3MrjvH41HPB9g0BUsk9G0i9PE1gtGUxK1dpN%2Fiw%3D";
+            // const fileServiceSasurl = "https://altherasandboxstorage.file.core.windows.net/?sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2025-08-27T19:47:30Z&st=2025-08-27T11:32:30Z&spr=https&sig=IGXS3MrjvH41HPB9g0BUsk9G0i9PE1gtGUxK1dpN%2Fiw%3D";
             const account = "altherasandboxstorage";
             const blobServiceClient = new BlobServiceClient(
                 `https://${account}.blob.core.windows.net/?${sasToken}`,
