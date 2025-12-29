@@ -2,6 +2,8 @@ import CreateOrderForm from '@/components/forms/CreateOrder';
 import { SheetTrigger } from '@/components/ui/sheet';
 import { patientClient } from '@/lib/api/patientClient';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
     const patients = await patientClient.getPatients();
 
