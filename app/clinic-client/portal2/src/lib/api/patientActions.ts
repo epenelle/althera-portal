@@ -3,6 +3,7 @@
 import { API_BASE_URL, API_KEY, defaultHeaders } from './config';
 
 const getUrlWithKey = (endpoint: string) => {
+    console.log(API_BASE_URL);
     const url = new URL(`${API_BASE_URL}${endpoint}`);
     if (API_KEY) {
         url.searchParams.append('code', API_KEY);
