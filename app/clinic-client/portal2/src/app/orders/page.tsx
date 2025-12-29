@@ -4,6 +4,9 @@ import { DataTable } from './data-table';
 import { SheetTrigger } from '@/components/ui/sheet';
 import { patientClient } from '@/lib/api/patientClient';
 
+export const dynamic = 'force-dynamic';
+
+
 async function getOrders(): Promise<Order[]> {
     // Fetch data from your API here.
     return [
