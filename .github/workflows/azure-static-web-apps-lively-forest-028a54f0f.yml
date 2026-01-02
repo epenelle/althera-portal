@@ -30,7 +30,7 @@ jobs:
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "./app/clinic-client" # App source code path
           api_location: "./app/backend/azure-functions" # Api source code path
-          output_location: "" # Built app content directory - optional
+          output_location: "./app/clinic-client/out" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
         env:
           NEXT_PUBLIC_API_BASE_URL: https://lively-forest-028a54f0f.4.azurestaticapps.net/api
