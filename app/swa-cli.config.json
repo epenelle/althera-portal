@@ -3,7 +3,7 @@
   "configurations": {
     "app": {
       "appLocation": "clinic-client",
-      "apiLocation": "backend\\azure-functions",
+      "apiLocation": "backend/azure-functions",
       "outputLocation": ".next",
       "apiLanguage": "dotnetisolated",
       "apiVersion": "9.0",
