@@ -1,5 +1,3 @@
-'use server';
-
 import { API_BASE_URL, defaultHeaders } from './config';
 
 const getUrlWithKey = (endpoint: string) => {

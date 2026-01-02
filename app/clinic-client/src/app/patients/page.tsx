@@ -1,10 +1,28 @@
+'use client';
+
 import { patientClient } from '@/lib/api/patientClient';
 import { columns } from './columns';
 import { CreatePatientForm } from './create-patient';
 import { DataTable } from './data-table';
+import { useEffect, useState } from 'react';
+import type { Patient } from '@/lib/api/patientClient';
 
-export default async function Patients() {
-    const patients = await patientClient.getPatients();
+export default function Patients() {
+    const [patients, setPatients] = useState<Patient[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        patientClient.getPatients()
+            .then(data => {
+                setPatients(data);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                setError(err.message);
+                setIsLoading(false);
+            });
+    }, []);
 
     return (
         <div>
@@ -15,7 +33,9 @@ export default async function Patients() {
                 <div className="flex flex-row-reverse">
                     <CreatePatientForm />
                 </div>
-                <DataTable columns={columns} data={patients} />
+                {isLoading && <div className="text-center p-4">Loading patients...</div>}
+                {error && <div className="text-center p-4 text-red-600">Error: {error}</div>}
+                {!isLoading && !error && <DataTable columns={columns} data={patients} />}
             </div>
         </div>
     );

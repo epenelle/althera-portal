@@ -1,9 +1,26 @@
+'use client';
+
 import CreateOrderForm from '@/components/forms/CreateOrder';
 import { SheetTrigger } from '@/components/ui/sheet';
 import { patientClient } from '@/lib/api/patientClient';
+import { useEffect, useState } from 'react';
+import type { Patient } from '@/lib/api/patientClient';
 
-export default async function Home() {
-    const patients = await patientClient.getPatients();
+export default function Home() {
+    const [patients, setPatients] = useState<Patient[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        patientClient.getPatients()
+            .then(data => {
+                setPatients(data);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                console.error('Failed to load patients:', err);
+                setIsLoading(false);
+            });
+    }, []);
 
     return (
         <div>
@@ -14,15 +31,18 @@ export default async function Home() {
             </header>
             <main>
                 <div className="mx-auto mt-4 grid h-40 w-4/5 gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    <CreateOrderForm
-                        // TODO: Not convinced by asking for patients here. Perhaps the component should fetch them itself ?
-                        patients={patients}
-                        sheetTrigger={
-                            <SheetTrigger className="rounded-xl bg-primary-dark-blue font-bold text-light-white hover:bg-secondary-dark-blue">
-                                Créer une commande
-                            </SheetTrigger>
-                        }
-                    />
+                    {isLoading ? (
+                        <div className="text-center">Loading...</div>
+                    ) : (
+                        <CreateOrderForm
+                            patients={patients}
+                            sheetTrigger={
+                                <SheetTrigger className="rounded-xl bg-primary-dark-blue font-bold text-light-white hover:bg-secondary-dark-blue">
+                                    Créer une commande
+                                </SheetTrigger>
+                            }
+                        />
+                    )}
                 </div>
             </main>
         </div>

@@ -1,13 +1,14 @@
+'use client';
+
 import { Order, columns } from './columns';
 import CreateOrderForm from '../../components/forms/CreateOrder';
 import { DataTable } from './data-table';
 import { SheetTrigger } from '@/components/ui/sheet';
 import { patientClient } from '@/lib/api/patientClient';
+import { useEffect, useState } from 'react';
+import type { Patient } from '@/lib/api/patientClient';
 
-export const dynamic = 'force-dynamic';
-
-
-async function getOrders(): Promise<Order[]> {
+function getOrders(): Order[] {
     // Fetch data from your API here.
     return [
         {
@@ -45,9 +46,22 @@ async function getOrders(): Promise<Order[]> {
     ];
 }
 
-export default async function Orders() {
-    const orders = await getOrders();
-    const patients = await patientClient.getPatients();
+export default function Orders() {
+    const [orders] = useState<Order[]>(getOrders());
+    const [patients, setPatients] = useState<Patient[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        patientClient.getPatients()
+            .then(data => {
+                setPatients(data);
+                setIsLoading(false);
+            })
+            .catch(err => {
+                console.error('Failed to load patients:', err);
+                setIsLoading(false);
+            });
+    }, []);
 
     return (
         <div>
@@ -55,17 +69,23 @@ export default async function Orders() {
                 <h1 className="md:text-4x1 p-2 text-center text-3xl font-bold text-secondary-dark-blue">Commandes</h1>
             </header>
             <div className="mx-auto w-4/5 py-2">
-                <div className="flex flex-row-reverse">
-                    <CreateOrderForm
-                        patients={patients}
-                        sheetTrigger={
-                            <SheetTrigger className="w-[150px] rounded-md p-2 bg-primary-dark-blue text-light-white hover:bg-secondary-dark-blue">
-                                Créer
-                            </SheetTrigger>
-                        }
-                    />
-                </div>
-                <DataTable columns={columns} data={orders} />
+                {isLoading ? (
+                    <div className="text-center p-4">Loading patients...</div>
+                ) : (
+                    <>
+                        <div className="flex flex-row-reverse">
+                            <CreateOrderForm
+                                patients={patients}
+                                sheetTrigger={
+                                    <SheetTrigger className="w-[150px] rounded-md p-2 bg-primary-dark-blue text-light-white hover:bg-secondary-dark-blue">
+                                        Créer
+                                    </SheetTrigger>
+                                }
+                            />
+                        </div>
+                        <DataTable columns={columns} data={orders} />
+                    </>
+                )}
             </div>
         </div>
     );
