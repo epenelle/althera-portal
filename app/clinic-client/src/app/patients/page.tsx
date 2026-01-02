@@ -3,8 +3,6 @@ import { columns } from './columns';
 import { CreatePatientForm } from './create-patient';
 import { DataTable } from './data-table';
 
-export const dynamic = 'force-dynamic';
-
 export default async function Patients() {
     const patients = await patientClient.getPatients();
 
