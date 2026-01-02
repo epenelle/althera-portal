@@ -3,12 +3,15 @@
 import { API_BASE_URL, API_KEY, defaultHeaders } from './config';
 
 const getUrlWithKey = (endpoint: string) => {
-    console.log(API_BASE_URL);
-    const url = new URL(`${API_BASE_URL}${endpoint}`);
-    if (API_KEY) {
-        url.searchParams.append('code', API_KEY);
-    }
-    return url.toString();
+    // const url = new URL(`${API_BASE_URL}${endpoint}`);
+    // if (API_KEY) {
+        //     url.searchParams.append('code', API_KEY);
+        // }
+        // return url.toString();
+    const route = `${API_BASE_URL}${endpoint}`;
+    console.log('API_BASE_URL:', API_BASE_URL);
+    console.log('API Route:', route);
+    return route;
 };
 
 export interface Patient {
