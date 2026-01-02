@@ -33,7 +33,7 @@ jobs:
           output_location: "" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
         env:
-          NEXT_PUBLIC_API_BASE_URL: https://althera-portal-api-age7ekb0gzbdcdgj.canadacentral-01.azurewebsites.net/api
+          NEXT_PUBLIC_API_BASE_URL: https://lively-forest-028a54f0f.4.azurestaticapps.net/api
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
