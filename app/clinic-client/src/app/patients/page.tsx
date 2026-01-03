@@ -27,7 +27,7 @@ export default function Patients() {
     return (
         <div>
             <header>
-                <h1 className="md:text-4x1 p-2 text-center text-3xl font-bold text-secondary-dark-blue">Patients</h1>
+                <h1 className="md:text-4x1 p-2 text-center text-3xl font-bold text-foreground">Patients</h1>
             </header>
             <div className="mx-auto w-4/5 py-2">
                 <div className="flex flex-row-reverse">
