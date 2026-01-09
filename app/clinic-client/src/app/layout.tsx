@@ -1,21 +1,6 @@
-import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import Link from 'next/link';
-import { navLinks } from '@/constants';
-import { CiLogout } from 'react-icons/ci';
-import Image from 'next/image';
 import {
-    Sidebar,
-    SidebarContent,
-    SidebarFooter,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarHeader,
-    SidebarInset,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
     SidebarProvider,
     SidebarTrigger,
 } from '@/components/ui/sidebar';
