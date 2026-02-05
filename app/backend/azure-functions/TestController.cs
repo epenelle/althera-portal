@@ -7,7 +7,7 @@ namespace azure_functions;
 public class TestController
 {
     [Function("hello")]
-    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "hello")] HttpRequest req, CancellationToken ct)
+    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "post", Route = "hello")] HttpRequest req, CancellationToken ct)
     {
         return new CreatedResult("/hello", new { message = "Hello, World!" });
     }

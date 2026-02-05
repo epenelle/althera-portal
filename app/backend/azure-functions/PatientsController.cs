@@ -28,7 +28,7 @@ public class PatientsController
     }
 
     [Function("create-patient")]
-    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "patients")] HttpRequest req, CancellationToken ct)
+    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "post", Route = "patients")] HttpRequest req, CancellationToken ct)
     {
         try
         {
@@ -71,7 +71,7 @@ public class PatientsController
     }
 
     [Function("get-patient")]
-    public async Task<IActionResult> GetPatient([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "patients/{id}")] HttpRequest req, string id, CancellationToken ct)
+    public async Task<IActionResult> GetPatient([HttpTrigger(AuthorizationLevel.Function, "get", Route = "patients/{id}")] HttpRequest req, string id, CancellationToken ct)
     {
         try
         {
@@ -96,7 +96,7 @@ public class PatientsController
     }
 
     [Function("get-patients")]
-    public async Task<IActionResult> GetPatients([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "patients")] HttpRequest req, CancellationToken ct)
+    public async Task<IActionResult> GetPatients([HttpTrigger(AuthorizationLevel.Function, "get", Route = "patients")] HttpRequest req, CancellationToken ct)
     {
         try
         {
