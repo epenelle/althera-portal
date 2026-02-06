@@ -27,7 +27,7 @@ public class OrdersController
     }
 
     [Function("create-order")]
-    public async Task<IActionResult> CreateOrder([HttpTrigger(AuthorizationLevel.Function, "post", Route = "orders")] HttpRequest req, CancellationToken ct)
+    public async Task<IActionResult> CreateOrder([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "orders")] HttpRequest req, CancellationToken ct)
     {
         try
         {
