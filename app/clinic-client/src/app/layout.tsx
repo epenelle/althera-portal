@@ -6,6 +6,8 @@ import {
 } from '@/components/ui/sidebar';
 import React from 'react';
 import { AppSidebar } from '@/components/app-sidebar';
+import { LoginPage } from '@/components/login-page';
+import { ClerkProvider, SignedIn, SignedOut } from '@clerk/nextjs'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -28,17 +30,26 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
+    <ClerkProvider>
         <html lang="en">
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <SidebarProvider defaultOpen={true}>
-                    <AppSidebar />
-                    <main className="flex-1 w-full">
-                        <SidebarTrigger />
-                        {children}
-                    </main>
-                </SidebarProvider>
+                <SignedOut>
+                    <div className="min-h-screen w-full flex items-center justify-center">
+                        <LoginPage />
+                    </div>
+                </SignedOut>
+                <SignedIn>
+                    <SidebarProvider defaultOpen={true}>
+                        <AppSidebar />
+                        <main className="flex-1 w-full">
+                            <SidebarTrigger />
+                            {children}
+                        </main>
+                    </SidebarProvider>
+                </SignedIn>
             </body>
         </html>
+    </ClerkProvider>
     );
 }
 

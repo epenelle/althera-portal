@@ -11,8 +11,8 @@ import {
 } from '@/components/ui/sidebar';
 import { navLinks } from '@/constants';
 import Link from 'next/link';
-import { CiLogout } from 'react-icons/ci';
 import Image from 'next/image';
+import { UserButton } from '@clerk/nextjs';
 
 export function AppSidebar() {
     return (
@@ -50,12 +50,7 @@ export function AppSidebar() {
             <SidebarFooter className="mt-auto">
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton asChild>
-                            <button className="cursor-pointer">
-                                <CiLogout className="h-5 w-5" />
-                                <span className="font-semibold">Déconnexion</span>
-                            </button>
-                        </SidebarMenuButton>
+                            <UserButton />
                     </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarFooter>
