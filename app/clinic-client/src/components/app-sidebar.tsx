@@ -12,7 +12,7 @@ import {
 import { navLinks } from '@/constants';
 import Link from 'next/link';
 import Image from 'next/image';
-import { UserButton } from '@clerk/nextjs';
+import { UserButton  } from '@clerk/nextjs';
 
 export function AppSidebar() {
     return (
@@ -48,11 +48,7 @@ export function AppSidebar() {
             </SidebarContent>
 
             <SidebarFooter className="mt-auto">
-                <SidebarMenu>
-                    <SidebarMenuItem>
-                            <UserButton />
-                    </SidebarMenuItem>
-                </SidebarMenu>
+                    <UserButton showName appearance={{variables: {colorText: 'hsl(var(--primary-foreground))' }}} />
             </SidebarFooter>
         </Sidebar>
     )
