@@ -12,7 +12,7 @@ import {
 import { navLinks } from '@/constants';
 import Link from 'next/link';
 import Image from 'next/image';
-import { UserButton  } from '@clerk/nextjs';
+import { OrganizationSwitcher, UserButton  } from '@clerk/nextjs';
 
 export function AppSidebar() {
     return (
@@ -49,6 +49,7 @@ export function AppSidebar() {
 
             <SidebarFooter className="mt-auto">
                     <UserButton showName appearance={{variables: {colorText: 'hsl(var(--primary-foreground))' }}} />
+                    <OrganizationSwitcher appearance={{variables: {colorNeutral: 'hsl(var(--primary-foreground))' }}} />
             </SidebarFooter>
         </Sidebar>
     )
