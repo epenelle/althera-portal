@@ -39,9 +39,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_3B1117FEC63340A5959601957DBFC98F }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_BCD8F905AD8B4D6BAB80364111C65607 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B39872F0ACB64EBFAD9270712376C27F }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
 
       - name: Who am I in Azure
         run: az account show --query "{tenantId:tenantId,subscription:id,user:user.name,type:user.type}" -o table
