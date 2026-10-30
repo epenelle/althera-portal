@@ -17,11 +17,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ReactElement, useEffect, useState } from 'react';
+import { useAuth } from '@clerk/nextjs';
 import { Patient } from '@/lib/api/patientClient';
-// import { fileClient } from '@/lib/api/fileClient';
-// import { AnonymousCredential, AnonymousCredentialPolicy, BlobServiceClient, BlockBlobClient, RequestPolicy, RequestPolicyOptions, StoragePipelineOptions, StorageSharedKeyCredential } from '@azure/storage-blob';
-import { BlobServiceClient } from '@azure/storage-blob';
-// import { DefaultAzureCredential } from "@azure/identity";
+import { fileClient } from '@/lib/api/fileClient';
 
 const FormSchema = z
     .object({
@@ -130,6 +128,7 @@ export default function CreateOrderForm({ patients, sheetTrigger }: CreateOrderF
     const [patientPopoverOpen, setPatientPopoverOpen] = useState(false)
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isUploading, setIsUploading] = useState(false);
+    const { getToken } = useAuth();
     const form = useForm<FormData>({
         resolver: zodResolver(FormSchema),
     });
@@ -151,69 +150,25 @@ export default function CreateOrderForm({ patients, sheetTrigger }: CreateOrderF
     }
     
     const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
         try {
-            // const cred: AnonymousCredential = {
-            //     create: (nextPolicy: RequestPolicy, __: RequestPolicyOptions) => {
-            //         const anonymousPolicy: AnonymousCredentialPolicy = {
-            //             nextPolicy: {
-            //                 sendRequest: async (request) => {
-            //                     // Modify the request as needed
-            //                     return nextPolicy.sendRequest(request);
-            //                 },
-            //             },
-            //         };
-            //     },
-            // };
-            // const connectionString = 
-            // "BlobEndpoint=https://altherasandboxstorage.blob.core.windows.net/;" + 
-            // "QueueEndpoint=https://altherasandboxstorage.queue.core.windows.net/;" + 
-            // "FileEndpoint=https://altherasandboxstorage.file.core.windows.net/;" + 
-            // "TableEndpoint=https://altherasandboxstorage.table.core.windows.net/;" + 
-            // "SharedAccessSignature=sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2025-08-27T19:47:30Z&st=2025-08-27T11:32:30Z&spr=https&sig=IGXS3MrjvH41HPB9g0BUsk9G0i9PE1gtGUxK1dpN%2Fiw%3D"
-            const sasToken = "sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2025-08-27T19:47:30Z&st=2025-08-27T11:32:30Z&spr=https&sig=IGXS3MrjvH41HPB9g0BUsk9G0i9PE1gtGUxK1dpN%2Fiw%3D";
-            // const blobServiceSasurl = "https://altherasandboxstorage.blob.core.windows.net/?sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2025-08-27T19:47:30Z&st=2025-08-27T11:32:30Z&spr=https&sig=IGXS3MrjvH41HPB9g0BUsk9G0i9PE1gtGUxK1dpN%2Fiw%3D";
-            // const fileServiceSasurl = "https://altherasandboxstorage.file.core.windows.net/?sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2025-08-27T19:47:30Z&st=2025-08-27T11:32:30Z&spr=https&sig=IGXS3MrjvH41HPB9g0BUsk9G0i9PE1gtGUxK1dpN%2Fiw%3D";
-            const account = "altherasandboxstorage";
-            const blobServiceClient = new BlobServiceClient(
-                `https://${account}.blob.core.windows.net/?${sasToken}`,
-            );
-            const containerClient = blobServiceClient.getContainerClient("patients-scans");
-            const blobClient = containerClient.getBlobClient("test-upload-file" + Date.now().toString());
-            const blockBlobClient = blobClient.getBlockBlobClient();
-            // const fileClient = new BlockBlobClient(
-            // "BlobEndpoint=https://altherasandboxstorage.blob.core.windows.net/;QueueEndpoint=https://altherasandboxstorage.queue.core.windows.net/;FileEndpoint=https://altherasandboxstorage.file.core.windows.net/;TableEndpoint=https://altherasandboxstorage.table.core.windows.net/;SharedAccessSignature=sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2025-08-25T20:53:20Z&st=2025-08-25T12:38:20Z&spr=https&sig=ZzwQbtd%2B4nbqjFjF8JXTbfqm5PyJpLPWZZyUnzHq8H8%3D",
-            // "patients-scans",
-            // "test-upload-file" + Date.now().toString(),
-            // {
-            //         userAgentOptions: { userAgentPrefix: 'dev-althera-sandbox' },
-            //         retryOptions: { maxTries: 3, retryDelayInMs: 1000 },
-            //     }
-            // );
-            const file = event.target.files?.[0];
-    
-            if (!file) return;
-    
-            try {
-                setIsUploading(true);
-                const content = "asdf";
-                const uploadResult = await blockBlobClient.upload(content, content.length);
-                console.log('Upload result:', uploadResult);
-                if (uploadResult?.errorCode !== undefined) {
-                    form.setValue('scanFile', undefined);
-                }
-                form.setValue('scanFile', {
-                    blobUrl: "blobUrl",
-                    fileName: "fileName",
-                });
-            } catch (error) {
-                console.error('Upload failed:', error);
-                // Handle error appropriately
-            } finally {
-                setIsUploading(false);
+            setIsUploading(true);
+            const token = await getToken();
+            if (!token) {
+                throw new Error('Not authenticated');
             }
-        }
-        catch (error) {
-            console.error('Unexpected error occured during setup:', error);
+            const result = await fileClient.uploadScan(file, token);
+            form.setValue('scanFile', {
+                blobUrl: result.blobUrl,
+                fileName: result.fileName,
+            });
+        } catch (error) {
+            console.error('Upload failed:', error);
+            form.setValue('scanFile', undefined);
+        } finally {
+            setIsUploading(false);
         }
     };
 
