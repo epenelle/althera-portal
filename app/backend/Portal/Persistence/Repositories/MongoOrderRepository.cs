@@ -22,5 +22,10 @@ public class MongoOrderRepository : IOrderRepository
         OrderModel orderModel = order.FromDomain();
         await _orders.InsertOneAsync(orderModel, options: null, cancellationToken);
         return orderModel;
-    }   
+    }
+
+    public async Task<List<OrderModel>> GetAllAsync(CancellationToken cancellationToken)
+    {
+        return await (await _orders.FindAsync(_ => true, null, cancellationToken)).ToListAsync(cancellationToken);
+    }
 }

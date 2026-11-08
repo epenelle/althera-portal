@@ -34,6 +34,9 @@ public class OrderModel
 
     public string? ScanId { get; init; } = null;
 
+    [BsonRepresentation(BsonType.String)]
+    public OrderStatus Status { get; init; } = OrderStatus.InProgress;
+
     [BsonRequired]
     public required DateTime CreatedAt { get; init; }
     
@@ -55,6 +58,7 @@ public static class OrderModelExtensions
             Measurements = order.Measurements,
             OrthoseModelId = order.OrthoseModelId,
             ScanId = order.ScanId,
+            Status = order.Status,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow,
         };
@@ -71,6 +75,7 @@ public static class OrderModelExtensions
             Measurements = orderModel.Measurements,
             OrthoseModelId = orderModel.OrthoseModelId,
             ScanId = orderModel.ScanId,
+            Status = orderModel.Status,
             CreatedAt = orderModel.CreatedAt,
             UpdatedAt = orderModel.UpdatedAt,
         };

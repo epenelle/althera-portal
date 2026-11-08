@@ -26,6 +26,21 @@ public class OrdersController
         _orderService = orderService;
     }
 
+    [Function("get-orders")]
+    public async Task<IActionResult> GetOrders([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "orders")] HttpRequest req, CancellationToken ct)
+    {
+        try
+        {
+            List<OrderResponse> orders = await _orderService.GetOrdersAsync(ct);
+            return new OkObjectResult(orders);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error fetching orders");
+            return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+        }
+    }
+
     [Function("create-order")]
     public async Task<IActionResult> CreateOrder([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "orders")] HttpRequest req, CancellationToken ct)
     {
