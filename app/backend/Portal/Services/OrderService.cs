@@ -1,6 +1,7 @@
 using Portal.Domain;
 using Portal.Dto;
 using Portal.Models;
+using Portal.Persistence.Models;
 using Portal.Repositories;
 
 namespace Portal.Services;
@@ -14,6 +15,40 @@ public class OrderService : IOrderService
     {
         _orderRepository = orderRepository;
         _patientService = patientService;
+    }
+
+    public async Task<List<OrderResponse>> GetOrdersAsync(CancellationToken cancellationToken)
+    {
+        List<OrderModel> orderModels = await _orderRepository.GetAllAsync(cancellationToken);
+        List<Patient> patients = await _patientService.GetPatientsAsync(cancellationToken);
+
+        Dictionary<Guid, Patient> patientMap = patients.ToDictionary(p => p.Id);
+
+        return [.. orderModels.Select(o =>
+        {
+            patientMap.TryGetValue(o.PatientId, out Patient? patient);
+            return new OrderResponse
+            {
+                Id = o.OrderId,
+                Patient = new PatientSummary
+                {
+                    PatientId = o.PatientId,
+                    FirstName = patient?.FirstName ?? string.Empty,
+                    LastName = patient?.LastName ?? string.Empty,
+                },
+                Orthosis = new OrthosisDetails
+                {
+                    Limb = o.Limb,
+                    Side = o.Side,
+                    ModelId = o.OrthoseModelId,
+                    Measurements = o.Measurements,
+                },
+                ScanId = o.ScanId,
+                Status = o.Status,
+                CreatedAt = o.CreatedAt,
+                UpdatedAt = o.UpdatedAt,
+            };
+        })];
     }
 
     public async Task<Order> CreateOrderAsync(OrderCreateRequest orderCreateRequest, CancellationToken cancellationToken)
@@ -45,6 +80,7 @@ public class OrderService : IOrderService
             OrthoseModelId = orderCreateRequest.OrthoseModelId,
             Measurements = orderCreateRequest.Measurements,
             ScanId = orderCreateRequest.ScanId,
+            Status = OrderStatus.InProgress,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow,
         };

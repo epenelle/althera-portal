@@ -13,4 +13,5 @@ public record Order : EntityBase
     public required string OrthoseModelId { get; init; }
     // TODO : Not sure if ScanId should be an URI
     public string? ScanId { get; init; }
+    public required OrderStatus Status { get; init; }
 }
