@@ -4,63 +4,40 @@ import { Order, columns } from './columns';
 import CreateOrderForm from '../../components/forms/CreateOrder';
 import { DataTable } from './data-table';
 import { SheetTrigger } from '@/components/ui/sheet';
+import { orderClient } from '@/lib/api/orderClient';
 import { patientClient } from '@/lib/api/patientClient';
 import { useEffect, useState } from 'react';
 import type { Patient } from '@/lib/api/patientClient';
 
-function getOrders(): Order[] {
-    // Fetch data from your API here.
-    return [
-        {
-            id: 'a1b2c3d4',
-            number: '123',
-            firstName: 'Anna',
-            lastName: 'Black',
-            dateCreated: new Date('2024-12-01'),
-            status: 'créé',
-        },
-        {
-            id: 'e5f6g7h8',
-            number: '456',
-            firstName: 'Noah',
-            lastName: 'Taylor',
-            dateCreated: new Date('2024-12-02'),
-            status: 'en cours',
-        },
-        {
-            id: 'i9j0k1l2',
-            number: '789',
-            firstName: 'Olivia',
-            lastName: 'Smith',
-            dateCreated: new Date('2024-12-03'),
-            status: 'terminé',
-        },
-        {
-            id: 'm3n4o5p6',
-            number: '012',
-            firstName: 'Liam',
-            lastName: 'Johnson',
-            dateCreated: new Date('2024-12-04'),
-            status: 'annulé',
-        },
-    ];
-}
-
 export default function Orders() {
-    const [orders] = useState<Order[]>(getOrders());
+    const [orders, setOrders] = useState<Order[]>([]);
     const [patients, setPatients] = useState<Patient[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        patientClient.getPatients()
-            .then(data => {
-                setPatients(data);
+        const controller = new AbortController();
+
+        const loadData = async () => {
+            try {
+                const [loadedOrders, loadedPatients] = await Promise.all([
+                    orderClient.getOrders(controller.signal),
+                    patientClient.getPatients(controller.signal),
+                ]);
+
+                setOrders(loadedOrders);
+                setPatients(loadedPatients);
+            } catch (error) {
+                if ((error as Error).name !== 'AbortError') {
+                    console.error('Failed to load orders or patients:', error);
+                }
+            } finally {
                 setIsLoading(false);
-            })
-            .catch(err => {
-                console.error('Failed to load patients:', err);
-                setIsLoading(false);
-            });
+            }
+        };
+
+        loadData();
+
+        return () => { controller.abort(); };
     }, []);
 
     return (

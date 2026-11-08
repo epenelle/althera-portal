@@ -11,15 +11,16 @@ import {
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
+import type { Order } from '@/lib/api/orderClient';
+import { OrderStatus } from '@/lib/api/orderClient';
 
-export type Order = {
-  id: string,
-  number: string,
-  firstName: string
-  lastName: string
-  dateCreated: Date
-  status: string
-}
+export type { Order };
+
+const statusLabels: Record<OrderStatus, string> = {
+    [OrderStatus.InProgress]: 'En cours',
+    [OrderStatus.Completed]: 'Terminé',
+    [OrderStatus.Cancelled]: 'Annulé',
+};
 
 export const columns: ColumnDef<Order>[] = [
   {
@@ -96,6 +97,7 @@ export const columns: ColumnDef<Order>[] = [
           </Button>
         )
       },
+    cell: ({ row }) => statusLabels[row.getValue("status") as OrderStatus] ?? row.getValue("status"),
   },
   {
     id: "actions",

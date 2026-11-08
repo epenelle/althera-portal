@@ -23,10 +23,11 @@ export interface CreatePatientRequest {
     phone?: string;
 }
 
-export async function getPatients(): Promise<Patient[]> {
+export async function getPatients(signal?: AbortSignal): Promise<Patient[]> {
     const response = await fetch(getUrlWithKey('/patients'), {
         method: 'GET',
         headers: defaultHeaders,
+        signal,
     });
 
     if (!response.ok) {
